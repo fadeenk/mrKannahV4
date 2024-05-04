@@ -9,7 +9,16 @@ export default function MDXContentWrapper(props: Props): JSX.Element {
   const [attemptedPass, setAttemptedPass] = useState<string>();
 
   const password: string = props.children?.type?.frontMatter?.password;
-  if (password && password.toString() !== attemptedPass) {
+
+  const isBrowser = typeof window !== `undefined`;
+  let browserPass = null;
+
+  if (isBrowser) {
+    const urlParams = new URLSearchParams(window.location.search);
+    browserPass = urlParams.get('pass');
+  }
+
+  if (password && password.toString() !== attemptedPass && password.toString() !== browserPass){
     return ( 
         <input type="text" className="passwordProtectedDoc" 
         placeholder="Enter the password" 
