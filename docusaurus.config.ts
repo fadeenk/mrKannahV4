@@ -37,8 +37,6 @@ const config: Config = {
           routeBasePath: "/blog",
           sidebarPath: "./sidebars.ts",
           tagsBasePath: "tags",
-          docCategoryGeneratedIndexComponent:
-            "@site/src/components/CategoryIndexPage",
         },
         blog: false,
         theme: {
