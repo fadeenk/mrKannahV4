@@ -41,7 +41,7 @@ export default function ParticlesBackground() {
     return (
       <Particles
         id="tsparticles"
-        className="header vistualEffect"
+        className="vistualEffect"
         particlesLoaded={particlesLoaded}
         options={options}
         width="100%"
