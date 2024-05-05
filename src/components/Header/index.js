@@ -20,19 +20,9 @@ class Header extends Component {
               position: "relative",
               flexWrap: "wrap",
               width: "100%",
+              padding: "20px",
             }}
           >
-            <div className="transition glassContainer">
-              <img
-                src="/img/fadee.jpg"
-                alt="Fadee Kannah"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                className="transition profilePicture"
-              />
-            </div>
             <div className="transition glassContainer">
               <h1>Hi, I'm Fadee.</h1>
               <p style={{ maxWidth: "800px" }}>
@@ -40,6 +30,20 @@ class Header extends Component {
                 expertise in software design, team building, and career
                 development to guide teams and individuals to success.
               </p>
+            </div>
+            <div class="profilePicture">
+              <div class="wrapper">
+                <img
+                  src="/img/fadee.jpg"
+                  class="cover-image"
+                  alt="Fadee Kannah in black & white"
+                />
+              </div>
+              <img
+                src="/img/fadee.png"
+                class="character"
+                alt="Fadee Kannah in color"
+              />
             </div>
           </div>
           <ParticlesBackground />

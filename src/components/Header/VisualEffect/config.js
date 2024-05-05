@@ -1,15 +1,12 @@
 export default {
   particles: {
     number: {
-      value: 80,
+      value: 200,
       density: {
         enable: true,
-        value_area: 800,
       },
     },
-    color: {
-      value: "#ffffff",
-    },
+    color: {},
     shape: {
       type: ["circle", "triangle", "polygon"],
       stroke: {
@@ -43,7 +40,7 @@ export default {
     links: {
       enable: true,
       distance: 150,
-      color: "#FFF",
+      color: "set in code",
       opacity: 0.4,
       width: 1,
     },
