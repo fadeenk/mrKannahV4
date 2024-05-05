@@ -16,10 +16,10 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "fadeenk", // Usually your GitHub org/user name.
-  projectName: "mrKannahV2", // Usually your repo name.
+  projectName: "mrKannahV3", // Usually your repo name.
 
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenMarkdownLinks: "throw",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -48,14 +48,14 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
+    image: "img/fadee.jpg",
     docs: {
       sidebar: {
         hideable: true,
       },
     },
     navbar: {
-      title: "Mr. Kannah",
+      title: "Home",
       logo: {
         alt: "My Site Logo",
         src: "img/logo.svg",
@@ -81,48 +81,43 @@ const config: Config = {
     },
     footer: {
       style: "dark",
-      links: [
-        {
-          title: "Docs",
-          items: [
-            {
-              label: "Tutorial",
-              to: "/",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          items: [
-            {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/docusaurus",
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "Blog",
-              to: "/",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      // links: [
+      //   {
+      //     title: "Navigation",
+      //     items: [
+      //       {
+      //         label: "Home",
+      //         to: "/",
+      //       },
+      //       {
+      //         label: "Blog",
+      //         to: "/blog",
+      //       },
+      //       {
+      //         label: "About",
+      //         to: "/about",
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     title: "Socials",
+      //     items: [
+      //       {
+      //         label: "LinkedIn",
+      //         href: "https://www.linkedin.com/in/fadeek/",
+      //       },
+      //       {
+      //         label: "Github",
+      //         href: "https://github.com/fadeenk",
+      //       },
+      //       {
+      //         label: "Instagram",
+      //         href: "https://www.instagram.com/fadeekannah/",
+      //       },
+      //     ],
+      //   },
+      // ],
+      copyright: `Fadee Kannah © ${new Date().getFullYear()}`,
     },
     prism: {
       theme: prismThemes.github,

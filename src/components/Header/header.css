@@ -1,0 +1,56 @@
+/* Mobile view */
+@media only screen and (max-width: 600px) {    
+    .header div h1 {
+        font-size: 26px;
+    }
+
+    .header div {
+        font-size: 20px;
+    }
+}
+
+/* Desktop view */
+@media only screen and (min-width: 600px) {
+
+    .header div h1 {
+        font-size: 30px;
+    }
+
+    .header div {
+        font-size: 26px;
+    }
+}
+
+/* General */
+.transition {
+    transition: all 750ms;
+}
+
+.profilePicture {
+    width: 200px;
+    min-width: 150px;
+    max-width: 300px;
+}
+
+.vistualEffect {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.glassContainer {
+    background: var(--glassBackground);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    height: max-content;
+}
+
+.glassContainer:hover {
+    backdrop-filter: blur(1vw);
+    background-color: var(--glassHoverBackground);
+  }
