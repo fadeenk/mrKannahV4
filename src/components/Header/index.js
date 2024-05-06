@@ -19,13 +19,13 @@ export default function Header() {
       <div id="myProfilePicture" className="profilePicture">
         <div className="wrapper">
           <img
-            src="/img/fadee.jpg"
+            src="./img/fadee.jpg"
             className="cover-image"
             alt="Fadee Kannah in black & white"
           />
         </div>
         <img
-          src="/img/fadee.png"
+          src="./img/fadee.png"
           className="character"
           alt="Fadee Kannah in color"
         />
