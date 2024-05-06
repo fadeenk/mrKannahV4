@@ -5,6 +5,7 @@ import Layout from '@theme/Layout';
 import Testimonials from '@site/src/components/Testimonials';
 import Heading from '@theme/Heading';
 import Header from '@site/src/components/Header';
+import Contact from '@site/src/components/Contact';
 
 import styles from './index.module.css';
 
@@ -32,8 +33,8 @@ function oldHome() {
 function Services() {
   return (      
     <div className='container'>
-      <Heading as="h2" className='hero__title'>Services</Heading>
-      <p className="hero__subtitle">I offer a range of consulting services designed to help businesses and individuals excel in technology, business and career development. Here's what I can do for you:</p>
+      <Heading as="h2" className='hero__title'>What I can do for you</Heading>
+      <p className="hero__subtitle">I offer a range of consulting services designed to help businesses and individuals excel in technology, business and career development.</p>
       <Heading as="h3">Software Architecture / Design Consultations</Heading>
       <p>Designing robust software systems is my specialty. I'll work with you to create scalable, maintainable architecture tailored to your business needs.</p>
       <Heading as="h3">Team Coaching</Heading>
@@ -69,6 +70,7 @@ export default function Home(): JSX.Element {
         <About />
         <Services />
         <Testimonials />
+        <Contact />
       </main>
     </Layout>
   );
