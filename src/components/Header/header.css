@@ -80,7 +80,7 @@
 .profilePicture:hover .character,
 .hovered .character {
   opacity: 1;
-  transform: translate3d(-5%, -11%, 350px);
+  transform: translate3d(-5%, -10%, 350px);
 }
 
 .headerTitle {
@@ -98,6 +98,18 @@
   width: 250px;
 }
 
+.headerTagline {
+	font-size: 30px;
+	mix-blend-mode: screen;
+  font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: .03em var(--particles-links-color);
+  text-align: center;
+  width: 100%;
+}
 /* width from main UI navbar breakpoint */
 @media screen and (max-width: 996px) {
   .header {

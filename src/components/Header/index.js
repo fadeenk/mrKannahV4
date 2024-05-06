@@ -2,8 +2,10 @@ import React from "react";
 import ParticlesBackground from "./VisualEffect";
 import "./header.css";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 export default function Header() {
+  const { siteConfig } = useDocusaurusContext();
   setTimeout(() => {
     const element = document.querySelector("#myProfilePicture");
     if (!element) return;
@@ -31,6 +33,7 @@ export default function Header() {
         />
       </div>
       <span className="headerTitle">Kannah</span>
+      <span className="headerTagline">{siteConfig.tagline}</span>
       <BrowserOnly>{() => <ParticlesBackground />}</BrowserOnly>
     </header>
   );
