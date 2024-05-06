@@ -1,11 +1,12 @@
 import React from "react";
 import ParticlesBackground from "./VisualEffect";
 import "./header.css";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 export default function Header() {
   setTimeout(() => {
     const element = document.querySelector("#myProfilePicture");
-
+    if (!element) return;
     element.classList.add("hovered");
     setTimeout(() => {
       element.classList.remove("hovered");
@@ -30,7 +31,7 @@ export default function Header() {
         />
       </div>
       <span className="headerTitle">Kannah</span>
-      <ParticlesBackground />
+      <BrowserOnly>{() => <ParticlesBackground />}</BrowserOnly>
     </header>
   );
 }
