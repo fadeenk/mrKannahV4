@@ -63,7 +63,8 @@
   background-color: #1b1b1d;
 }
 
-.profilePicture:hover .wrapper {
+.profilePicture:hover .wrapper,
+.hovered .wrapper {
   transform: perspective(900px) translateY(-2%) rotateX(25deg) translateZ(0);
   box-shadow: 2px 35px 32px -8px var(--profileShadowColor);
 }
@@ -76,7 +77,8 @@
   z-index: -1;
 }
 
-.profilePicture:hover .character {
+.profilePicture:hover .character,
+.hovered .character {
   opacity: 1;
   transform: translate3d(-5%, -11%, 350px);
 }
@@ -96,7 +98,8 @@
   width: 250px;
 }
 
-@media screen and (max-width: 860px) {
+/* width from main UI navbar breakpoint */
+@media screen and (max-width: 996px) {
   .header {
     flex-direction: column;
   }

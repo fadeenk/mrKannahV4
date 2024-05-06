@@ -7,15 +7,7 @@ export default function ParticlesBackground() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    }).then(() => {
-      initParticlesEngine((engine) => loadSlim(engine)).then(() =>
-        setInit(true)
-      );
-    });
+    initParticlesEngine((engine) => loadSlim(engine)).then(() => setInit(true));
   }, []);
 
   const particlesLoaded = (container) => {
