@@ -1,5 +1,5 @@
 :root {
-	--testimonialBackground: var(--ifm-hero-text-color);
+	--testimonialBackground: var(--ifm-font-color-base-inverse);
 	--testimonialAccent: var(--ifm-color-primary);
 	--deg: -86deg;
 	--trans: all 0.4s ease 0s;
@@ -99,6 +99,7 @@
 .description p {
 	padding: 0 2em;
 	margin-bottom: 1em;
+	color: var(--ifm-font-color-base)
 }
 
 .testimonialName {
@@ -145,7 +146,7 @@
 
 .member:nth-of-type(even) span {
 	right: inherit;
-	left: 4em;
+	left: 2em;
 	transform: rotate(-3deg);
 }
 
