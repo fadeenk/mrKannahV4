@@ -48,7 +48,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/fadee.jpg",
+    image: "./img/fadee.jpg",
     docs: {
       sidebar: {
         hideable: true,
@@ -59,6 +59,7 @@ const config: Config = {
       logo: {
         alt: "My Site Logo",
         src: "img/logo.svg",
+        srcDark: "img/logoDark.svg",
       },
       items: [
         {
