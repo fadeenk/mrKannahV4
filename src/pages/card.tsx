@@ -11,9 +11,9 @@ export default function Home(): JSX.Element {
         description={`${siteConfig.tagline}`}>
         <div className='container'>
             <div className={styles.virtualBusinessCard}>
-                <img src="./img/fadee.jpg" alt="profile-sample1" className={styles.background}/>
+                <img src="img/fadee.jpg" alt="profile-sample1" className={styles.background}/>
                 <div id={styles.front} className={styles.content}>
-                    <img src="./img/fadee.jpg" alt="profile-sample1" className={styles.profile}/>
+                    <img src="img/fadee.jpg" alt="profile-sample1" className={styles.profile}/>
                     <h3>Fadee Kannah<span>Chief Software Architect</span></h3>
                     <div className={styles.icons}>
                         <a href="tel:7023373306"><i className="ion-ios-telephone-outline"></i></a>
@@ -26,7 +26,7 @@ export default function Home(): JSX.Element {
                         <a href="https://github.com/fadeenk"> <i className="ion-social-github-outline"></i></a>
                     </div>
                     <div style={{padding: '10px 35px'}} className={styles.icons}>
-                        <a href="./fadeekannah.vcf" download="fadeekannah.vcf">
+                        <a href="fadeekannah.vcf" download="fadeekannah.vcf">
                             <i className="ion-person-add"></i>
                         </a>
                         <i className="ion-qr-scanner" onClick={() => {
@@ -36,7 +36,7 @@ export default function Home(): JSX.Element {
                     </div>
                 </div>
                 <div id={styles.back} className={styles.content}>
-                    <img src="./img/qr.jpg" style={{width: "90%"}} />
+                    <img src="img/qr.jpg" style={{width: "90%"}} />
                     <i className="ion-android-arrow-back" onClick={() => {
                         const element = document.querySelector('.'+styles.virtualBusinessCard);
                         element.classList.remove(styles.flip);
