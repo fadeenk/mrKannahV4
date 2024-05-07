@@ -19,38 +19,48 @@ class Gallery extends Component {
   componentDidMount() {
     const { photos } = this.props;
 
-    Promise.all(photos.map((obj) => {
-      const src = typeof obj === "string" ? obj : obj.src;
-      if (obj.width && obj.height) {
-        return obj;
-      }
-      let img = new Image();
-      img.src = src;
-      return new Promise(resolve => {
-        img.onload = () => {
-        const res = {
-            src: img.src,
-            height: img.height,
-            width: img.width
-        };
-        typeof obj === "string" ? resolve(res): resolve({...obj, ...res});
+    Promise.all(
+      photos.map((obj) => {
+        const src = typeof obj === "string" ? obj : obj.src;
+        if (obj.width && obj.height) {
+          return obj;
         }
+        let img = new Image();
+        img.src = src;
+        return new Promise((resolve) => {
+          img.onload = () => {
+            const res = {
+              src: img.src,
+              height: img.height,
+              width: img.width,
+            };
+            typeof obj === "string"
+              ? resolve(res)
+              : resolve({ ...obj, ...res });
+          };
+        });
       })
-    })).then((images) => this.setState({images}));
-  };
+    ).then((images) => this.setState({ images }));
+  }
 
-  render(){
-    const {images, index } = this.state;
+  render() {
+    const { images, index } = this.state;
     return (
       <>
-        <PhotoAlbum photos={images} layout="rows" targetRowHeight={250} 
-        onClick={({ index }) => this.setState({index})} padding={5} spacing={5} />
-  
+        <PhotoAlbum
+          photos={images}
+          layout="rows"
+          targetRowHeight={250}
+          onClick={({ index }) => this.setState({ index })}
+          padding={2}
+          spacing={2}
+        />
+
         <Lightbox
           slides={images}
           open={index >= 0}
           index={index}
-          close={() => this.setState({index: -1})}
+          close={() => this.setState({ index: -1 })}
           // enable optional lightbox plugins
           plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
         />
