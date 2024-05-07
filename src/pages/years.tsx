@@ -15,10 +15,14 @@ export default function Home(): JSX.Element {
   
     if ('facebook' !== attemptedPass){
       return ( 
-          <input type="text" className="passwordProtectedDoc" 
+        <Layout
+        title={`Yearly reviews links`}
+        description={`${siteConfig.tagline}`}>
+          <input type="text" className="passwordProtectedDoc" style={{margin: "10px auto"}} 
           placeholder="Enter the password" 
           onChange={(e) => setAttemptedPass(e.target.value)}
           />
+        </Layout>
       )
     } 
   
@@ -29,7 +33,7 @@ export default function Home(): JSX.Element {
         <div className='container'>
             {
                 Object.keys(years).reverse().map((year) => (
-                <div className='card'>
+                <div className='card' style={{margin: "10px auto", maxWidth: "400px"}}>
                     <div className='card__body'>
                         <p><a href={"./blog/Yearly/"+year}>{year}</a>: <b>{years[year]}</b></p>
                     </div>
