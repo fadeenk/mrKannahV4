@@ -89,7 +89,6 @@
 
 .headerTitle {
   font-size: 75px;
-  mix-blend-mode: screen;
   font-weight: 700;
   font-style: italic;
   display: block;
@@ -99,11 +98,11 @@
   margin-right: 10px;
   text-align: center;
   width: 250px;
+  z-index: 5;
 }
 
 .headerTagline {
   font-size: 30px;
-  mix-blend-mode: screen;
   font-weight: 700;
   font-style: italic;
   display: block;
