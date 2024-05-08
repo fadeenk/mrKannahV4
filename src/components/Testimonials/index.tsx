@@ -36,13 +36,13 @@ const TestimonialList: Testimonial[] = [
   {
     name: "Luke Sophinos",
     img: "https://media.licdn.com/dms/image/C5603AQGbkt9gO3g8vg/profile-displayphoto-shrink_200_200/0/1608532052662?e=1720656000&v=beta&t=9DYg6aXnB---3L4a61J3rJ97F69pffk4KqPYt8jqsv0",
-    description: "TBD",
+    description: "...",
     title: "CEO",
   },
   {
     name: "Cathy Pucher",
     img: "https://ziplaunchpad.sdsu.edu/_resources/images/cathy-headshot.jpeg",
-    description: "TBD",
+    description: "...",
     title: "Executive Director",
   },
 ];

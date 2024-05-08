@@ -1,5 +1,5 @@
 import React from "react";
-import ParticlesBackground from "./VisualEffect";
+import ParticlesBackground from "./visualEffect";
 import "./header.css";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
