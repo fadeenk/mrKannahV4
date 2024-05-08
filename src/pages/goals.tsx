@@ -188,7 +188,7 @@ export default function Home(): JSX.Element {
         description={`${siteConfig.tagline}`}
       >
         <input
-          type="text"
+          type="password"
           className="passwordProtectedDoc"
           style={{ margin: "10px auto" }}
           placeholder="Enter the password"

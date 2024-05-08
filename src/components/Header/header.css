@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
 :root {
   --particles-color: #205d3b;
   --particles-links-color: #3cad6e;
@@ -23,6 +25,8 @@
   flex-wrap: wrap;
   width: 100%;
   padding: 20px;
+  font-family: Impact, "Anton", Haettenschweiler, "Arial Narrow Bold",
+    sans-serif;
 }
 
 .vistualEffect {
@@ -90,11 +94,11 @@
   font-style: italic;
   display: block;
   color: transparent;
-  -webkit-text-stroke: 0.03em var(--particles-color);
+  -webkit-text-stroke: 0.03em var(--particles-links-color);
   rotate: -15deg;
   margin-right: 10px;
   text-align: center;
-  width: 275px;
+  width: 250px;
 }
 
 .headerTagline {
@@ -104,7 +108,7 @@
   font-style: italic;
   display: block;
   color: transparent;
-  -webkit-text-stroke: 0.03em var(--particles-links-color);
+  -webkit-text-stroke: 0.03em var(--particles-color);
   text-align: center;
   width: 100%;
 }
@@ -115,5 +119,11 @@
   }
   .headerTitle {
     rotate: -10deg;
+  }
+}
+
+@media screen and (min-width: 996px) {
+  .profilePicture {
+    margin-top: 20px;
   }
 }

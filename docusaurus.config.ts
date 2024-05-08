@@ -38,6 +38,10 @@ const config: Config = {
           sidebarPath: "./sidebars.ts",
           tagsBasePath: "tags",
         },
+        gtag: {
+          trackingID: "G-QRPFQQWH20",
+          anonymizeIP: true,
+        },
         blog: false,
         theme: {
           customCss: "./src/css/custom.css",
