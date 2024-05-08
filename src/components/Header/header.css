@@ -4,7 +4,7 @@
   --profileShadowColor: rgba(0, 0, 0, 0.5);
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --particles-color: #4fddbf;
   --particles-links-color: #1a8870;
   --profileShadowColor: rgba(255, 255, 255, 0.1);
@@ -44,7 +44,7 @@
   justify-content: center;
   align-items: center;
   perspective: 2500px;
-  margin: 20px 50px 0px 50px;
+  margin: 0 20px;
 }
 
 .cover-image {
@@ -84,29 +84,27 @@
 }
 
 .headerTitle {
-	font-size: 75px;
-	mix-blend-mode: screen;
-  font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 75px;
+  mix-blend-mode: screen;
   font-weight: 700;
   font-style: italic;
   display: block;
   color: transparent;
-  -webkit-text-stroke: .03em var(--particles-color);
+  -webkit-text-stroke: 0.03em var(--particles-color);
   rotate: -15deg;
   margin-right: 10px;
   text-align: center;
-  width: 250px;
+  width: 275px;
 }
 
 .headerTagline {
-	font-size: 30px;
-	mix-blend-mode: screen;
-  font-family: Impact, 'Anton', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
+  mix-blend-mode: screen;
   font-weight: 700;
   font-style: italic;
   display: block;
   color: transparent;
-  -webkit-text-stroke: .03em var(--particles-links-color);
+  -webkit-text-stroke: 0.03em var(--particles-links-color);
   text-align: center;
   width: 100%;
 }
