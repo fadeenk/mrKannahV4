@@ -52,7 +52,7 @@ export default function Home(): JSX.Element {
               </a>
             </div>
             <div style={{ padding: "10px 35px" }} className={styles.icons}>
-              <a href="fadeekannah.vcf" download="fadeekannah.vcf">
+              <a href="/fadeekannah.vcf" download="/fadeekannah.vcf">
                 <i className="ion-person-add"></i>
               </a>
               <i
