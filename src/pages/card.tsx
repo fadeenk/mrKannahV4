@@ -16,7 +16,7 @@ export default function Home(): JSX.Element {
             alt="profile-sample1"
             className={styles.background}
           />
-          <div id={styles.front} className={styles.content}>
+          <div id={styles.front}>
             <img
               src="/img/fadee.jpg"
               alt="profile-sample1"
@@ -66,7 +66,7 @@ export default function Home(): JSX.Element {
               ></i>
             </div>
           </div>
-          <div id={styles.back} className={styles.content}>
+          <div id={styles.back}>
             <img src="/img/qr.jpg" style={{ width: "90%" }} />
             <i
               className="ion-android-arrow-back"
