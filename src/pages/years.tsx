@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
             >
               <div className="card__body">
                 <p>
-                  <a href={"./blog/Yearly/" + year + "/?pass=" + years[year]}>
+                  <a href={"/blog/Yearly/" + year + "/?pass=" + years[year]}>
                     {year}
                   </a>
                   : <b>{years[year]}</b>

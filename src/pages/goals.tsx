@@ -170,7 +170,7 @@ function getUrlForGoal(goal: Goal): string | JSX.Element {
   return (
     <a
       style={{ color: "var(--ifm-color-content)" }}
-      href={`blog/Yearly/${goal.completed}/?pass=${years[goal.completed]}`}
+      href={`/blog/Yearly/${goal.completed}/?pass=${years[goal.completed]}`}
     >
       {goal.completed}
     </a>
