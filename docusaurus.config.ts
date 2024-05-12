@@ -77,6 +77,11 @@ const config: Config = {
           label: "About",
           position: "left",
         },
+        {
+          href: "/showcase",
+          label: "Showcase",
+          position: "left",
+        },
         // {
         //   href: "https://github.com/facebook/docusaurus",
         //   label: "GitHub",
