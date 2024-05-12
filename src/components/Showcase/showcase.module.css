@@ -64,8 +64,8 @@
   background: var(--particles-links-color);
   display: block;
   position: absolute;
-  top: 24px;
-  bottom: 0;
+  top: 30px;
+  bottom: 4px;
   left: 8px;
 }
 .timeline-item:last-child .timeline-marker:after {
@@ -126,4 +126,11 @@
 }
 .marker-outline .timeline-item:hover .timeline-marker:before {
   background: var(--particles-color);
+}
+
+.app img {
+  float: left;
+  width: 200px;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }

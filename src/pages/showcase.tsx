@@ -2,6 +2,7 @@ import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Businesses from "@site/src/components/Showcase/Businesses";
+import Apps from "@site/src/components/Showcase/Apps";
 
 export default function Showcase(): JSX.Element {
   return (
@@ -12,18 +13,7 @@ export default function Showcase(): JSX.Element {
             <Businesses />
           </TabItem>
           <TabItem value="Apps" label="Apps">
-            <hr />
-            <Tabs className="tabs--block">
-              <TabItem value="Alive" label="Alive">
-                <p>Alive</p>
-              </TabItem>
-              <TabItem value="Not Maintained" label="Not Maintained">
-                <p>Not Maintained</p>
-              </TabItem>
-              <TabItem value="Abandoned" label="Abandoned">
-                <p>Abandoned</p>
-              </TabItem>
-            </Tabs>
+            <Apps />
           </TabItem>
           <TabItem value="Websites" label="Websites">
             <p>Websites</p>
