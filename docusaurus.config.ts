@@ -73,20 +73,37 @@ const config: Config = {
           label: "Blog",
         },
         {
+          type: "dropdown",
+          label: "Showcase",
+          position: "left",
+          items: [
+            {
+              label: "Apps",
+              to: "/showcase/Apps",
+            },
+            {
+              label: "Businesses",
+              to: "/showcase/Businesses",
+            },
+            // {
+            //   label: "Hardware",
+            //   to: "/showcase/Hardware",
+            // },
+            // {
+            //   label: "Other",
+            //   to: "/showcase/Other",
+            // },
+            // {
+            //   label: "Websites",
+            //   to: "/showcase/Websites",
+            // },
+          ],
+        },
+        {
           href: "/about",
           label: "About",
           position: "left",
         },
-        {
-          href: "/showcase",
-          label: "Showcase",
-          position: "left",
-        },
-        // {
-        //   href: "https://github.com/facebook/docusaurus",
-        //   label: "GitHub",
-        //   position: "right",
-        // },
       ],
     },
     footer: {
