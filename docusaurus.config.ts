@@ -89,10 +89,10 @@ const config: Config = {
             //   label: "Hardware",
             //   to: "/showcase/Hardware",
             // },
-            // {
-            //   label: "Other",
-            //   to: "/showcase/Other",
-            // },
+            {
+              label: "Other",
+              to: "/showcase/Other",
+            },
             // {
             //   label: "Websites",
             //   to: "/showcase/Websites",
