@@ -27,14 +27,10 @@ const alive: App[] = [
 
 const NotMaintained: App[] = [
   {
-    title: "Investment Helper",
+    title: "Primus Rooms plugins",
+    link: "https://github.com/fadeenk?tab=repositories&q=rooms&type=source&language=&sort=",
     description:
-      "Script that helps me pick stocks to invest in. I built this script to help me pick stocks to invest in. I used the Ichimoku Cloud method of analysis to build an investment protfolio. This method allowed me to analyze many stocks all at ones and pick top stocks in terms of memontem over the last 100 days and two weeks.",
-  },
-  {
-    title: "Alexa youtube skill",
-    description:
-      "I built an alexa skill that allows you to play youtube videos on my alexa devices. I used the youtube api to search for videos and play them on the device.",
+      "I built a couple of plugins for the Primus (a realtime communication framework). I built a plugin that allowed you to use redis for caching for the rooms increasing the performance considerably when compared to the alternitaves. The other plugin I built was to allow leveraging a powerful feature in a scalable way and make it work seemlessly within the rooms.",
   },
   {
     title: "Warframe Farmer Assistant",
@@ -78,21 +74,36 @@ const NotMaintained: App[] = [
     thumbnail: "/img/showcase/roman.png",
   },
   {
-    title: "Primus Rooms plugins",
-    link: "https://github.com/fadeenk?tab=repositories&q=rooms&type=source&language=&sort=",
-    description:
-      "I built a couple of plugins for the Primus (a realtime communication framework). I built a plugin that allowed you to use redis for caching for the rooms increasing the performance considerably when compared to the alternitaves. The other plugin I built was to allow leveraging a powerful feature in a scalable way and make it work seemlessly within the rooms.",
-  },
-  {
     title: "Mouse Picker",
     link: "https://www.mediafire.com/file/2a53y943ct2g5be/Mouse_Picker.exe/file",
     description:
       "A simple tool that allows you to pick get color and position of any pixel from the screen and save it to the clipboard. I built this tool because I needed to get screen information from videogames that are running using directX which other tools could not caputre the info. I used the information from my picker to build macros that would automate the game for me.",
     thumbnail: "/img/showcase/mouse.png",
   },
+  {
+    title: "Investment Helper",
+    description:
+      "Script that helps me pick stocks to invest in. I built this script to help me pick stocks to invest in. I used the Ichimoku Cloud method of analysis to build an investment protfolio. This method allowed me to analyze many stocks all at ones and pick top stocks in terms of memontem over the last 100 days and two weeks.",
+  },
+  {
+    title: "Alexa youtube skill",
+    description:
+      "I built an alexa skill that allows you to play youtube videos on my alexa devices. I used the youtube api to search for videos and play them on the device.",
+  },
 ];
 
 const Abandoned: App[] = [
+  {
+    title: "Unnamed android game",
+    description:
+      "A simple android game that I built to learn android development. I built this game because I wanted to learn how to build android games and I wanted to build a game that was fun to play and has no ads/ pay to win stuff. The plan was to have it be a cross between tamagotchi and a pokemon game. I worked on this with a friend who helped with the art and created baby Andy the main character (waving at you right now). I stopped working on it because we got too busy with school and other projects.",
+    thumbnail: "/img/showcase/android.gif",
+  },
+  {
+    title: "Project X",
+    description:
+      "Craiglist clone for university students to sell and trade textbooks for reasonable prices. I built this app because I wanted to help students save money on textbooks and make it easier for them to find the books they need. I stopped working on this project because I found other alternatives/competitors.",
+  },
   {
     title: "DJ companion App",
     description:
