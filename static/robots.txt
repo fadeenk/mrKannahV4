@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /490/
+Disallow: /HealthEscort/
+Disallow: */tags/
+Disallow: */categories/
+
+sitemap: https://mrkannah.com/sitemap.xml
