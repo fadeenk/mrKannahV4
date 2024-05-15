@@ -1,6 +1,20 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import styles from "./card.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMobileScreen,
+  faGlobe,
+  faQrcode,
+  faUserPlus,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faInstagram,
+  faLinkedin,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -26,57 +40,54 @@ export default function Home(): JSX.Element {
               Fadee Kannah<span>Chief Software Architect</span>
             </h3>
             <div className={styles.icons}>
-              <a href="tel:7023373306">
-                <i className="ion-ios-telephone-outline"></i>
+              <a href="tel:7023373306" style={{ width: "38px" }}>
+                <FontAwesomeIcon icon={faMobileScreen} />
               </a>
               <a href="mailto:fadeekannah@gmail.com">
                 {" "}
-                <i className="ion-ios-email-outline"></i>
+                <FontAwesomeIcon icon={faEnvelope} />
               </a>
               <a href="https://mrkannah.com">
                 {" "}
-                <i className="ion-ios-world-outline"></i>
+                <FontAwesomeIcon icon={faGlobe} />
               </a>
             </div>
             <div className={styles.icons}>
               <a href="https://www.linkedin.com/in/fadeek/">
-                <i className="ion-social-linkedin-outline"></i>
+                <FontAwesomeIcon icon={faLinkedin} />
               </a>
               <a href="https://www.instagram.com/fadeekannah/">
                 {" "}
-                <i className="ion-social-instagram-outline"></i>
+                <FontAwesomeIcon icon={faInstagram} />
               </a>
               <a href="https://github.com/fadeenk">
                 {" "}
-                <i className="ion-social-github-outline"></i>
+                <FontAwesomeIcon icon={faGithub} />
               </a>
             </div>
             <div style={{ padding: "10px 35px" }} className={styles.icons}>
               <a href="/fadeekannah.vcf" download="/fadeekannah.vcf">
-                <i className="ion-person-add"></i>
+                <FontAwesomeIcon icon={faUserPlus} />
               </a>
-              <i
-                className="ion-qr-scanner"
+              <FontAwesomeIcon
+                icon={faQrcode}
                 onClick={() => {
-                  const element = document.querySelector(
-                    "." + styles.virtualBusinessCard
-                  );
-                  element.classList.add(styles.flip);
+                  const element = document.getElementById(styles.back);
+                  element.classList.remove(styles.hideQR);
                 }}
-              ></i>
+              />
             </div>
           </div>
-          <div id={styles.back}>
-            <img src="/img/qr.jpg" style={{ width: "90%" }} />
-            <i
-              className="ion-android-arrow-back"
+
+          <div id={styles.back} className={styles.hideQR}>
+            <img src="/img/qr.jpg" style={{ padding: "10px" }} />
+            <FontAwesomeIcon
+              icon={faEyeSlash}
               onClick={() => {
-                const element = document.querySelector(
-                  "." + styles.virtualBusinessCard
-                );
-                element.classList.remove(styles.flip);
+                const element = document.getElementById(styles.back);
+                element.classList.add(styles.hideQR);
               }}
-            ></i>
+            />
           </div>
         </div>
       </div>
