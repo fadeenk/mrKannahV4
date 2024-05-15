@@ -28,7 +28,7 @@ const alive: App[] = [
 const NotMaintained: App[] = [
   {
     title: "Primus Rooms plugins",
-    link: "https://github.com/fadeenk?tab=repositories&q=rooms&type=source&language=&sort=",
+    link: "https://github.com/fadeenk?tab=repositories&q=rooms&type=archived&language=&sort=",
     description:
       "I built a couple of plugins for Primus (a real-time communication framework). I built a plugin that allowed you to use Redis for caching for the rooms increasing the performance considerably when compared to the alternatives. The other plugin I built was to allow leveraging a powerful feature in a scalable way and make it work seamlessly within the rooms.",
   },
@@ -54,7 +54,7 @@ const NotMaintained: App[] = [
   },
   {
     title: "Slack theme userscript and chrome extension",
-    link: "https://github.com/fadeenk?tab=repositories&q=slack&type=source&language=&sort=",
+    link: "https://github.com/fadeenk?tab=repositories&q=slack&type=archived&language=&sort=",
     description:
       "This is a user script that allows the user to have better control of the slack theme on the web client. I built this because I was tired of the theming not working how I expected it to and it not being as flexible.",
     thumbnail: "/img/showcase/slack.png",
