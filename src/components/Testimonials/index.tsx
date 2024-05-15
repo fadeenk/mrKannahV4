@@ -28,7 +28,7 @@ const TestimonialList: Testimonial[] = [
   },
   {
     name: "Michael Habeeb",
-    img: "https://media.licdn.com/dms/image/C5635AQHwu44l1gYhqw/profile-framedphoto-shrink_200_200/0/1618216292194?e=1715569200&v=beta&t=y71W380UwgGwza44sZsVCAN9DgbxCPE988HhSwkkrh4",
+    img: "https://media.licdn.com/dms/image/C5635AQHwu44l1gYhqw/profile-framedphoto-shrink_800_800/0/1618216292194?e=1716325200&v=beta&t=nAFe_X03OZONglUWmAhwaoMsqQV-sJ4M5mFpHIwK3hE",
     description:
       "Since I started working with Fadee for coaching and mentorship, my growth has been remarkable. With his guidance, I have advanced my career, secured new opportunities, and gained the confidence to tackle complex challenges. The impact on my career trajectory has been substantial, and I couldn't be happier!",
     title: "Student",
