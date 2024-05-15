@@ -93,10 +93,10 @@ const config: Config = {
               label: "Other",
               to: "/showcase/Other",
             },
-            // {
-            //   label: "Websites",
-            //   to: "/showcase/Websites",
-            // },
+            {
+              label: "Websites",
+              to: "/showcase/Websites",
+            },
           ],
         },
         {
