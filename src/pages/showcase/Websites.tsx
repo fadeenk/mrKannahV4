@@ -142,7 +142,13 @@ export default function Apps(): JSX.Element {
             Those are the websites I have built for myself. And used to test
             different technologies and showcase different things about me.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+            }}
+          >
             {myPortfolios.map(renderWebsite)}
           </div>
         </div>
@@ -156,7 +162,11 @@ export default function Apps(): JSX.Element {
           </p>
           <div
             className={styles.websiteCardHero}
-            style={{ display: "flex", flexWrap: "wrap" }}
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+            }}
           >
             {funSites.map(renderWebsite)}
           </div>
@@ -170,7 +180,13 @@ export default function Apps(): JSX.Element {
             clients no longer exist. I was able to recover some of the work and
             link to it. However, there are many more that are lost to time.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+            }}
+          >
             {clientSites.map(renderWebsite)}
           </div>
         </div>

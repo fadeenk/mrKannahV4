@@ -42,6 +42,7 @@ export default function Showcase(): JSX.Element {
           <div>
             <h3>{detail.title}</h3>
             <p>{detail.description}</p>
+            <hr />
           </div>
         ))}
       </div>
