@@ -85,10 +85,10 @@ const config: Config = {
               label: "Businesses",
               to: "/showcase/Businesses",
             },
-            // {
-            //   label: "Hardware",
-            //   to: "/showcase/Hardware",
-            // },
+            {
+              label: "Hardware",
+              to: "/showcase/Hardware",
+            },
             {
               label: "Other",
               to: "/showcase/Other",
