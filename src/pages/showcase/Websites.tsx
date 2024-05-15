@@ -10,16 +10,23 @@ type Website = {
 
 const myPortfolios: Website[] = [
   {
-    title: "V3 Portfolio",
+    title: "V4 Portfolio",
     description:
       "Built with React using Docusaurus framework. Added a showcase section to show my past work, UI/UX improvements.",
-    thumbnail: "/img/showcase/v3.png",
+    thumbnail: "/img/showcase/v4.png",
     link: "https://mrkannah.com/",
+  },
+  {
+    title: "V3 Portfolio",
+    description:
+      "Built with React using Gatsby framework. Relatively new build and added a blog to it.",
+    thumbnail: "/img/showcase/v3.png",
+    link: "https://v3.mrkannah.com/",
   },
   {
     title: "V2 Portfolio",
     description:
-      "Built with React using Gatsby framework. Added a blog to it and simplified it by removing old projects and other irrelevant information.",
+      "Built with React create app. I simplified it by removing old projects and other irrelevant information.",
     thumbnail: "/img/showcase/v2.png",
     link: "https://v2.mrkannah.com/",
   },
