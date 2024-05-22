@@ -13,6 +13,7 @@
   text-align: center;
   line-height: 1.4em;
   background-color: #141414;
+  padding-bottom: 50px;
 }
 
 .virtualBusinessCard #front {
@@ -101,4 +102,5 @@
   display: flex;
   justify-content: space-between;
   width: 60%;
+  margin: 10px auto;
 }

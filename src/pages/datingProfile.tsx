@@ -21,6 +21,13 @@ import pphoto3 from "@site/static/img/dating/c.jpg";
 import pphoto4 from "@site/static/img/dating/d.png";
 import pphoto5 from "@site/static/img/dating/e.png";
 import pphoto6 from "@site/static/img/dating/f.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCannabis,
+  faMartiniGlassCitrus,
+  faPills,
+  faSmoking,
+} from "@fortawesome/free-solid-svg-icons";
 
 const photos = [
   photo1,
@@ -84,7 +91,7 @@ export default function Home(): JSX.Element {
           values and is a kind Christian. Open communication, trust, and honesty
           are crucial! If you or someone you know shares these values and is
           interested in a serious and respectful relationship, please feel free
-          to contact me here or on my social media.
+          to contact me here or on my <a href="/card">social media</a>.
         </p>
       </div>
       <div className="hero hero--primary">
@@ -101,12 +108,13 @@ export default function Home(): JSX.Element {
               <li>Watching anime</li>
               <li>Playing soccer</li>
               <li>Going to the gym</li>
-              <li>Taking care of plants</li>
+              <li>Taking care of my plants</li>
             </ul>
             <img src="/img/dating/3.png" className={styles.mainImage} />
           </div>
         </div>
       </div>
+      <Gallery photos={photos2} />
       <div
         className="container"
         style={{
@@ -122,7 +130,6 @@ export default function Home(): JSX.Element {
           me directly.
         </p>
       </div>
-      <Gallery photos={photos2} />
       <div className="hero hero--primary">
         <div
           className="container hero__subtitle"
@@ -144,7 +151,7 @@ export default function Home(): JSX.Element {
               <b>From</b>: Bartella, Iraq
             </li>
             <li>
-              <b>Location</b>: Henderson, NV
+              <b>Location</b>: Henderson, Nevada
             </li>
             <li>
               <b>Languages:</b>{" "}
@@ -164,6 +171,16 @@ export default function Home(): JSX.Element {
             </li>
             <li>
               <b>Children</b>: None, Want at some point
+            </li>
+            <li>
+              <b>Height</b>: 5’ 10.5” (179 cm)
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faMartiniGlassCitrus} /> Only socially
+              {" | "}
+              <FontAwesomeIcon icon={faSmoking} /> Never{" | "}
+              <FontAwesomeIcon icon={faCannabis} /> Never{" | "}
+              <FontAwesomeIcon icon={faPills} /> Never
             </li>
           </ul>
         </div>
