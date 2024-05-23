@@ -104,6 +104,11 @@ const config: Config = {
           label: "About",
           position: "left",
         },
+        {
+          href: "/datingProfile",
+          label: "💖",
+          position: "left",
+        },
       ],
     },
     footer: {

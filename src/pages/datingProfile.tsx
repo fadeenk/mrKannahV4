@@ -7,7 +7,7 @@ import photo2 from "@site/docs/Yearly/2023/images/fun11.jpg";
 import photo3 from "@site/docs/Yearly/2023/images/fun18.jpg";
 import photo4 from "@site/docs/Yearly/2023/images/hawaii27.jpg";
 import photo5 from "@site/docs/Yearly/2023/images/hennaF5.jpg";
-import photo6 from "@site/docs/Yearly/2023/images/imagine11.jpg";
+import photo6 from "@site/static/img/dating/g.jpg";
 import photo7 from "@site/docs/Yearly/2023/images/weddingF1.jpg";
 import photo8 from "@site/docs/Yearly/2023/images/november20234.jpg";
 import photo9 from "@site/docs/Yearly/2023/images/november20231.jpg";
