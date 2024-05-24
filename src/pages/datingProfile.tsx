@@ -91,14 +91,36 @@ export default function Home(): JSX.Element {
         }}
       >
         <img src="/img/dating/2.jpg" className={styles.mainImage} />
-        <p className="hero__subtitle" style={{ maxWidth: "800px" }}>
-          I have a strong commitment to family and traditional values. I’m
-          seeking a meaningful connection with a life partner who shares these
-          values and is a kind Christian. Open communication, trust, and honesty
-          are crucial! If you or someone you know shares these values and is
-          interested in a serious and respectful relationship, please feel free
-          to contact me here or on my <a href="/card">social media</a>.
-        </p>
+        <div>
+          <p className="hero__subtitle" style={{ maxWidth: "800px" }}>
+            I have a strong commitment to family and traditional values. I’m
+            seeking a meaningful connection with a life partner who shares these
+            values and is a kind Christian. Open communication, trust, and
+            honesty are crucial! If you or someone you know shares these values
+            and is interested in a serious and respectful relationship, please
+            feel free to contact me here or on my{" "}
+            <a href="/card">social media</a>.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <a href="tel:7023373306">
+              <FontAwesomeIcon icon={faMobileScreen} size="2xl" />
+            </a>
+            <a href="https://www.instagram.com/fadeekannah/">
+              <FontAwesomeIcon icon={faInstagram} size="2xl" />
+            </a>
+            <a href="https://www.snapchat.com/add/fadeenk?share_id=YehuIiaVous&locale=en-US">
+              <FontAwesomeIcon icon={faSnapchat} size="2xl" />
+            </a>
+            <a href="https://www.facebook.com/FadeeKannah/">
+              <FontAwesomeIcon icon={faFacebookSquare} size="2xl" />
+            </a>
+          </div>
+        </div>
       </div>
       <div className="hero hero--primary">
         <div className="container hero__subtitle">
@@ -135,25 +157,6 @@ export default function Home(): JSX.Element {
           reference checks with any mutual friends, or better yet, just talk to
           me directly.
         </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <a href="tel:7023373306">
-            <FontAwesomeIcon icon={faMobileScreen} size="2xl" />
-          </a>
-          <a href="https://www.instagram.com/fadeekannah/">
-            <FontAwesomeIcon icon={faInstagram} size="2xl" />
-          </a>
-          <a href="https://www.snapchat.com/add/fadeenk?share_id=YehuIiaVous&locale=en-US">
-            <FontAwesomeIcon icon={faSnapchat} size="2xl" />
-          </a>
-          <a href="https://www.facebook.com/FadeeKannah/">
-            <FontAwesomeIcon icon={faFacebookSquare} size="2xl" />
-          </a>
-        </div>
       </div>
       <div className="hero hero--primary">
         <div
