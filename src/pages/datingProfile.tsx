@@ -32,6 +32,7 @@ import {
 import {
   faFacebookSquare,
   faInstagram,
+  faSnapchat,
 } from "@fortawesome/free-brands-svg-icons";
 
 const photos = [
@@ -138,19 +139,19 @@ export default function Home(): JSX.Element {
           style={{
             display: "flex",
             justifyContent: "space-evenly",
-            fontSize: "xx-large",
           }}
         >
           <a href="tel:7023373306">
-            <FontAwesomeIcon icon={faMobileScreen} />
+            <FontAwesomeIcon icon={faMobileScreen} size="2xl" />
           </a>
           <a href="https://www.instagram.com/fadeekannah/">
-            {" "}
-            <FontAwesomeIcon icon={faInstagram} />
+            <FontAwesomeIcon icon={faInstagram} size="2xl" />
+          </a>
+          <a href="https://www.snapchat.com/add/fadeenk?share_id=YehuIiaVous&locale=en-US">
+            <FontAwesomeIcon icon={faSnapchat} size="2xl" />
           </a>
           <a href="https://www.facebook.com/FadeeKannah/">
-            {" "}
-            <FontAwesomeIcon icon={faFacebookSquare} />
+            <FontAwesomeIcon icon={faFacebookSquare} size="2xl" />
           </a>
         </div>
       </div>
