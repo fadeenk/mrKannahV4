@@ -12,10 +12,11 @@ import photo7 from "@site/docs/Yearly/2023/images/weddingF1.jpg";
 import photo8 from "@site/docs/Yearly/2023/images/november20234.jpg";
 import photo9 from "@site/docs/Yearly/2023/images/november20231.jpg";
 import photo10 from "@site/docs/Yearly/2023/images/hawaii26.jpg";
-import photo11 from "@site/docs/Yearly/2022/images/techAlley.png";
+import photo11 from "@site/static/img/dating/4.png";
+import techAlley from "@site/docs/Yearly/2022/images/techAlley.png";
 import photo12 from "@site/docs/Yearly/2023/images/fun8.jpg";
 import photo13 from "@site/docs/Yearly/2023/images/weddingPrep4.jpg";
-import pphoto1 from "@site/static/img/dating/a.jpg";
+import pphoto1 from "@site/static/img/dating/1.jpg";
 import pphoto2 from "@site/static/img/dating/b.jpg";
 import pphoto3 from "@site/static/img/dating/c.jpg";
 import pphoto4 from "@site/static/img/dating/d.png";
@@ -80,7 +81,7 @@ export default function Home(): JSX.Element {
               and technology.
             </p>
           </div>
-          <img src="/img/dating/1.jpg" className={styles.mainImage} />
+          <img src="/img/dating/a.jpg" className={styles.mainImage} />
         </div>
       </div>
       <div
@@ -166,7 +167,7 @@ export default function Home(): JSX.Element {
             margin: "20px auto",
           }}
         >
-          <img src="/img/dating/4.png" className={styles.mainImage} />
+          <img src={techAlley} className={styles.mainImage} />
           <ul style={{ maxWidth: "800px", listStyleType: "none" }}>
             <li>
               <b>Age</b>: 30
