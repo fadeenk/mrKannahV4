@@ -25,9 +25,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCannabis,
   faMartiniGlassCitrus,
+  faMobileScreen,
   faPills,
   faSmoking,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebookSquare,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 const photos = [
   photo1,
@@ -129,6 +134,25 @@ export default function Home(): JSX.Element {
           reference checks with any mutual friends, or better yet, just talk to
           me directly.
         </p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            fontSize: "xx-large",
+          }}
+        >
+          <a href="tel:7023373306">
+            <FontAwesomeIcon icon={faMobileScreen} />
+          </a>
+          <a href="https://www.instagram.com/fadeekannah/">
+            {" "}
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+          <a href="https://www.facebook.com/FadeeKannah/">
+            {" "}
+            <FontAwesomeIcon icon={faFacebookSquare} />
+          </a>
+        </div>
       </div>
       <div className="hero hero--primary">
         <div
