@@ -19,6 +19,13 @@ const TestimonialList: Testimonial[] = [
     link: "https://www.linkedin.com/in/fadeek/#:~:text=the%20same%20team-,Looking%20for%20a%2010xer%3F%20Look%20no%20further.%20Fadee%20has%20been%20one,loyalty%20has%20been%20reflective%20of%20his%20to%20them%20and%20the%20company.,-Looking%20for%20a",
   },
   {
+    name: "Cathy Pucher",
+    img: "https://ziplaunchpad.sdsu.edu/_resources/images/cathy-headshot.jpeg",
+    description:
+      "Fadee is an exceptional CTO and entrepreneur. I have known him for close to 10 years. Besides being crazy smart, he is exceptionally generous with his time. He is passionate about giving back and mentoring future technologists. He inspires others and his journey has inspired me.",
+    title: "Executive Director",
+  },
+  {
     name: "Irving Barajas",
     img: "https://media.licdn.com/dms/image/D5603AQHre9x2TsHg0A/profile-displayphoto-shrink_200_200/0/1697583433925?e=1720656000&v=beta&t=pLVjsksEE8bREYbuQeVqrnu5EVoiWbts9uB1NQZpdXc",
     description:
@@ -28,7 +35,7 @@ const TestimonialList: Testimonial[] = [
   },
   {
     name: "Michael Habeeb",
-    img: "https://media.licdn.com/dms/image/C5635AQHwu44l1gYhqw/profile-framedphoto-shrink_800_800/0/1618216292194?e=1716325200&v=beta&t=nAFe_X03OZONglUWmAhwaoMsqQV-sJ4M5mFpHIwK3hE",
+    img: "https://media.licdn.com/dms/image/C5635AQHwu44l1gYhqw/profile-framedphoto-shrink_200_200/0/1618216292194?e=1717524000&v=beta&t=Mqi4GVDKl47EHs7N_4mUWje76T4HstgJ8ZjENQGCuIY",
     description:
       "Since I started working with Fadee for coaching and mentorship, my growth has been remarkable. With his guidance, I have advanced my career, secured new opportunities, and gained the confidence to tackle complex challenges. The impact on my career trajectory has been substantial, and I couldn't be happier!",
     title: "Student",
@@ -38,12 +45,6 @@ const TestimonialList: Testimonial[] = [
     img: "https://media.licdn.com/dms/image/C5603AQGbkt9gO3g8vg/profile-displayphoto-shrink_200_200/0/1608532052662?e=1720656000&v=beta&t=9DYg6aXnB---3L4a61J3rJ97F69pffk4KqPYt8jqsv0",
     description: "...",
     title: "CEO",
-  },
-  {
-    name: "Cathy Pucher",
-    img: "https://ziplaunchpad.sdsu.edu/_resources/images/cathy-headshot.jpeg",
-    description: "...",
-    title: "Executive Director",
   },
 ];
 
