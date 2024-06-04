@@ -15,8 +15,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "3.3.2",
-    "@docusaurus/plugin-google-gtag": "^3.4.0",
+    "@docusaurus/core": "3.4.0",
+    "@docusaurus/plugin-google-gtag": "3.4.0",
     "@docusaurus/preset-classic": "3.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
@@ -30,7 +30,6 @@
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-pdf": "^9.0.0",
     "react-photo-album": "^2.4.0",
     "react-player": "^2.16.0",
     "yet-another-react-lightbox": "^3.19.0"
@@ -38,7 +37,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.4.0",
     "@docusaurus/tsconfig": "3.4.0",
-    "@docusaurus/types": "3.3.2",
+    "@docusaurus/types": "3.4.0",
     "typescript": "~5.4.5"
   },
   "browserslist": {
