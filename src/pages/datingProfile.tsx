@@ -170,7 +170,7 @@ export default function Home(): JSX.Element {
           <img src={techAlley} className={styles.mainImage} />
           <ul style={{ maxWidth: "800px", listStyleType: "none" }}>
             <li>
-              <b>Age</b>: 30
+              <b>Age</b>: 31
             </li>
             <li>
               <b>Religion</b>: Christian ♱ (Syriac Orthodox same as Catholic
