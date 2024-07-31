@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import PhotoAlbum from "react-photo-album";
+import { RowsPhotoAlbum } from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import "react-photo-album/rows.css";
 
 // import optional lightbox plugins
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
@@ -47,9 +48,8 @@ class Gallery extends Component {
     const { images, index } = this.state;
     return (
       <>
-        <PhotoAlbum
+        <RowsPhotoAlbum
           photos={images}
-          layout="rows"
           targetRowHeight={250}
           onClick={({ index }) => this.setState({ index })}
           padding={2}
