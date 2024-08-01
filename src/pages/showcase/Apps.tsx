@@ -12,6 +12,12 @@ type App = {
 
 const alive: App[] = [
   {
+    title: "PureFrame App",
+    description: `A desktop application that uses AI to detect glitches in videos.It runs the detection model locally using NVIDIA CUDA (if available) and generates an output of all frames with anamolies in multiple formats.`,
+    thumbnail: "/img/showcase/pureframe.gif",
+    link: "https://pureframe.app/",
+  },
+  {
     title: "My Personal Private Cloud Services",
     description:
       "I have a personal server that I use to host my own cloud services. I have my own Google Photos (PhotoPrism), Netflix (JellyFin), Backup (Duplicati), and Content management (Sonarr & Radarr). I also have a few other smaller services that are running.",
