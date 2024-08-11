@@ -60,6 +60,12 @@ const flexContainer = {
 };
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  const birthDate = new Date("6/22/1993");
+  const today = new Date();
+  const age = Math.floor(
+    (today.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24 * 365)
+  );
+
   return (
     <Layout
       title={`Fadee's Dating Profile`}
@@ -170,7 +176,7 @@ export default function Home(): JSX.Element {
           <img src={techAlley} className={styles.mainImage} />
           <ul style={{ maxWidth: "800px", listStyleType: "none" }}>
             <li>
-              <b>Age</b>: 31
+              <b>Age</b>: {age}
             </li>
             <li>
               <b>Religion</b>: Christian ♱ (Syriac Orthodox same as Catholic
