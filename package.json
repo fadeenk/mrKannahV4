@@ -15,9 +15,9 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "3.5.1",
-    "@docusaurus/plugin-google-gtag": "3.5.1",
-    "@docusaurus/preset-classic": "3.5.1",
+    "@docusaurus/core": "3.5.2",
+    "@docusaurus/plugin-google-gtag": "3.5.2",
+    "@docusaurus/preset-classic": "3.5.2",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
@@ -35,9 +35,9 @@
     "yet-another-react-lightbox": "^3.21.4"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.5.1",
-    "@docusaurus/tsconfig": "3.5.1",
-    "@docusaurus/types": "3.5.1",
+    "@docusaurus/module-type-aliases": "3.5.2",
+    "@docusaurus/tsconfig": "3.5.2",
+    "@docusaurus/types": "3.5.2",
     "typescript": "~5.5.4"
   },
   "browserslist": {
