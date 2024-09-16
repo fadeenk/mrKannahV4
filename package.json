@@ -32,7 +32,7 @@
     "react-dom": "^18.0.0",
     "react-photo-album": "^3.0.2",
     "react-player": "^2.16.0",
-    "yet-another-react-lightbox": "^3.21.4"
+    "yet-another-react-lightbox": "^3.21.5"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.5.2",
