@@ -7,12 +7,14 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 export default function Header() {
   const { siteConfig } = useDocusaurusContext();
   setTimeout(() => {
-    const element = document.querySelector("#myProfilePicture");
-    if (!element) return;
-    element.classList.add("hovered");
-    setTimeout(() => {
-      element.classList.remove("hovered");
-    }, 3000);
+    if (typeof window !== "undefined") {
+      const element = document.querySelector("#myProfilePicture");
+      if (!element) return;
+      element.classList.add("hovered");
+      setTimeout(() => {
+        element.classList.remove("hovered");
+      }, 3000);
+    }
   }, 1000);
 
   return (
