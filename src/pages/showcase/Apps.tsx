@@ -12,10 +12,11 @@ type App = {
 
 const alive: App[] = [
   {
-    title: "PureFrame App",
-    description: `A desktop application that uses AI to detect glitches in videos.It runs the detection model locally using NVIDIA CUDA (if available) and generates an output of all frames with anamolies in multiple formats.`,
-    thumbnail: "/img/showcase/pureframe.gif",
-    link: "https://pureframe.app/",
+    title: "MeetingHero.ai",
+    link: "https://meetinghero.ai/",
+    description:
+      "Automagic AI powered insights on the person you’re about to meet with. Conveniently in your email inbox and calendar app.",
+    thumbnail: "/img/showcase/MeetingHero.png",
   },
   {
     title: "My Personal Private Cloud Services",
@@ -32,6 +33,12 @@ const alive: App[] = [
 ];
 
 const NotMaintained: App[] = [
+  {
+    title: "PureFrame App",
+    description: `A desktop application that uses AI to detect glitches in videos.It runs the detection model locally using NVIDIA CUDA (if available) and generates an output of all frames with anamolies in multiple formats.`,
+    thumbnail: "/img/showcase/pureframe.gif",
+    link: "https://pureframe.app/",
+  },
   {
     title: "Primus Rooms plugins",
     link: "https://github.com/fadeenk?tab=repositories&q=rooms&type=archived&language=&sort=",
