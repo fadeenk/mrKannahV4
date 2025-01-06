@@ -35,7 +35,7 @@
     "yet-another-react-lightbox": "^3.21.7"
   },
   "devDependencies": {
-    "@docusaurus/faster": "3.6.3",
+    "@docusaurus/faster": "3.7.0",
     "@docusaurus/module-type-aliases": "3.6.3",
     "@docusaurus/tsconfig": "3.6.3",
     "@docusaurus/types": "3.6.3",
