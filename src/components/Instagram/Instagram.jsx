@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 class Instagram extends Component {
-
   componentDidMount() {
     const script = document.createElement("script");
     script.src = "//www.instagram.com/embed.js";
     script.async = true;
     // script.onload = () => this.scriptLoaded();
-  
+
     document.body.appendChild(script);
   }
 
@@ -60,11 +59,18 @@ class Instagram extends Component {
         </a>
         <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="${this.props.url}/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Fadee Kannah (@fadeekannah)</a></p>
     </div>
-  </blockquote>`
+  </blockquote>`;
     return (
-      <div style={{marginLeft: 'auto', marginRight: 'auto', width: '75%'}}  dangerouslySetInnerHTML={{__html: html}} />
-     )
-   }
+      <div
+        style={{
+          marginLeft: "auto",
+          marginRight: "auto",
+          maxWidth: "fit-content",
+        }}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  }
 }
 
 export default Instagram;
