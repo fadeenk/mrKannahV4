@@ -12,7 +12,7 @@ type Testimonial = {
 const TestimonialList: Testimonial[] = [
   {
     name: "Anthony Bull",
-    img: "https://media.licdn.com/dms/image/D4E03AQHxNVy1fYiLDw/profile-displayphoto-shrink_200_200/0/1698980292022?e=1720656000&v=beta&t=ktBDh5ukd1ogSovwg0tn8yONIRJjXeE4T4oe-Z6FMik",
+    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_E5TL0OE058OCK9WZAEVY.jpg",
     description:
       "Looking for a 10xer? Look no further. Fadee has been one of the best I've worked with over the course of my career. \nCurious, determined, passionate, resilient, communicative, caring, and gritty, he's phenomenal at the software game and a joy to work with.\nWe partnered well to tackle the people, process, and architecture aspects of Engineering, with all engineers admiring his technical abilities. Their loyalty has been reflective of his to them and the company.",
     title: "VP of Engineering",
@@ -20,14 +20,14 @@ const TestimonialList: Testimonial[] = [
   },
   {
     name: "Cathy Pucher",
-    img: "https://ziplaunchpad.sdsu.edu/_resources/images/cathy-headshot.jpeg",
+    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_6J0ZRDJ3T0PGEN0G4KXB.jpg",
     description:
       "Fadee is an exceptional CTO and entrepreneur. I have known him for close to 10 years. Besides being crazy smart, he is exceptionally generous with his time. He is passionate about giving back and mentoring future technologists. He inspires others and his journey has inspired me.",
     title: "Executive Director",
   },
   {
     name: "Irving Barajas",
-    img: "https://media.licdn.com/dms/image/D5603AQHre9x2TsHg0A/profile-displayphoto-shrink_200_200/0/1697583433925?e=1720656000&v=beta&t=pLVjsksEE8bREYbuQeVqrnu5EVoiWbts9uB1NQZpdXc",
+    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_NWBJMJOOTKGAE6P4I07Z.jpg",
     description:
       "It really is rare to come across an individual like Fadee. I had the pleasure of knowing him as our CTO, Back End engineer, and mentor. He is able to be CTO, mentor 3 teams, code while watching some educational video open and manage to complete a million points on his sprint. Fadee would be an asset for any company and I’m pretty sure he is half android.",
     title: "Software Engineer",
@@ -35,14 +35,14 @@ const TestimonialList: Testimonial[] = [
   },
   {
     name: "Michael Habeeb",
-    img: "https://media.licdn.com/dms/image/C5635AQHwu44l1gYhqw/profile-framedphoto-shrink_200_200/0/1618216292194?e=1717524000&v=beta&t=Mqi4GVDKl47EHs7N_4mUWje76T4HstgJ8ZjENQGCuIY",
+    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_8FT08RB5M1CVMH6ASHTS.jpg",
     description:
       "Since I started working with Fadee for coaching and mentorship, my growth has been remarkable. With his guidance, I have advanced my career, secured new opportunities, and gained the confidence to tackle complex challenges. The impact on my career trajectory has been substantial, and I couldn't be happier!",
     title: "Student",
   },
   {
     name: "Luke Sophinos",
-    img: "https://media.licdn.com/dms/image/C5603AQGbkt9gO3g8vg/profile-displayphoto-shrink_200_200/0/1608532052662?e=1720656000&v=beta&t=9DYg6aXnB---3L4a61J3rJ97F69pffk4KqPYt8jqsv0",
+    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_KKW3QCENF3VX0LX162GU.jpg",
     description: "...",
     title: "CEO",
   },
