@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 class YouTube extends Component {
   render() {
     const { videoId } = this.props;
-    const url = `https://www.youtube.com/watch?v=${videoId}`;
+    const src = `https://www.youtube.com/watch?v=${videoId}`;
     return (
       <div
         style={{
@@ -14,7 +14,7 @@ class YouTube extends Component {
         }}
       >
         <ReactPlayer
-          url={url}
+          src={src}
           width="100%"
           height="100%"
           style={{
