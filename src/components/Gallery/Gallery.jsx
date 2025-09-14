@@ -186,10 +186,8 @@ class Gallery extends Component {
       this.playerRefs[slideIndex] = React.createRef();
     }
 
-    // Construct full URL for the video
-    const videoUrl = slide.videoSrc.startsWith("http")
-      ? slide.videoSrc
-      : `${window.location.origin}${slide.videoSrc}`;
+    // Use the video source directly - Docusaurus handles the path resolution
+    const videoUrl = slide.videoSrc;
 
     return (
       <div
