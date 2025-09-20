@@ -8,6 +8,16 @@ type Website = {
   thumbnail?: string;
 };
 
+const recentSites: Website[] = [
+  {
+    title: "MeetingHero.AI",
+    description:
+      "My latest project. Automagic AI powered insights on the person you’re about to meet with. Conveniently in your email inbox and calendar app.",
+    thumbnail: "/img/showcase/MeetingHeroWeb.png",
+    link: "https://meetinghero.ai/",
+  },
+];
+
 const myPortfolios: Website[] = [
   {
     title: "V4 Portfolio",
@@ -135,6 +145,24 @@ function renderWebsite(website: Website): JSX.Element {
 export default function Apps(): JSX.Element {
   return (
     <Layout title={`My Websites`} description={`Showcasing my work`}>
+      <div className="hero hero--primary" style={{ display: "block" }}>
+        <div className="container" style={{ marginTop: "10px" }}>
+          <div>
+            <h2>Recent websites</h2>
+            <p>Those are the websites I have built recently.</p>
+            <div
+              className={styles.websiteCardHero}
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+              }}
+            >
+              {recentSites.map(renderWebsite)}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container" style={{ marginTop: "10px" }}>
         <div>
           <h2>My Portfolio websites</h2>
