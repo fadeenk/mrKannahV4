@@ -77,7 +77,7 @@ const clientSites: Website[] = [
     title: "California Health Escort Service",
     description:
       "I built this website using HTML and this was my first website that was multi-lingual. I also designed the logo, brochures, letterheads and a few other things.",
-    link: "/healthEscort",
+    link: "/HealthEscort",
     thumbnail: "https://v1.mrkannah.com/images/ches.jpg",
   },
   {
