@@ -111,6 +111,50 @@
   text-align: center;
   width: 100%;
 }
+
+.headerCTA {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  display: inline-block;
+  text-align: center;
+  min-width: 140px;
+}
+
+.ctaButton.primary {
+  background-color: var(--particles-links-color);
+  color: var(--ifm-font-color-base-inverse);
+  border-color: var(--particles-links-color);
+}
+
+.ctaButton.primary:hover {
+  background-color: transparent;
+  color: var(--particles-links-color);
+  transform: translateY(-2px);
+}
+
+.ctaButton.secondary {
+  background-color: transparent;
+  color: var(--particles-color);
+  border-color: var(--particles-color);
+}
+
+.ctaButton.secondary:hover {
+  background-color: var(--particles-color);
+  color: var(--ifm-font-color-base-inverse);
+  transform: translateY(-2px);
+}
 /* width from main UI navbar breakpoint */
 @media screen and (max-width: 996px) {
   .header {
@@ -118,6 +162,14 @@
   }
   .headerTitle {
     rotate: -10deg;
+  }
+  .headerCTA {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .ctaButton {
+    width: 200px;
   }
 }
 

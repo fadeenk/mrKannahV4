@@ -36,6 +36,14 @@ export default function Header() {
       </div>
       <span className="headerTitle">Kannah</span>
       <span className="headerTagline">{siteConfig.tagline}</span>
+      <div className="headerCTA hero--primary">
+        <a href="#contact" className="ctaButton primary">
+          Work with me
+        </a>
+        <a href="/showcase/Apps" className="ctaButton secondary">
+          See work
+        </a>
+      </div>
       <BrowserOnly>{() => <ParticlesBackground />}</BrowserOnly>
     </header>
   );

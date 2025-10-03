@@ -1,70 +1,73 @@
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Testimonials from "@site/src/components/Testimonials";
 import Heading from "@theme/Heading";
 import Header from "@site/src/components/Header";
 import Contact from "@site/src/components/Contact";
-
-import styles from "./index.module.css";
-
-function oldHome() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <div className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
+import FeaturedWork from "@site/src/components/FeaturedWork";
+import Skills from "@site/src/components/Skills";
 
 function Services() {
   return (
     <div className="container">
       <Heading as="h2" className="hero__title">
-        What I can do for you
+        How I Help You Succeed
       </Heading>
       <p className="hero__subtitle">
-        I offer a range of consulting services designed to help businesses and
-        individuals excel in technology, business and career development.
+        I deliver measurable results through strategic technology consulting and
+        hands-on execution.
       </p>
-      <Heading as="h3">Software Architecture / Design Consultations</Heading>
-      <p>
-        Designing robust software systems is my specialty. I'll work with you to
-        create scalable, maintainable architecture tailored to your business
-        needs.
-      </p>
-      <Heading as="h3">Team Coaching</Heading>
-      <p>
-        Strengthen your team's performance with customized coaching. I offer
-        strategies for improving collaboration, communication, and productivity.
-      </p>
-      <Heading as="h3">Agile Coaching</Heading>
-      <p>
-        Implement agile practices effectively. I'll help you navigate agile
-        methodologies, ensuring your team delivers high-quality results
-        efficiently.
-      </p>
-      <Heading as="h3">Personal Career Coaching and Mentorship</Heading>
-      <p>
-        I'll work with you 1-on-1 to set career goals, identify opportunities,
-        navigate challenges and achieve your professional goals.
-      </p>
-      <Heading as="h3">Speaking and Training</Heading>
-      <p>
-        I offer customized training sessions and speaking engagements on a
-        variety of technology and entrepreneurship topics.
-      </p>
+
+      <div style={{ display: "grid", gap: "2rem", marginTop: "2rem" }}>
+        <div>
+          <Heading as="h3">MVP Development & Launch</Heading>
+          <p>
+            Get your product to market 3x faster with battle-tested
+            architecture. I've helped founders launch AI-powered SaaS, SaaS
+            platforms, and enterprise solutions that raised funding and acquired
+            customers.
+          </p>
+        </div>
+
+        <div>
+          <Heading as="h3">
+            Technical Architecture & Platform Modernization
+          </Heading>
+          <p>
+            Transform legacy systems into scalable, cloud-native platforms.
+            Reduce infrastructure costs by 40-60% while improving performance
+            and developer productivity.
+          </p>
+        </div>
+
+        <div>
+          <Heading as="h3">AI Integration & Strategy</Heading>
+          <p>
+            Implement AI features that drive user engagement and business value.
+            From OpenAI APIs to custom full agentic AI, I help you build
+            AI-powered features that differentiate your product.
+          </p>
+        </div>
+
+        <div>
+          <Heading as="h3">Engineering Team Enablement</Heading>
+          <p>
+            Build high-performing engineering teams with modern practices.
+            Implement CI/CD, testing strategies, integrate AI in development
+            process and agile methodologies that increase delivery speed by
+            50%+.
+          </p>
+        </div>
+
+        <div>
+          <Heading as="h3">Fractional CTO & Technical Leadership</Heading>
+          <p>
+            Get senior-level technical leadership without the full-time cost. I
+            provide strategic guidance, architecture decisions, and hands-on
+            coding to accelerate your development.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -73,17 +76,18 @@ function About() {
   return (
     <div className="hero hero--primary ">
       <div className="container">
+        <h2 className="hero__title">Transform Your Tech Vision Into Reality</h2>
         <p className="hero__subtitle">
-          I have more than 18 years of experience in software development,
-          architecture, and team leadership, establishing myself as a seasoned
-          technology expert. As founder and co-founder of many software as a
-          service companies, I’ve steered teams toward innovative software
-          solutions. I have also consulted with multiple companies on their
-          software development and architecture needs, while my role as a
-          Technical Advisor at San Diego State University's incubator has
-          allowed me to mentor emerging talent. My work spans a variety of
-          industries, from healthcare and home services to entertainment,
-          automotive, and education.
+          I'm a seasoned technology leader with 18+ years building and scaling
+          software companies. I help startup founders launch MVPs faster and
+          engineering orgs modernize their platforms. From AI-powered SaaS to
+          cloud architecture, I've guided teams from concept to market success
+          across healthcare, e-commerce, and enterprise sectors.
+        </p>
+        <p className="hero__subtitle">
+          <strong>Ready to accelerate your product development?</strong> Let's
+          discuss how I can help your team deliver faster, scale smarter, and
+          build the technical foundation for your next breakthrough.
         </p>
       </div>
     </div>
@@ -98,8 +102,12 @@ export default function Home(): JSX.Element {
       <main>
         <About />
         <Services />
+        <FeaturedWork />
+        <Skills />
         <Testimonials />
-        <Contact />
+        <div id="contact">
+          <Contact />
+        </div>
       </main>
     </Layout>
   );
