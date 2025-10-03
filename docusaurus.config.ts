@@ -80,6 +80,7 @@ const config: Config = {
           type: "dropdown",
           label: "Showcase",
           position: "left",
+          to: "/showcase",
           items: [
             {
               label: "Apps",

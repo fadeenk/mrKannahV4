@@ -40,7 +40,7 @@ export default function Header() {
         <a href="#contact" className="ctaButton primary">
           Work with me
         </a>
-        <a href="/showcase/Apps" className="ctaButton secondary">
+        <a href="/showcase" className="ctaButton secondary">
           See work
         </a>
       </div>

@@ -131,7 +131,7 @@ export default function FeaturedWork(): JSX.Element {
 
         <div className="text--center" style={{ marginTop: "2rem" }}>
           <a
-            href="/showcase/Apps"
+            href="/showcase"
             className="button--primary"
             style={{ width: "80%" }}
           >
