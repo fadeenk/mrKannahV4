@@ -69,7 +69,7 @@ export default function Testimonials(): JSX.Element {
   return (
     <section className="hero hero--primary">
       <div className="container">
-        <Heading as="h2" className="hero__title">
+        <Heading as="h2" className="hero__title text--center">
           What People I have worked with say
         </Heading>
         <ul className={styles.team}>

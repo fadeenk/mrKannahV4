@@ -63,29 +63,23 @@ const skillCategories: SkillCategory[] = [
 function SkillCategoryCard({ category }: { category: SkillCategory }) {
   return (
     <div
+      className="card--elevated"
       style={{
-        background: "#f8f9fa",
-        border: "1px solid #e9ecef",
-        borderRadius: "8px",
-        padding: "1.5rem",
         textAlign: "center",
-        transition: "transform 0.2s ease, box-shadow 0.2s ease",
         minWidth: "300px",
         flex: "0 0 auto",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-2px)";
-        e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "none";
       }}
     >
       <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
         {category.icon}
       </div>
-      <h4 style={{ margin: "0 0 1rem 0", fontSize: "1.1rem", color: "#333" }}>
+      <h4
+        style={{
+          margin: "0 0 1rem 0",
+          fontSize: "1.1rem",
+          color: "var(--ifm-font-color-base)",
+        }}
+      >
         {category.title}
       </h4>
       <div
@@ -98,18 +92,7 @@ function SkillCategoryCard({ category }: { category: SkillCategory }) {
         }}
       >
         {category.skills.map((skill, index) => (
-          <span
-            key={index}
-            style={{
-              background: "#e3f2fd",
-              color: "var(--ifm-color-primary)",
-              padding: "0.3rem 0.6rem",
-              borderRadius: "12px",
-              fontSize: "0.8rem",
-              fontWeight: "500",
-              border: "1px solid var(--ifm-color-primary)",
-            }}
-          >
+          <span key={index} className="tag--pill">
             {skill}
           </span>
         ))}
@@ -124,7 +107,7 @@ export default function Skills(): JSX.Element {
       className="container"
       style={{ marginTop: "3rem", marginBottom: "3rem" }}
     >
-      <Heading as="h2" className="hero__title">
+      <Heading as="h2" className="hero__title text--center">
         Technical Expertise
       </Heading>
       <p className="hero__subtitle">

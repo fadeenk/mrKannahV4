@@ -79,7 +79,7 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
           style={{
             margin: 0,
             fontWeight: "bold",
-            color: "#2e7d32",
+            color: "var(--ifm-color-primary)",
             fontSize: "0.9rem",
           }}
         >
@@ -104,12 +104,12 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
 
 export default function FeaturedWork(): JSX.Element {
   return (
-    <div className="hero hero--primary">
+    <div className="hero hero--primary ">
       <div
         className="container"
         style={{ marginTop: "3rem", marginBottom: "3rem" }}
       >
-        <Heading as="h2" className="hero__title">
+        <Heading as="h2" className="hero__title text--center">
           Featured Work
         </Heading>
         <p className="hero__subtitle">
@@ -129,30 +129,11 @@ export default function FeaturedWork(): JSX.Element {
           ))}
         </div>
 
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <div className="text--center" style={{ marginTop: "2rem" }}>
           <a
             href="/showcase/Apps"
-            style={{
-              display: "inline-block",
-              padding: "12px 24px",
-              background: "var(--ifm-font-color-base-inverse)",
-              color: "var(--ifm-color-primary)",
-              border: "2px solid var(--ifm-color-primary)",
-              borderRadius: "8px",
-              textDecoration: "none",
-              fontWeight: "600",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--ifm-font-color-base)";
-              e.currentTarget.style.color =
-                "var(--ifm-font-color-base-inverse)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "var(--ifm-font-color-base-inverse)";
-              e.currentTarget.style.color = "var(--ifm-color-primary)";
-            }}
+            className="button--primary"
+            style={{ width: "80%" }}
           >
             See More Work
           </a>
