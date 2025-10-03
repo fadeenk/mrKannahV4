@@ -33,16 +33,22 @@ const details: { years: string; title: string; description: string }[] = [
       "I started my own consulting company where I provided software services to businesses. I worked with clients to build and maintain their websites, web apps, and mobile apps. I also provided consulting services to help them with their business needs.",
   },
   {
-    years: "2014-ongoing",
+    years: "2014-2024",
     title: "CourseKey",
     description:
       "While I was studying for my degree, I realized the education system was broken. I wanted to fix it. I met Luke and together we came up with CourseKey to help students and teachers have a better learning experience. We built the first version of the product and got our first customers. We slowly grew the team and raised money to grow the company. I am currently the Chief Architect and co-founder. We have helped over 400,000 students and teachers have a better learning experience. Currently, I am an advisor to the company.",
   },
   {
-    years: "2025-ongoing",
+    years: "2024-2025",
     title: "MeetingHero.AI",
     description:
-      "I am currently building MeetingHero.AI, a saas that helps people prepare for meetings and get more out of them. Using AI to automagically figure out who you are meeting with and gets you information about them and delivers it to you in a digestible format within your calendar or inbox.",
+      "A saas that helps people prepare for meetings and get more out of them. Using AI to automagically figure out who you are meeting with and gets you information about them and delivers it to you in a digestible format within your calendar or inbox.",
+  },
+  {
+    years: "2025-ongoing",
+    title: "Kannah Consulting",
+    description:
+      "I revived my Kannah Consulting business. I work with clients to build and maintain their apps, platforms and websites. I also provide consulting services to help them with their business needs.",
   },
 ];
 
