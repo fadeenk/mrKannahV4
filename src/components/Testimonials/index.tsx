@@ -11,6 +11,13 @@ type Testimonial = {
 
 const TestimonialList: Testimonial[] = [
   {
+    name: "Luke Sophinos",
+    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_P9SDXXVRDKY95QL4BIRI.jpg",
+    description:
+      "Fadee is a code magician. He can turn any idea into reality in a scalable way. And he’s been doing it with me for more than a decade. Not only is Fadee insanely talented and hard working, but he exemplifies the best of humanity - he’s thoughtful, genuine, and really cares about his work and his contribution. I’ve been beyond blessed to work with Fadee and will continue to do so at any opportunity.",
+    title: "CEO & Founder",
+  },
+  {
     name: "Anthony Bull",
     img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_E5TL0OE058OCK9WZAEVY.jpg",
     description:
@@ -39,12 +46,6 @@ const TestimonialList: Testimonial[] = [
     description:
       "Since I started working with Fadee for coaching and mentorship, my growth has been remarkable. With his guidance, I have advanced my career, secured new opportunities, and gained the confidence to tackle complex challenges. The impact on my career trajectory has been substantial, and I couldn't be happier!",
     title: "Student",
-  },
-  {
-    name: "Luke Sophinos",
-    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_KKW3QCENF3VX0LX162GU.jpg",
-    description: "...",
-    title: "CEO",
   },
 ];
 
