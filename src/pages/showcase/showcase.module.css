@@ -128,13 +128,6 @@
   background: var(--particles-color);
 }
 
-.app img {
-  float: left;
-  width: 200px;
-  margin-right: 10px;
-  margin-bottom: 5px;
-}
-
 .websiteCard {
   margin: 10px;
   max-width: 400px;

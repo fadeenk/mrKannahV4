@@ -11,6 +11,15 @@ type FeaturedWorkItem = {
 
 const featuredWork: FeaturedWorkItem[] = [
   {
+    title: "SuperAgent Integration",
+    description:
+      "AI-powered assistant interface with comprehensive infrastructure. Features workflow management, tool execution, document parsing, web search, sandbox environment, and real-time streaming.",
+    result:
+      "Delivered in 1 month with full infrastructure deployment and UI integration.",
+    link: "/showcase/SuperAgentIntegration",
+    category: "Agentic AI",
+  },
+  {
     title: "AI-Powered Meeting Intelligence Platform",
     description:
       "Built a comprehensive SaaS platform that provides AI-powered insights on meeting participants, integrated with email and calendar systems.",

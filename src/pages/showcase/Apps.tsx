@@ -2,6 +2,7 @@ import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import styles from "./showcase.module.css";
+import Gallery from "@site/src/components/Gallery/Gallery";
 
 type App = {
   title: string;
@@ -12,10 +13,17 @@ type App = {
 
 const alive: App[] = [
   {
+    title: "SuperAgent Integration",
+    link: "/showcase/SuperAgentIntegration",
+    description:
+      "AI-powered assistant interface with comprehensive infrastructure. Features workflow management, tool execution, document parsing, web search, sandbox environment, and real-time streaming.",
+    thumbnail: "/img/showcase/superAgent.mp4",
+  },
+  {
     title: "MeetingHero.ai",
     link: "https://meetinghero.ai/",
     description:
-      "Automagic AI powered insights on the person you’re about to meet with. Conveniently in your email inbox and calendar app.",
+      "Automagic AI powered insights on the person you're about to meet with. Conveniently in your email inbox and calendar app.",
     thumbnail: "/img/showcase/MeetingHero.png",
   },
   {
@@ -147,10 +155,24 @@ const Abandoned: App[] = [
 function renderApp(app: App): JSX.Element {
   return (
     <div className={styles.app} key={app.title}>
-      {app.thumbnail && <img src={app.thumbnail} alt={app.title} />}
-      <h3>{app.link ? <a href={app.link}>{app.title}</a> : app.title}</h3>
+      {app.thumbnail && (
+        <div
+          style={{
+            float: "left",
+            width: 200,
+            marginRight: 10,
+            marginBottom: 5,
+            marginTop: 5,
+          }}
+        >
+          <Gallery photos={[app.thumbnail]} />
+        </div>
+      )}
+      <h3 style={{ marginTop: 10 }}>
+        {app.link ? <a href={app.link}>{app.title}</a> : app.title}
+      </h3>
       <p>{app.description}</p>
-      <hr style={{ clear: "both" }} />
+      <hr style={{ clear: "both", margin: 0 }} />
     </div>
   );
 }
