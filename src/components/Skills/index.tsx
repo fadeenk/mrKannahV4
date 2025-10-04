@@ -14,6 +14,7 @@ const skillCategories: SkillCategory[] = [
       "AWS/GCP/Azure",
       "Terraform",
       "Microservices",
+      "Multi-tenant SaaS",
       "Serverless",
       "Event-Driven Architecture",
     ],
@@ -22,18 +23,34 @@ const skillCategories: SkillCategory[] = [
 
   {
     title: "Backend & Data",
-    skills: ["Node.js", "PostgreSQL", "Redis", "GraphQL", "REST APIs"],
+    skills: [
+      "Node.js",
+      "Python",
+      "PostgreSQL",
+      "Redis",
+      "GraphQL",
+      "REST APIs",
+      "NoSQL",
+    ],
     icon: "🔧",
   },
   {
     title: "DevOps & Delivery",
-    skills: ["CI/CD", "Docker", "Testing", "Monitoring", "Agile/Scrum"],
+    skills: [
+      "CI/CD",
+      "Docker",
+      "Infrastructure as Code",
+      "Testing",
+      "Monitoring",
+      "Agile/Scrum",
+    ],
     icon: "🚀",
   },
   {
     title: "AI & Machine Learning",
     skills: [
       "OpenAI APIs",
+      "Agentic AI",
       "Vector Stores",
       "Custom ML Models",
       "AI Integration",
@@ -42,7 +59,15 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "Security & Compliance",
-    skills: ["SOC 2", "FERPA", "Security Scanning", "Access Control"],
+    skills: [
+      "SOC 2",
+      "OAuth 2",
+      "OpenID Connect",
+      "SAML",
+      "Security Scanning",
+      "Access Control",
+      "FERPA",
+    ],
     icon: "🔒",
   },
   {
@@ -53,7 +78,6 @@ const skillCategories: SkillCategory[] = [
       "Next.js",
       "Vue3",
       "Svelte",
-      "Next.js",
       "Responsive Design",
     ],
     icon: "⚛️",
