@@ -11,6 +11,14 @@ type FeaturedWorkItem = {
 
 const featuredWork: FeaturedWorkItem[] = [
   {
+    title: "Customizable Agentic Platform",
+    description:
+      "White-labeled agentic platform across four verticals with real-time chat, file management, browser automation, code execution, and multi-LLM support.",
+    result: "Delivered in 8 days with full IaC, CI/CD, and white-label UI.",
+    link: "/showcase/CustomizableAgenticPlatform",
+    category: "Agentic AI",
+  },
+  {
     title: "SuperAgent Integration",
     description:
       "AI-powered assistant interface with comprehensive infrastructure. Features workflow management, tool execution, document parsing, web search, sandbox environment, and real-time streaming.",
