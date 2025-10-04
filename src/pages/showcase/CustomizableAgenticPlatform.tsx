@@ -13,7 +13,7 @@ export default function CustomizableAgenticPlatform(): JSX.Element {
 
         <div style={{ marginBottom: "2rem" }}>
           <Gallery
-            photos={["/img/showcase/websites.mp4", "/img/showcase/agentic.mp4"]}
+            photos={["/img/showcase/agentic.mp4", "/img/showcase/websites.mp4"]}
           />
         </div>
 

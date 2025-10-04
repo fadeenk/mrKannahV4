@@ -17,7 +17,7 @@ const clientProjects: App[] = [
     link: "/showcase/CustomizableAgenticPlatform",
     description:
       "White-labeled agentic framework deployed across Therapy, HomeHealth, Pharmacists, and FinancialAdvisors with custom domains, template agents, real-time chat, and containerized services.",
-    thumbnail: "/img/showcase/websites.mp4",
+    thumbnail: "/img/showcase/agentic.mp4",
   },
   {
     title: "SuperAgent Integration",
