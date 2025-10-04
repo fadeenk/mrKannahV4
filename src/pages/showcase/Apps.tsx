@@ -11,7 +11,7 @@ type App = {
   thumbnail?: string;
 };
 
-const alive: App[] = [
+const clientProjects: App[] = [
   {
     title: "Customizable Agentic Platform",
     link: "/showcase/CustomizableAgenticPlatform",
@@ -26,6 +26,9 @@ const alive: App[] = [
       "AI-powered assistant interface with comprehensive infrastructure. Features workflow management, tool execution, document parsing, web search, sandbox environment, and real-time streaming.",
     thumbnail: "/img/showcase/superAgent.mp4",
   },
+];
+
+const alive: App[] = [
   {
     title: "MeetingHero.ai",
     link: "https://meetinghero.ai/",
@@ -189,6 +192,9 @@ export default function Apps(): JSX.Element {
     <Layout title={`My Apps`} description={`Showcasing my work`}>
       <div className="container" style={{ marginTop: "10px" }}>
         <Tabs className="tabs--block" groupId="section" queryString>
+          <TabItem value="Client Projects" label="Client Projects">
+            {clientProjects.map(renderApp)}
+          </TabItem>
           <TabItem value="Alive" label="Alive">
             {alive.map(renderApp)}
           </TabItem>
