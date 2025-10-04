@@ -16,7 +16,7 @@ const featuredWork: FeaturedWorkItem[] = [
       "White-labeled agentic platform across four verticals with real-time chat, file management, browser automation, code execution, and multi-LLM support.",
     result: "Delivered in 8 days with full IaC, CI/CD, and white-label UI.",
     link: "/showcase/CustomizableAgenticPlatform",
-    category: "Agentic AI",
+    category: "SaaS/AI",
   },
   {
     title: "SuperAgent Integration",
@@ -32,27 +32,9 @@ const featuredWork: FeaturedWorkItem[] = [
     description:
       "Built a comprehensive SaaS platform that provides AI-powered insights on meeting participants, integrated with email and calendar systems.",
     result:
-      "Launched MVP in 3 months, secured initial funding, and acquired first enterprise customers.",
-    link: "/showcase/Apps",
+      "Launched MVP in 3 months, secured multiple customers and generated revenue.",
+    link: "https://meetinghero.ai/",
     category: "SaaS/AI",
-  },
-  {
-    title: "Multi-Industry Client Portfolio",
-    description:
-      "Delivered custom web solutions for healthcare, dental, and service businesses with multilingual support and modern UX.",
-    result:
-      "Helped 10+ businesses establish professional online presence and improve customer acquisition.",
-    link: "/showcase/Websites",
-    category: "Web Development",
-  },
-  {
-    title: "Personal Cloud Infrastructure",
-    description:
-      "Architected and deployed a complete private cloud solution with photo management, media streaming, backup systems, and content automation.",
-    result:
-      "Reduced monthly cloud costs by 80% while improving data privacy and control.",
-    link: "/showcase/Apps",
-    category: "Cloud Architecture",
   },
 ];
 
