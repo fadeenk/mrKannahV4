@@ -1,5 +1,6 @@
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
+import Gallery from "@site/src/components/Gallery/Gallery";
 
 type Hardware = {
   title: string;
@@ -40,7 +41,19 @@ const projects: Hardware[] = [
 function renderApp(project: Hardware): JSX.Element {
   return (
     <div className={styles.app} key={project.title}>
-      {project.thumbnail && <img src={project.thumbnail} alt={project.title} />}
+      {project.thumbnail && (
+        <div
+          style={{
+            float: "left",
+            width: 200,
+            marginRight: 10,
+            marginBottom: 5,
+            marginTop: 5,
+          }}
+        >
+          <Gallery photos={[project.thumbnail]} />
+        </div>
+      )}
       <h3>
         {project.link ? (
           <a href={project.link}>{project.title}</a>
@@ -49,7 +62,7 @@ function renderApp(project: Hardware): JSX.Element {
         )}
       </h3>
       <p>{project.description}</p>
-      <hr style={{ clear: "both" }} />
+      <hr style={{ clear: "both", margin: 0 }} />
     </div>
   );
 }
