@@ -25,7 +25,7 @@ const sections: Section[] = [
     title: "Businesses",
     desc: "Companies and ventures.",
     to: "/showcase/Businesses",
-    thumbnail: "/img/showcase/servers.png",
+    thumbnail: "/img/logo.svg",
   },
   {
     title: "Hardware",
@@ -37,7 +37,7 @@ const sections: Section[] = [
     title: "Other",
     desc: "Experiments, AI, tools.",
     to: "/showcase/Other",
-    thumbnail: "/img/showcase/pureframe.gif",
+    thumbnail: "/img/showcase/businesscards.jpg",
   },
 ];
 
@@ -45,7 +45,7 @@ function renderSection(section: Section): JSX.Element {
   return (
     <div className={`card ${styles.websiteCard}`} key={section.title}>
       {section.thumbnail && (
-        <div className="card__image">
+        <div className={styles.websiteCardImage}>
           <img src={section.thumbnail} alt={section.title} />
         </div>
       )}

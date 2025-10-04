@@ -130,14 +130,26 @@
 
 .websiteCard {
   margin: 10px;
-  max-width: 400px;
+  width: 400px;
 }
 
-.websiteCard .card__image img {
+.websiteCardImage img {
+  display: block;
+  margin: 0 auto;
   width: 100%;
 }
 
 .websiteCardHero p,
 .websiteCardHero h3 {
   color: var(--ifm-font-color-base);
+}
+
+.websiteCard {
+  transition: all 0.3s ease-in-out;
+}
+
+.websiteCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
 }
