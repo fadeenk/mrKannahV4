@@ -62,16 +62,22 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
           <span
             style={{
               fontSize: "0.8rem",
-              background: "#f0f0f0",
+              background: "var(--ifm-color-primary)",
               padding: "0.2rem 0.5rem",
               borderRadius: "4px",
-              color: "#666",
+              fontWeight: "bold",
+              color: "var(--ifm-font-color-base-inverse)",
             }}
           >
             {work.category}
           </span>
         </div>
-        <p style={{ marginBottom: "0.5rem", color: "#666" }}>
+        <p
+          style={{
+            marginBottom: "0.5rem",
+            color: "var(--ifm-font-color-base)",
+          }}
+        >
           {work.description}
         </p>
         <p
