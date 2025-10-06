@@ -5,7 +5,12 @@ const details: { title: string; description: string }[] = [
   {
     title: "Generative AI",
     description:
-      "With the rise of AI, I got more curious about the technology and decided to experiment and play with it. I have created a few projects that use AI to generate art, music, and text.",
+      'With the rise of AI, I got more curious about the technology and decided to experiment and play with it. I have created a few projects that use AI to generate art, music, and text. I have setup and used many AI tools and frameworks.\n For image generation, I have self hosted Stable Diffusion Webui and ComfyUi. For text generation, I have used Oobabooga webui, ollama and SillyTavern which allows me to have multiple "characters" with specific personalities and specific skills.\nI have also setup a Private GPT.',
+  },
+  {
+    title: "Self-Hosted Software Experiments",
+    description:
+      "I maintain a comprehensive self-hosted infrastructure running on my home server. This includes experiments with all sorts of software and services. I have setup many random tools and services to play with and learn more about them.",
   },
   {
     title: "Image processing and face detection",

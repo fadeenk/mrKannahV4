@@ -129,14 +129,77 @@
 }
 
 .websiteCard {
-  margin: 10px;
-  width: 400px;
+  margin: 15px;
+  width: 100%;
+  max-width: 350px;
+  min-height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.websiteCardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--ifm-color-emphasis-100);
 }
 
 .websiteCardImage img {
-  display: block;
-  margin: 0 auto;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.websiteCard:hover .websiteCardImage img {
+  transform: scale(1.05);
+}
+
+.websiteCard .card__body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.websiteCard .card__body h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+.websiteCard .card__body h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.websiteCard .card__body h3 a:hover {
+  color: var(--ifm-color-primary-dark);
+}
+
+.websiteCard .card__body p {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.websiteCardHero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+  justify-items: center;
 }
 
 .websiteCardHero p,
@@ -144,12 +207,159 @@
   color: var(--ifm-font-color-base);
 }
 
-.websiteCard {
-  transition: all 0.3s ease-in-out;
+.websiteCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: var(--ifm-color-primary);
 }
 
-.websiteCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .websiteCardHero {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .websiteCard {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .websiteCardImage {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .websiteCard {
+    max-width: 100%;
+  }
+
+  .websiteCardImage {
+    height: 160px;
+  }
+
+  .websiteCard .card__body {
+    padding: 15px;
+  }
+}
+
+/*==================================
+      AWARDS COMPONENT
+  ==================================*/
+
+.awardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin: 40px 0;
+}
+
+.awardCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
   border-radius: 8px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.awardCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--ifm-color-primary);
+}
+
+.awardImage {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.awardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.awardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.awardYear {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.awardTitle {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-900);
+  line-height: 1.3;
+}
+
+.awardTitleLink {
+  color: var(--ifm-color-emphasis-900);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.awardTitleLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+.awardDescription {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments for awards */
+@media (max-width: 768px) {
+  .awardsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .awardCard {
+    padding: 20px;
+  }
+
+  .awardImage {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .awardsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .awardCard {
+    padding: 16px;
+  }
+
+  .awardTitle {
+    font-size: 1.2rem;
+  }
+
+  .awardDescription {
+    font-size: 0.95rem;
+  }
+
+  .awardImage {
+    height: 160px;
+  }
 }
