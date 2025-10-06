@@ -12,9 +12,7 @@ export default function CustomizableAgenticPlatform(): JSX.Element {
         <Heading as="h1">Customizable Agentic Platform</Heading>
 
         <div style={{ marginBottom: "2rem" }}>
-          <Gallery
-            photos={["/img/showcase/agentic.mp4", "/img/showcase/websites.mp4"]}
-          />
+          <Gallery photos={["/img/showcase/websites.mp4"]} />
         </div>
 
         <div style={{ display: "grid", gap: "2rem", marginBottom: "2rem" }}>
@@ -158,6 +156,7 @@ export default function CustomizableAgenticPlatform(): JSX.Element {
             </div>
           </section>
         </div>
+        <Gallery photos={["/img/showcase/agentic.mp4"]} />
 
         <div className="text--center" style={{ marginTop: "2rem" }}>
           <a href="/showcase/Apps" className="button--primary">
