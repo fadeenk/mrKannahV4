@@ -1,5 +1,6 @@
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
+import soundPatent from "@site/docs/Yearly/2024/images/SoundPatent.jpg";
 
 type Section = {
   title: string;
@@ -43,7 +44,7 @@ const sections: Section[] = [
     title: "Awards",
     desc: "My professional recognition, industry certifications, and achievements that validate my expertise and commitment to continuous learning and excellence.",
     to: "/showcase/Awards",
-    thumbnail: "/img/showcase/SoundPatent.jpg",
+    thumbnail: soundPatent,
   },
 ];
 
