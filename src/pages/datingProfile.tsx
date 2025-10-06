@@ -36,6 +36,8 @@ import {
   faSnapchat,
 } from "@fortawesome/free-brands-svg-icons";
 
+import type { JSX } from "react";
+
 const photos = [
   photo1,
   photo2,
@@ -54,7 +56,7 @@ const photos = [
 const photos2 = [pphoto1, pphoto2, pphoto3, pphoto4, pphoto5, pphoto6];
 const flexContainer = {
   display: "flex",
-  flexWrap: "wrap",
+  flexWrap: "wrap" as const,
   alignItems: "center",
   justifyContent: "space-between",
 };

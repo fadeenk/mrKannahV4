@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, type JSX } from "react";
 import Heading from "@theme/Heading";
 
 const url =

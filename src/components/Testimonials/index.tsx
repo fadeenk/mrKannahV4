@@ -1,6 +1,8 @@
 import Heading from "@theme/Heading";
 import styles from "./styles.module.css";
 
+import type { JSX } from "react";
+
 type Testimonial = {
   name: string;
   img: string;

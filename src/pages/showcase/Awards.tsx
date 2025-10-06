@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, type JSX } from "react";
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
 import Gallery from "@site/src/components/Gallery/Gallery";

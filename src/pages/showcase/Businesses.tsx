@@ -1,6 +1,8 @@
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
 
+import type { JSX } from "react";
+
 const details: { years: string; title: string; description: string }[] = [
   {
     years: "2009-2012",

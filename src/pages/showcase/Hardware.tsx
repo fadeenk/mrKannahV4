@@ -2,6 +2,8 @@ import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
 import Gallery from "@site/src/components/Gallery/Gallery";
 
+import type { JSX } from "react";
+
 type Hardware = {
   title: string;
   link?: string;

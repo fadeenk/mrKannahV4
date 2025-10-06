@@ -17,6 +17,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
+import type { JSX } from "react";
+
 const toggleQR = () => {
   const element = document.getElementById(styles.back);
   if (element.classList.contains(styles.hideQR))

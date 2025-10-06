@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { RowsPhotoAlbum } from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -12,22 +12,19 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
-class Gallery extends Component {
-  state = {
-    images: [],
-    index: -1,
-    videoStates: {}, // Track playing state for each video by index
-  };
-
-  playerRefs = {}; // Store refs for each video player
+const Gallery = ({ photos }) => {
+  const [images, setImages] = useState([]);
+  const [index, setIndex] = useState(-1);
+  const [videoStates, setVideoStates] = useState({}); // Track playing state for each video by index
+  const playerRefs = useRef({}); // Store refs for each video player
 
   // Helper function to check if file is a video
-  isVideo = (src) => {
+  const isVideo = (src) => {
     return /\.(mp4|webm|ogg|avi|mov|wmv|flv|mkv)$/i.test(src);
   };
 
   // Helper function to generate video thumbnail with play button overlay
-  generateVideoThumbnail = (videoSrc) => {
+  const generateVideoThumbnail = (videoSrc) => {
     return new Promise((resolve) => {
       const video = document.createElement("video");
       video.crossOrigin = "anonymous";
@@ -50,7 +47,7 @@ class Gallery extends Component {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
         // Add play button overlay
-        this.drawPlayButton(ctx, canvas.width, canvas.height);
+        drawPlayButton(ctx, canvas.width, canvas.height);
 
         const thumbnailSrc = canvas.toDataURL("image/jpeg", 0.8);
         resolve({
@@ -74,7 +71,7 @@ class Gallery extends Component {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Add play button
-        this.drawPlayButton(ctx, canvas.width, canvas.height);
+        drawPlayButton(ctx, canvas.width, canvas.height);
 
         resolve({
           src: videoSrc,
@@ -90,7 +87,7 @@ class Gallery extends Component {
   };
 
   // Helper function to draw play button on canvas
-  drawPlayButton = (ctx, width, height) => {
+  const drawPlayButton = (ctx, width, height) => {
     const centerX = width / 2;
     const centerY = height / 2;
     const buttonSize = Math.min(width, height) * 0.15; // 15% of the smaller dimension
@@ -121,7 +118,7 @@ class Gallery extends Component {
   };
 
   // Helper function to load image dimensions
-  loadImageDimensions = (src) => {
+  const loadImageDimensions = (src) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = src;
@@ -144,9 +141,7 @@ class Gallery extends Component {
     });
   };
 
-  componentDidMount() {
-    const { photos } = this.props;
-
+  useEffect(() => {
     Promise.all(
       photos.map((obj) => {
         const src = typeof obj === "string" ? obj : obj.src;
@@ -155,35 +150,35 @@ class Gallery extends Component {
         if (obj.width && obj.height) {
           return {
             ...obj,
-            isVideo: this.isVideo(src),
+            isVideo: isVideo(src),
           };
         }
 
         // Check if it's a video
-        if (this.isVideo(src)) {
-          return this.generateVideoThumbnail(src);
+        if (isVideo(src)) {
+          return generateVideoThumbnail(src);
         } else {
           // It's an image
-          return this.loadImageDimensions(src);
+          return loadImageDimensions(src);
         }
       })
-    ).then((images) => this.setState({ images }));
-  }
+    ).then((images) => setImages(images));
+  }, [photos]);
 
   // Custom slide component for videos
-  renderVideoSlide = ({ slide, rect }) => {
+  const renderVideoSlide = ({ slide, rect }) => {
     if (!slide.isVideo) return null;
 
     // Find the index of this slide in the images array
-    const slideIndex = this.state.images.findIndex(
+    const slideIndex = images.findIndex(
       (img) => img.src === slide.videoSrc || img.thumbnail === slide.src
     );
 
     if (slideIndex === -1) return null;
 
     // Create or get ref for this video
-    if (!this.playerRefs[slideIndex]) {
-      this.playerRefs[slideIndex] = React.createRef();
+    if (!playerRefs.current[slideIndex]) {
+      playerRefs.current[slideIndex] = React.createRef();
     }
 
     // Use the video source directly - Docusaurus handles the path resolution
@@ -205,10 +200,10 @@ class Gallery extends Component {
         }}
       >
         <ReactPlayer
-          ref={this.playerRefs[slideIndex]}
+          ref={playerRefs.current[slideIndex]}
           src={videoUrl}
           controls
-          playing={this.state.videoStates[slideIndex] || false}
+          playing={videoStates[slideIndex] || false}
           width="100%"
           height="100%"
           style={{
@@ -233,28 +228,26 @@ class Gallery extends Component {
   };
 
   // Handle slide change
-  handleSlideChange = (newIndex) => {
+  const handleSlideChange = (newIndex) => {
     // Stop all currently playing videos
-    this.stopAllVideos();
+    stopAllVideos();
 
     // Create new video states object
     const newVideoStates = {};
 
     // If the new slide is a video, set it to play
-    if (this.state.images[newIndex] && this.state.images[newIndex].isVideo) {
+    if (images[newIndex] && images[newIndex].isVideo) {
       newVideoStates[newIndex] = true;
     }
 
-    this.setState({
-      index: newIndex,
-      videoStates: newVideoStates,
-    });
+    setIndex(newIndex);
+    setVideoStates(newVideoStates);
   };
 
   // Helper method to stop all videos
-  stopAllVideos = () => {
-    Object.keys(this.playerRefs).forEach((index) => {
-      const playerRef = this.playerRefs[index];
+  const stopAllVideos = () => {
+    Object.keys(playerRefs.current).forEach((index) => {
+      const playerRef = playerRefs.current[index];
       if (playerRef && playerRef.current) {
         try {
           const internalPlayer = playerRef.current.getInternalPlayer();
@@ -267,55 +260,52 @@ class Gallery extends Component {
   };
 
   // Handle lightbox close with video cleanup
-  handleLightboxClose = () => {
+  const handleLightboxClose = () => {
     // Stop all playing videos before closing
-    this.stopAllVideos();
-    this.setState({ index: -1, videoStates: {} });
+    stopAllVideos();
+    setIndex(-1);
+    setVideoStates({});
   };
 
-  render() {
-    const { images, index } = this.state;
+  // Prepare slides for lightbox
+  const slides = images.map((img) => ({
+    src: img.thumbnail || img.src,
+    alt: img.alt || "",
+    isVideo: img.isVideo,
+    videoSrc: img.isVideo ? img.src : undefined,
+  }));
 
-    // Prepare slides for lightbox
-    const slides = images.map((img) => ({
-      src: img.thumbnail || img.src,
-      alt: img.alt || "",
-      isVideo: img.isVideo,
-      videoSrc: img.isVideo ? img.src : undefined,
-    }));
+  return (
+    <>
+      <RowsPhotoAlbum
+        photos={images.map((img) => ({
+          src: img.thumbnail || img.src,
+          width: img.width,
+          height: img.height,
+          alt: img.alt || "",
+        }))}
+        targetRowHeight={250}
+        onClick={({ index }) => setIndex(index)}
+        padding={2}
+        spacing={2}
+      />
 
-    return (
-      <>
-        <RowsPhotoAlbum
-          photos={images.map((img) => ({
-            src: img.thumbnail || img.src,
-            width: img.width,
-            height: img.height,
-            alt: img.alt || "",
-          }))}
-          targetRowHeight={250}
-          onClick={({ index }) => this.setState({ index })}
-          padding={2}
-          spacing={2}
-        />
-
-        <Lightbox
-          slides={slides}
-          open={index >= 0}
-          index={index}
-          close={this.handleLightboxClose}
-          // enable optional lightbox plugins
-          plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-          render={{
-            slide: this.renderVideoSlide,
-          }}
-          on={{
-            view: ({ index: newIndex }) => this.handleSlideChange(newIndex),
-          }}
-        />
-      </>
-    );
-  }
-}
+      <Lightbox
+        slides={slides}
+        open={index >= 0}
+        index={index}
+        close={handleLightboxClose}
+        // enable optional lightbox plugins
+        plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+        render={{
+          slide: renderVideoSlide,
+        }}
+        on={{
+          view: ({ index: newIndex }) => handleSlideChange(newIndex),
+        }}
+      />
+    </>
+  );
+};
 
 export default Gallery;

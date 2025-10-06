@@ -2,6 +2,8 @@ import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
 import soundPatent from "@site/docs/Yearly/2024/images/SoundPatent.jpg";
 
+import type { JSX } from "react";
+
 type Section = {
   title: string;
   desc: string;

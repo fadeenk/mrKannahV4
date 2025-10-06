@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, type JSX } from 'react';
 import MDXContent from '@theme-original/MDXContent';
 import type MDXContentType from '@theme/MDXContent';
 import type {WrapperProps} from '@docusaurus/types';

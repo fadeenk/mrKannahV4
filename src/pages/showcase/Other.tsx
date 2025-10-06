@@ -1,6 +1,8 @@
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
 
+import type { JSX } from "react";
+
 const details: { title: string; description: string }[] = [
   {
     title: "Generative AI",

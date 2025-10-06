@@ -1,6 +1,8 @@
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
 
+import type { JSX } from "react";
+
 type Website = {
   title: string;
   link?: string;

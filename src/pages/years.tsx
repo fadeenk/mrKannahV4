@@ -1,6 +1,6 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 
 export const years = {
   2024: "partying",

@@ -4,6 +4,8 @@ import TabItem from "@theme/TabItem";
 import styles from "./showcase.module.css";
 import Gallery from "@site/src/components/Gallery/Gallery";
 
+import type { JSX } from "react";
+
 type App = {
   title: string;
   link?: string;

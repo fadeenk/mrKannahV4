@@ -7,6 +7,8 @@ import Contact from "@site/src/components/Contact";
 import FeaturedWork from "@site/src/components/FeaturedWork";
 import Skills from "@site/src/components/Skills";
 
+import type { JSX } from "react";
+
 function Services() {
   return (
     <div className="section">

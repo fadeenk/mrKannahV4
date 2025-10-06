@@ -1,6 +1,6 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import { years } from "./years";
