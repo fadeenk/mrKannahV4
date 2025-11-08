@@ -2,14 +2,12 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: var(--ifm-background-color);
   color: var(--ifm-font-color-base);
   font-family: var(--ifm-font-family-base);
 }
 
 /* Top Banner Section */
 .topBanner {
-  background-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary-contrast-foreground);
   padding: 3rem 2rem;
   text-align: center;
@@ -58,7 +56,6 @@
 .interiorAndSpecsContainer {
   display: flex;
   flex-direction: column;
-  background-color: var(--ifm-color-primary);
 }
 
 @media (min-width: 768px) {
@@ -71,7 +68,6 @@
 
 /* Interior Images and Descriptions Section */
 .interiorSection {
-  background-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary-contrast-foreground);
   padding: 3rem 2rem;
   display: flex;
@@ -103,7 +99,7 @@
 }
 
 .interiorText {
-  background-color: var(--ifm-color-primary-dark);
+  border: 2px solid var(--ifm-color-primary-contrast-foreground);
   padding: 1.5rem;
   border-radius: 8px;
   flex: 1;
@@ -119,7 +115,6 @@
 
 /* Property Specifications Section */
 .specsSection {
-  background-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary-contrast-foreground);
   padding: 3rem 2rem;
   flex: 0 0 auto;
@@ -206,7 +201,7 @@
 .specsList li {
   padding: 0.75rem 0;
   font-size: 1.1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid var(--ifm-color-primary-contrast-foreground);
   color: var(--ifm-color-primary-contrast-foreground);
 }
 
@@ -216,7 +211,6 @@
 
 /* Property Description Section */
 .descriptionSection {
-  background-color: var(--ifm-background-color);
   padding: 0 2rem;
   max-width: 100%;
   margin: 0 auto;
@@ -224,7 +218,6 @@
 
 /* Map Section */
 .mapSection {
-  background-color: var(--ifm-background-color);
   padding: 3rem 0;
   max-width: 100%;
   margin: 0 auto;
@@ -351,7 +344,6 @@
 
 /* Contact Information Section */
 .contactSection {
-  background-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary-contrast-foreground);
   padding: 3rem 2rem;
   display: flex;
