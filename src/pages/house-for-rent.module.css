@@ -35,6 +35,10 @@
   color: var(--ifm-color-primary-contrast-foreground);
 }
 
+.address {
+  font-weight: 600;
+}
+
 /* Main House Image Section */
 .mainImageSection {
   width: 100%;

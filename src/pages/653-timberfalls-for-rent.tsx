@@ -61,7 +61,7 @@ export default function HouseForRent(): JSX.Element {
         <div className={styles.topBanner}>
           <h1 className={styles.mainTitle}>HOUSE FOR RENT</h1>
           <div className={styles.rentInfo}>
-            <p className={styles.rentPrice}>Rent: $ 2,600 per month</p>
+            <p className={styles.rentPrice}>Rent: $2,600 per month</p>
             <p className={styles.address}>
               653 Timberfalls Ln, Henderson, NV 89015
             </p>
@@ -71,6 +71,8 @@ export default function HouseForRent(): JSX.Element {
               <br />
               This property offers comfort, convenience, and a variety of
               upgrades to make everyday living enjoyable.
+              <br />
+              Accepts section 8 vouchers
             </p>
           </div>
         </div>
