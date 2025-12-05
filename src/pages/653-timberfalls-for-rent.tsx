@@ -249,7 +249,7 @@ export default function HouseForRent(): JSX.Element {
           <div className={styles.actionContainer}>
             <p className={styles.actionLabel}>Ready to Apply?</p>
             <a
-              href="https://www.apartments.com/apply-online/?token=negwzym&l=wdy2nkk&u=363kwjf&landlordInvite=true"
+              href="https://www.apartments.com/apply-online/?token=441cvtk&l=wdy2nkk&u=363kwjf&landlordInvite=true"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.actionButton}
