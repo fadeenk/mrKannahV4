@@ -58,7 +58,15 @@ export default function Contact(): JSX.Element {
         Ready to get started or to take your project to the next level?
       </Heading>
       <p className="hero__subtitle">
-        Fill out the form below or reach out to me directly.
+        Fill out the form below, reach out to me directly, or{" "}
+        <a
+          href="https://cal.com/kannah/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          schedule a free 30-min consultation
+        </a>
+        .
       </p>
       <form
         onSubmit={handleSubmit}

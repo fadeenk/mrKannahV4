@@ -9,6 +9,49 @@ import Skills from "@site/src/components/Skills";
 
 import type { JSX } from "react";
 
+const engagementModels = [
+  {
+    title: "Project Based",
+    description:
+      "Perfect for defined initiatives with clear deliverables. We align on scope, timeline, and budget to build your MVP, specific features, or complete platform overhauls. Best for when you know exactly what you need built.",
+  },
+  {
+    title: "Strategic Advisory",
+    description:
+      "Strategic partnership for leadership and decision-making. I provide high-level guidance on architecture, team structure, tech stack selection, and roadmap planning. Ideal for founders needing a fractional CTO or technical soundboard.",
+  },
+  {
+    title: "Contractor Engagement",
+    description:
+      "Integrated development support. I join your existing engineering team to boost velocity, handle complex technical challenges, and mentor junior engineers. Flexible hourly or monthly retainer arrangements.",
+  },
+];
+
+function EngagementCard({ model }: { model: (typeof engagementModels)[0] }) {
+  return (
+    <div
+      className="card--elevated"
+      style={{
+        textAlign: "center",
+        minWidth: "300px",
+        flex: "1",
+        padding: "2rem",
+      }}
+    >
+      <h4
+        style={{
+          margin: "0 0 1rem 0",
+          fontSize: "1.1rem",
+          color: "var(--ifm-font-color-base)",
+        }}
+      >
+        {model.title}
+      </h4>
+      <p>{model.description}</p>
+    </div>
+  );
+}
+
 function Services() {
   return (
     <div className="section">
@@ -74,24 +117,41 @@ function Services() {
           </div>
         </div>
 
-        <div className="text--center">
-          <Heading as="h3">
-            Ready to accelerate your product development?
+        <div className="text--center margin-top--md">
+          <Heading as="h2" className="hero__title">
+            Engagement Models
           </Heading>
-          <p style={{ fontSize: "1.2rem" }}>
-            Let's discuss how I can help your team deliver faster, scale
-            smarter, and build the technical foundation for your next
-            breakthrough.
+          <p className="hero__subtitle">
+            Flexible ways to work together based on your needs and stage.
           </p>
-        </div>
-        <div className="cta-container">
-          <a
-            href="#contact"
-            className="button--primary"
-            style={{ width: "80%" }}
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "1.5rem",
+              marginTop: "2rem",
+              justifyContent: "center",
+            }}
           >
-            Work with me
-          </a>
+            {engagementModels.map((model, index) => (
+              <EngagementCard key={index} model={model} />
+            ))}
+          </div>
+
+          <div className="margin-top--lg">
+            <p style={{ fontSize: "1.2rem" }}>
+              Not sure which model is right for you?{" "}
+              <a
+                href="https://cal.com/kannah/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schedule a free 30-min consultation
+              </a>{" "}
+              to discuss your goals.
+            </p>
+          </div>
         </div>
       </div>
     </div>
