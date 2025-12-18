@@ -29,7 +29,7 @@
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.3",
-    "react-dom": "^19.2.1",
+    "react-dom": "^19.2.3",
     "react-photo-album": "^3.3.0",
     "react-player": "^3.4.0",
     "yet-another-react-lightbox": "^3.26.0"
