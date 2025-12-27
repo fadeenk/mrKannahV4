@@ -83,10 +83,10 @@ export default function Home(): JSX.Element {
             </h1>
             <p className="hero__subtitle">
               Welcome to my "dating" profile! I’m a computer engineer by
-              education and currently the Chief Software Architect, designing
-              and building complex software solutions for trade schools and
-              colleges. In short, I help people solve problems using software
-              and technology.
+              education which led me to becoming the CEO of my own consulting
+              business. Currently I help companies architect, design and build
+              complex software solutions. In short, I help people solve problems
+              using software and technology.
             </p>
           </div>
           <img src="/img/dating/a.jpg" className={styles.mainImage} />
@@ -142,10 +142,12 @@ export default function Home(): JSX.Element {
             <ul>
               <li>Spending quality time with family and friends</li>
               <li>Playing board games</li>
-              <li>Watching anime</li>
               <li>Playing soccer</li>
               <li>Going to the gym</li>
               <li>Taking care of my plants</li>
+              <li>Watching anime</li>
+              <li>Dj-ing</li>
+              <li>Random hands-on projects</li>
             </ul>
             <img src="/img/dating/3.png" className={styles.mainImage} />
           </div>
@@ -181,14 +183,14 @@ export default function Home(): JSX.Element {
               <b>Age</b>: {age}
             </li>
             <li>
-              <b>Religion</b>: Christian ♱ (Syriac Orthodox same as Catholic
+              <b>Religion</b>: Christian ♱ (Syriac Orthodox similar to Catholic
               Chaldean except for a few minor differences and dates)
             </li>
             <li>
               <b>From</b>: Bartella, Iraq
             </li>
             <li>
-              <b>Location</b>: Henderson, Nevada
+              <b>Location</b>: Las Vegas, Nevada
             </li>
             <li>
               <b>Languages:</b>{" "}
