@@ -1,0 +1,353 @@
+[
+  {
+    "name": "Command Line Heros",
+    "url": "https://castbox.fm/channel/Command-Line-Heroes-id1105224",
+    "description": "True stories about everything that shaped and revolutionized the technology world",
+    "yearAdded": "2020",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Darknet Diaries",
+    "url": "https://castbox.fm/channel/Darknet-Diaries-id1468651?country=us",
+    "description": "Amazing secret stories related to technology (cybercrime)",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Hackable?",
+    "url": "https://castbox.fm/channel/Hackable%3F-id970566",
+    "description": "Stories of everything related to hacking (mainly how secure things really are)",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Malicious Life",
+    "url": "https://castbox.fm/channel/Malicious-Life-id943414",
+    "description": "Stories about hackers and how they got into hacking",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Naval",
+    "url": "https://castbox.fm/channel/Naval-id2030098?country=us",
+    "description": "Intriguing insights life/entrepreneurship/ wealth creation",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Pessimists Archive",
+    "url": "https://castbox.fm/channel/Pessimists-Archive-Podcast-id338179",
+    "description": "Stories of people resisting new things",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Problem Solvers",
+    "url": "https://castbox.fm/channel/Problem-Solvers-id980712",
+    "description": "Stories about entrepreneurs solving problems and how they handle them",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Soft-Skills Engineering",
+    "url": "https://castbox.fm/channel/Soft-Skills-Engineering-id231452?country=us",
+    "description": "Softskills in software engineering",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "The Diary Of A CEO",
+    "url": "https://www.youtube.com/@TheDiaryOfACEO",
+    "description": "Business/Life podcast",
+    "yearAdded": 2024,
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "All JavaScript Podcasts by Devchat",
+    "url": "https://castbox.fm/channel/All-JavaScript-Podcasts-by-Devchat.tv-id325284?country=us",
+    "description": "Multiple podcasts that focus on JavaScript",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "All-In with Chamath, Jason, Sacks & Friedberg",
+    "url": "https://castbox.fm/channel/All-In-with-Chamath%2C-Jason%2C-Sacks-%26-Friedberg-id2689921?country=us",
+    "description": "",
+    "yearAdded": "2022",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "Changelog Master Feed",
+    "url": "https://castbox.fm/channel/Changelog-Master-Feed-id397660?country=us",
+    "description": "Multiple software development podcasts in one, plus one Brain Science podcast",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "CodePen Radio",
+    "url": "https://castbox.fm/channel/CodePen-Radio-id218322?country=us",
+    "description": "Software development centered around CodePen",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "EconTalk",
+    "url": "https://castbox.fm/channel/EconTalk-id2734",
+    "description": "talk show about economics in daily life",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Entreprogrammers",
+    "url": "https://castbox.fm/channel/Entreprogrammers-Podcast-id38063?country=us",
+    "description": "Programmers who are entrepreneurs",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Gaming Ride Home",
+    "url": "https://castbox.fm/channel/Gaming-Ride-Home-id2638311",
+    "description": "Latest video game news",
+    "yearAdded": "2020",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Mixergy",
+    "url": "https://castbox.fm/channel/Mixergy---Recession-Startup-Stories-id349217",
+    "description": "Startup stories",
+    "yearAdded": "2020",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "My First Million",
+    "url": "https://castbox.fm/channel/My-First-Million-id2180580",
+    "description": "Backstories & strategies behind millionaires' success",
+    "yearAdded": "2020",
+    "yearDropped": null,
+    "isFavorite": true,
+    "state": "active"
+  },
+  {
+    "name": "On Call Nightmares",
+    "url": "https://castbox.fm/channel/On-Call-Nightmares-Podcast-id1778442?country=us",
+    "description": "Software development retrospectives",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Reply All",
+    "url": "https://castbox.fm/channel/Reply-All-id2159255?country=us",
+    "description": "",
+    "yearAdded": "2022",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Software Engineering Daily",
+    "url": "https://castbox.fm/channel/Software-Engineering-Daily-id409522?country=us",
+    "description": "Interviews with technical people about software",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Syntax",
+    "url": "https://castbox.fm/channel/Syntax-Tasty-Web-Development-Treats-id938004?country=us",
+    "description": "Tips/tricks for web development",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Techmeme Ride Home",
+    "url": "https://castbox.fm/channel/2215699?country=us",
+    "description": "Quick tech news updates",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "The Bike Shed",
+    "url": "https://castbox.fm/channel/The-Bike-Shed-id491181?country=us",
+    "description": "Software development",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "The CityAge",
+    "url": "https://castbox.fm/channel/The-CityAge-Podcast-id4970437?country=us",
+    "description": "",
+    "yearAdded": "2022",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "The Dream",
+    "url": "https://castbox.fm/channel/The-Dream-id2096806",
+    "description": "Deep dives into pyramid schemes and wellness products",
+    "yearAdded": "2020",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "The Freelancers' Show",
+    "url": "https://castbox.fm/channel/The-Freelancers'-Show-id325583?country=us",
+    "description": "Freelance software development",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "The Meb Faber Show",
+    "url": "https://castbox.fm/channel/The-Meb-Faber-Show-id351652?country=us",
+    "description": "Investment",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "The NewsWorthy",
+    "url": "https://castbox.fm/channel/the-NewsWorthy-id1014399?country=us",
+    "description": "Quick general news updates",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Today in Digital Marketing",
+    "url": "https://castbox.fm/channel/Today-in-Digital-Marketing-id2372870?country=us",
+    "description": "Quick marketing news updates",
+    "yearAdded": "2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Under the Radar",
+    "url": "https://castbox.fm/channel/Under-the-Radar-id2378?country=us",
+    "description": "Independent iOS development",
+    "yearAdded": "Pre-2019",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Zengeen",
+    "url": "https://castbox.fm/channel/Zengeen-id2901088?country=us",
+    "description": "",
+    "yearAdded": "2022",
+    "yearDropped": null,
+    "isFavorite": false,
+    "state": "active"
+  },
+  {
+    "name": "Akimbo",
+    "url": "https://castbox.fm/channel/Akimbo%3A-A-Podcast-from-Seth-Godin-id2543209",
+    "description": "talks about culture and about how we can change it. The only reason I dropped it is that I already have too many podcasts to listen to",
+    "yearAdded": "2020",
+    "yearDropped": "2020",
+    "isFavorite": false,
+    "state": "dropped"
+  },
+  {
+    "name": "DevelopersHangout",
+    "url": "https://castbox.fm/channel/DevelopersHangout-id491567?country=us",
+    "description": "No longer producing new episodes",
+    "yearAdded": "2019",
+    "yearDropped": "2019",
+    "isFavorite": false,
+    "state": "dropped"
+  },
+  {
+    "name": "Election Ride Home",
+    "url": "https://castbox.fm/channel/2181696?country=us",
+    "description": "Quick election news updates",
+    "yearAdded": "2019",
+    "yearDropped": "2020",
+    "isFavorite": false,
+    "state": "dropped"
+  },
+  {
+    "name": "Heist Podcast",
+    "url": "https://castbox.fm/channel/Heist-Podcast-id2151870",
+    "description": "Everything related to Heists. Deep dives into famous heists as well as discussing heists in the news.",
+    "yearAdded": "2020",
+    "yearDropped": "2020",
+    "isFavorite": false,
+    "state": "dropped"
+  },
+  {
+    "name": "Late Nights with Trav and Los",
+    "url": "https://castbox.fm/channel/Late-Nights-with-Trav-and-Los-id491136?country=us",
+    "description": "No longer producing new episodes",
+    "yearAdded": "2019",
+    "yearDropped": "2019",
+    "isFavorite": false,
+    "state": "dropped"
+  },
+  {
+    "name": "NodeUp",
+    "url": "https://castbox.fm/channel/NodeUp-id2345?country=us",
+    "description": "No longer producing new episodes",
+    "yearAdded": "2019",
+    "yearDropped": "2019",
+    "isFavorite": false,
+    "state": "dropped"
+  },
+  {
+    "name": "Sht They Don't Tell You",
+    "url": "https://castbox.fm/channel/Sh*t-They-Don%E2%80%99t-Tell-You-with-Nikki-Limo-and-Steve-Greene-id1500855?country=us",
+    "description": "Content quality below my standard (had good episodes but since it is a weekly podcast most of the new episodes are just random conversation without much valuable information)",
+    "yearAdded": "2019",
+    "yearDropped": "2019",
+    "isFavorite": false,
+    "state": "dropped"
+  }
+]
