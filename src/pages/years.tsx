@@ -3,6 +3,8 @@ import Layout from "@theme/Layout";
 import { useState, type JSX } from "react";
 
 export const years = {
+  2026: "wip",
+  2025: "craziness",
   2024: "partying",
   2023: "eventful",
   2022: "traveling",
