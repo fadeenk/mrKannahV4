@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import styles from "./card.module.css";
@@ -19,15 +20,11 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 import type { JSX } from "react";
 
-const toggleQR = () => {
-  const element = document.getElementById(styles.back);
-  if (element.classList.contains(styles.hideQR))
-    element.classList.remove(styles.hideQR);
-  else element.classList.add(styles.hideQR);
-};
-
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  const [showQR, setShowQR] = useState(false);
+
+  const toggleQR = () => setShowQR(!showQR);
   return (
     <Layout
       title={`Virtual Business Card`}
@@ -40,7 +37,7 @@ export default function Home(): JSX.Element {
             alt="profile-sample1"
             className={styles.background}
           />
-          <div id={styles.front}>
+          {!showQR && <div id={styles.front}>
             <img
               src="/img/fadee.jpg"
               alt="profile-sample1"
@@ -50,11 +47,10 @@ export default function Home(): JSX.Element {
               Fadee Kannah<span>Chief Software Architect</span>
             </h3>
             <div className={styles.icons}>
-              <a href="tel:7023373306" style={{ width: "38px" }}>
+              <a href="tel:7023373306">
                 <FontAwesomeIcon icon={faMobileScreen} />
               </a>
               <a href="mailto:fadeekannah@gmail.com">
-                {" "}
                 <FontAwesomeIcon icon={faEnvelope} />
               </a>
               <a href="https://mrkannah.com">
@@ -79,21 +75,23 @@ export default function Home(): JSX.Element {
               <a href="/fadeekannah.vcf" download="/fadeekannah.vcf">
                 <FontAwesomeIcon
                   icon={faUserPlus}
-                  style={{ fontSize: "24px" }}
                 />
               </a>
               <a href="https://github.com/fadeenk">
-                {" "}
                 <FontAwesomeIcon icon={faGithub} />
               </a>
-              <FontAwesomeIcon icon={faQrcode} onClick={toggleQR} />
+              <div className={styles.iconWrapper}>
+                <FontAwesomeIcon icon={faQrcode} onClick={toggleQR} />
+              </div>
             </div>
-          </div>
+          </div>}
 
-          <div id={styles.back} className={styles.hideQR}>
-            <img src="/img/qr.jpg" style={{ padding: "10px" }} />
-            <FontAwesomeIcon icon={faEyeSlash} onClick={toggleQR} />
-          </div>
+          {showQR && <div id={styles.back}>
+            <img src="/img/qr.jpg" style={{ padding: "10px", maxWidth: "100%" }} />
+            <div className={styles.iconWrapper} style={{ marginTop: "20px" }}>
+              <FontAwesomeIcon icon={faEyeSlash} onClick={toggleQR} />
+            </div>
+          </div>}
         </div>
       </div>
     </Layout>
