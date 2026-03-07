@@ -114,6 +114,11 @@ const config: Config = {
           label: "💖",
           position: "left",
         },
+        {
+          href: "/card",
+          label: "💼",
+          position: "left",
+        },
       ],
     },
     footer: {
