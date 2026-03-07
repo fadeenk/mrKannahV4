@@ -354,16 +354,6 @@
     max-width: 100%;
   }
 
-  .cardFront,
-  .cardBack {
-    min-height: 600px;
-  }
-
-  .profileImageWrapper {
-    width: 130px;
-    height: 130px;
-  }
-
   .name {
     font-size: 1.5rem;
   }
@@ -376,10 +366,5 @@
   .actionButton {
     padding: 0.75rem 1rem;
     font-size: 0.85rem;
-  }
-
-  .qrImage {
-    width: 180px;
-    height: 180px;
   }
 }
