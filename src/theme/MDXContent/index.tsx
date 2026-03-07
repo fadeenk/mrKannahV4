@@ -8,7 +8,14 @@ type Props = WrapperProps<typeof MDXContentType>;
 export default function MDXContentWrapper(props: Props): JSX.Element {
   const [attemptedPass, setAttemptedPass] = useState<string>();
 
-  const password: string = props.children?.type?.frontMatter?.password;
+  const password: string | undefined = (() => {
+    const child = props.children;
+    if (typeof child === 'object' && child !== null && 'type' in child) {
+      const element = child as { type?: { frontMatter?: { password?: string } } };
+      return element.type?.frontMatter?.password;
+    }
+    return undefined;
+  })();
 
   const isBrowser = typeof window !== `undefined`;
   let browserPass = null;
