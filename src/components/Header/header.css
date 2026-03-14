@@ -155,6 +155,62 @@
   color: var(--ifm-font-color-base-inverse);
   transform: translateY(-2px);
 }
+
+
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Hero Section */
+.hero-content {
+  flex: 1;
+  text-align: left;
+  padding-right: 2rem;
+}
+
+.hero-headline {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--ifm-font-color-base);
+}
+
+.hero-subheadline {
+  font-size: 1.25rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.5rem;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-trust {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.hero-trust li::before {
+  content: "✓";
+  margin-right: 0.5rem;
+  color: var(--ifm-color-success);
+}
+
+.profileSection {
+  flex-shrink: 0;
+}
+
 /* width from main UI navbar breakpoint */
 @media screen and (max-width: 996px) {
   .header {
@@ -168,13 +224,34 @@
     align-items: center;
     gap: 10px;
   }
-  .ctaButton {
-    width: 200px;
-  }
-}
 
-@media screen and (min-width: 996px) {
+  .header-container {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    text-align: center;
+    padding-right: 0;
+  }
+  
+  .hero-headline {
+    font-size: 1.75rem;
+  }
+  
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-trust {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
   .profilePicture {
     margin-top: 20px;
   }
+
 }
