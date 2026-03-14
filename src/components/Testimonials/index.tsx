@@ -14,14 +14,14 @@ type Testimonial = {
 const TestimonialList: Testimonial[] = [
   {
     name: "Luke Sophinos",
-    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_P9SDXXVRDKY95QL4BIRI.jpg",
+    img: "/img/testimonials/luke.jpg",
     description:
       "Fadee is a code magician. He can turn any idea into reality in a scalable way. And he’s been doing it with me for more than a decade. Not only is Fadee insanely talented and hard working, but he exemplifies the best of humanity - he’s thoughtful, genuine, and really cares about his work and his contribution. I’ve been beyond blessed to work with Fadee and will continue to do so at any opportunity.",
     title: "CEO & Founder",
   },
   {
     name: "Anthony Bull",
-    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_E5TL0OE058OCK9WZAEVY.jpg",
+    img: "/img/testimonials/anthony.jpg",
     description:
       "Looking for a 10xer? Look no further. Fadee has been one of the best I've worked with over the course of my career. \nCurious, determined, passionate, resilient, communicative, caring, and gritty, he's phenomenal at the software game and a joy to work with.\nWe partnered well to tackle the people, process, and architecture aspects of Engineering, with all engineers admiring his technical abilities. Their loyalty has been reflective of his to them and the company.",
     title: "VP of Engineering",
@@ -29,14 +29,14 @@ const TestimonialList: Testimonial[] = [
   },
   {
     name: "Cathy Pucher",
-    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_6J0ZRDJ3T0PGEN0G4KXB.jpg",
+    img: "/img/testimonials/cathy.jpg",
     description:
       "Fadee is an exceptional CTO and entrepreneur. I have known him for close to 10 years. Besides being crazy smart, he is exceptionally generous with his time. He is passionate about giving back and mentoring future technologists. He inspires others and his journey has inspired me.",
     title: "Executive Director",
   },
   {
     name: "Irving Barajas",
-    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_NWBJMJOOTKGAE6P4I07Z.jpg",
+    img: "/img/testimonials/irving.jpg",
     description:
       "It really is rare to come across an individual like Fadee. I had the pleasure of knowing him as our CTO, Back End engineer, and mentor. He is able to be CTO, mentor 3 teams, code while watching some educational video open and manage to complete a million points on his sprint. Fadee would be an asset for any company and I’m pretty sure he is half android.",
     title: "Software Engineer",
@@ -44,7 +44,7 @@ const TestimonialList: Testimonial[] = [
   },
   {
     name: "Michael Habeeb",
-    img: "https://assets-prospeo.s3.us-east-2.amazonaws.com/lead_8FT08RB5M1CVMH6ASHTS.jpg",
+    img: "/img/testimonials/michael.jpg",
     description:
       "Since I started working with Fadee for coaching and mentorship, my growth has been remarkable. With his guidance, I have advanced my career, secured new opportunities, and gained the confidence to tackle complex challenges. The impact on my career trajectory has been substantial, and I couldn't be happier!",
     title: "Student",
