@@ -52,9 +52,72 @@ function EngagementCard({ model }: { model: (typeof engagementModels)[0] }) {
   );
 }
 
-function Services() {
+const services = [
+  {
+    title: "MVP Development & Launch",
+    icon: "🚀",
+    bullets: [
+      "Get to market 3x faster with battle-tested architecture",
+      "Launch AI-powered SaaS, platforms, or enterprise solutions",
+      "Structured for funding readiness",
+    ],
+  },
+  {
+    title: "Technical Architecture & Modernization",
+    icon: "🏗️",
+    bullets: [
+      "Transform legacy systems to cloud-native platforms",
+      "Reduce infrastructure costs by 40-60%",
+      "Improve performance and developer productivity",
+    ],
+  },
+  {
+    title: "AI Integration & Strategy",
+    icon: "🤖",
+    bullets: [
+      "Implement AI features that drive user engagement",
+      "From OpenAI APIs to custom agentic AI",
+      "Build differentiation with AI-powered features",
+    ],
+  },
+];
+
+const secondaryServices = [
+  {
+    title: "Engineering Team Enablement",
+    bullets: [
+      "Build high-performing engineering teams",
+      "Implement CI/CD, testing strategies, and agile methodologies",
+      "Increase delivery speed by 50%+",
+    ],
+  },
+  {
+    title: "Fractional CTO & Technical Leadership",
+    bullets: [
+      "Senior-level leadership without full-time cost",
+      "Architecture decisions and roadmap planning",
+      "Hands-on coding to accelerate development",
+    ],
+  },
+];
+
+function ServiceCard({ service, index }: { service: Partial<(typeof services)[0]>; index: number }): JSX.Element {
   return (
-    <div className="section">
+    <div className="service-card">
+      {service?.icon && <div className="service-icon">{service.icon}</div>}
+      <h3 className="service-title">{service.title}</h3>
+      <ul className="service-bullets">
+        {service.bullets.map((bullet, i) => (
+          <li key={i}>{bullet}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Services(): JSX.Element {
+  return (
+    <div className="section hero hero--primary">
       <div className="container">
         <div className="section__header">
           <Heading as="h2" className="hero__title">
@@ -66,101 +129,71 @@ function Services() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gap: "2rem" }}>
-          <div>
-            <Heading as="h3">MVP Development & Launch</Heading>
-            <p style={{ fontSize: "1.2rem" }}>
-              Get your product to market 3x faster with battle-tested
-              architecture. I've helped founders launch AI-powered SaaS, SaaS
-              platforms, and enterprise solutions that raised funding and
-              acquired customers.
-            </p>
-          </div>
-
-          <div>
-            <Heading as="h3">
-              Technical Architecture & Platform Modernization
-            </Heading>
-            <p style={{ fontSize: "1.2rem" }}>
-              Transform legacy systems into scalable, cloud-native platforms.
-              Reduce infrastructure costs by 40-60% while improving performance
-              and developer productivity.
-            </p>
-          </div>
-
-          <div>
-            <Heading as="h3">AI Integration & Strategy</Heading>
-            <p style={{ fontSize: "1.2rem" }}>
-              Implement AI features that drive user engagement and business
-              value. From OpenAI APIs to custom full agentic AI, I help you
-              build AI-powered features that differentiate your product.
-            </p>
-          </div>
-
-          <div>
-            <Heading as="h3">Engineering Team Enablement</Heading>
-            <p style={{ fontSize: "1.2rem" }}>
-              Build high-performing engineering teams with modern practices.
-              Implement CI/CD, testing strategies, integrate AI in development
-              process and agile methodologies that increase delivery speed by
-              50%+.
-            </p>
-          </div>
-
-          <div>
-            <Heading as="h3">Fractional CTO & Technical Leadership</Heading>
-            <p style={{ fontSize: "1.2rem" }}>
-              Get senior-level technical leadership without the full-time cost.
-              I provide strategic guidance, architecture decisions, and hands-on
-              coding to accelerate your development.
-            </p>
-          </div>
+        <div className="services-grid">
+          {services.map((service, index) => (
+            <ServiceCard key={index} service={service} index={index} />
+          ))}
         </div>
 
-        <div className="text--center margin-top--md">
-          <Heading as="h2" className="hero__title">
-            Engagement Models
-          </Heading>
-          <p className="hero__subtitle">
-            Flexible ways to work together based on your needs and stage.
-          </p>
+        <div className="services-grid">
+          {secondaryServices.map((service, index) => (
+            <ServiceCard key={index} service={service} index={index} />
+          ))}
+        </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1.5rem",
-              marginTop: "2rem",
-              justifyContent: "center",
-            }}
+        <div className="text--center margin-top--lg">
+          <a
+            href="https://cal.com/kannah/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--primary"
           >
-            {engagementModels.map((model, index) => (
-              <EngagementCard key={index} model={model} />
-            ))}
-          </div>
-
-          <div className="margin-top--lg">
-            <p style={{ fontSize: "1.2rem" }}>
-              Not sure which model is right for you?{" "}
-              <a
-                href="https://cal.com/kannah/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Schedule a free 30-min consultation
-              </a>{" "}
-              to discuss your goals.
-            </p>
-          </div>
+            Let's Discuss Your Project
+          </a>
         </div>
       </div>
     </div>
   );
 }
 
+function EngagementSection(): JSX.Element {
+  return (
+    <div className="section">
+      <div className="container">
+
+      <div className="section__header">
+        <Heading as="h2" className="hero__title">
+          Engagement Models
+        </Heading>
+        <p className="hero__subtitle">
+          Flexible ways to work together based on your needs and stage.
+        </p>
+      </div>
+
+      <div className="engagement-grid">
+        {engagementModels.map((model, index) => (
+          <EngagementCard key={index} model={model} />
+        ))}
+      </div>
+
+      <div className="text--center margin-top--lg">
+        <a
+          href="https://cal.com/kannah/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="button button--primary button--lg"
+        >
+          Not sure which model is right for you? Let's talk
+        </a>
+      </div>
+    </div>
+    </div>
+  );
+}
+
 function About() {
   return (
-    <div className="hero hero--primary">
+    <div className="hero">
       <div className="container">
         <h2 className="hero__title text--center">
           Transform Your Tech Vision Into Reality
@@ -172,6 +205,39 @@ function About() {
           cloud architecture, I've guided teams from concept to market success
           across healthcare, e-commerce, and enterprise sectors.
         </p>
+        <div className="text--center margin-top--lg">
+          <a
+            href="https://cal.com/kannah/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--primary"
+          >
+            Book Free Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StatsBar(): JSX.Element {
+  return (
+    <div className="stats-bar hero hero--primary">
+      <div className="container">
+        <div className="stats-grid">
+          <div className="stat-item">
+            <span className="stat-number">18+</span>
+            <span className="stat-label">Years Experience</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-number">$45M+</span>
+            <span className="stat-label">Raised for Clients</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-number">40-60%</span>
+            <span className="stat-label">Infrastructure Cost Reduction</span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -182,15 +248,15 @@ export default function Home(): JSX.Element {
   return (
     <Layout title={`Hello from Fadee`} description={`${siteConfig.tagline}`}>
       <Header />
+      <StatsBar />
       <main>
         <About />
         <Services />
+        <EngagementSection />
         <FeaturedWork />
         <Skills />
         <Testimonials />
-        <div id="contact">
-          <Contact />
-        </div>
+        <Contact />
       </main>
     </Layout>
   );

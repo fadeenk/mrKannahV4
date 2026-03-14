@@ -53,8 +53,9 @@ export default function Contact(): JSX.Element {
     setDisabled(false);
   }
   return (
+    <div id="contact" className="hero">
     <section className="container">
-      <Heading as="h2" className="hero__title text--center">
+      <Heading as="h3" className="hero__title text--center">
         Ready to get started or to take your project to the next level?
       </Heading>
       <p className="hero__subtitle">
@@ -113,5 +114,6 @@ export default function Contact(): JSX.Element {
         </button>
       </form>
     </section>
+    </div>
   );
 }

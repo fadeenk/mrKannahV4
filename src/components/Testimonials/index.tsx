@@ -47,7 +47,7 @@ const TestimonialList: Testimonial[] = [
     img: "/img/testimonials/michael.jpg",
     description:
       "Since I started working with Fadee for coaching and mentorship, my growth has been remarkable. With his guidance, I have advanced my career, secured new opportunities, and gained the confidence to tackle complex challenges. The impact on my career trajectory has been substantial, and I couldn't be happier!",
-    title: "Student",
+    title: "Electrical Engineer",
   },
 ];
 
@@ -79,6 +79,16 @@ export default function Testimonials(): JSX.Element {
             <Testimonial key={idx} {...props} />
           ))}
         </ul>
+        <div className="text--center margin-top--lg">
+          <a
+            href="https://cal.com/kannah/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--primary button--lg"
+          >
+            Ready to Transform Your Tech Vision?
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -151,6 +151,17 @@ export default function Skills(): JSX.Element {
           <SkillCategoryCard key={index} category={category} />
         ))}
       </div>
+      <div className="text--center margin-top--lg">
+          <a
+            href="https://cal.com/kannah/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--primary"
+          >
+            Ready to Get Started?
+          </a>
+        </div>
+
     </div>
   );
 }

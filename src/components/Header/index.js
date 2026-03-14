@@ -37,11 +37,6 @@ export default function Header() {
             See My Work
           </a>
         </div>
-        <ul className="hero-trust">
-          <li>$30M+ raised for clients</li>
-          <li>40-60% infrastructure cost reduction</li>
-          <li>Built teams from 2 to 50</li>
-        </ul>
       </div>
       <div className="profileSection">
         <div id="myProfilePicture" className="profilePicture">

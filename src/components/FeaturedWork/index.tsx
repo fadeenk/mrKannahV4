@@ -110,10 +110,7 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
 export default function FeaturedWork(): JSX.Element {
   return (
     <div className="hero hero--primary ">
-      <div
-        className="container"
-        style={{ marginTop: "3rem", marginBottom: "3rem" }}
-      >
+      <div className="container">
         <Heading as="h2" className="hero__title text--center">
           Featured Work
         </Heading>
