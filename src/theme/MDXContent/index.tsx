@@ -119,6 +119,9 @@ const YEARLY_REVIEW_ANCHORS = [
   'my-website-upgrades',
   'custom-smart-nfc-business-cards',
   'sell-coursekey',
+  'tech-support-and-repair',
+  'random-projects',
+  'house-maintenance',
 ];
 
 function PasswordProtectedContent({ password, children }: { password: string | undefined; children: JSX.Element }): JSX.Element {
