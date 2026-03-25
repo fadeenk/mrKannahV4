@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAR Transportation — Premium VIP Car Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #D4BC8B;
+      --gold-pale: #E8D5B0;
+      --champagne: #F5E6C8;
+      --obsidian: #0A0A0A;
+      --onyx: #111111;
+      --charcoal: #1A1A1A;
+      --graphite: #2A2A2A;
+      --smoke: #888888;
+      --pearl: #E8E4DF;
+      --ivory: #F8F5F0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--obsidian);
+      color: var(--pearl);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--obsidian);
+    }
+
+    /* ===== GRAIN OVERLAY ===== */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background 0.4s ease;
+    }
+
+    .top-bar.scrolled {
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid rgba(201,169,110,0.12);
+    }
+
+    .logo-mark {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .logo-mark span {
+      font-weight: 600;
+    }
+
+    .top-cta {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+      background: var(--gold);
+      padding: 0.6rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .top-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(201,169,110,0.3);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      padding: 7rem 1.5rem 4rem;
+      overflow: hidden;
+      gap: 3rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 30% 20%, rgba(201,169,110,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 85% 70%, rgba(201,169,110,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-bg-anim {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .hero-orb:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
+      top: -10%;
+      left: -5%;
+      animation-duration: 18s;
+      animation-delay: 0s;
+    }
+
+    .hero-orb:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+      bottom: -10%;
+      right: -5%;
+      animation-duration: 22s;
+      animation-delay: -6s;
+    }
+
+    .hero-orb:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(212,188,139,0.07) 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      animation-duration: 16s;
+      animation-delay: -12s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% {
+        opacity: 0.4;
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        opacity: 0.7;
+        transform: translate(40px, -30px) scale(1.1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+      75% {
+        opacity: 0.8;
+        transform: translate(30px, 40px) scale(1.05);
+      }
+    }
+
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleDrift linear infinite;
+    }
+
+    .hero-particle:nth-child(1) { left: 10%; animation-duration: 14s; animation-delay: 0s; }
+    .hero-particle:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: -3s; width: 3px; height: 3px; }
+    .hero-particle:nth-child(3) { left: 40%; animation-duration: 12s; animation-delay: -7s; }
+    .hero-particle:nth-child(4) { left: 55%; animation-duration: 20s; animation-delay: -2s; width: 1.5px; height: 1.5px; }
+    .hero-particle:nth-child(5) { left: 70%; animation-duration: 16s; animation-delay: -9s; }
+    .hero-particle:nth-child(6) { left: 85%; animation-duration: 15s; animation-delay: -5s; width: 2.5px; height: 2.5px; }
+    .hero-particle:nth-child(7) { left: 15%; animation-duration: 19s; animation-delay: -11s; }
+    .hero-particle:nth-child(8) { left: 60%; animation-duration: 13s; animation-delay: -4s; width: 1.5px; height: 1.5px; }
+    .hero-particle:nth-child(9) { left: 35%; animation-duration: 17s; animation-delay: -8s; }
+    .hero-particle:nth-child(10) { left: 80%; animation-duration: 21s; animation-delay: -1s; width: 3px; height: 3px; }
+    .hero-particle:nth-child(11) { left: 48%; animation-duration: 14s; animation-delay: -6s; }
+    .hero-particle:nth-child(12) { left: 92%; animation-duration: 16s; animation-delay: -10s; width: 1.5px; height: 1.5px; }
+
+    @keyframes particleDrift {
+      0% {
+        bottom: -5%;
+        opacity: 0;
+        transform: translateX(0);
+      }
+      10% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.3;
+        transform: translateX(30px);
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        bottom: 105%;
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-grid-lines::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(201,169,110,0.04) 20%, rgba(201,169,110,0.04) 80%, transparent 100%);
+      animation: lineReveal 3s ease-out 0.5s both;
+    }
+
+    .hero-grid-lines::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 20%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(201,169,110,0.03) 30%, rgba(201,169,110,0.03) 70%, transparent 100%);
+      animation: lineReveal 3s ease-out 1s both;
+    }
+
+    @keyframes lineReveal {
+      from {
+        clip-path: inset(50% 0 50% 0);
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--ivory);
+      margin-bottom: 0.4em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      color: var(--smoke);
+      max-width: 26em;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards;
+    }
+
+    .hero-cta-box {
+      background: var(--onyx);
+      border: 1px solid rgba(201,169,110,0.12);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .hero-cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent 60%);
+    }
+
+    .hero-cta-label {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-cta-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .hero-cta-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--smoke);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .hero-call-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+      background: var(--gold);
+      padding: 1rem 2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .hero-call-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,169,110,0.25);
+    }
+
+    .hero-whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #25D366;
+      padding: 1rem 2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .hero-whatsapp-btn:hover {
+      background: #20BD5A;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.2);
+    }
+
+    .hero-whatsapp-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .hero-cta-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(201,169,110,0.1);
+      margin: 0.4rem 0;
+    }
+
+    .hero-cta-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(201,169,110,0.08);
+    }
+
+    .hero-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-detail-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      width: 1.6rem;
+      text-align: center;
+    }
+
+    .hero-detail-text {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--pearl);
+    }
+
+    .hero-detail-text a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .hero-detail-text a:hover {
+      color: var(--gold);
+    }
+
+    .hero-vertical-line {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 60%;
+      background: linear-gradient(180deg, transparent, rgba(201,169,110,0.12), transparent);
+      pointer-events: none;
+    }
+
+    /* ===== SERVICES ===== */
+    .section {
+      padding: 5rem 1.5rem;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--ivory);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: rgba(201,169,110,0.08);
+      margin-top: 3rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .service-card {
+      background: var(--onyx);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.6s ease;
+    }
+
+    .service-card:hover::before {
+      width: 100%;
+    }
+
+    .service-card:hover {
+      background: var(--charcoal);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+      filter: grayscale(0.2);
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--ivory);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--smoke);
+      line-height: 1.7;
+    }
+
+    /* ===== WHY US ===== */
+    .why-section {
+      padding: 5rem 1.5rem;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .why-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .why-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ivory);
+      margin-bottom: 0.4rem;
+    }
+
+    .why-content p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--smoke);
+      line-height: 1.7;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(180deg, var(--obsidian) 0%, var(--onyx) 100%);
+      position: relative;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      opacity: 0.3;
+    }
+
+    .contact-container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: rgba(201,169,110,0.08);
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: var(--onyx);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    .contact-card:hover {
+      background: var(--charcoal);
+    }
+
+    .contact-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .contact-card-label {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-card-value {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--ivory);
+    }
+
+    .contact-card-value a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card-value a:hover {
+      color: var(--gold);
+    }
+
+    /* ===== WHATSAPP SECTION ===== */
+    .whatsapp-section {
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .whatsapp-box {
+      max-width: 400px;
+      margin: 0 auto;
+      background: var(--charcoal);
+      border: 1px solid rgba(201,169,110,0.12);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .whatsapp-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .whatsapp-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 0.5rem;
+    }
+
+    .whatsapp-sub {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--smoke);
+      margin-bottom: 2rem;
+    }
+
+    .qr-container {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 1.5rem;
+      background: white;
+      padding: 12px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+      background: #25D366;
+      padding: 0.9rem 2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      background: #20BD5A;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.25);
+    }
+
+    .whatsapp-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 3rem 1.5rem;
+      border-top: 1px solid rgba(201,169,110,0.08);
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--smoke);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: rgba(136,136,136,0.5);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        grid-template-columns: 1.1fr 0.9fr;
+        padding: 0 3rem;
+        gap: 4rem;
+      }
+
+      .hero-left {
+        padding-right: 2rem;
+      }
+
+      .section {
+        padding: 7rem 3rem;
+      }
+
+      .contact-section,
+      .whatsapp-section {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .hero {
+        padding: 0 5rem;
+        gap: 5rem;
+      }
+
+      .section {
+        padding: 8rem 4rem;
+      }
+    }
+
+    /* ===== CUSTOM CURSOR AREA ===== */
+    .cta-area {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-area::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,169,110,0.03) 0%, transparent 50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .cta-area:hover::after {
+      opacity: 1;
+    }
+
+    /* ===== PHONE LINK STYLING ===== */
+    .phone-link {
+      position: relative;
+    }
+
+    .phone-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .phone-link:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-bar" id="topBar">
+    <a href="#" class="logo-mark"><span>Mar</span> Transportation</a>
+    <a href="tel:7256669224" class="top-cta">Book Now</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-anim">
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
+    </div>
+    <div class="hero-particles">
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+    </div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-left">
+      <div class="hero-badge">Premium VIP Service</div>
+
+      <h1 class="hero-title">
+        Arrive in<em>Distinction</em>
+      </h1>
+
+      <p class="hero-subtitle">
+        Luxury ground transportation for those who expect nothing less than excellence. Airport transfers, corporate travel, special events — handled with precision.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-cta-box">
+        <div class="hero-cta-label">Book Your Ride</div>
+        <h2 class="hero-cta-title">Ready When You Are</h2>
+        <p class="hero-cta-desc">Available 24/7. Call, text, or message us on WhatsApp to reserve your premium ride.</p>
+
+        <div class="hero-cta-actions">
+          <a href="tel:7256669224" class="hero-call-btn">
+            📞 Call 725 666 9224
+          </a>
+          <a href="https://wa.me/17256669224" target="_blank" rel="noopener noreferrer" class="hero-whatsapp-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+
+        <div class="hero-cta-details">
+          <div class="hero-detail-row">
+            <span class="hero-detail-icon">✉</span>
+            <span class="hero-detail-text"><a href="mailto:maroraha82@gmail.com">maroraha82@gmail.com</a></span>
+          </div>
+          <div class="hero-detail-row">
+            <span class="hero-detail-icon">🕐</span>
+            <span class="hero-detail-text">Available 24 hours, 7 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div class="reveal">
+        <div class="section-label">Our Services</div>
+        <h2 class="section-heading">Tailored <em>Experiences</em><br>on Every Mile</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card cta-area reveal reveal-delay-1">
+          <span class="service-icon">🛩</span>
+          <h3 class="service-name">Airport Transfers</h3>
+          <p class="service-desc">Seamless pickup and drop-off at all major airports. Flight tracking ensures we're always on time, even when your flight isn't.</p>
+        </div>
+        <div class="service-card cta-area reveal reveal-delay-2">
+          <span class="service-icon">🏢</span>
+          <h3 class="service-name">Corporate Travel</h3>
+          <p class="service-desc">Executive transportation for business meetings, conferences, and corporate events. Discretion and professionalism guaranteed.</p>
+        </div>
+        <div class="service-card cta-area reveal reveal-delay-3">
+          <span class="service-icon">🥂</span>
+          <h3 class="service-name">Special Events</h3>
+          <p class="service-desc">Weddings, galas, anniversaries — make your grand entrance unforgettable with our premium fleet and chauffeur service.</p>
+        </div>
+        <div class="service-card cta-area reveal reveal-delay-1">
+          <span class="service-icon">🌃</span>
+          <h3 class="service-name">City Tours</h3>
+          <p class="service-desc">Explore the city in comfort with a knowledgeable private driver. Customized itineraries at your pace.</p>
+        </div>
+        <div class="service-card cta-area reveal reveal-delay-2">
+          <span class="service-icon">⏰</span>
+          <h3 class="service-name">Hourly Charter</h3>
+          <p class="service-desc">Book by the hour for maximum flexibility. Perfect for multi-stop trips, errands, or a night out on the town.</p>
+        </div>
+        <div class="service-card cta-area reveal reveal-delay-3">
+          <span class="service-icon">🛣</span>
+          <h3 class="service-name">Long Distance</h3>
+          <p class="service-desc">Interstate and long-distance travel in supreme comfort. Sit back, relax, and enjoy the journey.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-section" id="about">
+    <div class="why-grid">
+      <div class="reveal">
+        <div class="section-label">Why Mar Transportation</div>
+        <h2 class="section-heading">Built on <em>Trust</em>,<br>Driven by Detail</h2>
+      </div>
+      <div></div>
+      <div class="why-item reveal reveal-delay-1">
+        <div class="why-number">01</div>
+        <div class="why-content">
+          <h3>Always On Time</h3>
+          <p>Punctuality is our promise. We monitor traffic, weather, and flight data in real time to ensure every pickup is seamless.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="why-number">02</div>
+        <div class="why-content">
+          <h3>Immaculate Vehicles</h3>
+          <p>Every vehicle is detailed before each trip. Spotless interiors, pristine exteriors — because the details matter.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="why-number">03</div>
+        <div class="why-content">
+          <h3>Professional Chauffeurs</h3>
+          <p>Background-checked, professionally trained, and always in uniform. Your safety and comfort are their top priority.</p>
+        </div>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <div class="why-number">04</div>
+        <div class="why-content">
+          <h3>24/7 Availability</h3>
+          <p>Early morning flights or late-night events — we're always ready. Book anytime, ride anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-container">
+      <div class="reveal">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-heading">Reserve Your <em>Ride</em></h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card reveal reveal-delay-1">
+          <span class="contact-card-icon">📞</span>
+          <div class="contact-card-label">Call Us</div>
+          <div class="contact-card-value">
+            <a href="tel:7256669224" class="phone-link">725 666 9224</a>
+          </div>
+        </div>
+        <div class="contact-card reveal reveal-delay-2">
+          <span class="contact-card-icon">✉</span>
+          <div class="contact-card-label">Email</div>
+          <div class="contact-card-value">
+            <a href="mailto:maroraha82@gmail.com" class="phone-link">maroraha82@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card reveal reveal-delay-3">
+          <span class="contact-card-icon">💬</span>
+          <div class="contact-card-label">WhatsApp</div>
+          <div class="contact-card-value">
+            <a href="https://wa.me/17256669224" target="_blank" rel="noopener noreferrer" class="phone-link">Message Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP QR -->
+  <section class="whatsapp-section reveal">
+    <div class="whatsapp-box">
+      <h3 class="whatsapp-title">Quick Booking via WhatsApp</h3>
+      <p class="whatsapp-sub">Scan the QR code or tap below to start a conversation</p>
+
+      <div class="qr-container">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/17256669224" alt="WhatsApp QR Code for MAR Transportation" loading="lazy">
+      </div>
+
+      <a href="https://wa.me/17256669224" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">Mar Transportation</div>
+    <div class="footer-tagline">Premium VIP Car Service</div>
+    <div class="footer-links">
+      <a href="tel:7256669224">Call</a>
+      <a href="mailto:maroraha82@gmail.com">Email</a>
+      <a href="https://wa.me/17256669224" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 MAR Transportation. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Scroll-triggered reveals
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Top bar scroll effect
+    const topBar = document.getElementById('topBar');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          topBar.classList.toggle('scrolled', window.scrollY > 60);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
