@@ -6,6 +6,7 @@ import Header from "@site/src/components/Header";
 import Contact from "@site/src/components/Contact";
 import FeaturedWork from "@site/src/components/FeaturedWork";
 import Skills from "@site/src/components/Skills";
+import LogosCarousel from "@site/src/components/LogosCarousel";
 
 import type { JSX } from "react";
 
@@ -238,6 +239,7 @@ function StatsBar(): JSX.Element {
             <span className="stat-label">Infrastructure Cost Reduction</span>
           </div>
         </div>
+        <LogosCarousel />
       </div>
     </div>
   );
