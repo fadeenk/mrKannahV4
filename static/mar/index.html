@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -18,6 +19,7 @@
       --gold: #C9A96E;
       --gold-light: #D4BC8B;
       --gold-pale: #E8D5B0;
+      --gold-bright: #E5C77D;
       --champagne: #F5E6C8;
       --obsidian: #0A0A0A;
       --onyx: #111111;
@@ -28,6 +30,10 @@
       --ivory: #F8F5F0;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Outfit', system-ui, sans-serif;
+      --gold-glow: rgba(201, 169, 110, 0.4);
+      --gold-glow-soft: rgba(201, 169, 110, 0.15);
+      --glass-bg: rgba(17, 17, 17, 0.7);
+      --glass-border: rgba(201, 169, 110, 0.18);
     }
 
     html {
@@ -186,6 +192,26 @@
       animation-delay: -12s;
     }
 
+    .hero-orb:nth-child(4) {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(201,169,110,0.05) 0%, transparent 70%);
+      top: 60%;
+      left: 20%;
+      animation-duration: 24s;
+      animation-delay: -4s;
+    }
+
+    .hero-orb:nth-child(5) {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(212,188,139,0.04) 0%, transparent 70%);
+      top: 20%;
+      left: 70%;
+      animation-duration: 20s;
+      animation-delay: -8s;
+    }
+
     @keyframes orbFloat {
       0%, 100% {
         opacity: 0.4;
@@ -234,6 +260,10 @@
     .hero-particle:nth-child(10) { left: 80%; animation-duration: 21s; animation-delay: -1s; width: 3px; height: 3px; }
     .hero-particle:nth-child(11) { left: 48%; animation-duration: 14s; animation-delay: -6s; }
     .hero-particle:nth-child(12) { left: 92%; animation-duration: 16s; animation-delay: -10s; width: 1.5px; height: 1.5px; }
+    .hero-particle:nth-child(13) { left: 22%; animation-duration: 17s; animation-delay: -3s; width: 2px; height: 2px; }
+    .hero-particle:nth-child(14) { left: 65%; animation-duration: 19s; animation-delay: -7s; width: 1.5px; height: 1.5px; }
+    .hero-particle:nth-child(15) { left: 38%; animation-duration: 15s; animation-delay: -2s; }
+    .hero-particle:nth-child(16) { left: 75%; animation-duration: 18s; animation-delay: -9s; width: 2.5px; height: 2.5px; }
 
     @keyframes particleDrift {
       0% {
@@ -264,17 +294,6 @@
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
-    }
-
-    .hero-grid-lines::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 15%;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(180deg, transparent 0%, rgba(201,169,110,0.04) 20%, rgba(201,169,110,0.04) 80%, transparent 100%);
-      animation: lineReveal 3s ease-out 0.5s both;
     }
 
     .hero-grid-lines::after {
@@ -999,6 +1018,691 @@
     .phone-link:hover::after {
       width: 100%;
     }
+
+    .service-icon svg,
+    .hero-detail-icon svg,
+    .contact-card-icon svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .hero-detail-icon svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .contact-card-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .hero-call-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ===== GLASSMORPHISM ===== */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* ===== ENHANCED SHADOWS ===== */
+    .shadow-lift {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .shadow-lift:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 60px var(--gold-glow-soft),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .glow-hover {
+      transition: all 0.3s ease;
+    }
+
+    .glow-hover:hover {
+      box-shadow: 0 0 30px var(--gold-glow-soft), 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== TEXT GRADIENT ===== */
+    .text-gradient {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 50%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== DIVIDER LINES ===== */
+    .divider-gold {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.5rem auto;
+    }
+
+    .divider-gold-left {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1rem 0;
+    }
+
+    /* ===== ENHANCED SERVICE CARDS ===== */
+    .service-card {
+      background: var(--onyx);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.6s ease;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.6s ease;
+    }
+
+    .service-card:hover::before,
+    .service-card:hover::after {
+      width: 100%;
+    }
+
+    .service-card:hover {
+      background: var(--charcoal);
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px var(--gold-glow-soft),
+        inset 0 1px 0 rgba(201, 169, 110, 0.1);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+      filter: grayscale(0.2);
+      transition: all 0.4s ease;
+    }
+
+    .service-card:hover .service-icon {
+      filter: grayscale(0);
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px var(--gold-glow-soft));
+    }
+
+    /* ===== ENHANCED BUTTONS ===== */
+    .hero-call-btn,
+    .hero-whatsapp-btn,
+    .top-cta {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-call-btn::before,
+    .hero-whatsapp-btn::before,
+    .top-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .hero-call-btn:hover::before,
+    .hero-whatsapp-btn:hover::before,
+    .top-cta:hover::before {
+      left: 100%;
+    }
+
+    .hero-call-btn:active,
+    .hero-whatsapp-btn:active,
+    .top-cta:active {
+      transform: scale(0.98);
+    }
+
+    /* ===== ENHANCED HERO CTA BOX ===== */
+    .hero-cta-box {
+      background: var(--onyx);
+      border: 1px solid rgba(201,169,110,0.12);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .hero-cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent 60%);
+    }
+
+    .hero-cta-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,169,110,0.03) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .hero-cta-box:hover {
+      border-color: var(--gold-glow-soft);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 40px var(--gold-glow-soft);
+    }
+
+    .hero-cta-box:hover::after {
+      opacity: 1;
+    }
+
+    /* ===== ENHANCED CONTACT CARDS ===== */
+    .contact-card {
+      background: var(--onyx);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold-glow-soft) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .contact-card:hover {
+      background: var(--charcoal);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-card:hover::before {
+      opacity: 1;
+    }
+
+    .contact-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      transition: all 0.4s ease;
+    }
+
+    .contact-card:hover .contact-card-icon {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 8px var(--gold-glow));
+    }
+
+    /* ===== ENHANCED WHY ITEMS ===== */
+    .why-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, transparent 0%, rgba(201,169,110,0.02) 100%);
+      border-left: 1px solid transparent;
+      transition: all 0.4s ease;
+    }
+
+    .why-item:hover {
+      background: linear-gradient(135deg, rgba(201,169,110,0.05) 0%, rgba(201,169,110,0.01) 100%);
+      border-left-color: var(--gold);
+      padding-left: 2rem;
+    }
+
+    .why-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.6;
+      transition: all 0.4s ease;
+    }
+
+    .why-item:hover .why-number {
+      opacity: 1;
+      text-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    /* ===== SECTION DIVIDERS ===== */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent);
+      margin: 0;
+    }
+
+    /* ===== FLOATING ANIMATION ===== */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .float-animation {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* ===== PULSE GLOW ===== */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px var(--gold-glow-soft); }
+      50% { box-shadow: 0 0 40px var(--gold-glow), 0 0 60px var(--gold-glow-soft); }
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    /* ===== SHIMMER EFFECT ===== */
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .shimmer {
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* ===== ENHANCED TOP BAR ===== */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
+    }
+
+    .top-bar.scrolled {
+      background: rgba(10,10,10,0.98);
+      border-bottom: 1px solid rgba(201,169,110,0.15);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .logo-mark {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .logo-mark:hover {
+      text-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .logo-mark span {
+      font-weight: 600;
+    }
+
+    /* ===== WHATSAPP BOX ENHANCED ===== */
+    .whatsapp-box {
+      max-width: 400px;
+      margin: 0 auto;
+      background: var(--charcoal);
+      border: 1px solid rgba(201,169,110,0.12);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .whatsapp-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .whatsapp-box:hover {
+      border-color: var(--gold-glow-soft);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 40px var(--gold-glow-soft);
+      transform: translateY(-4px);
+    }
+
+    /* ===== FOOTER ENHANCED ===== */
+    .footer {
+      padding: 4rem 1.5rem;
+      border-top: 1px solid rgba(201,169,110,0.08);
+      text-align: center;
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-brand:hover {
+      text-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    /* ===== LINK UNDERLINE EFFECT ===== */
+    .phone-link {
+      position: relative;
+      display: inline-block;
+    }
+
+    .phone-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.4s ease;
+    }
+
+    .phone-link:hover::after {
+      width: 100%;
+    }
+
+    .phone-link:hover {
+      color: var(--gold);
+    }
+
+    /* ===== ICON STYLES ===== */
+    .service-icon svg,
+    .hero-detail-icon svg,
+    .contact-card-icon svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      fill: none;
+      transition: all 0.4s ease;
+    }
+
+    .hero-detail-icon svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .contact-card-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .hero-call-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ===== HERO TITLE ENHANCED ===== */
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      background: linear-gradient(135deg, var(--ivory) 0%, var(--pearl) 50%, var(--gold-pale) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4em;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+
+    /* ===== SECTION HEADING ENHANCED ===== */
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--ivory);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    /* ===== ANIMATION ENHANCEMENTS ===== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== CIRCLE DECORATIONS ===== */
+    .circle-decor {
+      position: absolute;
+      border: 1px solid var(--gold-glow-soft);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    /* ===== RESPONSIVE ENHANCEMENTS ===== */
+    @media (min-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        grid-template-columns: 1.1fr 0.9fr;
+        padding: 0 3rem;
+        gap: 4rem;
+      }
+
+      .hero-left {
+        padding-right: 2rem;
+      }
+
+      .section {
+        padding: 7rem 3rem;
+      }
+
+      .contact-section,
+      .whatsapp-section {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .hero {
+        padding: 0 5rem;
+        gap: 5rem;
+      }
+
+      .section {
+        padding: 8rem 4rem;
+      }
+    }
+
+    /* ===== CUSTOM CURSOR AREA ===== */
+    .cta-area {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-area::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,169,110,0.03) 0%, transparent 50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .cta-area:hover::after {
+      opacity: 1;
+    }
+
+    /* ===== PHONE LINK STYLING ===== */
+    .phone-link {
+      position: relative;
+    }
+
+    .phone-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .phone-link:hover::after {
+      width: 100%;
+    }
+
+    /* ===== FOOTER LINKS ENHANCED ===== */
+    .footer-links a {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -1015,8 +1719,14 @@
       <div class="hero-orb"></div>
       <div class="hero-orb"></div>
       <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
     </div>
     <div class="hero-particles">
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
+      <div class="hero-particle"></div>
       <div class="hero-particle"></div>
       <div class="hero-particle"></div>
       <div class="hero-particle"></div>
@@ -1035,23 +1745,23 @@
       <div class="hero-badge">Premium VIP Service</div>
 
       <h1 class="hero-title">
-        Arrive in<em>Distinction</em>
+        Your Journey,<em>Elevated</em>
       </h1>
 
       <p class="hero-subtitle">
-        Luxury ground transportation for those who expect nothing less than excellence. Airport transfers, corporate travel, special events — handled with precision.
+        Experience the art of effortless travel. From the moment we meet, every detail is handled with care — so you can simply relax and enjoy the ride.
       </p>
     </div>
 
     <div class="hero-right">
       <div class="hero-cta-box">
-        <div class="hero-cta-label">Book Your Ride</div>
-        <h2 class="hero-cta-title">Ready When You Are</h2>
-        <p class="hero-cta-desc">Available 24/7. Call, text, or message us on WhatsApp to reserve your premium ride.</p>
+        <div class="hero-cta-label">Book Your Experience</div>
+        <h2 class="hero-cta-title">Let's Plan Your Trip</h2>
+        <p class="hero-cta-desc">Whether it's a quick airport run or a special evening, we'd be honored to drive you. Reach out however you prefer — we're here to help.</p>
 
         <div class="hero-cta-actions">
           <a href="tel:7256669224" class="hero-call-btn">
-            📞 Call 725 666 9224
+            <i data-lucide="phone"></i> Call 725 666 9224
           </a>
           <a href="https://wa.me/17256669224" target="_blank" rel="noopener noreferrer" class="hero-whatsapp-btn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1061,11 +1771,11 @@
 
         <div class="hero-cta-details">
           <div class="hero-detail-row">
-            <span class="hero-detail-icon">✉</span>
+            <span class="hero-detail-icon"><i data-lucide="mail"></i></span>
             <span class="hero-detail-text"><a href="mailto:maroraha82@gmail.com">maroraha82@gmail.com</a></span>
           </div>
           <div class="hero-detail-row">
-            <span class="hero-detail-icon">🕐</span>
+            <span class="hero-detail-icon"><i data-lucide="clock"></i></span>
             <span class="hero-detail-text">Available 24 hours, 7 days</span>
           </div>
         </div>
@@ -1083,34 +1793,34 @@
 
       <div class="services-grid">
         <div class="service-card cta-area reveal reveal-delay-1">
-          <span class="service-icon">🛩</span>
+          <span class="service-icon"><i data-lucide="plane"></i></span>
           <h3 class="service-name">Airport Transfers</h3>
-          <p class="service-desc">Seamless pickup and drop-off at all major airports. Flight tracking ensures we're always on time, even when your flight isn't.</p>
+          <p class="service-desc">Begin and end your travels stress-free. We'll track your flight, wait if you're delayed, and ensure a smooth journey to or from the airport.</p>
         </div>
         <div class="service-card cta-area reveal reveal-delay-2">
-          <span class="service-icon">🏢</span>
+          <span class="service-icon"><i data-lucide="building-2"></i></span>
           <h3 class="service-name">Corporate Travel</h3>
-          <p class="service-desc">Executive transportation for business meetings, conferences, and corporate events. Discretion and professionalism guaranteed.</p>
+          <p class="service-desc">Make your business journey a seamless extension of your success. Impeccable timing, discretion, and comfort for every meeting.</p>
         </div>
         <div class="service-card cta-area reveal reveal-delay-3">
-          <span class="service-icon">🥂</span>
+          <span class="service-icon"><i data-lucide="wine"></i></span>
           <h3 class="service-name">Special Events</h3>
-          <p class="service-desc">Weddings, galas, anniversaries — make your grand entrance unforgettable with our premium fleet and chauffeur service.</p>
+          <p class="service-desc">Mark life's moments with elegance. From weddings to galas, arrive feeling like royalty — with a chauffeur who understands the occasion.</p>
         </div>
         <div class="service-card cta-area reveal reveal-delay-1">
-          <span class="service-icon">🌃</span>
+          <span class="service-icon"><i data-lucide="moon"></i></span>
           <h3 class="service-name">City Tours</h3>
-          <p class="service-desc">Explore the city in comfort with a knowledgeable private driver. Customized itineraries at your pace.</p>
+          <p class="service-desc">Discover the city through local eyes. Your private guide will craft an experience that feels personal, not scripted.</p>
         </div>
         <div class="service-card cta-area reveal reveal-delay-2">
-          <span class="service-icon">⏰</span>
+          <span class="service-icon"><i data-lucide="timer"></i></span>
           <h3 class="service-name">Hourly Charter</h3>
-          <p class="service-desc">Book by the hour for maximum flexibility. Perfect for multi-stop trips, errands, or a night out on the town.</p>
+          <p class="service-desc">The freedom to go where you please, at your pace. Ideal for shopping, dining, or simply exploring without the worry of schedules.</p>
         </div>
-        <div class="service-card cta-area reveal reveal-delay-3">
-          <span class="service-icon">🛣</span>
+        <div class="service-card cta-area reveal-delay-3">
+          <span class="service-icon"><i data-lucide="route"></i></span>
           <h3 class="service-name">Long Distance</h3>
-          <p class="service-desc">Interstate and long-distance travel in supreme comfort. Sit back, relax, and enjoy the journey.</p>
+          <p class="service-desc">Travel farther in style. Relax in plush comfort as we handle the journey — leaving you refreshed when you arrive.</p>
         </div>
       </div>
     </div>
@@ -1120,36 +1830,36 @@
   <section class="why-section" id="about">
     <div class="why-grid">
       <div class="reveal">
-        <div class="section-label">Why Mar Transportation</div>
-        <h2 class="section-heading">Built on <em>Trust</em>,<br>Driven by Detail</h2>
+        <div class="section-label">Why Choose MAR</div>
+        <h2 class="section-heading">The MAR <em>Difference</em></h2>
       </div>
       <div></div>
       <div class="why-item reveal reveal-delay-1">
         <div class="why-number">01</div>
         <div class="why-content">
-          <h3>Always On Time</h3>
-          <p>Punctuality is our promise. We monitor traffic, weather, and flight data in real time to ensure every pickup is seamless.</p>
+          <h3>Punctuality, Guaranteed</h3>
+          <p>We believe your time is precious. Advanced planning and real-time monitoring mean you'll never wait — we'll be there when you need us.</p>
         </div>
       </div>
       <div class="why-item reveal reveal-delay-2">
         <div class="why-number">02</div>
         <div class="why-content">
-          <h3>Immaculate Vehicles</h3>
-          <p>Every vehicle is detailed before each trip. Spotless interiors, pristine exteriors — because the details matter.</p>
+          <h3>Pristinely Maintained</h3>
+          <p>Every vehicle is prepared with care before your journey. Immaculate interiors, polished exteriors — a reflection of the experience you deserve.</p>
         </div>
       </div>
       <div class="why-item reveal reveal-delay-3">
         <div class="why-number">03</div>
         <div class="why-content">
-          <h3>Professional Chauffeurs</h3>
-          <p>Background-checked, professionally trained, and always in uniform. Your safety and comfort are their top priority.</p>
+          <h3>Trusted Professionals</h3>
+          <p>Our chauffeurs are more than drivers — they're trained hospitality experts. Background-checked, polished, and dedicated to your comfort.</p>
         </div>
       </div>
       <div class="why-item reveal reveal-delay-4">
         <div class="why-number">04</div>
         <div class="why-content">
-          <h3>24/7 Availability</h3>
-          <p>Early morning flights or late-night events — we're always ready. Book anytime, ride anytime.</p>
+          <h3>Around the Clock</h3>
+          <p>Day or night, early flights or late celebrations — we're here whenever you need us. Just let us know when and where.</p>
         </div>
       </div>
     </div>
@@ -1159,27 +1869,27 @@
   <section class="contact-section" id="contact">
     <div class="contact-container">
       <div class="reveal">
-        <div class="section-label">Get in Touch</div>
-        <h2 class="section-heading">Reserve Your <em>Ride</em></h2>
+        <div class="section-label">Start Your Journey</div>
+        <h2 class="section-heading">Let's <em>Connect</em></h2>
       </div>
 
       <div class="contact-grid">
         <div class="contact-card reveal reveal-delay-1">
-          <span class="contact-card-icon">📞</span>
+          <span class="contact-card-icon"><i data-lucide="phone"></i></span>
           <div class="contact-card-label">Call Us</div>
           <div class="contact-card-value">
             <a href="tel:7256669224" class="phone-link">725 666 9224</a>
           </div>
         </div>
         <div class="contact-card reveal reveal-delay-2">
-          <span class="contact-card-icon">✉</span>
+          <span class="contact-card-icon"><i data-lucide="mail"></i></span>
           <div class="contact-card-label">Email</div>
           <div class="contact-card-value">
             <a href="mailto:maroraha82@gmail.com" class="phone-link">maroraha82@gmail.com</a>
           </div>
         </div>
         <div class="contact-card reveal reveal-delay-3">
-          <span class="contact-card-icon">💬</span>
+          <span class="contact-card-icon"><i data-lucide="message-circle"></i></span>
           <div class="contact-card-label">WhatsApp</div>
           <div class="contact-card-value">
             <a href="https://wa.me/17256669224" target="_blank" rel="noopener noreferrer" class="phone-link">Message Us</a>
@@ -1192,8 +1902,8 @@
   <!-- WHATSAPP QR -->
   <section class="whatsapp-section reveal">
     <div class="whatsapp-box">
-      <h3 class="whatsapp-title">Quick Booking via WhatsApp</h3>
-      <p class="whatsapp-sub">Scan the QR code or tap below to start a conversation</p>
+      <h3 class="whatsapp-title">Prefer to Message?</h3>
+      <p class="whatsapp-sub">Scan the QR code or tap below — we'd love to hear from you</p>
 
       <div class="qr-container">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/17256669224" alt="WhatsApp QR Code for MAR Transportation" loading="lazy">
@@ -1208,8 +1918,8 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-brand">Mar Transportation</div>
-    <div class="footer-tagline">Premium VIP Car Service</div>
+    <div class="footer-brand">MAR Transportation</div>
+    <div class="footer-tagline">Your Trusted Partner in Premium Travel</div>
     <div class="footer-links">
       <a href="tel:7256669224">Call</a>
       <a href="mailto:maroraha82@gmail.com">Email</a>
@@ -1219,8 +1929,16 @@
   </footer>
 
   <script>
-    // Scroll-triggered reveals
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Enhanced scroll-triggered reveals
     const reveals = document.querySelectorAll('.reveal');
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1228,21 +1946,52 @@
           observer.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -40px 0px'
-    });
+    }, observerOptions);
 
     reveals.forEach(el => observer.observe(el));
 
-    // Top bar scroll effect
-    const topBar = document.getElementById('topBar');
+    // Enhanced parallax effect for hero orbs
+    const heroOrbs = document.querySelectorAll('.hero-orb');
+    const heroParticles = document.querySelectorAll('.hero-particle');
     let ticking = false;
 
     window.addEventListener('scroll', () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          topBar.classList.toggle('scrolled', window.scrollY > 60);
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
+          
+          // Parallax for orbs
+          heroOrbs.forEach((orb, index) => {
+            const speed = 0.15 + (index * 0.05);
+            const yPos = scrollY * speed;
+            orb.style.transform = `translateY(${yPos}px)`;
+          });
+
+          // Parallax for particles
+          heroParticles.forEach((particle, index) => {
+            const speed = 0.1 + (index * 0.02);
+            const yPos = scrollY * speed;
+            particle.style.transform = `translateY(${-yPos}px)`;
+          });
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Top bar scroll effect with enhanced transition
+    const topBar = document.getElementById('topBar');
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 60) {
+            topBar.classList.add('scrolled');
+          } else {
+            topBar.classList.remove('scrolled');
+          }
           ticking = false;
         });
         ticking = true;
@@ -1257,6 +2006,42 @@
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+      });
+    });
+
+    // Mouse parallax for hero section
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        heroOrbs.forEach((orb, index) => {
+          const moveX = x * (20 + index * 10);
+          const moveY = y * (20 + index * 10);
+          orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+      });
+    }
+
+    // Add staggered animation delays dynamically
+    document.querySelectorAll('.service-card').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.05}s`;
+    });
+
+    // Magnetic button effect
+    const buttons = document.querySelectorAll('.hero-call-btn, .hero-whatsapp-btn, .top-cta');
+    buttons.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
       });
     });
   </script>

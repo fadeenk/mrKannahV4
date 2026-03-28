@@ -12,6 +12,24 @@ type Website = {
 
 const recentSites: Website[] = [
   {
+    title: "MAR Transportation",
+    description: "A website for a premium VIP transportation company in Las Vegas.",
+    thumbnail: "/img/showcase/mar.png",
+    link: "https://mrkannah.com/mar/",
+  },
+  {
+    title: "Take Your Case",
+    description: "A website for a lawsuits intake company.",
+    thumbnail: "/img/showcase/tyc.png",
+    link: "https://takeyourcase.com/",
+  },
+  {
+    title: "Internet Candy Corporation",
+    description: "Bite-sized software solutions that make your work life sweeter. Powerful tools that solve real problems, one byte at a time.",
+    thumbnail: "/img/showcase/icc.png",
+    link: "https://internetcandycorp.com/",
+  },
+  {
     title: "MeetingHero.AI",
     description:
       "My latest project. Automagic AI powered insights on the person you’re about to meet with. Conveniently in your email inbox and calendar app.",
