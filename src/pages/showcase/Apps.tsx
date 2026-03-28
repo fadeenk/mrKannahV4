@@ -32,6 +32,17 @@ const clientProjects: App[] = [
 
 const alive: App[] = [
   {
+    title: "Personal Lab results dashboard",
+    description: "Instead of having to use multiple different websites to check my lab results, and try to peiece together the full picture. I built a dashboard that pulls the data from all of them and displays it in one place. It not only centeralize my data but also make it easier to see how things are trending over time. As well as the ability to identify which labs are out of range and which ones I need to pay attention to.",
+    thumbnail: "/img/showcase/labs.mp4",
+  },
+  {
+    title: "DJ assistant App",
+    description:
+      "Personal DJ assistant app that I built to help me with my DJing events. It allows attendees to request songs and vote on them in real time. As well as automatically prepare the song to be played and have it ready on my laptop. It integrates with YouTube to allow people to find any song/remix in any language!",
+    thumbnail: "/img/showcase/dj.mp4",
+  },
+  {
     title: "MeetingHero.ai",
     link: "https://meetinghero.ai/",
     description:
@@ -177,7 +188,7 @@ function renderApp(app: App): JSX.Element {
             marginTop: 5,
           }}
         >
-          <Gallery photos={[app.thumbnail]} />
+          <Gallery photos={[app.thumbnail]} shouldLoop={true} />
         </div>
       )}
       <h3 style={{ marginTop: 10 }}>

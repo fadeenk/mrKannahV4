@@ -12,7 +12,7 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
-const Gallery = ({ photos }) => {
+const Gallery = ({ photos, shouldLoop = false }) => {
   const [images, setImages] = useState([]);
   const [index, setIndex] = useState(-1);
   const [videoStates, setVideoStates] = useState({}); // Track playing state for each video by index
@@ -213,6 +213,7 @@ const Gallery = ({ photos }) => {
             width: "100%",
             height: "100%",
           }}
+          loop={shouldLoop}
           onError={(e) => console.error("Video error:", e)}
           config={{
             file: {
