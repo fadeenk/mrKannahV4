@@ -84,6 +84,14 @@
       transition: background 0.4s ease;
     }
 
+    @media (max-width: 480px) {
+      .top-bar {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+    }
+
     .top-bar.scrolled {
       background: rgba(10,10,10,0.97);
       border-bottom: 1px solid rgba(201,169,110,0.12);
@@ -128,12 +136,10 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr;
-      align-items: center;
       padding: 7rem 1.5rem 4rem;
       overflow: hidden;
-      gap: 3rem;
+      display: flex;
+      align-items: center;
     }
 
     .hero::before {
@@ -307,6 +313,17 @@
       animation: lineReveal 3s ease-out 1s both;
     }
 
+    .hero-content {
+      max-width: 1320px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
     @keyframes lineReveal {
       from {
         clip-path: inset(50% 0 50% 0);
@@ -319,6 +336,33 @@
     .hero-left {
       position: relative;
       z-index: 1;
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding: 0 3rem;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .hero-left {
+        padding-right: 2rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .hero {
+        padding: 0 5rem;
+      }
+
+      .hero-content {
+        gap: 5rem;
+      }
     }
 
     .hero-badge {
@@ -943,10 +987,11 @@
     }
 
     @media (min-width: 900px) {
-      .hero {
+      .hero-content {
+        display: grid;
         grid-template-columns: 1.1fr 0.9fr;
-        padding: 0 3rem;
         gap: 4rem;
+        align-items: center;
       }
 
       .hero-left {
@@ -969,8 +1014,7 @@
     }
 
     @media (min-width: 1200px) {
-      .hero {
-        padding: 0 5rem;
+      .hero-content {
         gap: 5rem;
       }
 
@@ -1597,9 +1641,14 @@
 
     @media (min-width: 900px) {
       .hero {
-        grid-template-columns: 1.1fr 0.9fr;
         padding: 0 3rem;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
         gap: 4rem;
+        align-items: center;
       }
 
       .hero-left {
@@ -1624,6 +1673,9 @@
     @media (min-width: 1200px) {
       .hero {
         padding: 0 5rem;
+      }
+
+      .hero-content {
         gap: 5rem;
       }
 
@@ -1633,46 +1685,6 @@
     }
 
     /* ===== CUSTOM CURSOR AREA ===== */
-    .cta-area {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-area::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(201,169,110,0.03) 0%, transparent 50%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .cta-area:hover::after {
-      opacity: 1;
-    }
-
-    /* ===== PHONE LINK STYLING ===== */
-    .phone-link {
-      position: relative;
-    }
-
-    .phone-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--gold);
-      transition: width 0.3s ease;
-    }
-
-    .phone-link:hover::after {
-      width: 100%;
-    }
-
-    /* ===== FOOTER LINKS ENHANCED ===== */
     .footer-links a {
       font-size: 0.7rem;
       font-weight: 400;
@@ -1741,6 +1753,7 @@
       <div class="hero-particle"></div>
     </div>
     <div class="hero-grid-lines"></div>
+    <div class="hero-content">
     <div class="hero-left">
       <div class="hero-badge">Premium VIP Service</div>
 
@@ -1780,6 +1793,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
