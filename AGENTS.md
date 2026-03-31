@@ -179,3 +179,7 @@ Key dependencies:
 2. Make changes to `src/pages/` or `src/components/`
 3. Run `npm run typecheck` to verify types
 4. Run `npm run build` to test production build
+
+# Important
+
+None of this applies to projects in the static folder. Those are just static files that are served as-is.

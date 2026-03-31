@@ -32,6 +32,12 @@ const clientProjects: App[] = [
 
 const alive: App[] = [
   {
+    title: "My Personal Private Cloud Services V2",
+    description:
+      "A revamped and improved personal cloud server! This time with much better experince and features. A new home dashboard with more features and a better UI, and better networking, security, isolation and even intrution detection systems. My image hosting changed to a better service (Immich), my multimedia/streaming services improved to have additional features and have much better features. I added a few more services such as online file storage, services analytics and reporting. Private remote desktop service for techinical support. and many more!",
+    thumbnail: "/img/showcase/serversV2.png",
+  },
+  {
     title: "Personal Lab results dashboard",
     description: "Instead of having to use multiple different websites to check my lab results, and try to peiece together the full picture. I built a dashboard that pulls the data from all of them and displays it in one place. It not only centeralize my data but also make it easier to see how things are trending over time. As well as the ability to identify which labs are out of range and which ones I need to pay attention to.",
     thumbnail: "/img/showcase/labs.mp4",
@@ -48,12 +54,6 @@ const alive: App[] = [
     description:
       "Automagic AI powered insights on the person you're about to meet with. Conveniently in your email inbox and calendar app.",
     thumbnail: "/img/showcase/MeetingHero.png",
-  },
-  {
-    title: "My Personal Private Cloud Services",
-    description:
-      "I have a personal server that I use to host my own cloud services. I have my own Google Photos (PhotoPrism), Netflix (JellyFin), Backup (Duplicati), and Content management (Sonarr & Radarr). I also have a few other smaller services that are running.",
-    thumbnail: "/img/showcase/servers.png",
   },
   {
     title: "Crypto Taxes and Tracker",
@@ -137,6 +137,12 @@ const NotMaintained: App[] = [
 ];
 
 const Abandoned: App[] = [
+  {
+    title: "My Personal Private Cloud Services",
+    description:
+      "I have a personal server that I use to host my own cloud services. I have my own Google Photos (PhotoPrism), Netflix (JellyFin), Backup (Duplicati), and Content management (Sonarr & Radarr). I also have a few other smaller services that are running.",
+    thumbnail: "/img/showcase/servers.png",
+  },
   {
     title: "Unnamed Android game",
     description:
