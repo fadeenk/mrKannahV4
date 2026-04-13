@@ -2,7 +2,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import { useState, type JSX } from "react";
 
-export const years = {
+export const years: Record<number | string, string> = {
   2026: "wip",
   2025: "craziness",
   2024: "partying",

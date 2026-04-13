@@ -1,6 +1,6 @@
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
-import Gallery from "@site/src/components/Gallery/Gallery";
+import Gallery from "@site/src/components/Gallery";
 
 import type { JSX } from "react";
 

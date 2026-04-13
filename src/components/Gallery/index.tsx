@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, type JSX } from "react";
 import { RowsPhotoAlbum } from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -12,19 +12,36 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 
-const Gallery = ({ photos, shouldLoop = false }) => {
-  const [images, setImages] = useState([]);
+type PhotoInput = string | { src: string; width?: number; height?: number; alt?: string };
+
+type GalleryProps = {
+  photos: PhotoInput[];
+  shouldLoop?: boolean;
+};
+
+type ImageData = {
+  src: string;
+  thumbnail?: string;
+  width?: number;
+  height?: number;
+  isVideo?: boolean;
+  alt?: string;
+  videoSrc?: string;
+};
+
+const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
+  const [images, setImages] = useState<ImageData[]>([]);
   const [index, setIndex] = useState(-1);
-  const [videoStates, setVideoStates] = useState({}); // Track playing state for each video by index
-  const playerRefs = useRef({}); // Store refs for each video player
+  const [videoStates, setVideoStates] = useState<Record<number, boolean>>({}); // Track playing state for each video by index
+  const playerRefs = useRef<Record<number, React.RefObject<any>>>({}); // Store refs for each video player
 
   // Helper function to check if file is a video
-  const isVideo = (src) => {
+  const isVideo = (src: string): boolean => {
     return /\.(mp4|webm|ogg|avi|mov|wmv|flv|mkv)$/i.test(src);
   };
 
   // Helper function to generate video thumbnail with play button overlay
-  const generateVideoThumbnail = (videoSrc) => {
+  const generateVideoThumbnail = (videoSrc: string): Promise<ImageData> => {
     return new Promise((resolve) => {
       const video = document.createElement("video");
       video.crossOrigin = "anonymous";
@@ -39,6 +56,16 @@ const Gallery = ({ photos, shouldLoop = false }) => {
       video.onseeked = () => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
+        
+        if (!ctx) {
+            resolve({
+                src: videoSrc,
+                width: video.videoWidth,
+                height: video.videoHeight,
+                isVideo: true,
+            });
+            return;
+        }
 
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
@@ -63,6 +90,16 @@ const Gallery = ({ photos, shouldLoop = false }) => {
         // Fallback: create a placeholder thumbnail with play button
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
+        if (!ctx) {
+            resolve({
+                src: videoSrc,
+                width: 400,
+                height: 300,
+                isVideo: true,
+            });
+            return;
+        }
+
         canvas.width = 400;
         canvas.height = 300;
 
@@ -87,7 +124,7 @@ const Gallery = ({ photos, shouldLoop = false }) => {
   };
 
   // Helper function to draw play button on canvas
-  const drawPlayButton = (ctx, width, height) => {
+  const drawPlayButton = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
     const centerX = width / 2;
     const centerY = height / 2;
     const buttonSize = Math.min(width, height) * 0.15; // 15% of the smaller dimension
@@ -118,7 +155,7 @@ const Gallery = ({ photos, shouldLoop = false }) => {
   };
 
   // Helper function to load image dimensions
-  const loadImageDimensions = (src) => {
+  const loadImageDimensions = (src: string): Promise<ImageData> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = src;
@@ -147,11 +184,11 @@ const Gallery = ({ photos, shouldLoop = false }) => {
         const src = typeof obj === "string" ? obj : obj.src;
 
         // If dimensions are already provided, use them
-        if (obj.width && obj.height) {
+        if (typeof obj !== "string" && obj.width && obj.height) {
           return {
             ...obj,
             isVideo: isVideo(src),
-          };
+          } as ImageData;
         }
 
         // Check if it's a video
@@ -166,15 +203,15 @@ const Gallery = ({ photos, shouldLoop = false }) => {
   }, [photos]);
 
   // Custom slide component for videos
-  const renderVideoSlide = ({ slide, rect }) => {
-    if (!slide.isVideo) return null;
+  const renderVideoSlide = ({ slide }: { slide: any }) => {
+    if (!slide.isVideo) return undefined;
 
     // Find the index of this slide in the images array
     const slideIndex = images.findIndex(
       (img) => img.src === slide.videoSrc || img.thumbnail === slide.src
     );
 
-    if (slideIndex === -1) return null;
+    if (slideIndex === -1) return undefined;
 
     // Create or get ref for this video
     if (!playerRefs.current[slideIndex]) {
@@ -222,19 +259,19 @@ const Gallery = ({ photos, shouldLoop = false }) => {
                 preload: "metadata",
               },
             },
-          }}
+          } as any}
         />
       </div>
     );
   };
 
   // Handle slide change
-  const handleSlideChange = (newIndex) => {
+  const handleSlideChange = (newIndex: number) => {
     // Stop all currently playing videos
     stopAllVideos();
 
     // Create new video states object
-    const newVideoStates = {};
+    const newVideoStates: Record<number, boolean> = {};
 
     // If the new slide is a video, set it to play
     if (images[newIndex] && images[newIndex].isVideo) {
@@ -247,11 +284,12 @@ const Gallery = ({ photos, shouldLoop = false }) => {
 
   // Helper method to stop all videos
   const stopAllVideos = () => {
-    Object.keys(playerRefs.current).forEach((index) => {
+    Object.keys(playerRefs.current).forEach((idxStr) => {
+      const index = parseInt(idxStr, 10);
       const playerRef = playerRefs.current[index];
       if (playerRef && playerRef.current) {
         try {
-          const internalPlayer = playerRef.current.getInternalPlayer();
+          const internalPlayer = playerRef.current.getInternalPlayer() as any;
           if (internalPlayer && typeof internalPlayer.pause === "function") {
             internalPlayer.pause();
           }
@@ -276,15 +314,18 @@ const Gallery = ({ photos, shouldLoop = false }) => {
     videoSrc: img.isVideo ? img.src : undefined,
   }));
 
+  // Map to format that RowsPhotoAlbum expects
+  const mappedPhotos = images.map((img) => ({
+    src: img.thumbnail || img.src,
+    width: img.width || 400,
+    height: img.height || 300,
+    alt: img.alt || "",
+  }));
+
   return (
     <>
       <RowsPhotoAlbum
-        photos={images.map((img) => ({
-          src: img.thumbnail || img.src,
-          width: img.width,
-          height: img.height,
-          alt: img.alt || "",
-        }))}
+        photos={mappedPhotos}
         targetRowHeight={250}
         onClick={({ index }) => setIndex(index)}
         padding={2}
@@ -299,7 +340,7 @@ const Gallery = ({ photos, shouldLoop = false }) => {
         // enable optional lightbox plugins
         plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
         render={{
-          slide: renderVideoSlide,
+          slide: renderVideoSlide as any,
         }}
         on={{
           view: ({ index: newIndex }) => handleSlideChange(newIndex),

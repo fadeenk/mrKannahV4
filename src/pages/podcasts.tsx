@@ -9,7 +9,7 @@ export default function PodcastPage() {
   const [filter, setFilter] = useState('all'); // all, active, dropped
   const [sortConfig, setSortConfig] = useState({ key: 'yearAdded', direction: 'desc' });
 
-  const handleSort = (key) => {
+  const handleSort = (key: string) => {
     let direction = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
       direction = 'desc';
@@ -17,7 +17,7 @@ export default function PodcastPage() {
     setSortConfig({ key, direction });
   };
 
-  const getSortValue = (podcast, key) => {
+  const getSortValue = (podcast: any, key: string) => {
       if (key === 'yearAdded') {
           if (podcast.yearAdded === 'Pre-2019') return 2018;
           return parseInt(podcast.yearAdded) || 0;
@@ -43,7 +43,7 @@ export default function PodcastPage() {
         return 0;
     });
 
-  const renderSortIcon = (key) => {
+  const renderSortIcon = (key: string) => {
       if (sortConfig.key !== key) return <span style={{opacity: 0.3}}>⇅</span>;
       return sortConfig.direction === 'asc' ? '↑' : '↓';
   };

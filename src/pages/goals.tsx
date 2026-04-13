@@ -204,15 +204,15 @@ export default function Home(): JSX.Element {
         <Tabs className="tabs--block">
           {Object.keys(goals).map((category) => (
             <TabItem value={category} label={category}>
-              {goals[category]
-                .sort((a, b) => {
+              {goals[category as GoalType]
+                .sort((a: Goal, b: Goal) => {
                   if (a.completed === undefined && b.completed === undefined)
                     return 0;
                   else if (b.completed === undefined) return 1;
                   else if (a.completed === undefined) return -1;
                   else return b.completed - a.completed;
                 })
-                .map((goal) => (
+                .map((goal: Goal) => (
                   <div className="card" style={{ margin: "10px auto" }}>
                     <div
                       className="card__header"

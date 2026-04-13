@@ -5,7 +5,7 @@ export default function CategoryList() {
   const sideBar = useDocsSidebar();
   return (
     <DocCardList
-      items={sideBar.items.filter((item) => item.type === "category")}
+      items={sideBar?.items.filter((item) => item.type === "category") ?? []}
     />
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, type JSX } from "react";
 import Layout from "@theme/Layout";
 import styles from "./showcase.module.css";
-import Gallery from "@site/src/components/Gallery/Gallery";
+import Gallery from "@site/src/components/Gallery";
 import aramic from "@site/docs/Yearly/2023/images/november20239.jpg";
 import techAlley from "@site/docs/Yearly/2022/images/techAlley.png";
 import soundPatent from "@site/docs/Yearly/2024/images/SoundPatent.jpg";

@@ -3,7 +3,7 @@ import Layout from "@theme/Layout";
 import styles from "./house-for-rent.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faFilePen } from "@fortawesome/free-solid-svg-icons";
-import Gallery from "@site/src/components/Gallery/Gallery";
+import Gallery from "@site/src/components/Gallery";
 
 import type { JSX } from "react";
 

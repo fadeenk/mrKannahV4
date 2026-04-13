@@ -2,7 +2,7 @@ import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import styles from "./showcase.module.css";
-import Gallery from "@site/src/components/Gallery/Gallery";
+import Gallery from "@site/src/components/Gallery";
 
 import type { JSX } from "react";
 

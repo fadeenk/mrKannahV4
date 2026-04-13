@@ -108,7 +108,7 @@ function ServiceCard({ service, index }: { service: Partial<(typeof services)[0]
       {service?.icon && <div className="service-icon">{service.icon}</div>}
       <h3 className="service-title">{service.title}</h3>
       <ul className="service-bullets">
-        {service.bullets.map((bullet, i) => (
+        {service.bullets?.map((bullet, i) => (
           <li key={i}>{bullet}</li>
         ))}
       </ul>

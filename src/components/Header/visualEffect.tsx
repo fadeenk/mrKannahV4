@@ -63,7 +63,7 @@ export default function ParticlesBackground() {
     const linksColor = getComputedStyle(document.body)
       .getPropertyValue("--particles-links-color")
       .trim();
-    config.particles.color.value = color;
+    config.particles.color!.value = color;
     config.particles.links.color = linksColor;
 
     return config;
