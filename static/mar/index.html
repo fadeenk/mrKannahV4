@@ -262,6 +262,9 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+    }
+
+    .hero-actions .btn {
       opacity: 0;
     }
 
@@ -983,7 +986,7 @@
     tl.add('.top-bar', { opacity: [0, 1], translateY: [-20, 0], duration: 1200 })
       .add('.hero-title', { opacity: [0, 1], translateY: [40, 0], duration: 1200 }, '-=800')
       .add('.hero-subtitle', { opacity: [0, 1], translateY: [30, 0], duration: 1000 }, '-=1000')
-      .add('.hero-actions .btn', { opacity: [0, 1], translateY: [20, 0], delay: stagger(150), duration: 1000 }, '-=800')
+      .add('.hero-actions .btn', { opacity: [0, 1], translateY: [20, 0], delay: stagger(150), duration: 1000 }, '-=1000')
       .add('.hero-scroll', { opacity: [0, 1], duration: 1000 }, '-=600');
 
     // 2. Scroll Reveal Observer Setup
@@ -1006,7 +1009,8 @@
 
     // Hide elements initially to prevent FOUC before intersection
     staggerGroups.forEach(group => {
-      document.querySelectorAll(`${group.parent} ${group.target}`).forEach(el => el.style.opacity = '0');
+      const selectors = group.target.split(',').map(t => `${group.parent} ${t.trim()}`).join(', ');
+      document.querySelectorAll(selectors).forEach(el => el.style.opacity = '0');
     });
     standalones.forEach(item => {
       document.querySelectorAll(item.target).forEach(el => el.style.opacity = '0');
