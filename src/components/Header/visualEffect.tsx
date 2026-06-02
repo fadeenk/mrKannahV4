@@ -1,29 +1,35 @@
-import React, { useState, useEffect, useMemo } from "react";
-import Particles, {
-  IParticlesProps,
-  initParticlesEngine,
-} from "@tsparticles/react";
+import React, { useEffect, useMemo, useState } from "react";
+import Particles, { ParticlesProvider } from "@tsparticles/react";
+import { useColorMode } from "@docusaurus/theme-common";
+import {
+  type Container,
+  type Engine,
+  type ISourceOptions,
+} from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 
+const particlesInit = async (engine: Engine): Promise<void> => {
+  await loadSlim(engine);
+};
+
 export default function ParticlesBackground() {
-  const [init, setInit] = useState(false);
+  const { colorMode } = useColorMode();
+  const [particleColor, setParticleColor] = useState<string>("");
+  const [linksColor, setLinksColor] = useState<string>("");
+
+  const particlesLoaded = async (container?: Container): Promise<void> => {
+    void container;
+  };
 
   useEffect(() => {
-    initParticlesEngine((engine) => loadSlim(engine)).then(() => setInit(true));
-  }, []);
+    if (typeof window === "undefined") return;
+    const style = getComputedStyle(document.body);
+    setParticleColor(style.getPropertyValue("--particles-color").trim());
+    setLinksColor(style.getPropertyValue("--particles-links-color").trim());
+  }, [colorMode]);
 
-  const options = useMemo(() => {
-    const config: IParticlesProps["options"] & {
-      particles: {
-        links: {
-          enable: boolean;
-          distance: number;
-          opacity: number;
-          color: string;
-          width: number;
-        };
-      };
-    } = {
+  const options: ISourceOptions = useMemo(() => {
+    return {
       detectRetina: false,
       fullScreen: { enable: false, zIndex: -5 },
       particles: {
@@ -36,7 +42,14 @@ export default function ParticlesBackground() {
         shape: {
           type: ["circle", "triangle", "polygon", "square"],
         },
-        color: {},
+        paint: {
+          fill: {
+            enable: true,
+            color: {
+              value: particleColor,
+            },
+          },
+        },
         opacity: {
           value: 0.5,
         },
@@ -50,29 +63,24 @@ export default function ParticlesBackground() {
         links: {
           enable: true,
           distance: 150,
-          color: "set in code",
-          opacity: 0.4,
+          color: linksColor,
+          opacity: 0.8,
           width: 1,
         },
         collisions: { enable: true },
       },
     };
-    const color = getComputedStyle(document.body)
-      .getPropertyValue("--particles-color")
-      .trim();
-    const linksColor = getComputedStyle(document.body)
-      .getPropertyValue("--particles-links-color")
-      .trim();
-    config.particles.color!.value = color;
-    config.particles.links.color = linksColor;
+  }, [linksColor, particleColor]);
 
-    return config;
-  }, []);
-
-  if (init) {
-    return (
-      <Particles id="tsparticles" className="vistualEffect" options={options} />
-    );
-  }
-  return null;
+  return (
+    <ParticlesProvider init={particlesInit}>
+      <Particles
+        key={colorMode}
+        id="tsparticles"
+        className="vistualEffect"
+        particlesLoaded={particlesLoaded}
+        options={options}
+      />
+    </ParticlesProvider>
+  );
 }
