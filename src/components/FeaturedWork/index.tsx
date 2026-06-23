@@ -68,33 +68,34 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
           >
             {work.title}
           </h3>
-          <span
-            style={{
-              fontSize: "0.8rem",
-              background: "var(--ifm-color-primary)",
-              padding: "0.2rem 0.5rem",
-              borderRadius: "4px",
-              fontWeight: "bold",
-              color: "var(--ifm-font-color-base-inverse)",
-            }}
-          >
-            {work.category}
-          </span>
-          {work.category === "Personal Project" && (
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <span
               style={{
                 fontSize: "0.8rem",
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                background: "var(--ifm-color-primary)",
                 padding: "0.2rem 0.5rem",
                 borderRadius: "4px",
                 fontWeight: "bold",
-                color: "#fff",
-                marginLeft: "0.5rem",
+                color: "var(--ifm-font-color-base-inverse)",
               }}
             >
-              ✦ Built with AI
+              {work.category}
             </span>
-          )}
+            {work.category === "Personal Project" && (
+              <span
+                style={{
+                  fontSize: "0.8rem",
+                  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  padding: "0.2rem 0.5rem",
+                  borderRadius: "4px",
+                  fontWeight: "bold",
+                  color: "#fff",
+                }}
+              >
+                ✦ Built with AI
+              </span>
+            )}
+          </div>
         </div>
         <p
           style={{
