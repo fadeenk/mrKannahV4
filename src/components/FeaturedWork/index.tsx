@@ -69,23 +69,12 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
             {work.title}
           </h3>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <span
-              style={{
-                fontSize: "0.8rem",
-                background: "var(--ifm-color-primary)",
-                padding: "0.2rem 0.5rem",
-                borderRadius: "4px",
-                fontWeight: "bold",
-                color: "var(--ifm-font-color-base-inverse)",
-              }}
-            >
-              {work.category}
-            </span>
-            {work.category === "Personal Project" && (
+            {work.title.includes("iFolio") ? (
               <span
                 style={{
                   fontSize: "0.8rem",
-                  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  background:
+                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                   padding: "0.2rem 0.5rem",
                   borderRadius: "4px",
                   fontWeight: "bold",
@@ -93,6 +82,19 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
                 }}
               >
                 ✦ Built with AI
+              </span>
+            ) : (
+              <span
+                style={{
+                  fontSize: "0.8rem",
+                  background: "var(--ifm-color-primary)",
+                  padding: "0.2rem 0.5rem",
+                  borderRadius: "4px",
+                  fontWeight: "bold",
+                  color: "var(--ifm-font-color-base-inverse)",
+                }}
+              >
+                {work.category}
               </span>
             )}
           </div>
