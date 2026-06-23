@@ -32,6 +32,12 @@ const clientProjects: App[] = [
 
 const alive: App[] = [
   {
+    title: "iFolio — Investment Portfolio Tracker",
+    link: "/showcase/iFolio",
+    description:
+      "A privacy-first, offline-capable personal investment portfolio tracker. All financial data is encrypted locally (AES-256-GCM) — no portfolio data ever touches a server. Built entirely through AI agent pair programming across 224 sessions.",
+  },
+  {
     title: "My Personal Private Cloud Services V2",
     description:
       "A revamped and improved personal cloud server! This time with much better experince and features. A new home dashboard with more features and a better UI, and better networking, security, isolation and even intrution detection systems. My image hosting changed to a better service (Immich), my multimedia/streaming services improved to have additional features and have much better features. I added a few more services such as online file storage, services analytics and reporting. Private remote desktop service for techinical support. and many more!",
