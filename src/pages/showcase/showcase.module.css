@@ -230,6 +230,25 @@
   }
 }
 
+.ifolioStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .ifolioStatsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .ifolioStatsGrid {
+    gap: 0.75rem;
+  }
+}
+
 @media (max-width: 480px) {
   .websiteCard {
     max-width: 100%;

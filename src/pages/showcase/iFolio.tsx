@@ -1,6 +1,7 @@
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
 import Gallery from "@site/src/components/Gallery";
+import styles from "@site/src/pages/showcase/showcase.module.css";
 
 import type { JSX } from "react";
 
@@ -35,15 +36,15 @@ export default function IFolio(): JSX.Element {
           <Gallery photos={["/img/showcase/ifolio.png"]} />
         </div> */}
 
-        <div style={{ display: "grid", gap: "2rem", marginBottom: "2rem" }}>
+        <div>
           <section>
             <Heading as="h2">Project Overview</Heading>
             <p>
               A privacy-first, offline-capable personal investment portfolio
               tracker. All financial data is encrypted locally in the browser
               using AES-256-GCM — no portfolio data ever touches a server. A
-              lightweight Cloudflare Worker acts solely as a CORS proxy for Yahoo
-              Finance market data with zero knowledge of user data. No
+              lightweight Cloudflare Worker acts solely as a CORS proxy for
+              Yahoo Finance market data with zero knowledge of user data. No
               authentication, no backend database, no recurring cost.
             </p>
           </section>
@@ -59,17 +60,17 @@ export default function IFolio(): JSX.Element {
               </li>
               <li>
                 <strong>Dashboard & Charts</strong> — Summary metric cards
-                (total value, daily G/L, unrealized G/L, realized G/L YTD, income
-                YTD, cash). Portfolio value line chart, asset allocation donut,
-                monthly income bar chart. Account filter pills + time range
-                selector (1D-All). Charts are presentational-only (data via
-                props).
+                (total value, daily G/L, unrealized G/L, realized G/L YTD,
+                income YTD, cash). Portfolio value line chart, asset allocation
+                donut, monthly income bar chart. Account filter pills + time
+                range selector (1D-All). Charts are presentational-only (data
+                via props).
               </li>
               <li>
-                <strong>Positions & Tax Lots</strong> — Open positions table with
-                expandable per-lot breakdown. Tax lot table with acquired date,
-                cost basis, unrealized G/L, wash sale flag. Cost basis methods:
-                FIFO, LIFO, Specific ID, Average Cost.
+                <strong>Positions & Tax Lots</strong> — Open positions table
+                with expandable per-lot breakdown. Tax lot table with acquired
+                date, cost basis, unrealized G/L, wash sale flag. Cost basis
+                methods: FIFO, LIFO, Specific ID, Average Cost.
               </li>
               <li>
                 <strong>Transaction Management</strong> — Full CRUD with type
@@ -83,8 +84,8 @@ export default function IFolio(): JSX.Element {
               </li>
               <li>
                 <strong>Google Sheets Sync</strong> — OAuth 2.0 via Google
-                Identity Services. Auto-writes account balances to a configurable
-                Google Sheet.
+                Identity Services. Auto-writes account balances to a
+                configurable Google Sheet.
               </li>
               <li>
                 <strong>Income View</strong> — Year-over-year table, income by
@@ -107,8 +108,15 @@ export default function IFolio(): JSX.Element {
 
           <section>
             <Heading as="h2">Technical Architecture</Heading>
-            <pre style={{ background: "var(--ifm-color-emphasis-100)", padding: "1rem", borderRadius: "8px", overflow: "auto" }}>
-{`Pages → Pinia Stores → Chart Components (presentational only)
+            <pre
+              style={{
+                background: "var(--ifm-color-emphasis-100)",
+                padding: "1rem",
+                borderRadius: "8px",
+                overflow: "auto",
+              }}
+            >
+              {`Pages → Pinia Stores → Chart Components (presentational only)
                 ↓
          Ledger Engine (pure function: recalculateDerivedDataFromTransactions())
                 ↓
@@ -145,7 +153,8 @@ export default function IFolio(): JSX.Element {
             <p>
               <strong>Phase 4 — Polish & Launch:</strong> PWA installable with
               Service Worker, CI/CD pipelines (GitHub Actions → lint → typecheck
-              → test → deploy), Google Sheets sync, responsive design, dark mode.
+              → test → deploy), Google Sheets sync, responsive design, dark
+              mode.
             </p>
           </section>
 
@@ -169,7 +178,8 @@ export default function IFolio(): JSX.Element {
                 infrastructure, simplified Worker to transparent proxy.
               </li>
               <li>
-                Zero <code>any</code> type policy — every value typed explicitly,
+                Zero <code>any</code> type policy — every value typed
+                explicitly,
                 <code>unknown</code> + narrowing enforced in CI.
               </li>
             </ol>
@@ -196,84 +206,182 @@ export default function IFolio(): JSX.Element {
               As the codebase matured, the development workflow scaled to
               multiple AI agents working concurrently — one refactoring the
               ledger engine while another built chart components, a third set up
-              CI/CD pipelines, all coordinated through clear interfaces and typed
-              contracts. What started as guided iteration became a parallel
-              multi-agent engineering process.
+              CI/CD pipelines, all coordinated through clear interfaces and
+              typed contracts. What started as guided iteration became a
+              parallel multi-agent engineering process.
             </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
-                gap: "1rem",
-                marginTop: "1.5rem",
-              }}
-            >
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+            <div className={styles.ifolioStatsGrid}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     4,043
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     AI Interactions
                   </div>
                 </div>
               </div>
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     224
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     Sessions
                   </div>
                 </div>
               </div>
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     15.4M
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     Input Tokens
                   </div>
                 </div>
               </div>
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     1.69M
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     Output Tokens
                   </div>
                 </div>
               </div>
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     5
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     AI Models
                   </div>
                 </div>
               </div>
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     48
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     Days
                   </div>
                 </div>
               </div>
-              <div className="card" style={{ textAlign: "center", padding: "1.5rem" }}>
+              <div
+                className="card"
+                style={{ textAlign: "center", padding: "1.5rem" }}
+              >
                 <div className="card__body">
-                  <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
+                  <div
+                    style={{
+                      fontSize: "2rem",
+                      fontWeight: "bold",
+                      color: "var(--ifm-color-primary)",
+                    }}
+                  >
                     $0
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
+                  <div
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--ifm-color-emphasis-600)",
+                      overflowWrap: "break-word",
+                    }}
+                  >
                     Total Cost
                   </div>
                 </div>
@@ -281,7 +389,7 @@ export default function IFolio(): JSX.Element {
             </div>
           </section>
 
-          <section>
+          <section style={{ marginTop: "2rem" }}>
             <Heading as="h2">Tech Stack</Heading>
             <div
               style={{
