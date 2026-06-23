@@ -201,7 +201,7 @@ export default function IFolio(): JSX.Element {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))",
                 gap: "1rem",
                 marginTop: "1.5rem",
               }}
@@ -211,7 +211,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     4,043
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     AI Interactions
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     224
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     Sessions
                   </div>
                 </div>
@@ -231,7 +231,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     15.4M
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     Input Tokens
                   </div>
                 </div>
@@ -241,7 +241,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     1.69M
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     Output Tokens
                   </div>
                 </div>
@@ -251,7 +251,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     5
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     AI Models
                   </div>
                 </div>
@@ -261,7 +261,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     48
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     Days
                   </div>
                 </div>
@@ -271,7 +271,7 @@ export default function IFolio(): JSX.Element {
                   <div style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--ifm-color-primary)" }}>
                     $0
                   </div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)" }}>
+                  <div style={{ fontSize: "0.85rem", color: "var(--ifm-color-emphasis-600)", overflowWrap: "break-word" }}>
                     Total Cost
                   </div>
                 </div>
