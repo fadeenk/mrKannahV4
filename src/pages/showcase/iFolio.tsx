@@ -181,6 +181,9 @@ export default function IFolio(): JSX.Element {
               border: "1px solid var(--ifm-color-emphasis-300)",
               borderRadius: "12px",
               padding: "2rem",
+              boxSizing: "border-box",
+              maxWidth: "100%",
+              overflow: "hidden",
             }}
           >
             <Heading as="h2">🤖 AI-Driven Development</Heading>
