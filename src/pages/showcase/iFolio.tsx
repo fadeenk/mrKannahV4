@@ -180,10 +180,9 @@ export default function IFolio(): JSX.Element {
               background: "var(--ifm-color-emphasis-100)",
               border: "1px solid var(--ifm-color-emphasis-300)",
               borderRadius: "12px",
-              padding: "2rem",
+              padding: "1rem",
               boxSizing: "border-box",
               maxWidth: "100%",
-              overflow: "hidden",
             }}
           >
             <Heading as="h2">🤖 AI-Driven Development</Heading>
@@ -204,7 +203,7 @@ export default function IFolio(): JSX.Element {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
                 gap: "1rem",
                 marginTop: "1.5rem",
               }}
