@@ -32,9 +32,18 @@ export default function IFolio(): JSX.Element {
           </a>
         </div>
 
-        {/* <div style={{ marginBottom: "2rem" }}>
-          <Gallery photos={["/img/showcase/ifolio.png"]} />
-        </div> */}
+        <div style={{ marginBottom: "2rem" }}>
+          <Gallery
+            photos={[
+              "/img/showcase/ifolio-dashboard.png",
+              "/img/showcase/ifolio-positions.png",
+              "/img/showcase/ifolio-transactions.png",
+              "/img/showcase/ifolio-income.png",
+              "/img/showcase/ifolio-settings.png",
+              "/img/showcase/ifolio-landing.png",
+            ]}
+          />
+        </div>
 
         <div>
           <section>

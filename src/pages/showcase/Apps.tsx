@@ -36,6 +36,7 @@ const alive: App[] = [
     link: "/showcase/iFolio",
     description:
       "A privacy-first, offline-capable personal investment portfolio tracker. All financial data is encrypted locally (AES-256-GCM) — no portfolio data ever touches a server. Built entirely through AI agent pair programming across 224 sessions.",
+    thumbnail: "/img/showcase/ifolio-dashboard.png",
   },
   {
     title: "My Personal Private Cloud Services V2",
