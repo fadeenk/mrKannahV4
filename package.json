@@ -24,7 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.3.1",
     "@mdx-js/react": "^3.1.1",
-    "@tsparticles/engine": "^4.2.1",
+    "@tsparticles/engine": "^4.3.0",
     "@tsparticles/react": "^4.2.1",
     "@tsparticles/slim": "^4.2.1",
     "clsx": "^2.1.1",
