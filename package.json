@@ -31,7 +31,7 @@
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-photo-album": "^3.6.0",
+    "react-photo-album": "^3.6.1",
     "react-player": "^3.4.0",
     "yet-another-react-lightbox": "^3.32.1"
   },
