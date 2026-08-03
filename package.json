@@ -33,7 +33,7 @@
     "react-dom": "^19.2.7",
     "react-photo-album": "^3.6.0",
     "react-player": "^3.4.0",
-    "yet-another-react-lightbox": "^3.32.1"
+    "yet-another-react-lightbox": "^3.32.2"
   },
   "devDependencies": {
     "@docusaurus/faster": "3.10.2",
