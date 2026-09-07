@@ -1,8 +1,8 @@
 import React, { useState, type JSX } from "react";
 import Heading from "@theme/Heading";
 
-const url =
-  "https://8rwjvhixyb.execute-api.us-west-2.amazonaws.com/development/sendMail";
+const WORKER_URL =
+  "https://mrkannah-contact-worker.fadeekannah.workers.dev";
 const myEmail = "fadeekannah@gmail.com";
 
 export default function Contact(): JSX.Element {
@@ -11,28 +11,46 @@ export default function Contact(): JSX.Element {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const isFormValid = Boolean(name.trim() && email.trim() && message.trim());
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setIsSubmitting(true);
     e.preventDefault();
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        to: [myEmail],
-        from: myEmail,
-        body: `New message from ${name}, \n${message}\n`,
-        replyTo: email,
-        subject: "New contact form submission on my website",
-      }),
-    });
-    if (response.ok) {
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok && !result.error) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(
+          result.error || "Failed to send message. Please try again or email me directly."
+        );
+      }
+    } catch (err) {
+      setErrorMessage(
+        "Network error. Please check your connection or email me directly."
+      );
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
     }
   };
 
@@ -47,10 +65,6 @@ export default function Contact(): JSX.Element {
         </p>
       </section>
     );
-  }
-
-  if (email && name && message && disabled && !isSubmitting) {
-    setDisabled(false);
   }
   return (
     <div id="contact" className="hero">
@@ -69,51 +83,64 @@ export default function Contact(): JSX.Element {
         </a>
         .
       </p>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <label>
-          Name
-          <input
-            className="passwordProtectedDoc"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <label>
-          Email
-          <input
-            className="passwordProtectedDoc"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Message
-          <textarea
-            style={{ height: "8rem" }}
-            className="passwordProtectedDoc"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </label>
-        <button
-          style={{ margin: "20px" }}
-          className="button button--lg button--primary"
-          type="submit"
-          disabled={disabled || isSubmitting}
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          Send
-        </button>
-      </form>
-    </section>
+          {errorMessage && (
+            <div
+              className="alert alert--danger"
+              role="alert"
+              style={{ marginBottom: "1rem", maxWidth: "400px", width: "100%" }}
+            >
+              {errorMessage}{" "}
+              <a href={`mailto:${myEmail}`}>{myEmail}</a>
+            </div>
+          )}
+          <label>
+            Name
+            <input
+              className="passwordProtectedDoc"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Email
+            <input
+              className="passwordProtectedDoc"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            Message
+            <textarea
+              style={{ height: "8rem" }}
+              className="passwordProtectedDoc"
+              required
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </label>
+          <button
+            style={{ margin: "20px" }}
+            className="button button--lg button--primary"
+            type="submit"
+            disabled={!isFormValid || isSubmitting}
+          >
+            {isSubmitting ? "Sending..." : "Send"}
+          </button>
+        </form>
+      </section>
     </div>
   );
 }
