@@ -2,7 +2,7 @@ import React, { useState, type JSX } from "react";
 import Heading from "@theme/Heading";
 
 const WORKER_URL =
-  "https://mrkannah-contact-worker.fadeekannah.workers.dev";
+  "https://mrkannah-contact-worker.mrkannah.workers.dev";
 const myEmail = "fadeekannah@gmail.com";
 
 export default function Contact(): JSX.Element {

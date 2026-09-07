@@ -14,7 +14,7 @@ Cloudflare Worker service that securely handles contact form submissions from [m
   - `https://fadeenk.github.io`
   - `http://localhost:3000`
   - `http://localhost:3001`
-- **Production Endpoint**: `https://mrkannah-contact-worker.fadeekannah.workers.dev`
+- **Production Endpoint**: `https://mrkannah-contact-worker.mrkannah.workers.dev`
 
 ---
 
@@ -98,7 +98,7 @@ npx wrangler deploy
 ```
 
 Once deployed, your worker is accessible at:
-`https://mrkannah-contact-worker.fadeekannah.workers.dev`
+`https://mrkannah-contact-worker.mrkannah.workers.dev`
 
 ---
 
@@ -124,7 +124,7 @@ Expected Response:
 ### Test Production Worker via `curl`
 
 ```bash
-curl -X POST https://mrkannah-contact-worker.fadeekannah.workers.dev \
+curl -X POST https://mrkannah-contact-worker.mrkannah.workers.dev \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test Submitter",
@@ -141,7 +141,7 @@ Expected Response:
 ### Test CORS Preflight (`OPTIONS`)
 
 ```bash
-curl -i -X OPTIONS https://mrkannah-contact-worker.fadeekannah.workers.dev \
+curl -i -X OPTIONS https://mrkannah-contact-worker.mrkannah.workers.dev \
   -H "Origin: https://mrkannah.com" \
   -H "Access-Control-Request-Method: POST" \
   -H "Access-Control-Request-Headers: Content-Type, Accept"
@@ -158,7 +158,7 @@ Expected Response:
 Send an incomplete payload to verify input validation:
 
 ```bash
-curl -i -X POST https://mrkannah-contact-worker.fadeekannah.workers.dev \
+curl -i -X POST https://mrkannah-contact-worker.mrkannah.workers.dev \
   -H "Content-Type: application/json" \
   -d '{"name": "Missing Fields"}'
 ```
