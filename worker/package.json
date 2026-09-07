@@ -8,11 +8,11 @@
     "deploy": "wrangler deploy"
   },
   "dependencies": {
-    "resend": "^4.1.2"
+    "resend": "^6.26.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250224.0",
-    "typescript": "^5.7.3",
-    "wrangler": "^3.111.0"
+    "@cloudflare/workers-types": "^5.20260907.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.129.1"
   }
 }
