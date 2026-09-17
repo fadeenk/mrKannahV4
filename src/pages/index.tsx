@@ -102,7 +102,13 @@ const secondaryServices = [
   },
 ];
 
-function ServiceCard({ service, index }: { service: Partial<(typeof services)[0]>; index: number }): JSX.Element {
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: Partial<(typeof services)[0]>;
+  index: number;
+}): JSX.Element {
   return (
     <div className="service-card">
       {service?.icon && <div className="service-icon">{service.icon}</div>}
@@ -161,33 +167,32 @@ function EngagementSection(): JSX.Element {
   return (
     <div className="section">
       <div className="container">
+        <div className="section__header">
+          <Heading as="h2" className="hero__title">
+            Engagement Models
+          </Heading>
+          <p className="hero__subtitle">
+            Flexible ways to work together based on your needs and stage.
+          </p>
+        </div>
 
-      <div className="section__header">
-        <Heading as="h2" className="hero__title">
-          Engagement Models
-        </Heading>
-        <p className="hero__subtitle">
-          Flexible ways to work together based on your needs and stage.
-        </p>
-      </div>
+        <div className="engagement-grid">
+          {engagementModels.map((model, index) => (
+            <EngagementCard key={index} model={model} />
+          ))}
+        </div>
 
-      <div className="engagement-grid">
-        {engagementModels.map((model, index) => (
-          <EngagementCard key={index} model={model} />
-        ))}
+        <div className="text--center margin-top--lg">
+          <a
+            href="https://cal.com/kannah/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--primary button--lg"
+          >
+            Not sure which model is right for you? Let's talk
+          </a>
+        </div>
       </div>
-
-      <div className="text--center margin-top--lg">
-        <a
-          href="https://cal.com/kannah/30min"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="button button--primary button--lg"
-        >
-          Not sure which model is right for you? Let's talk
-        </a>
-      </div>
-    </div>
     </div>
   );
 }
@@ -206,7 +211,20 @@ function About() {
           cloud architecture, I've guided teams from concept to market success
           across healthcare, e-commerce, and enterprise sectors.
         </p>
-        <div className="text--center margin-top--lg">
+        <p className="hero__subtitle">
+          I help teams turn AI initiatives into reliable production systems
+          through targeted assessments, architecture guidance, and embedded
+          engineering.
+        </p>
+        <div
+          className="text--center margin-top--lg"
+          style={{
+            display: "flex",
+            gap: "0.75rem",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
           <a
             href="https://cal.com/kannah/30min"
             target="_blank"
@@ -214,6 +232,9 @@ function About() {
             className="button button--primary"
           >
             Book Free Consultation
+          </a>
+          <a href="/consulting" className="button button--secondary">
+            See consulting engagements
           </a>
         </div>
       </div>

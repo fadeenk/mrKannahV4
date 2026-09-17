@@ -27,7 +27,8 @@ export default function Header() {
           I Help You Launch Faster, Scale Smarter.
         </h1>
         <p className="hero-subheadline">
-          From MVP to enterprise — get senior technical leadership without the full-time cost.
+          From MVP to enterprise — plus AI delivery consulting that helps SaaS
+          engineering teams ship AI into production without breaking reliability.
         </p>
         <div className="hero-ctas">
           <a href="https://cal.com/kannah/30min" target="_blank" rel="noopener noreferrer" className="ctaButton primary">
