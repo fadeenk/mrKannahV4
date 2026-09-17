@@ -9,6 +9,7 @@ import {
   faQrcode,
   faUserPlus,
   faArrowLeft,
+  faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
@@ -66,7 +67,10 @@ export default function Card(): JSX.Element {
                 </div>
                 
                 <h2 className={styles.name}>Fadee Kannah</h2>
-                <p className={styles.title}>Chief Software Architect</p>
+                <p className={styles.title}>AI Delivery Partner for Vertical SaaS</p>
+                <p className={styles.title} style={{ fontSize: "0.85rem", marginTop: "0.25rem" }}>
+                  Ship AI to prod without breaking reliability
+                </p>
               </div>
 
               <div className={styles.linksSection}>
@@ -125,6 +129,17 @@ export default function Card(): JSX.Element {
                     <span>QR Code</span>
                     <span className={styles.tooltip}>Show QR Code</span>
                   </button>
+                  <a
+                    href="https://cal.com/kannah/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.actionButton}
+                    aria-label="Book a fit call"
+                  >
+                    <FontAwesomeIcon icon={faCalendarCheck} />
+                    <span>Book fit call</span>
+                    <span className={styles.tooltip}>Book a 30-min fit call</span>
+                  </a>
                 </div>
               </div>
             </div>
