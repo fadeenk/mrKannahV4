@@ -11,7 +11,7 @@ import type { JSX } from "react";
 
 const CAL_URL = "https://cal.com/kannah/30min";
 
-type CtaVariant = "assessment" | "retainer" | "close";
+type CtaVariant = "assessment" | "project" | "retainer" | "close";
 
 function calUrl(variant: CtaVariant): string {
   return `${CAL_URL}?variant=${variant}`;
@@ -26,12 +26,12 @@ const painGroups = [
   {
     title: "Delivery at risk",
     body: "Delivery bottlenecks, legacy constraints; shipping AI destabilizes production",
-    route: "→ Retainer",
+    route: "→ Project",
   },
   {
     title: "Flat growth",
     body: "NRR (net revenue retention) flat; need revenue beyond subscriptions",
-    route: "→ Either",
+    route: "→ Retainer",
   },
 ];
 
@@ -42,7 +42,7 @@ const proofs = [
   },
   {
     title: "Regulated workflow SaaS, legacy monolith",
-    text: "Roadmap stalled on reliability risk. Embedded delivery owned one workstream 12h/week: CI + test coverage first, then AI-assisted triage. Lead time down, no prod destabilization.",
+    text: "Roadmap stalled on reliability risk. Embedded delivery owned one workstream: CI + test coverage first, then AI-assisted triage. Lead time down, no prod destabilization.",
   },
 ];
 
@@ -92,16 +92,16 @@ function CtaButtons({
 
 function PainGroups(): JSX.Element {
   return (
-    <section className="section">
+    <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
       <div className="container">
         <Heading as="h2">Sound familiar?</Heading>
         <div className="services-grid">
           {painGroups.map((group) => (
             <div key={group.title} className="card--elevated">
               <h3>{group.title}</h3>
-              <p style={{ marginBottom: "0.5rem" }}>{group.body}</p>
+              <p style={{ marginBottom: "0.75rem" }}>{group.body}</p>
               <p style={{ marginBottom: 0 }}>
-                <strong>{group.route}</strong>
+                <span className="tag--pill">{group.route}</span>
               </p>
             </div>
           ))}
@@ -115,16 +115,20 @@ function EngagementOffers(): JSX.Element {
   return (
     <section className="section section--alt" id="engagements">
       <div className="container">
-        <Heading as="h2">Two ways to work together</Heading>
-        <p style={{ marginBottom: 0 }}>
-          <strong>Start here if…</strong> stuck pilots that never reach production or you
-          need evidence first → Assessment; delivery at risk with clear scope and urgency →
-          Retainer; flat growth (NRR flat) → either — most start with Assessment.
-        </p>
+        <div className="section__header">
+          <Heading as="h2" style={{ marginBottom: "0.75rem" }}>
+            Three ways to work together
+          </Heading>
+        </div>
         <div className="engagement-grid">
           <div
             className="card--elevated"
-            style={{ borderColor: "var(--ifm-color-primary)", borderWidth: "2px" }}
+            style={{
+              borderColor: "var(--ifm-color-primary)",
+              borderWidth: "2px",
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
             <div className="card__header">
               <p style={{ marginBottom: "0.5rem" }}>
@@ -135,7 +139,7 @@ function EngagementOffers(): JSX.Element {
                 <strong>Fixed-scope · 1–2 weeks</strong>
               </p>
             </div>
-            <div className="card__body">
+            <div className="card__body" style={{ flex: "1 1 auto" }}>
               <p>When you need confidence about the problem or approach first.</p>
               <p style={{ marginBottom: "0.5rem" }}>
                 <strong>You get:</strong> confidence about the problem and approach before a
@@ -156,7 +160,7 @@ function EngagementOffers(): JSX.Element {
                 </p>
               </details>
             </div>
-            <div className="card__footer">
+            <div className="card__footer" style={{ marginTop: "auto", paddingTop: "1rem" }}>
               <CtaButtons
                 variant="assessment"
                 block
@@ -164,14 +168,50 @@ function EngagementOffers(): JSX.Element {
               />
             </div>
           </div>
-          <div className="card--elevated">
+          <div className="card--elevated" style={{ display: "flex", flexDirection: "column" }}>
+            <div className="card__header">
+              <h3>Project-Based AI Delivery</h3>
+              <p>
+                <strong>Fixed-scope · scoped to done</strong>
+              </p>
+            </div>
+            <div className="card__body" style={{ flex: "1 1 auto" }}>
+              <p>When scope and done are definable upfront.</p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You get:</strong> a defined MVP, feature, or overhaul shipped to
+                production with your team.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You need:</strong> definable scope, access to discuss delivery
+                workflow and production risk, and one engineering counterpart.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>Timeline:</strong> defined at scoping, owned workstream to done.
+              </p>
+              <details>
+                <summary>What defines done</summary>
+                <p style={{ marginBottom: 0 }}>
+                  Scope, ownership, and success measures defined in writing; work happens
+                  in your repo with CI.
+                </p>
+              </details>
+            </div>
+            <div className="card__footer" style={{ marginTop: "auto", paddingTop: "1rem" }}>
+              <CtaButtons
+                variant="project"
+                block
+                microcopy="30 min · proposal in 48h · scoped to done"
+              />
+            </div>
+          </div>
+          <div className="card--elevated" style={{ display: "flex", flexDirection: "column" }}>
             <div className="card__header">
               <h3>Embedded AI Delivery Partner</h3>
               <p>
                 <strong>Weekly retainer · 3-month minimum</strong>
               </p>
             </div>
-            <div className="card__body">
+            <div className="card__body" style={{ flex: "1 1 auto" }}>
               <p>When urgency, scope, and ownership are clear.</p>
               <p style={{ marginBottom: "0.5rem" }}>
                 <strong>You get:</strong> an owned workstream shipped to production with your team.
@@ -190,7 +230,7 @@ function EngagementOffers(): JSX.Element {
                 </p>
               </details>
             </div>
-            <div className="card__footer">
+            <div className="card__footer" style={{ marginTop: "auto", paddingTop: "1rem" }}>
               <CtaButtons
                 variant="retainer"
                 block
@@ -206,18 +246,20 @@ function EngagementOffers(): JSX.Element {
 
 function ProofCases(): JSX.Element {
   return (
-    <section className="section">
+    <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
       <div className="container">
         <Heading as="h2">Proof</Heading>
-        {proofs.map((proof) => (
-          <div key={proof.title} className="card--elevated margin-bottom--md">
-            <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
-              {proof.title}
-            </Heading>
-            <p style={{ marginBottom: 0 }}>{proof.text}</p>
-          </div>
-        ))}
-        <p style={{ marginBottom: 0 }}>
+        <div className="secondary-services-grid" style={{ marginTop: "1.5rem" }}>
+          {proofs.map((proof) => (
+            <div key={proof.title} className="card--elevated">
+              <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+                {proof.title}
+              </Heading>
+              <p style={{ marginBottom: 0 }}>{proof.text}</p>
+            </div>
+          ))}
+        </div>
+        <p style={{ marginBottom: 0, marginTop: "1.5rem" }}>
           <a href="/showcase">See more work →</a>
         </p>
       </div>
@@ -228,7 +270,7 @@ function ProofCases(): JSX.Element {
 function FitFaq(): JSX.Element {
   return (
     <>
-      <section className="section section--alt">
+      <section className="section section--alt" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
         <div className="container">
           <Heading as="h2">Fit / non-fit</Heading>
           <p>
@@ -242,25 +284,27 @@ function FitFaq(): JSX.Element {
           </p>
         </div>
       </section>
-      <section className="section">
+      <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
         <div className="container">
           <Heading as="h2">FAQ</Heading>
-          <div className="card--elevated margin-bottom--md">
-            <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
-              Who owns the code?
-            </Heading>
-            <p style={{ marginBottom: 0 }}>
-              You do — I work in your repo, on your cadence, with scope, ownership, and
-              success measures defined in writing.
-            </p>
-          </div>
-          <div className="card--elevated">
-            <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
-              What access do you need?
-            </Heading>
-            <p style={{ marginBottom: 0 }}>
-              Repo, CI, and one engineering counterpart. No reorg required.
-            </p>
+          <div className="secondary-services-grid" style={{ marginTop: "1.5rem" }}>
+            <div className="card--elevated">
+              <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+                Who owns the code?
+              </Heading>
+              <p style={{ marginBottom: 0 }}>
+                You do — I work in your repo, on your cadence, with scope, ownership, and
+                success measures defined in writing.
+              </p>
+            </div>
+            <div className="card--elevated">
+              <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+                What access do you need?
+              </Heading>
+              <p style={{ marginBottom: 0 }}>
+                Repo, CI, and one engineering counterpart. No reorg required.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -302,7 +346,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title="AI Delivery Consulting for SaaS Teams"
-      description="Kannah Consulting helps SaaS engineering teams ship AI into production without sacrificing reliability. Assessment and embedded delivery engagements."
+      description="Kannah Consulting helps SaaS engineering teams ship AI into production without sacrificing reliability. Assessment, project-based, and embedded delivery engagements."
     >
       <Header
         headline="Rewiring to AI-first without breaking production?"

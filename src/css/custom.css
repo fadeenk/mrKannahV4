@@ -86,6 +86,19 @@
   background: var(--ifm-color-primary);
 }
 
+.button--primary:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.button--primary.button--lg,
+.button--primary.button--block {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .button--outline {
   background: white;
   color: var(--ifm-color-primary);
@@ -226,6 +239,13 @@
 
 @media (max-width: 768px) {
   .secondary-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .services-grid,
+  .engagement-grid {
     grid-template-columns: 1fr;
   }
 }
