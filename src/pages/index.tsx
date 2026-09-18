@@ -20,18 +20,24 @@ function calUrl(variant: CtaVariant): string {
 const painGroups = [
   {
     title: "Stuck pilots",
-    body: "AI pilots never reach production; rewiring feels risky",
+    body: "Your AI pilot has lived in staging for weeks. Every rollout plan feels like it risks production.",
+    proof: "Shipped like: sandboxed rollout, eval harness, rollback plan — to prod without an incident.",
     route: "→ Assessment",
+    routeLabel: "Go to AI Delivery & Reliability Assessment in engagements",
   },
   {
-    title: "Delivery at risk",
-    body: "Delivery bottlenecks, legacy constraints; shipping AI destabilizes production",
+    title: "At-risk delivery",
+    body: "Legacy constraints and delivery bottlenecks. Adding AI looks like it will destabilize what works.",
+    proof: "Shipped like: CI + coverage first, then AI-assisted triage — lead time down, prod stable.",
     route: "→ Project",
+    routeLabel: "Go to Project-Based AI Delivery in engagements",
   },
   {
-    title: "Flat growth",
-    body: "NRR (net revenue retention) flat; need revenue beyond subscriptions",
+    title: "Overloaded team",
+    body: "Roadmap is full and senior bandwidth is thin. AI work waits because no one can own it safely.",
+    proof: "Shipped like: embedded senior owner for one workstream — in your repo, to prod with your team.",
     route: "→ Retainer",
+    routeLabel: "Go to Embedded AI Delivery Partner in engagements",
   },
 ];
 
@@ -94,14 +100,49 @@ function PainGroups(): JSX.Element {
   return (
     <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
       <div className="container">
-        <Heading as="h2">Sound familiar?</Heading>
+        <Heading as="h2" style={{ marginBottom: "0.5rem" }}>
+          Sound familiar?
+        </Heading>
+        <p
+          style={{
+            marginBottom: 0,
+            fontSize: "1.1rem",
+            color: "var(--ifm-color-emphasis-700)",
+          }}
+        >
+          Three patterns I get called in for:
+        </p>
         <div className="services-grid">
           {painGroups.map((group) => (
-            <div key={group.title} className="card--elevated">
-              <h3>{group.title}</h3>
-              <p style={{ marginBottom: "0.75rem" }}>{group.body}</p>
-              <p style={{ marginBottom: 0 }}>
-                <span className="tag--pill">{group.route}</span>
+            <div
+              key={group.title}
+              className="card--elevated"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <h3 style={{ marginBottom: "0.5rem" }}>{group.title}</h3>
+              <p style={{ marginBottom: "1rem" }}>{group.body}</p>
+              <hr
+                aria-hidden="true"
+                style={{
+                  border: 0,
+                  borderTop: "1px solid var(--ifm-color-emphasis-200)",
+                  margin: "0 0 1rem 0",
+                }}
+              />
+              <p
+                style={{
+                  marginBottom: "1.25rem",
+                  fontSize: "0.95rem",
+                  fontStyle: "italic",
+                  color: "var(--ifm-color-emphasis-700)",
+                }}
+              >
+                {group.proof}
+              </p>
+              <p style={{ marginBottom: 0, marginTop: "auto" }}>
+                <a href="#engagements" aria-label={group.routeLabel} className="tag--pill">
+                  {group.route}
+                </a>
               </p>
             </div>
           ))}
