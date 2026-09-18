@@ -1,8 +1,6 @@
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import Testimonials from "@site/src/components/Testimonials";
 import Heading from "@theme/Heading";
-import Header from "@site/src/components/Header";
 import Contact from "@site/src/components/Contact";
 import FeaturedWork from "@site/src/components/FeaturedWork";
 import Skills from "@site/src/components/Skills";
@@ -10,235 +8,295 @@ import LogosCarousel from "@site/src/components/LogosCarousel";
 
 import type { JSX } from "react";
 
-const engagementModels = [
-  {
-    title: "Project Based",
-    description:
-      "Perfect for defined initiatives with clear deliverables. We align on scope, timeline, and budget to build your MVP, specific features, or complete platform overhauls. Best for when you know exactly what you need built.",
-  },
-  {
-    title: "Strategic Advisory",
-    description:
-      "Strategic partnership for leadership and decision-making. I provide high-level guidance on architecture, team structure, tech stack selection, and roadmap planning. Ideal for founders needing a fractional CTO or technical soundboard.",
-  },
-  {
-    title: "Contractor Engagement",
-    description:
-      "Integrated development support. I join your existing engineering team to boost velocity, handle complex technical challenges, and mentor junior engineers. Flexible hourly or monthly retainer arrangements.",
-  },
-];
+const CAL_URL = "https://cal.com/kannah/30min";
 
-function EngagementCard({ model }: { model: (typeof engagementModels)[0] }) {
-  return (
-    <div
-      className="card--elevated"
-      style={{
-        textAlign: "center",
-        minWidth: "300px",
-        flex: "1",
-        padding: "2rem",
-      }}
-    >
-      <h4
-        style={{
-          margin: "0 0 1rem 0",
-          fontSize: "1.1rem",
-          color: "var(--ifm-font-color-base)",
-        }}
-      >
-        {model.title}
-      </h4>
-      <p>{model.description}</p>
-    </div>
-  );
+type CtaVariant = "assessment" | "retainer" | "close";
+
+function calUrl(variant: CtaVariant): string {
+  return `${CAL_URL}?variant=${variant}`;
 }
 
-const services = [
+const painGroups = [
   {
-    title: "MVP Development & Launch",
-    icon: "🚀",
-    bullets: [
-      "Get to market 3x faster with battle-tested architecture",
-      "Launch AI-powered SaaS, platforms, or enterprise solutions",
-      "Structured for funding readiness",
-    ],
+    title: "Stuck pilots",
+    body: "AI pilots never reach production; rewiring feels risky",
+    route: "→ Assessment",
   },
   {
-    title: "Technical Architecture & Modernization",
-    icon: "🏗️",
-    bullets: [
-      "Transform legacy systems to cloud-native platforms",
-      "Reduce infrastructure costs by 40-60%",
-      "Improve performance and developer productivity",
-    ],
+    title: "Delivery at risk",
+    body: "Delivery bottlenecks, legacy constraints; shipping AI destabilizes production",
+    route: "→ Retainer",
   },
   {
-    title: "AI Integration & Strategy",
-    icon: "🤖",
-    bullets: [
-      "Implement AI features that drive user engagement",
-      "From OpenAI APIs to custom agentic AI",
-      "Build differentiation with AI-powered features",
-    ],
+    title: "Flat growth",
+    body: "NRR (net revenue retention) flat; need revenue beyond subscriptions",
+    route: "→ Either",
   },
 ];
 
-const secondaryServices = [
+const proofs = [
   {
-    title: "Engineering Team Enablement",
-    bullets: [
-      "Build high-performing engineering teams",
-      "Implement CI/CD, testing strategies, and agile methodologies",
-      "Increase delivery speed by 50%+",
-    ],
+    title: "Vertical SaaS platform, 40-engineer org",
+    text: "AI pilot stuck in staging for 6 weeks. Assessment sequenced a 2-week path: sandboxed rollout (limited blast radius), eval harness (repeatable AI quality checks), rollback plan. Team shipped to prod without an incident.",
   },
   {
-    title: "Fractional CTO & Technical Leadership",
-    bullets: [
-      "Senior-level leadership without full-time cost",
-      "Architecture decisions and roadmap planning",
-      "Hands-on coding to accelerate development",
-    ],
+    title: "Regulated workflow SaaS, legacy monolith",
+    text: "Roadmap stalled on reliability risk. Embedded delivery owned one workstream 12h/week: CI + test coverage first, then AI-assisted triage. Lead time down, no prod destabilization.",
   },
 ];
 
-function ServiceCard({
-  service,
-  index,
+function CtaButtons({
+  center = false,
+  variant = "close",
+  microcopy = "30 min · proposal in 48h · no prep needed",
+  block = false,
 }: {
-  service: Partial<(typeof services)[0]>;
-  index: number;
+  center?: boolean;
+  variant?: CtaVariant;
+  microcopy?: string;
+  block?: boolean;
 }): JSX.Element {
   return (
-    <div className="service-card">
-      {service?.icon && <div className="service-icon">{service.icon}</div>}
-      <h3 className="service-title">{service.title}</h3>
-      <ul className="service-bullets">
-        {service.bullets?.map((bullet, i) => (
-          <li key={i}>{bullet}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Services(): JSX.Element {
-  return (
-    <div className="section hero hero--primary">
-      <div className="container">
-        <div className="section__header">
-          <Heading as="h2" className="hero__title">
-            How I Help You Succeed
-          </Heading>
-          <p className="hero__subtitle">
-            I deliver measurable results through strategic technology consulting
-            and hands-on execution.
-          </p>
-        </div>
-
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <ServiceCard key={index} service={service} index={index} />
-          ))}
-        </div>
-
-        <div className="services-grid">
-          {secondaryServices.map((service, index) => (
-            <ServiceCard key={index} service={service} index={index} />
-          ))}
-        </div>
-
-        <div className="text--center margin-top--lg">
-          <a
-            href="https://cal.com/kannah/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button button--primary"
-          >
-            Let's Discuss Your Project
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function EngagementSection(): JSX.Element {
-  return (
-    <div className="section">
-      <div className="container">
-        <div className="section__header">
-          <Heading as="h2" className="hero__title">
-            Engagement Models
-          </Heading>
-          <p className="hero__subtitle">
-            Flexible ways to work together based on your needs and stage.
-          </p>
-        </div>
-
-        <div className="engagement-grid">
-          {engagementModels.map((model, index) => (
-            <EngagementCard key={index} model={model} />
-          ))}
-        </div>
-
-        <div className="text--center margin-top--lg">
-          <a
-            href="https://cal.com/kannah/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button button--primary button--lg"
-          >
-            Not sure which model is right for you? Let's talk
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div className="hero">
-      <div className="container">
-        <h2 className="hero__title text--center">
-          Transform Your Tech Vision Into Reality
-        </h2>
-        <p className="hero__subtitle">
-          I'm a seasoned technology leader with 18+ years building and scaling
-          software companies. I help startup founders launch MVPs faster and
-          engineering orgs modernize their platforms. From AI-powered SaaS to
-          cloud architecture, I've guided teams from concept to market success
-          across healthcare, e-commerce, and enterprise sectors.
-        </p>
-        <p className="hero__subtitle">
-          I help teams turn AI initiatives into reliable production systems
-          through targeted assessments, architecture guidance, and embedded
-          engineering.
-        </p>
-        <div
-          className="text--center margin-top--lg"
-          style={{
-            display: "flex",
-            gap: "0.75rem",
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
+    <div>
+      <div
+        className="cta-container"
+        style={center && !block ? undefined : { justifyContent: "flex-start" }}
+      >
+        <a
+          href={calUrl(variant)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Book a 30-min fit call, opens in new tab"
+          className={`button button--primary ${block ? "button--block" : "button--lg"}`}
         >
-          <a
-            href="https://cal.com/kannah/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button button--primary"
-          >
-            Book Free Consultation
-          </a>
-          <a href="/consulting" className="button button--secondary">
-            See consulting engagements
+          Book a 30-min fit call{" "}
+          <span aria-hidden="true" style={{ fontSize: "0.85em", marginLeft: "0.25rem" }}>
+            ↗
+          </span>
+        </a>
+      </div>
+      <p
+        style={{
+          fontSize: "1rem",
+          marginTop: "0.5rem",
+          marginBottom: 0,
+          textAlign: center && !block ? "center" : "left",
+        }}
+      >
+        {microcopy}
+      </p>
+    </div>
+  );
+}
+
+function ConsultingHero(): JSX.Element {
+  return (
+    <div className="hero hero--primary">
+      <div className="container">
+        <p style={{ marginBottom: "0.5rem" }}>
+          <span className="tag--pill" style={{ color: "inherit", borderColor: "currentColor" }}>
+            Kannah Consulting · For SaaS engineering teams
+          </span>
+        </p>
+        <Heading as="h1" className="hero__title">
+          Rewiring to AI-first without breaking production?
+        </Heading>
+        <p className="hero__subtitle">
+          I help vertical SaaS teams ship AI into real workflows — faster delivery, same
+          reliability, engineering ownership intact.
+        </p>
+        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center" }}>
+          <CtaButtons variant="close" />
+          <a href="#engagements" className="button button--secondary button--lg">
+            See how we work ↓
           </a>
         </div>
       </div>
     </div>
+  );
+}
+
+function PainGroups(): JSX.Element {
+  return (
+    <section className="section">
+      <div className="container">
+        <Heading as="h2">Sound familiar?</Heading>
+        <div className="services-grid">
+          {painGroups.map((group) => (
+            <div key={group.title} className="card--elevated">
+              <h3>{group.title}</h3>
+              <p style={{ marginBottom: "0.5rem" }}>{group.body}</p>
+              <p style={{ marginBottom: 0 }}>
+                <strong>{group.route}</strong>
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EngagementOffers(): JSX.Element {
+  return (
+    <section className="section section--alt" id="engagements">
+      <div className="container">
+        <Heading as="h2">Two ways to work together</Heading>
+        <p style={{ marginBottom: 0 }}>
+          <strong>Start here if…</strong> stuck pilots that never reach production or you
+          need evidence first → Assessment; delivery at risk with clear scope and urgency →
+          Retainer; flat growth (NRR flat) → either — most start with Assessment.
+        </p>
+        <div className="engagement-grid">
+          <div
+            className="card--elevated"
+            style={{ borderColor: "var(--ifm-color-primary)", borderWidth: "2px" }}
+          >
+            <div className="card__header">
+              <p style={{ marginBottom: "0.5rem" }}>
+                <span className="tag--pill">Start here</span>
+              </p>
+              <h3>AI Delivery &amp; Reliability Assessment</h3>
+              <p>
+                <strong>Fixed-scope · 1–2 weeks</strong>
+              </p>
+            </div>
+            <div className="card__body">
+              <p>When you need confidence about the problem or approach first.</p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You get:</strong> confidence about the problem and approach before a
+                larger commitment.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You need:</strong> an active roadmap and access to discuss delivery
+                workflow and production risk.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>Timeline:</strong> 1–2 weeks.
+              </p>
+              <details>
+                <summary>What shapes scope</summary>
+                <p style={{ marginBottom: 0 }}>
+                  Depth of the workflow review and whether a small proof of value is useful
+                  and safe to include in 1–2 weeks.
+                </p>
+              </details>
+            </div>
+            <div className="card__footer">
+              <CtaButtons
+                variant="assessment"
+                block
+                microcopy="30 min · proposal in 48h · start with evidence"
+              />
+            </div>
+          </div>
+          <div className="card--elevated">
+            <div className="card__header">
+              <h3>Embedded AI Delivery Partner</h3>
+              <p>
+                <strong>Weekly retainer · 3-month minimum</strong>
+              </p>
+            </div>
+            <div className="card__body">
+              <p>When urgency, scope, and ownership are clear.</p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You get:</strong> an owned workstream shipped to production with your team.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You need:</strong> clear urgency, scope, and ownership for a 3-month minimum.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>Timeline:</strong> 3-month minimum, embedded in your cadence.
+              </p>
+              <details>
+                <summary>How we work</summary>
+                <p style={{ marginBottom: 0 }}>
+                  Work happens in your repo with CI and one engineering counterpart; scope,
+                  ownership, and success measures defined in writing.
+                </p>
+              </details>
+            </div>
+            <div className="card__footer">
+              <CtaButtons
+                variant="retainer"
+                block
+                microcopy="30 min · proposal in 48h · for a clear-scope workstream"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProofCases(): JSX.Element {
+  return (
+    <section className="section">
+      <div className="container">
+        <Heading as="h2">Proof</Heading>
+        {proofs.map((proof) => (
+          <div key={proof.title} className="card--elevated margin-bottom--md">
+            <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+              {proof.title}
+            </Heading>
+            <p style={{ marginBottom: 0 }}>{proof.text}</p>
+          </div>
+        ))}
+        <p style={{ marginBottom: 0 }}>
+          <a href="/showcase">See more work →</a>
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function FitFaq(): JSX.Element {
+  return (
+    <>
+      <section className="section section--alt">
+        <div className="container">
+          <Heading as="h2">Fit / non-fit</Heading>
+          <p>
+            <strong>Fit:</strong> CTOs, VPs/Heads of Engineering, and technical founders at
+            established SaaS companies with an active roadmap and real engineering constraints —
+            especially where workflows are complex or regulated.
+          </p>
+          <p>
+            <strong>Not fit:</strong> generic web builds, idea-stage teams with no production
+            system, or teams looking for presentation-only advice.
+          </p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <Heading as="h2">FAQ</Heading>
+          <div className="card--elevated margin-bottom--md">
+            <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+              Who owns the code?
+            </Heading>
+            <p style={{ marginBottom: 0 }}>
+              You do — I work in your repo, on your cadence, with scope, ownership, and
+              success measures defined in writing.
+            </p>
+          </div>
+          <div className="card--elevated">
+            <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+              What access do you need?
+            </Heading>
+            <p style={{ marginBottom: 0 }}>
+              Repo, CI, and one engineering counterpart. No reorg required.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="section section--alt">
+        <div className="container text--center">
+          <Heading as="h2">Turn your AI pilot into production.</Heading>
+          <CtaButtons center />
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -267,16 +325,19 @@ function StatsBar(): JSX.Element {
 }
 
 export default function Home(): JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout title={`Hello from Fadee`} description={`${siteConfig.tagline}`}>
-      <Header />
+    <Layout
+      title="AI Delivery Consulting for SaaS Teams"
+      description="Kannah Consulting helps SaaS engineering teams ship AI into production without sacrificing reliability. Assessment and embedded delivery engagements."
+    >
+      <ConsultingHero />
       <StatsBar />
       <main>
-        <About />
-        <Services />
-        <EngagementSection />
-        <FeaturedWork />
+        <PainGroups />
+        <EngagementOffers />
+        <ProofCases />
+        <FitFaq />
+        <FeaturedWork limit={3} />
         <Skills />
         <Testimonials />
         <Contact />
