@@ -134,7 +134,7 @@ function WorkCard({ work }: { work: FeaturedWorkItem }) {
   );
 }
 
-export default function FeaturedWork(): JSX.Element {
+export default function FeaturedWork({ limit }: { limit?: number }): JSX.Element {
   return (
     <div className="hero hero--primary ">
       <div className="container">
@@ -153,7 +153,7 @@ export default function FeaturedWork(): JSX.Element {
             marginTop: "2rem",
           }}
         >
-          {featuredWork.map((work, index) => (
+          {(limit ? featuredWork.slice(0, limit) : featuredWork).map((work, index) => (
             <WorkCard key={index} work={work} />
           ))}
         </div>
