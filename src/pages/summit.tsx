@@ -86,7 +86,7 @@ export default function Summit(): JSX.Element {
         <p>
           Vertical SaaS platform: AI pilot stuck 6 weeks → production, zero incidents. Regulated workflow
           SaaS: roadmap unblocked, lead time down, prod stable. Full detail on{" "}
-          <a href="/consulting">/consulting</a>.
+          <a href="/#engagements">/#engagements</a>.
         </p>
 
         <Heading as="h2">Fit / non-fit</Heading>
