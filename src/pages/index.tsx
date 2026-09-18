@@ -1,6 +1,7 @@
 import Layout from "@theme/Layout";
 import Testimonials from "@site/src/components/Testimonials";
 import Heading from "@theme/Heading";
+import Header from "@site/src/components/Header";
 import Contact from "@site/src/components/Contact";
 import FeaturedWork from "@site/src/components/FeaturedWork";
 import Skills from "@site/src/components/Skills";
@@ -85,33 +86,6 @@ function CtaButtons({
       >
         {microcopy}
       </p>
-    </div>
-  );
-}
-
-function ConsultingHero(): JSX.Element {
-  return (
-    <div className="hero hero--primary">
-      <div className="container">
-        <p style={{ marginBottom: "0.5rem" }}>
-          <span className="tag--pill" style={{ color: "inherit", borderColor: "currentColor" }}>
-            Kannah Consulting · For SaaS engineering teams
-          </span>
-        </p>
-        <Heading as="h1" className="hero__title">
-          Rewiring to AI-first without breaking production?
-        </Heading>
-        <p className="hero__subtitle">
-          I help vertical SaaS teams ship AI into real workflows — faster delivery, same
-          reliability, engineering ownership intact.
-        </p>
-        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center" }}>
-          <CtaButtons variant="close" />
-          <a href="#engagements" className="button button--secondary button--lg">
-            See how we work ↓
-          </a>
-        </div>
-      </div>
     </div>
   );
 }
@@ -330,7 +304,14 @@ export default function Home(): JSX.Element {
       title="AI Delivery Consulting for SaaS Teams"
       description="Kannah Consulting helps SaaS engineering teams ship AI into production without sacrificing reliability. Assessment and embedded delivery engagements."
     >
-      <ConsultingHero />
+      <Header
+        eyebrow="Kannah Consulting · For SaaS engineering teams"
+        headline="Rewiring to AI-first without breaking production?"
+        subheadline="I help vertical SaaS teams ship AI into real workflows — faster delivery, same reliability, engineering ownership intact."
+        primaryCta={{ label: "Book a 30-min fit call ↗", href: calUrl("close"), external: true }}
+        secondaryCta={{ label: "See how we work ↓", href: "#engagements", external: false }}
+        microcopy="30 min · proposal in 48h · no prep needed"
+      />
       <StatsBar />
       <main>
         <PainGroups />

@@ -3,7 +3,37 @@ import ParticlesBackground from "./visualEffect";
 import "./header.css";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
-export default function Header() {
+export default function Header({
+  eyebrow,
+  headline,
+  subheadline,
+  primaryCta,
+  secondaryCta,
+  microcopy,
+}) {
+  const heading = headline ?? (
+    <>
+      18+ Years Building Tech Companies.
+      <br />
+      I Help You Launch Faster, Scale Smarter.
+    </>
+  );
+  const sub = subheadline ?? (
+    <>
+      From MVP to enterprise — plus AI delivery consulting that helps SaaS
+      engineering teams ship AI into production without breaking reliability.
+    </>
+  );
+  const primary = primaryCta ?? {
+    label: "Book Free Consultation",
+    href: "https://cal.com/kannah/30min",
+    external: true,
+  };
+  const secondary = secondaryCta ?? {
+    label: "See My Work",
+    href: "/showcase",
+    external: false,
+  };
   React.useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -22,22 +52,40 @@ export default function Header() {
     <header className="transition header">
       <div className="container header-container">
       <div className="hero-content">
+        {eyebrow && (
+          <p style={{ marginBottom: "0.5rem" }}>
+            <span className="tag--pill" style={{ color: "inherit", borderColor: "currentColor" }}>
+              {eyebrow}
+            </span>
+          </p>
+        )}
         <h1 className="hero-headline">
-          18+ Years Building Tech Companies.<br />
-          I Help You Launch Faster, Scale Smarter.
+          {heading}
         </h1>
         <p className="hero-subheadline">
-          From MVP to enterprise — plus AI delivery consulting that helps SaaS
-          engineering teams ship AI into production without breaking reliability.
+          {sub}
         </p>
         <div className="hero-ctas">
-          <a href="https://cal.com/kannah/30min" target="_blank" rel="noopener noreferrer" className="ctaButton primary">
-            Book Free Consultation
+          <a
+            href={primary.href}
+            {...(primary.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className="ctaButton primary"
+          >
+            {primary.label}
           </a>
-          <a href="/showcase" className="ctaButton secondary">
-            See My Work
+          <a
+            href={secondary.href}
+            {...(secondary.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className="ctaButton secondary"
+          >
+            {secondary.label}
           </a>
         </div>
+        {microcopy && (
+          <p style={{ fontSize: "1rem", marginTop: "0.5rem", marginBottom: 0 }}>
+            {microcopy}
+          </p>
+        )}
       </div>
       <div className="profileSection">
         <div id="myProfilePicture" className="profilePicture">
