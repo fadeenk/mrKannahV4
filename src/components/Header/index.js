@@ -3,37 +3,42 @@ import ParticlesBackground from "./visualEffect";
 import "./header.css";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
+/**
+ * @param {Object} props
+ * @param {string | null} [props.eyebrow]
+ * @param {React.ReactNode} [props.headline]
+ * @param {React.ReactNode} [props.subheadline]
+ * @param {{ label: string, href: string, external: boolean }} [props.primaryCta]
+ * @param {{ label: string, href: string, external: boolean }} [props.secondaryCta]
+ * @param {string | null} [props.microcopy]
+ */
 export default function Header({
-  eyebrow,
-  headline,
-  subheadline,
-  primaryCta,
-  secondaryCta,
-  microcopy,
-}) {
-  const heading = headline ?? (
+  eyebrow = null,
+  headline = (
     <>
       18+ Years Building Tech Companies.
       <br />
       I Help You Launch Faster, Scale Smarter.
     </>
-  );
-  const sub = subheadline ?? (
+  ),
+  subheadline = (
     <>
       From MVP to enterprise — plus AI delivery consulting that helps SaaS
       engineering teams ship AI into production without breaking reliability.
     </>
-  );
-  const primary = primaryCta ?? {
+  ),
+  primaryCta = {
     label: "Book Free Consultation",
     href: "https://cal.com/kannah/30min",
     external: true,
-  };
-  const secondary = secondaryCta ?? {
+  },
+  secondaryCta = {
     label: "See My Work",
     href: "/showcase",
     external: false,
-  };
+  },
+  microcopy = null,
+}) {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -60,25 +65,25 @@ export default function Header({
           </p>
         )}
         <h1 className="hero-headline">
-          {heading}
+          {headline}
         </h1>
         <p className="hero-subheadline">
-          {sub}
+          {subheadline}
         </p>
         <div className="hero-ctas">
           <a
-            href={primary.href}
-            {...(primary.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            href={primaryCta.href}
+            {...(primaryCta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="ctaButton primary"
           >
-            {primary.label}
+            {primaryCta.label}
           </a>
           <a
-            href={secondary.href}
-            {...(secondary.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            href={secondaryCta.href}
+            {...(secondaryCta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="ctaButton secondary"
           >
-            {secondary.label}
+            {secondaryCta.label}
           </a>
         </div>
         {microcopy && (

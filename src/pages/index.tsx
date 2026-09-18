@@ -305,7 +305,6 @@ export default function Home(): JSX.Element {
       description="Kannah Consulting helps SaaS engineering teams ship AI into production without sacrificing reliability. Assessment and embedded delivery engagements."
     >
       <Header
-        eyebrow="Kannah Consulting · For SaaS engineering teams"
         headline="Rewiring to AI-first without breaking production?"
         subheadline="I help vertical SaaS teams ship AI into real workflows — faster delivery, same reliability, engineering ownership intact."
         primaryCta={{ label: "Book a 30-min fit call ↗", href: calUrl("close"), external: true }}
