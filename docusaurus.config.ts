@@ -88,6 +88,10 @@ const config: Config = {
           to: "/showcase",
           items: [
             {
+              label: "Case Studies",
+              to: "/case-studies",
+            },
+            {
               label: "Apps",
               to: "/showcase/Apps",
             },
