@@ -23,12 +23,13 @@ const caseStudies: CaseStudy[] = [
     status: "live",
   },
   {
-    title: "Embedded Retainer: Features, Reports, Docs",
-    client: "Retainer client",
-    engagement: "Weekly retainer · Embedded AI Delivery Partner",
-    outcome: "Shipped features and reports, closed documentation gaps.",
-    to: "/case-studies/team-augmentation-retainer",
-    status: "soon",
+    title: "Embedded Retainer That Shipped the Success Backlog",
+    client: "Portico",
+    engagement: "Ongoing retainer · Embedded Delivery Partner",
+    outcome:
+      "24 initiatives in 9 months — roadmap, reports, and LMS interop without diverting core eng.",
+    to: "/case-studies/portico-embedded-retainer",
+    status: "live",
   },
   {
     title: "AI POC to Continuous Delivery",
