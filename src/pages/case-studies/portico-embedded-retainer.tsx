@@ -1,14 +1,32 @@
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
+import Gallery from "@site/src/components/Gallery";
 
 import type { JSX } from "react";
 
 const CAL_URL = "https://cal.com/kannah/30min";
 
-// TODO(screenshots): replace the placeholder box below with
-// <Gallery photos={[...]} /> + caption once redacted screenshots land.
 // TODO(quote): the blockquote under "What the client says" is a draft
 // placeholder — swap in the real VP of Success quote when received.
+
+const SCREENSHOTS = [
+  {
+    src: "/img/case-studies/portico-d2l-dynamic-registration.png",
+    alt: "LTI 1.3 dynamic registration for D2L Brightspace",
+  },
+  {
+    src: "/img/case-studies/portico-attendance-technology-setup.png",
+    alt: "Attendance verification technology setup",
+  },
+  {
+    src: "/img/case-studies/portico-approval-status-report.png",
+    alt: "Approval status reporting with audit trail",
+  },
+  {
+    src: "/img/case-studies/portico-notifications-inbox.png",
+    alt: "Instructor notification inbox for attendance actions",
+  },
+];
 
 export default function PorticoEmbeddedRetainer(): JSX.Element {
   return (
@@ -71,19 +89,18 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
           </p>
         </div>
 
-        <div
-          style={{
-            border: "1px dashed var(--ifm-color-emphasis-400)",
-            borderRadius: "8px",
-            padding: "2rem",
-            marginBottom: "2rem",
-            textAlign: "center",
-            color: "var(--ifm-color-emphasis-700)",
-          }}
-        >
-          <p style={{ margin: 0 }}>
-            <strong>Screenshots coming soon</strong> — redacted walkthrough of
-            the reporting and LMS integration work.
+        <div style={{ marginBottom: "2rem" }}>
+          <Gallery photos={SCREENSHOTS} />
+          <p
+            style={{
+              marginTop: "0.5rem",
+              fontSize: "0.9rem",
+              color: "var(--ifm-color-emphasis-700)",
+              textAlign: "center",
+            }}
+          >
+            Redacted walkthrough of the reporting and LMS integration work —
+            click any screenshot to enlarge.
           </p>
         </div>
 
