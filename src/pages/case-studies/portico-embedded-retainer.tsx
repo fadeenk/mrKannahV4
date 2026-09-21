@@ -7,7 +7,7 @@ import type { JSX } from "react";
 const CAL_URL = "https://cal.com/kannah/30min";
 
 // TODO(quote): the blockquote under "What the client says" is a draft
-// placeholder — swap in the real VP of Success quote when received.
+// placeholder attributed to Tina Tran — swap in her real quote when received.
 
 const SCREENSHOTS = [
   {
@@ -136,8 +136,8 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
               <strong>
                 Embedded Delivery Partner — ongoing retainer, 2 years.
               </strong>{" "}
-              Started at 10 hrs/mo prepaid; now flexes from 4 to 100+ hrs/mo
-              depending on the month and the need. Fully embedded with full
+              Started at 10 hrs/mo prepaid; now scales from 4 to 100+ hrs/mo
+              with the month and the need. Fully embedded with full
               access — teams, chat, every repo needed, meetings, internal
               documents, code reviews, and deploys to staging — bridging the
               Success and engineering teams.
@@ -194,8 +194,8 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
               <li>
                 <strong>24 major tracked initiatives in 9 months</strong> —
                 this year&apos;s tracked scope (year one ran on the prepaid
-                block and wasn&apos;t item-tracked), flexing 4–100+ hrs/mo
-                with need: ~124 hrs on attendance and reporting
+                block and wasn&apos;t item-tracked), scaling from 4 to 100+
+                hrs/mo with need: ~124 hrs on attendance and reporting
                 capabilities, 68+ hrs on integrations and data
                 infrastructure, and 130 logged work entries on testing,
                 debugging, pull requests, staging validation, and deployment
@@ -212,6 +212,14 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
                 LTI 1.3 with dynamic registration for D2L Brightspace and
                 Canvas work shipped through normal review and QA while core
                 engineering stayed on priorities
+              </li>
+              <li>
+                <strong>At-risk clients saved, revenue retained</strong> —
+                stepped in on escalated, at-risk accounts across multiple
+                products — shipping the fixes and reports that kept them
+                onboard — saving multiple clients from churning and retaining
+                tens of thousands of dollars the business would otherwise
+                have lost
               </li>
               <li>
                 <strong>Production issues closed, releases de-risked</strong>{" "}
@@ -232,13 +240,13 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
               }}
             >
               <p>
-                “Fadee took the Success-requested roadmap, reports, and
-                documentation off our plate and shipped them without pulling
-                engineering off priorities. Planning, build, reviews,
-                staging — handled, with engineering only looped in where it
-                mattered.”
+                “When at-risk clients needed answers, Fadee shipped them —
+                roadmap blockers, custom reports, production fixes — without
+                us ever having to pull engineering off priorities. He saved
+                accounts worth tens of thousands of dollars and gave Success
+                a delivery arm we never had.”
               </p>
-              <footer>— VP of Success, Portico</footer>
+              <footer>— Tina Tran, VP of Success, Portico</footer>
             </blockquote>
           </section>
 
