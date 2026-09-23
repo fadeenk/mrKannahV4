@@ -28,13 +28,13 @@ export default function Header({
     </>
   ),
   primaryCta = {
-    label: "Book Free Consultation",
+    label: "Book a 30-min fit call",
     href: "https://cal.com/kannah/30min",
     external: true,
   },
   secondaryCta = {
-    label: "See My Work",
-    href: "/showcase",
+    label: "See how we work",
+    href: "#engagements",
     external: false,
   },
   microcopy = null,
@@ -75,8 +75,18 @@ export default function Header({
             href={primaryCta.href}
             {...(primaryCta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="ctaButton primary"
+            aria-label={
+              primaryCta.external
+                ? `${primaryCta.label}, opens in new tab`
+                : primaryCta.label
+            }
           >
             {primaryCta.label}
+            {primaryCta.external && (
+              <span aria-hidden="true" style={{ fontSize: "0.85em", marginLeft: "0.25rem" }}>
+                {" "}↗
+              </span>
+            )}
           </a>
           <a
             href={secondaryCta.href}

@@ -156,10 +156,17 @@ export default function Skills(): JSX.Element {
             href="https://cal.com/kannah/30min"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Book a 30-min fit call, opens in new tab"
             className="button button--primary"
           >
-            Ready to Get Started?
+            Book a 30-min fit call{" "}
+            <span aria-hidden="true" style={{ fontSize: "0.85em", marginLeft: "0.25rem" }}>
+              ↗
+            </span>
           </a>
+          <p style={{ fontSize: "1rem", marginTop: "0.5rem", marginBottom: 0 }}>
+            30 min · proposal in 48h · no prep needed
+          </p>
         </div>
 
     </div>

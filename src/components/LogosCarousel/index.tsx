@@ -22,7 +22,13 @@ export default function LogosCarousel(): JSX.Element {
           {logos.map((logo, index) => (
             <div key={`a-${index}`} className="logos-carousel-item">
               {logo.logoUrl ? (
-                <img src={logo.logoUrl} alt={logo.name} />
+                <img
+                  src={logo.logoUrl}
+                  alt={logo.name}
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
+                />
               ) : (
                 <span>{logo.name}</span>
               )}
@@ -31,7 +37,14 @@ export default function LogosCarousel(): JSX.Element {
           {logos.map((logo, index) => (
             <div key={`b-${index}`} className="logos-carousel-item" aria-hidden="true">
               {logo.logoUrl ? (
-                <img src={logo.logoUrl} alt={logo.name} />
+                <img
+                  src={logo.logoUrl}
+                  alt=""
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
+                  tabIndex={-1}
+                />
               ) : (
                 <span>{logo.name}</span>
               )}

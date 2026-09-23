@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-17T00:00:00.000Z",
+  "title": "Design System: Mr. Kannah",
+  "extensions": {
+    "colorMeta": {
+      "forest-canopy": {
+        "role": "primary",
+        "displayName": "Forest Canopy",
+        "canonical": "#2e8555",
+        "tonalRamp": ["oklch(22% 0.06 160)", "oklch(32% 0.09 160)", "oklch(42% 0.11 160)", "oklch(52% 0.12 160)", "oklch(62% 0.12 160)", "oklch(72% 0.10 160)", "oklch(82% 0.07 160)", "oklch(92% 0.04 160)"]
+      },
+      "pine-shadow": {
+        "role": "primary",
+        "displayName": "Pine Shadow",
+        "canonical": "#205d3b",
+        "tonalRamp": ["oklch(18% 0.05 160)", "oklch(28% 0.07 160)", "oklch(38% 0.09 160)", "oklch(48% 0.10 160)", "oklch(58% 0.10 160)", "oklch(70% 0.09 160)", "oklch(82% 0.06 160)", "oklch(93% 0.03 160)"]
+      },
+      "meadow": {
+        "role": "primary",
+        "displayName": "Meadow",
+        "canonical": "#3cad6e",
+        "tonalRamp": ["oklch(22% 0.06 160)", "oklch(34% 0.10 160)", "oklch(46% 0.13 160)", "oklch(58% 0.14 160)", "oklch(68% 0.13 160)", "oklch(78% 0.10 160)", "oklch(88% 0.06 160)", "oklch(95% 0.03 160)"]
+      },
+      "mint-signal": {
+        "role": "primary",
+        "displayName": "Mint Signal",
+        "canonical": "#25c2a0",
+        "tonalRamp": ["oklch(20% 0.06 175)", "oklch(32% 0.10 175)", "oklch(44% 0.13 175)", "oklch(56% 0.14 175)", "oklch(66% 0.13 175)", "oklch(76% 0.10 175)", "oklch(86% 0.06 175)", "oklch(94% 0.03 175)"]
+      },
+      "deep-teal": {
+        "role": "primary",
+        "displayName": "Deep Teal",
+        "canonical": "#1a8870",
+        "tonalRamp": ["oklch(18% 0.05 175)", "oklch(28% 0.08 175)", "oklch(38% 0.10 175)", "oklch(48% 0.11 175)", "oklch(58% 0.11 175)", "oklch(70% 0.09 175)", "oklch(82% 0.06 175)", "oklch(93% 0.03 175)"]
+      },
+      "mint-glow": {
+        "role": "primary",
+        "displayName": "Mint Glow",
+        "canonical": "#4fddbf",
+        "tonalRamp": ["oklch(24% 0.06 175)", "oklch(38% 0.10 175)", "oklch(52% 0.12 175)", "oklch(64% 0.13 175)", "oklch(74% 0.12 175)", "oklch(82% 0.09 175)", "oklch(90% 0.05 175)", "oklch(96% 0.02 175)"]
+      },
+      "card-ink": {
+        "role": "neutral",
+        "displayName": "Card Ink",
+        "canonical": "#1a1a1a",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(25% 0 0)", "oklch(35% 0 0)", "oklch(50% 0 0)", "oklch(65% 0 0)", "oklch(78% 0 0)", "oklch(88% 0 0)", "oklch(95% 0 0)"]
+      },
+      "card-muted": {
+        "role": "neutral",
+        "displayName": "Card Muted",
+        "canonical": "#555555",
+        "tonalRamp": ["oklch(20% 0 0)", "oklch(32% 0 0)", "oklch(44% 0 0)", "oklch(56% 0 0)", "oklch(68% 0 0)", "oklch(80% 0 0)", "oklch(89% 0 0)", "oklch(96% 0 0)"]
+      },
+      "link-blue": {
+        "role": "neutral",
+        "displayName": "Detail Blue",
+        "canonical": "#1976d2",
+        "tonalRamp": ["oklch(20% 0.08 250)", "oklch(32% 0.12 250)", "oklch(44% 0.14 250)", "oklch(55% 0.14 250)", "oklch(66% 0.11 250)", "oklch(77% 0.08 250)", "oklch(87% 0.05 250)", "oklch(95% 0.02 250)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Site header identity only. Anton italic with green stroke." },
+      "headline": { "displayName": "Headline", "purpose": "Hero headlines and section titles." },
+      "title": { "displayName": "Title", "purpose": "Service titles and work-card titles." },
+      "body": { "displayName": "Body", "purpose": "Descriptions, bullets, and testimonial quotes." },
+      "label": { "displayName": "Label", "purpose": "Pills, badges, and testimonial roles." }
+    },
+    "shadows": [
+      { "name": "card-hover", "value": "0 10px 24px rgba(0, 0, 0, 0.12)", "purpose": "Elevated card hover lift with translateY(-2px)." },
+      { "name": "service-hover", "value": "0 4px 12px rgba(0, 0, 0, 0.1)", "purpose": "Service card hover with translateY(-4px)." },
+      { "name": "button-hover", "value": "0 6px 18px rgba(0, 0, 0, 0.2)", "purpose": "Primary button hover lift with translateY(-1px)." },
+      { "name": "portrait-tilt", "value": "2px 35px 32px -8px rgba(0, 0, 0, 0.5)", "purpose": "Header portrait 3D tilt shadow on hover." }
+    ],
+    "motion": [
+      { "name": "ease-quick", "value": "all 0.15s ease", "purpose": "Default for buttons and elevated cards." },
+      { "name": "ease-card", "value": "transform 0.2s ease, box-shadow 0.2s ease", "purpose": "Service cards." },
+      { "name": "ease-testimonial", "value": "all 0.4s ease 0s", "purpose": "Testimonial collage transitions." },
+      { "name": "marquee", "value": "marquee-scroll 25s linear infinite", "purpose": "Logos carousel, pauses on hover." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "996px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "White fill with green stroke at rest, fills green on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"https://cal.com/kannah/30min\">Book Free Consultation</a>",
+      "css": ".ds-btn-primary { background: #ffffff; color: #2e8555; border: 2px solid #2e8555; border-radius: 8px; padding: 12px 24px; font-weight: 600; font-size: 1rem; text-decoration: none; display: inline-block; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.15s ease; } .ds-btn-primary:hover { background: #2e8555; color: #ffffff; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); text-decoration: none; } .ds-btn-primary:focus-visible { outline: 2px solid #2e8555; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tag Pill",
+      "kind": "chip",
+      "refersTo": "tag-pill",
+      "description": "Fully round outline tag for lightweight labels.",
+      "html": "<span class=\"ds-tag-pill\">SaaS/AI</span>",
+      "css": ".ds-tag-pill { border: 1px solid #2e8555; color: #2e8555; border-radius: 999px; padding: 3px 10px; font-weight: 600; font-size: 0.75rem; display: inline-block; letter-spacing: 0.02em; }"
+    },
+    {
+      "name": "Elevated Card",
+      "kind": "card",
+      "refersTo": "card-elevated",
+      "description": "Flat neutral card with hairline border that lifts on hover.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Project Based</h3><p class=\"ds-card-text\">Defined initiatives with clear deliverables.</p></div>",
+      "css": ".ds-card { background: #ffffff; color: #1a1a1a; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 24px; transition: transform 0.15s ease, box-shadow 0.15s ease; } .ds-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.12); } .ds-card-title { font-size: 1.1rem; margin: 0 0 16px 0; } .ds-card-text { font-size: 1rem; line-height: 1.65; margin: 0; }"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "refersTo": "card-elevated",
+      "description": "Centered service tile with emoji icon and left-aligned bullets.",
+      "html": "<div class=\"ds-service\"><div class=\"ds-service-icon\">🚀</div><h3 class=\"ds-service-title\">MVP Development & Launch</h3><ul class=\"ds-service-list\"><li>Get to market 3x faster</li><li>Launch AI-powered SaaS</li></ul></div>",
+      "css": ".ds-service { background: #ffffff; color: #1a1a1a; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; padding: 24px; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease; } .ds-service:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); } .ds-service-icon { font-size: 2.5rem; margin-bottom: 16px; } .ds-service-title { font-size: 1.25rem; margin: 0 0 16px 0; } .ds-service-list { text-align: left; padding-left: 16px; margin: 0; font-size: 0.95rem; } .ds-service-list li { margin-bottom: 8px; }"
+    },
+    {
+      "name": "Contact Input",
+      "kind": "input",
+      "refersTo": "input-neumorphic",
+      "description": "Neumorphic well input with inset shadow at rest.",
+      "html": "<label class=\"ds-field\">Name<input class=\"ds-input\" type=\"text\" placeholder=\"Jane Founder\" /></label>",
+      "css": ".ds-field { display: block; font-size: 1rem; } .ds-input { width: 326px; max-width: 100%; height: 64px; border-radius: 16px; font-size: 1.4rem; padding-left: 22px; border: none; background: transparent; color: #1a1a1a; box-shadow: inset 3px 3px 8px rgba(0,0,0,0.12), inset -3px -3px 8px rgba(255,255,255,0.9); display: block; margin: 8px auto 16px auto; font-family: inherit; } .ds-input::placeholder { color: #888888; } .ds-input:focus { outline: none; box-shadow: 5px 5px 10px rgba(0,0,0,0.12), -3px -3px 8px rgba(255,255,255,0.9); }"
+    },
+    {
+      "name": "Site Nav",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "Docusaurus navbar with Showcase dropdown and emoji shortcuts.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-brand\">Home</span><span class=\"ds-nav-links\"><span>Blog</span><span>Showcase</span><span>About</span></span></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.08); font-size: 1rem; } .ds-nav-brand { font-weight: 700; } .ds-nav-links { display: flex; gap: 16px; color: #1a1a1a; }"
+    },
+    {
+      "name": "Testimonial Card",
+      "kind": "custom",
+      "refersTo": "card-elevated",
+      "description": "Angled collage card with rotated avatar that colorizes on hover.",
+      "html": "<div class=\"ds-testi\"><div class=\"ds-testi-thumb\"></div><p class=\"ds-testi-quote\">Shipped our MVP in weeks, not months.</p><span class=\"ds-testi-name\">Founder, SaaS</span></div>",
+      "css": ".ds-testi { background: #ffffff; border-radius: 8px; padding: 12px; transform: scale(0.85) rotate(-1deg); transition: all 0.4s ease 0s; border-left: 6px solid #2e8555; } .ds-testi:hover { transform: scale(1) rotate(0deg); filter: drop-shadow(0px 20px 10px rgba(0,0,0,0.5)); } .ds-testi-thumb { width: 64px; height: 64px; border-radius: 4px; background: linear-gradient(-86deg, #2e8555 0 70%, #ffffff 70% 100%); padding: 8px; transform: rotate(-4deg); } .ds-testi-quote { font-style: italic; font-size: 1.1rem; color: #1a1a1a; } .ds-testi-name { font-size: 0.75rem; font-weight: 700; color: #2e8555; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Quiet Authority",
+    "overview": "This is a pragmatic and proven consulting surface. Minimal chrome, honest materials, and quantified claims let shipped work do the persuading. The header carries the only expressive moment — stroked italic display type, particle field, and a tilting portrait — then the page settles into calm Infima rhythm: centered containers, even sections, and flat cards that lift only on interaction.\n\nDensity is comfortable, not airy and not dense. Copy is direct and results-quantified. Green is the single voice across light and dark themes; everything else is Infima neutral structure.",
+    "keyCharacteristics": [
+      "Single green voice, theme-flipped (forest in light, mint in dark)",
+      "Flat surfaces at rest, lift only on hover",
+      "Restrained and confident controls with 8–12px geometry",
+      "Playful proof accents (tilt, angled testimonials, logo marquee) on a calm base"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Green is the only accent on any screen. Its rarity is the point — rarity preserves the booking CTA.", "section": "colors" },
+      { "name": "The Display-Once Rule", "body": "Anton italic with stroke appears in the site header and nowhere else. Section hierarchy stays in the system sans.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "No persistent shadows at rest except hairlines. Shadows appear only as a response to hover, focus, or tilt.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the theme-correct green (Forest Canopy #2e8555 in light, Mint Signal #25c2a0 in dark) for every accent, stroke, and CTA fill.",
+      "Do keep surfaces flat at rest with 1px neutral hairlines; add shadow only on hover/focus/tilt.",
+      "Do reserve Anton italic + stroke for the site header; set all section titles in the system sans.",
+      "Do preserve external CTA attributes (`target=\"_blank\" rel=\"noopener noreferrer\"`) on cal.com and outbound links.",
+      "Do collapse 3-col stats and 2-col secondary grids to 1 column under 768px, and the header split under 996px."
+    ],
+    "donts": [
+      "Don't introduce a new accent hue or promote the one-off blues/purples (#1976d2, #667eea) to system roles.",
+      "Don't apply persistent drop shadows or glass blur to base cards — lift is feedback only.",
+      "Don't reuse display rotation, text-stroke, or testimonial tilt outside their signature components.",
+      "Don't invent testimonials, client names, stats, or pricing beyond `Testimonials`, `LogosCarousel`, `FeaturedWork`, and `PRODUCT.md` evidence."
+    ]
+  }
+}

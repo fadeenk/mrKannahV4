@@ -11,6 +11,8 @@ import type { JSX } from "react";
 
 const CAL_URL = "https://cal.com/kannah/30min";
 
+const CTA_MICROCOPY = "30 min · proposal in 48h · no prep needed";
+
 type CtaVariant = "assessment" | "project" | "retainer" | "close";
 
 function calUrl(variant: CtaVariant): string {
@@ -21,23 +23,29 @@ const painGroups = [
   {
     title: "Stuck pilots",
     body: "Your AI pilot has lived in staging for weeks. Every rollout plan feels like it risks production.",
-    proof: "Shipped like: sandboxed rollout, eval harness, rollback plan — to prod without an incident.",
-    route: "→ Assessment",
-    routeLabel: "Go to AI Delivery & Reliability Assessment in engagements",
+    proof:
+      "Example: sandboxed rollout, eval harness, rollback plan — shipped to prod without an incident.",
+    route: "See assessment details",
+    routeLabel:
+      "See assessment details: AI Delivery and Reliability Assessment in engagements section",
   },
   {
     title: "At-risk delivery",
     body: "Legacy constraints and delivery bottlenecks. Adding AI looks like it will destabilize what works.",
-    proof: "Shipped like: CI + coverage first, then AI-assisted triage — lead time down, prod stable.",
-    route: "→ Project",
-    routeLabel: "Go to Project-Based AI Delivery in engagements",
+    proof:
+      "Example: CI and coverage first, then AI-assisted triage — lead time down, prod stable.",
+    route: "See project details",
+    routeLabel:
+      "See project details: Project-Based AI Delivery in engagements section",
   },
   {
     title: "Overloaded team",
     body: "Roadmap is full and senior bandwidth is thin. AI work waits because no one can own it safely.",
-    proof: "Shipped like: embedded senior owner for one workstream — in your repo, to prod with your team.",
-    route: "→ Retainer",
-    routeLabel: "Go to Embedded AI Delivery Partner in engagements",
+    proof:
+      "Example: embedded senior owner for one workstream — in your repo, to prod with your team.",
+    route: "See retainer details",
+    routeLabel:
+      "See retainer details: Embedded AI Delivery Partner in engagements section",
   },
 ];
 
@@ -55,7 +63,7 @@ const proofs = [
 function CtaButtons({
   center = false,
   variant = "close",
-  microcopy = "30 min · proposal in 48h · no prep needed",
+  microcopy = CTA_MICROCOPY,
   block = false,
 }: {
   center?: boolean;
@@ -63,11 +71,12 @@ function CtaButtons({
   microcopy?: string;
   block?: boolean;
 }): JSX.Element {
+  const alignStart = !center || block;
   return (
-    <div>
+    <div style={block ? { width: "100%" } : undefined}>
       <div
         className="cta-container"
-        style={center && !block ? undefined : { justifyContent: "flex-start" }}
+        style={alignStart ? { justifyContent: "flex-start" } : undefined}
       >
         <a
           href={calUrl(variant)}
@@ -77,7 +86,10 @@ function CtaButtons({
           className={`button button--primary ${block ? "button--block" : "button--lg"}`}
         >
           Book a 30-min fit call{" "}
-          <span aria-hidden="true" style={{ fontSize: "0.85em", marginLeft: "0.25rem" }}>
+          <span
+            aria-hidden="true"
+            style={{ fontSize: "0.85em", marginLeft: "0.25rem" }}
+          >
             ↗
           </span>
         </a>
@@ -87,7 +99,8 @@ function CtaButtons({
           fontSize: "1rem",
           marginTop: "0.5rem",
           marginBottom: 0,
-          textAlign: center && !block ? "center" : "left",
+          textAlign: alignStart ? "left" : "center",
+          color: "var(--ifm-color-emphasis-700)",
         }}
       >
         {microcopy}
@@ -98,7 +111,7 @@ function CtaButtons({
 
 function PainGroups(): JSX.Element {
   return (
-    <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+    <section className="section">
       <div className="container">
         <Heading as="h2" style={{ marginBottom: "0.5rem" }}>
           Sound familiar?
@@ -119,7 +132,12 @@ function PainGroups(): JSX.Element {
               className="card--elevated"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <h3 style={{ marginBottom: "0.5rem" }}>{group.title}</h3>
+              <Heading
+                as="h3"
+                style={{ marginBottom: "0.5rem", fontSize: "1.25rem" }}
+              >
+                {group.title}
+              </Heading>
               <p style={{ marginBottom: "1rem" }}>{group.body}</p>
               <hr
                 aria-hidden="true"
@@ -140,7 +158,11 @@ function PainGroups(): JSX.Element {
                 {group.proof}
               </p>
               <p style={{ marginBottom: 0, marginTop: "auto" }}>
-                <a href="#engagements" aria-label={group.routeLabel} className="tag--pill">
+                <a
+                  href="#engagements"
+                  aria-label={group.routeLabel}
+                  className="tag--pill"
+                >
                   {group.route}
                 </a>
               </p>
@@ -154,7 +176,11 @@ function PainGroups(): JSX.Element {
 
 function EngagementOffers(): JSX.Element {
   return (
-    <section className="section section--alt" id="engagements">
+    <section
+      className="section section--alt"
+      id="engagements"
+      style={{ scrollMarginTop: "var(--ifm-navbar-height, 60px)" }}
+    >
       <div className="container">
         <div className="section__header">
           <Heading as="h2" style={{ marginBottom: "0.75rem" }}>
@@ -175,20 +201,27 @@ function EngagementOffers(): JSX.Element {
               <p style={{ marginBottom: "0.5rem" }}>
                 <span className="tag--pill">Start here</span>
               </p>
-              <h3>AI Delivery &amp; Reliability Assessment</h3>
+              <Heading
+                as="h3"
+                style={{ marginBottom: "0.5rem", fontSize: "1.25rem" }}
+              >
+                AI Delivery &amp; Reliability Assessment
+              </Heading>
               <p>
                 <strong>Fixed-scope · 1–2 weeks</strong>
               </p>
             </div>
             <div className="card__body" style={{ flex: "1 1 auto" }}>
-              <p>When you need confidence about the problem or approach first.</p>
-              <p style={{ marginBottom: "0.5rem" }}>
-                <strong>You get:</strong> confidence about the problem and approach before a
-                larger commitment.
+              <p>
+                When you need confidence about the problem or approach first.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>You need:</strong> an active roadmap and access to discuss delivery
-                workflow and production risk.
+                <strong>You get:</strong> confidence about the problem and
+                approach before a larger commitment.
+              </p>
+              <p style={{ marginBottom: "0.5rem" }}>
+                <strong>You need:</strong> an active roadmap and access to
+                discuss delivery workflow and production risk.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
                 <strong>Timeline:</strong> 1–2 weeks.
@@ -196,22 +229,29 @@ function EngagementOffers(): JSX.Element {
               <details>
                 <summary>What shapes scope</summary>
                 <p style={{ marginBottom: 0 }}>
-                  Depth of the workflow review and whether a small proof of value is useful
-                  and safe to include in 1–2 weeks.
+                  Depth of the workflow review and whether a small proof of
+                  value is useful and safe to include in 1–2 weeks.
                 </p>
               </details>
             </div>
-            <div className="card__footer" style={{ marginTop: "auto", paddingTop: "1rem" }}>
-              <CtaButtons
-                variant="assessment"
-                block
-                microcopy="30 min · proposal in 48h · start with evidence"
-              />
+            <div
+              className="card__footer"
+              style={{ marginTop: "auto", paddingTop: "1rem" }}
+            >
+              <CtaButtons variant="assessment" block />
             </div>
           </div>
-          <div className="card--elevated" style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            className="card--elevated"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             <div className="card__header">
-              <h3>Project-Based AI Delivery</h3>
+              <Heading
+                as="h3"
+                style={{ marginBottom: "0.5rem", fontSize: "1.25rem" }}
+              >
+                Project-Based AI Delivery
+              </Heading>
               <p>
                 <strong>Fixed-scope · scoped to done</strong>
               </p>
@@ -219,35 +259,44 @@ function EngagementOffers(): JSX.Element {
             <div className="card__body" style={{ flex: "1 1 auto" }}>
               <p>When scope and done are definable upfront.</p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>You get:</strong> a defined MVP, feature, or overhaul shipped to
-                production with your team.
+                <strong>You get:</strong> a defined MVP, feature, or overhaul
+                shipped to production with your team.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>You need:</strong> definable scope, access to discuss delivery
-                workflow and production risk, and one engineering counterpart.
+                <strong>You need:</strong> definable scope, access to discuss
+                delivery workflow and production risk, and one engineering
+                counterpart.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>Timeline:</strong> defined at scoping, owned workstream to done.
+                <strong>Timeline:</strong> defined at scoping, owned workstream
+                to done.
               </p>
               <details>
                 <summary>What defines done</summary>
                 <p style={{ marginBottom: 0 }}>
-                  Scope, ownership, and success measures defined in writing; work happens
-                  in your repo with CI.
+                  Scope, ownership, and success measures defined in writing;
+                  work happens in your repo with CI.
                 </p>
               </details>
             </div>
-            <div className="card__footer" style={{ marginTop: "auto", paddingTop: "1rem" }}>
-              <CtaButtons
-                variant="project"
-                block
-                microcopy="30 min · proposal in 48h · scoped to done"
-              />
+            <div
+              className="card__footer"
+              style={{ marginTop: "auto", paddingTop: "1rem" }}
+            >
+              <CtaButtons variant="project" block />
             </div>
           </div>
-          <div className="card--elevated" style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            className="card--elevated"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
             <div className="card__header">
-              <h3>Embedded AI Delivery Partner</h3>
+              <Heading
+                as="h3"
+                style={{ marginBottom: "0.5rem", fontSize: "1.25rem" }}
+              >
+                Embedded AI Delivery Partner
+              </Heading>
               <p>
                 <strong>Weekly retainer · 3-month minimum</strong>
               </p>
@@ -255,28 +304,31 @@ function EngagementOffers(): JSX.Element {
             <div className="card__body" style={{ flex: "1 1 auto" }}>
               <p>When urgency, scope, and ownership are clear.</p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>You get:</strong> an owned workstream shipped to production with your team.
+                <strong>You get:</strong> an owned workstream shipped to
+                production with your team.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>You need:</strong> clear urgency, scope, and ownership for a 3-month minimum.
+                <strong>You need:</strong> clear urgency, scope, and ownership
+                for a 3-month minimum.
               </p>
               <p style={{ marginBottom: "0.5rem" }}>
-                <strong>Timeline:</strong> 3-month minimum, embedded in your cadence.
+                <strong>Timeline:</strong> 3-month minimum, embedded in your
+                cadence.
               </p>
               <details>
                 <summary>How we work</summary>
                 <p style={{ marginBottom: 0 }}>
-                  Work happens in your repo with CI and one engineering counterpart; scope,
-                  ownership, and success measures defined in writing.
+                  Work happens in your repo with CI and one engineering
+                  counterpart; scope, ownership, and success measures defined in
+                  writing.
                 </p>
               </details>
             </div>
-            <div className="card__footer" style={{ marginTop: "auto", paddingTop: "1rem" }}>
-              <CtaButtons
-                variant="retainer"
-                block
-                microcopy="30 min · proposal in 48h · for a clear-scope workstream"
-              />
+            <div
+              className="card__footer"
+              style={{ marginTop: "auto", paddingTop: "1rem" }}
+            >
+              <CtaButtons variant="retainer" block />
             </div>
           </div>
         </div>
@@ -287,13 +339,19 @@ function EngagementOffers(): JSX.Element {
 
 function ProofCases(): JSX.Element {
   return (
-    <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+    <section className="section">
       <div className="container">
         <Heading as="h2">Proof</Heading>
-        <div className="secondary-services-grid" style={{ marginTop: "1.5rem" }}>
+        <div
+          className="secondary-services-grid"
+          style={{ marginTop: "1.5rem" }}
+        >
           {proofs.map((proof) => (
             <div key={proof.title} className="card--elevated">
-              <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+              <Heading
+                as="h3"
+                style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}
+              >
                 {proof.title}
               </Heading>
               <p style={{ marginBottom: 0 }}>{proof.text}</p>
@@ -301,7 +359,13 @@ function ProofCases(): JSX.Element {
           ))}
         </div>
         <p style={{ marginBottom: 0, marginTop: "1.5rem" }}>
-          <a href="/showcase">See more work →</a>
+          <a href="/case-studies" aria-label="Read client case studies">
+            Read case studies <span aria-hidden="true">→</span>
+          </a>{" "}
+          ·{" "}
+          <a href="/showcase" aria-label="See more work in the showcase">
+            See more work <span aria-hidden="true">→</span>
+          </a>
         </p>
       </div>
     </section>
@@ -311,35 +375,30 @@ function ProofCases(): JSX.Element {
 function FitFaq(): JSX.Element {
   return (
     <>
-      <section className="section section--alt" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
-        <div className="container">
-          <Heading as="h2">Fit / non-fit</Heading>
-          <p>
-            <strong>Fit:</strong> CTOs, VPs/Heads of Engineering, and technical founders at
-            established SaaS companies with an active roadmap and real engineering constraints —
-            especially where workflows are complex or regulated.
-          </p>
-          <p>
-            <strong>Not fit:</strong> generic web builds, idea-stage teams with no production
-            system, or teams looking for presentation-only advice.
-          </p>
-        </div>
-      </section>
-      <section className="section" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
+      <section className="section">
         <div className="container">
           <Heading as="h2">FAQ</Heading>
-          <div className="secondary-services-grid" style={{ marginTop: "1.5rem" }}>
+          <div
+            className="secondary-services-grid"
+            style={{ marginTop: "1.5rem" }}
+          >
             <div className="card--elevated">
-              <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+              <Heading
+                as="h3"
+                style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}
+              >
                 Who owns the code?
               </Heading>
               <p style={{ marginBottom: 0 }}>
-                You do — I work in your repo, on your cadence, with scope, ownership, and
-                success measures defined in writing.
+                You do — I work in your repo, on your cadence, with scope,
+                ownership, and success measures defined in writing.
               </p>
             </div>
             <div className="card--elevated">
-              <Heading as="h3" style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+              <Heading
+                as="h3"
+                style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}
+              >
                 What access do you need?
               </Heading>
               <p style={{ marginBottom: 0 }}>
@@ -392,8 +451,16 @@ export default function Home(): JSX.Element {
       <Header
         headline="Rewiring to AI-first without breaking production?"
         subheadline="I help vertical SaaS teams ship AI into real workflows — faster delivery, same reliability, engineering ownership intact."
-        primaryCta={{ label: "Book a 30-min fit call ↗", href: calUrl("close"), external: true }}
-        secondaryCta={{ label: "See how we work ↓", href: "#engagements", external: false }}
+        primaryCta={{
+          label: "Book a 30-min fit call",
+          href: calUrl("close"),
+          external: true,
+        }}
+        secondaryCta={{
+          label: "See how we work",
+          href: "#engagements",
+          external: false,
+        }}
         microcopy="30 min · proposal in 48h · no prep needed"
       />
       <StatsBar />

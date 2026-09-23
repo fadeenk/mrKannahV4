@@ -15,6 +15,12 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* DESIGN.md type ramp (sanctioned sizes): display 75px/30px, headline
+     2.5rem (1.75rem mobile), title 1.25rem, body 1rem, bullets 0.95rem,
+     quote 1.1rem italic, label 0.75rem, work badge 0.8rem bold.
+     Off-ramp mapping: 1.2rem -> 1.25rem (title); 0.9rem -> 1rem (body);
+     2rem stats numeral kept as display-adjacent token (see --font-size-stats). */
+  --font-size-stats: 2rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -54,12 +60,44 @@
 }
 .tag--pill {
   border: 1px solid var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-darkest);
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   font-weight: 600;
   font-size: 0.75rem;
   display: inline-block;
+}
+
+a.tag--pill {
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+a.tag--pill:hover {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+a.tag--pill:active {
+  transform: translateY(1px);
+}
+
+a.tag--pill:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Dark theme: lightest mint keeps 9:1 on dark surfaces (#4fddbf on
+   #242526 = 9.09:1); #1a8870 alone is 3.51:1 and fails. */
+[data-theme="dark"] .tag--pill {
+  border-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme="dark"] a.tag--pill:hover {
+  background: var(--ifm-color-primary-lightest);
+  color: #1c1e21;
 }
 
 /* Button utilities */
@@ -99,6 +137,21 @@
   justify-content: center;
 }
 
+.button--primary.button--block {
+  width: 100%;
+}
+
+.button--primary:active {
+  transform: translateY(0);
+}
+
+.button--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .button--outline {
   background: white;
   color: var(--ifm-color-primary);
@@ -110,6 +163,22 @@
   color: white;
 }
 
+/* Dark theme button contrast: #25c2a0 on white is 2.26:1 (fails AA).
+   Use pine #205d3b text (7.81:1 on white) to stay in the green voice
+   while passing. Hover fill uses mint-glow bg + ink text (9.89:1). */
+[data-theme="dark"] .button--primary,
+[data-theme="dark"] .button--outline {
+  color: #205d3b;
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme="dark"] .button--primary:hover,
+[data-theme="dark"] .button--outline:hover {
+  background: var(--ifm-color-primary-lightest);
+  border-color: var(--ifm-color-primary-lightest);
+  color: #1c1e21;
+}
+
 /* CTA container */
 .cta-container {
   display: flex;
@@ -117,6 +186,40 @@
   margin-top: 1.5rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.card__footer .cta-container {
+  margin-top: 0;
+}
+
+#engagements {
+  scroll-margin-top: var(--ifm-navbar-height, 60px);
+}
+
+/* Engagement card disclosures: native details, themed focus */
+.engagement-grid details {
+  margin-top: 0.75rem;
+}
+
+.engagement-grid summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ifm-color-primary-darkest);
+  border-radius: 4px;
+}
+
+.engagement-grid summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.engagement-grid summary:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .engagement-grid summary {
+  color: var(--ifm-color-primary-lightest);
 }
 
 .passwordProtectedDoc {
@@ -148,6 +251,14 @@
   padding: 2rem 0;
   border-top: 1px solid var(--ifm-color-emphasis-200);
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  /* Contrast-safe foreground per theme. Light: #fff on #2e8555 = 4.56:1
+     (passes AA). Dark hero bg is #25c2a0 where #fff is 2.26:1, so use
+     ink #1c1e21 instead (7.40:1). */
+  --stats-fg: #fff;
+}
+
+[data-theme="dark"] .stats-bar {
+  --stats-fg: #1c1e21;
 }
 
 .stats-grid {
@@ -163,14 +274,15 @@
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: var(--font-size-stats);
   font-weight: 700;
-  color: var(--ifm-font-color);
+  color: var(--stats-fg);
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: var(--ifm-color-emphasis-200);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--stats-fg);
 }
 
 @media (max-width: 768px) {
@@ -206,6 +318,28 @@
 .service-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+}
+
+/* Readable measure: cap hero subtitles + section prose at 65ch
+   (fixes 92/111-char line-length findings). Centered blocks re-center. */
+.hero__subtitle,
+.hero-subheadline {
+  max-width: 65ch;
+}
+
+.section p {
+  max-width: 65ch;
+}
+
+.section .text--center p,
+.section__header p,
+.text--center .hero__subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  max-width: 100%;
 }
 
 .service-title {
@@ -289,6 +423,7 @@
 .logos-carousel-track-wrapper {
   overflow: hidden;
   position: relative;
+  max-width: 100%;
 }
 
 .logos-carousel-track-wrapper::before,
@@ -314,13 +449,14 @@
 
 .logos-carousel-track {
   display: flex;
-  gap: 6rem;
+  gap: 3rem;
   align-items: center;
   animation: marquee-scroll 25s linear infinite;
   width: max-content;
 }
 
-.logos-carousel-track-wrapper:hover .logos-carousel-track {
+.logos-carousel-track-wrapper:hover .logos-carousel-track,
+.logos-carousel-track-wrapper:focus-within .logos-carousel-track {
   animation-play-state: paused;
 }
 
@@ -342,6 +478,19 @@
   height: 32px;
   width: auto;
   display: block;
+  aspect-ratio: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logos-carousel-track {
+    animation: none;
+  }
+
+  .card--elevated:hover,
+  .service-card:hover,
+  .button--primary:hover {
+    transform: none;
+  }
 }
 
 @keyframes marquee-scroll {
