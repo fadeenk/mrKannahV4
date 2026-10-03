@@ -1,0 +1,135 @@
+.h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  text-wrap: balance;
+}
+
+.lede {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHighlight {
+  border-color: var(--ifm-color-primary);
+  border-width: 2px;
+}
+
+.statsBand {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 2rem 0;
+}
+
+.statNumber {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: var(--font-size-stats);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.finalCta {
+  text-align: center;
+  padding: 4rem 0;
+  background: var(--ifm-background-surface-color);
+}
+
+@media screen and (max-width: 996px) {
+  .grid3,
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardHighlight {
+    transition: none;
+  }
+}
+
+/* Magnetic CTA: pointer-tracked translate (--mx/--my) with spring
+   return on leave. Shadow deepens with proximity intent. */
+.magnetic {
+  display: inline-block;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.magnetic:hover {
+  transition: transform 0.12s ease-out;
+}
+
+:global(.hasMotion) .magnetic :global(.button--primary) {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+:global(.hasMotion) .magnetic:hover :global(.button--primary) {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+}
+
+/* Browser surfaces: selection, numerals, link underlines, icon glyphs */
+.page ::selection,
+.statsBand ::selection {
+  background: color-mix(in srgb, var(--ifm-color-primary) 30%, transparent);
+}
+
+.ctaArrow {
+  flex: none;
+  margin-left: 0.4rem;
+  font-size: 1.05em;
+}
+
+.inlineArrow {
+  vertical-align: -0.125em;
+}
+
+.statNumber {
+  font-variant-numeric: tabular-nums;
+}
+
+.finalCta a {
+  text-underline-offset: 3px;
+}
+
+.finalCta a:focus-visible,
+.card a:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnetic,
+  :global(.hasMotion) .magnetic :global(.button--primary) {
+    transition: none !important;
+    transform: none !important;
+  }
+}
