@@ -1,0 +1,92 @@
+.blockWrap {
+  width: 100%;
+}
+
+.alignStart {
+  justify-content: flex-start;
+}
+
+/* Magnetic CTA: pointer-tracked translate (--mx/--my, set by useMagnet in
+   tier "full") with a spring-like return on leave. */
+.magnetic {
+  display: inline-block;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.35s var(--c-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.blockWrap .magnetic {
+  display: block;
+}
+
+.magnetic:hover {
+  transition: transform 0.12s ease-out;
+}
+
+.magnetic :global(.button--primary) {
+  transition:
+    box-shadow 0.35s var(--c-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+:global(.hasMotion) .magnetic :global(.button--primary) {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+:global(.hasMotion) .magnetic:hover :global(.button--primary) {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+}
+
+.arrow {
+  flex: none;
+  margin-left: 0.4rem;
+  font-size: 1.05em;
+}
+
+.microcopy {
+  font-size: 1rem;
+  margin: 0.5rem 0 0;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.microStart {
+  text-align: left;
+}
+
+.microCenter {
+  text-align: center;
+}
+
+/* Drenched green band: inverted button, white-ish microcopy. */
+.onGreen,
+.onGreen:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--c-drench-bg, var(--ifm-color-primary-darker));
+}
+
+.onGreen:hover {
+  background-color: color-mix(in srgb, #fff 88%, var(--c-drench-bg, #000));
+  color: var(--c-drench-bg, var(--ifm-color-primary-darker));
+}
+
+.microOnGreen {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.magnetic a:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+
+.onGreen:focus-visible {
+  outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnetic,
+  .magnetic :global(.button--primary) {
+    transition: none !important;
+    transform: none !important;
+  }
+}

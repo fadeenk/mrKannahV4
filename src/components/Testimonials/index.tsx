@@ -55,7 +55,7 @@ function Testimonial({ name, img, description, link, title }: Testimonial) {
   return (
     <li className={styles.member}>
       <div className={styles.thumb}>
-        <img src={img} />
+        <img src={img} alt="" loading="lazy" decoding="async" />
       </div>
       <div className={styles.description}>
         <h3 className={styles.testimonialName}>{name}</h3>

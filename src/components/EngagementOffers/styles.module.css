@@ -1,0 +1,35 @@
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHighlight {
+  border-color: var(--ifm-color-primary);
+  border-width: 2px;
+}
+
+.card a:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 996px) {
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardHighlight {
+    transition: none;
+  }
+}
