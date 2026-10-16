@@ -31,7 +31,7 @@ const COUNT_MS = 1500;
 const STAGGER_MS = 110;
 
 /**
- * "off": render the final text only (SSR, reduced motion, already on screen).
+ * "off": render the final text only (SSR, reduced motion, scrolled past).
  * "armed": below the fold; the overlay waits at zero so nothing flashes.
  * "run": first view reached; the overlay counts up.
  */
@@ -111,8 +111,9 @@ function StatItem({ value, label, phase, delay }: StatItemProps): JSX.Element {
 /**
  * First drenched green band (stats + client logos), directly under the hero.
  * The release line continues as the band's 1px top hairline. Numerals count
- * up once on first view in motion tiers "full" and "touch"; the reduced tier
- * (and anything already on screen at mount) shows the final values.
+ * up once on first view in motion tiers "full" and "touch", at mount if the
+ * band is already on screen; the reduced tier (and a band scrolled past at
+ * mount) shows the final values.
  */
 export default function StatsBand(): JSX.Element {
   const tier = useMotionTier();
@@ -133,9 +134,15 @@ export default function StatsBand(): JSX.Element {
       setPhase("off");
       return;
     }
-    // Already in view (or scrolled past) at mount: never replay, never flash.
-    if (el.getBoundingClientRect().top < window.innerHeight) {
+    const rect = el.getBoundingClientRect();
+    // Scrolled past at mount (restored scroll position): never replay.
+    if (rect.bottom < 0) {
       setPhase("off");
+      return;
+    }
+    // Already on screen at mount (tall viewports): count up right away.
+    if (rect.top < window.innerHeight) {
+      setPhase("run");
       return;
     }
     setPhase("armed");
