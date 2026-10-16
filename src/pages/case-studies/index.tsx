@@ -14,7 +14,7 @@ import styles from "./index.module.css";
 
 /*
  * The case-study index: the two studies as ledger rows on the release
- * line, in /consulting order. Every value comes from the registry
+ * line, in homepage order. Every value comes from the registry
  * (src/components/CaseStudy/registry.ts), the same source as the "More case
  * studies" row at the foot of each study.
  */

@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 /**
- * Motion tiers for the /consulting page.
+ * Motion tiers for the homepage.
  * - full: fine pointer, no reduced-motion. Everything runs.
  * - touch: coarse pointer, no reduced-motion. Effects settle once, no pointer
  *   effects.

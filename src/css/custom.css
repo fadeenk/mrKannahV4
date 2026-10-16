@@ -18,9 +18,7 @@
   /* DESIGN.md type ramp (sanctioned sizes): display 75px/30px, headline
      2.5rem (1.75rem mobile), title 1.25rem, body 1rem, bullets 0.95rem,
      quote 1.1rem italic, label 0.75rem, work badge 0.8rem bold.
-     Off-ramp mapping: 1.2rem -> 1.25rem (title); 0.9rem -> 1rem (body);
-     2rem stats numeral kept as display-adjacent token (see --font-size-stats). */
-  --font-size-stats: 2rem;
+     Off-ramp mapping: 1.2rem -> 1.25rem (title); 0.9rem -> 1rem (body). */
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -42,11 +40,6 @@
 .section--alt {
   background: var(--ifm-background-surface-color);
 }
-.section__header {
-  text-align: center;
-  margin-bottom: 1.25rem;
-}
-
 .card--elevated {
   background: var(--ifm-card-background-color, var(--ifm-background-color));
   border: 1px solid var(--ifm-color-emphasis-200, rgba(0, 0, 0, 0.08));
@@ -196,32 +189,6 @@ a.tag--pill:focus-visible {
   scroll-margin-top: var(--ifm-navbar-height, 60px);
 }
 
-/* Engagement card disclosures: native details, themed focus */
-.engagement-grid details {
-  margin-top: 0.75rem;
-}
-
-.engagement-grid summary {
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--ifm-color-primary-darkest);
-  border-radius: 4px;
-}
-
-.engagement-grid summary:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.engagement-grid summary:focus-visible {
-  outline: 3px solid var(--ifm-color-primary);
-  outline-offset: 2px;
-}
-
-[data-theme="dark"] .engagement-grid summary {
-  color: var(--ifm-color-primary-lightest);
-}
-
 .passwordProtectedDoc {
   width: 20.4rem;
   height: 4rem;
@@ -247,79 +214,6 @@ a.tag--pill:focus-visible {
   }
 }
 
-.stats-bar {
-  padding: 2rem 0;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  /* Contrast-safe foreground per theme. Light: #fff on #2e8555 = 4.56:1
-     (passes AA). Dark hero bg is #25c2a0 where #fff is 2.26:1, so use
-     ink #1c1e21 instead (7.40:1). */
-  --stats-fg: #fff;
-}
-
-[data-theme="dark"] .stats-bar {
-  --stats-fg: #1c1e21;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  text-align: center;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-number {
-  font-size: var(--font-size-stats);
-  font-weight: 700;
-  color: var(--stats-fg);
-}
-
-.stat-label {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--stats-fg);
-}
-
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-/* Services */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.service-card {
-  background: var(--ifm-background-surface-color);
-  color: var(--ifm-font-color-base);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.service-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
 /* Readable measure: cap hero subtitles + section prose at 65ch
    (fixes 92/111-char line-length findings). Centered blocks re-center. */
 .hero__subtitle,
@@ -332,7 +226,6 @@ a.tag--pill:focus-visible {
 }
 
 .section .text--center p,
-.section__header p,
 .text--center .hero__subtitle {
   margin-left: auto;
   margin-right: auto;
@@ -340,48 +233,6 @@ a.tag--pill:focus-visible {
 
 img {
   max-width: 100%;
-}
-
-.service-title {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.service-bullets {
-  text-align: left;
-  padding-left: 1rem;
-}
-
-.service-bullets li {
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-}
-
-.engagement-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.secondary-services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-@media (max-width: 768px) {
-  .secondary-services-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 400px) {
-  .services-grid,
-  .engagement-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Testimonials */
@@ -487,7 +338,6 @@ img {
   }
 
   .card--elevated:hover,
-  .service-card:hover,
   .button--primary:hover {
     transform: none;
   }

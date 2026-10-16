@@ -40,7 +40,7 @@ import styles from "./card.module.css";
 
 /**
  * /card: the digital business card. A frosted glass badge held over the
- * /consulting release-line field: the ticks and the line run behind the
+ * homepage release-line field: the ticks and the line run behind the
  * badge and the glass blurs them. Show QR code turns the badge over in place
  * to the QR. Chromeless (no navbar or footer), so the badge is the page.
  *

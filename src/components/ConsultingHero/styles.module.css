@@ -1,4 +1,4 @@
-/* /consulting hero. The H1 is the LCP element and renders with the server
+/* Homepage hero. The H1 is the LCP element and renders with the server
    markup; the field behind it (SignalField) arrives later and never moves
    layout. Display type is Besley via --c-display (page tokens). */
 

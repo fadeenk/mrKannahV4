@@ -1,5 +1,5 @@
 /*
- * The published case studies, in /consulting order (Portico, AGI).
+ * The published case studies, in homepage order (Portico, AGI).
  * One source for everything shown about a study outside its own page: the
  * /case-studies index and the "More case studies" row at the foot of each
  * study. The index fields are the `indexEntry` copy in
@@ -13,7 +13,7 @@ export type CaseSlug =
   | "portico-embedded-retainer"
   | "american-growth-insurance";
 
-/** Exactly the /consulting offer names (EngagementOffers), one per study. */
+/** Exactly the homepage offer names (EngagementOffers), one per study. */
 export type EngagementLabel =
   | "Embedded Delivery Partner"
   | "Fixed-Scope Project";

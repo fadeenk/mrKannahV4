@@ -118,7 +118,7 @@ export default function AmericanGrowthInsurance(): JSX.Element {
           TODO(title): Luke's title is unconfirmed, so the attribution is name
           and company only. Candidates conflict: "CEO & Founder" in
           src/components/Testimonials, "Co-Founder / Advisor" on the previous
-          version of this page. Add it here and make /consulting match once
+          version of this page. Add it here and make the homepage match once
           confirmed. */}
       <CaseQuote
         variant="lead"

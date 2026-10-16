@@ -43,9 +43,9 @@ A generic agency sells capacity; this product sells founder-to-production accoun
 
 Confirmed functionality:
 
-- Home (`src/pages/index.tsx`): Header, StatsBar (18+ / $45M+ / 40-60%), About summary, Services, Engagement Models, FeaturedWork, Skills, Testimonials, Contact.
+- Home (`src/pages/index.tsx`): the consulting-led page: hero, stats band with client logos, pain groups, proof showcase, engagement offers, testimonials, fit FAQ, closing CTA, contact.
 - Showcase (`src/pages/showcase/`): index + Apps, Businesses, Hardware, Other, Websites, Awards, iFolio, CustomizableAgenticPlatform, SuperAgentIntegration.
-- Blog docs at `/blog` (`docs/`, `sidebars.ts`), About (`src/pages/about.mdx`), Consulting (`src/pages/consulting.tsx`), plus goals, podcasts, summit, years, card, datingProfile, 653-timberfalls-for-rent.
+- Blog docs at `/blog` (`docs/`, `sidebars.ts`), About (`src/pages/about.mdx`), plus goals, podcasts, summit, years, card, datingProfile, 653-timberfalls-for-rent.
 - Technical constraints: Docusaurus 3.10.2 + React 19 + TypeScript strict, static export to `build/`, `onBrokenLinks: throw`, English-only, gtag `G-QRPFQQWH20`.
 
 Explicitly undecided: role and prominence of personal routes (`datingProfile`, `card`, `653-timberfalls-for-rent`, `years`, `goals`, `summit`) in the consulting funnel — preserve routes, do not assume funnel relevance.
@@ -65,9 +65,8 @@ Real proof that must not be fabricated, with paths:
 - Stats: 18+ years, $45M+ raised for clients, 40-60% infra reduction (`src/pages/index.tsx` StatsBar).
 - Testimonials: `src/components/Testimonials/index.tsx`.
 - Client logos: `src/components/LogosCarousel/index.tsx`.
-- Featured work: `src/components/FeaturedWork/index.tsx`.
 - Founder story: Iraq → Turkey → US refugee via UN (2008), ESL to top of class, SDSU Computer Engineering + CS, web business, CourseKey technical co-founder (`src/pages/about.mdx`).
-- Skills: `src/components/Skills/index.tsx`, Contact: `src/components/Contact/index.tsx`, Gallery where used.
+- Contact: `src/components/Contact/index.tsx`, Gallery where used.
 
 Absences future work must not invent: no fabricated client names, testimonials, benchmarks, pricing, or licensing beyond what components/docs contain.
 

@@ -6,7 +6,7 @@ Docusaurus portfolio site (React 19, TypeScript) for a technology consultant. Pr
 
 - `PRODUCT.md` and `DESIGN.md`: product context and the design system, including its Do's and Don'ts. `.impeccable/` holds the design sidecar and per-surface direction contracts.
 - `docs/superpowers/`: specs and plans, local only and gitignored. `docs/` publishes at `/blog`, so `docusaurus.config.ts` also excludes `superpowers/**`.
-- Client proof appears in `src/pages/case-studies/`, `src/components/ProofShowcase`, `LogosCarousel` and the `/consulting` page.
+- Client proof appears in `src/pages/case-studies/`, `src/components/ProofShowcase`, `LogosCarousel` and the homepage.
 
 ## Conventions
 

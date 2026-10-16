@@ -1,4 +1,4 @@
-/* Case-study pages: the /consulting world extended to its proof pages.
+/* Case-study pages: the homepage world extended to its proof pages.
    Masthead and facts ledger, numeral ledger, Besley quotes, the story on the
    release-line spine, screenshot frames, and the stack disclosure. Green is
    the only accent; text sits on the page ground in both themes, and only the
@@ -11,7 +11,7 @@
    and opacity animate. */
 
 /* Same width-matched stand-in for Besley 700 as
-   src/pages/consulting.module.css, so the font swap does not reflow the H1. */
+   src/pages/index.module.css, so the font swap does not reflow the H1. */
 @font-face {
   font-family: "Besley Fallback";
   src: local("Georgia Bold"), local("Georgia-Bold");
@@ -20,7 +20,7 @@
 }
 
 /* ── Page tokens ──
-   The --c-* block mirrors .root in src/pages/consulting.module.css (keep the
+   The --c-* block mirrors .root in src/pages/index.module.css (keep the
    two in sync): FinalCta, BookCta, SectionHeader, and Reveal read them. */
 .root {
   --c-display:

@@ -75,7 +75,7 @@ const offers: readonly Offer[] = [
  * shaping row line up across all three and can be scanned side by side. The
  * "Case study" row comes last: an offer without one ends a row early.
  * The section is the anchor target for every `#engagements` link, including
- * the case studies' `/consulting#engagements`; registering it lets the build's
+ * the case studies' `/#engagements`; registering it lets the build's
  * anchor check see a plain `id`, which it otherwise only finds on headings.
  */
 export default function EngagementOffers(): JSX.Element {

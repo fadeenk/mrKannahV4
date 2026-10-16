@@ -80,7 +80,7 @@ type TestimonialsProps = {
   /**
    * "onGreen" re-skins the cards (white, with the band's own green as the
    * accent). It does not paint the band: the host page supplies that
-   * (/consulting does, in consulting.module.css).
+   * (the homepage does, in src/pages/index.module.css).
    */
   tone?: "default" | "onGreen";
 };

@@ -167,7 +167,7 @@ This is a pragmatic and proven consulting surface. Minimal chrome, honest materi
 
 Density is comfortable, not airy and not dense. Copy is direct and results-quantified. Green is the single voice across light and dark themes; everything else is Infima neutral structure.
 
-The `/consulting` surface (`src/pages/consulting.tsx`, a noindex draft meant to replace the homepage) is the one place the system speaks louder, built on one idea: **the release line**. A field of small ticks starts disordered, aligns into a single green line that runs behind the hero portrait and climbs past it, and that stroke then recurs as the stats-band hairline, the 2px stroke that opens each problem and FAQ row, and the proof spine; the closing CTA keeps only a quiet tick ground whose ticks point at the copy, with no line drawn. The departures below are scoped to that surface, to its proof pages, the case studies under `/case-studies` (built from `src/components/CaseStudy/`), which a visitor reaches from the proof rows, and to `/card` (`src/pages/card.tsx`), the digital business card; every other page keeps the incumbent system until `/consulting` replaces `/`, at which point they become the system.
+The homepage (`src/pages/index.tsx`) is the one place the system speaks louder, built on one idea: **the release line**. A field of small ticks starts disordered, aligns into a single green line that runs behind the hero portrait and climbs past it, and that stroke then recurs as the stats-band hairline, the 2px stroke that opens each problem and FAQ row, and the proof spine; the closing CTA keeps only a quiet tick ground whose ticks point at the copy, with no line drawn. The departures below are scoped to that surface, to its proof pages, the case studies under `/case-studies` (built from `src/components/CaseStudy/`), which a visitor reaches from the proof rows, and to `/card` (`src/pages/card.tsx`), the digital business card; every other page keeps the incumbent system.
 
 `/card` is the same world under one held object: a pane of glass held over the release line. The tick field runs behind a frosted badge, the line enters behind the round portrait and climbs past it, and the glass is what you hold up and hand over. The page is chromeless, Besley sets the name and nothing else, and there is no drenched band. The glass, its light-catching edge, its sheen, and its one resting shadow are user-pinned and belong to that badge alone.
 
@@ -176,7 +176,7 @@ The `/consulting` surface (`src/pages/consulting.tsx`, a noindex draft meant to 
 - Flat surfaces at rest, lift only on hover
 - Restrained and confident controls with 8–12px geometry
 - Playful proof accents (tilt, angled testimonials, logo marquee) on a calm base
-- `/consulting`, its case studies, and `/card` only: a serif display face and one recurring "release line" motif in ticks, strokes, and a pilot dot; drenched green bands on `/consulting` (three) and each case study (the closing one), none on `/card`
+- The homepage, its case studies, and `/card` only: a serif display face and one recurring "release line" motif in ticks, strokes, and a pilot dot; drenched green bands on the homepage (three) and each case study (the closing one), none on `/card`
 - `/card` only: a frosted glass badge over the tick field, the one glass surface in the system
 
 ## Colors
@@ -203,8 +203,8 @@ Full ramps are normative in `src/css/custom.css`: light `#29784c, #277148, #205d
 Functional one-offs, not system accents: View Details blue (#1976d2 in `FeaturedWork`), iFolio AI badge gradient (#667eea → #764ba2). Do not promote these to palette roles.
 
 - **Logo Plate** (#fcfbf7, 1px `rgba(28, 30, 33, 0.14)` border, 8px radius): the warm light chip behind client logos in both themes, because the logos are dark marks on transparent. It sits behind the logo only; text never sits on it, so copy keeps following the theme (ProofShowcase, the case studies, the stats-band marquee on hover).
-### Drenched Bands (`/consulting` only)
-- **Drench Forest** (#277148): Light-theme ground of a drenched band. This is the theme's `primary-darker` step (`--c-drench-bg` in `src/pages/consulting.module.css`). White text on it measures 5.9:1.
+### Drenched Bands (the homepage only)
+- **Drench Forest** (#277148): Light-theme ground of a drenched band. This is the theme's `primary-darker` step (`--c-drench-bg` in `src/pages/index.module.css`). White text on it measures 5.9:1.
 - **Drench Deep** (#136251): Dark-theme ground, the deep ramp step (`primary-darkest` at 72% over black). White text measures 7.3:1. Mint Signal is not used as a ground because white on it is 2.3:1.
 
 Bands: the stats band, the testimonials band (the shared component with `tone="onGreen"`: white cards with dark text in both themes, and the name tags, photo frames, role chips and source links in the band's own drench green), and the closing CTA. Text and the inverted CTA are white; selection inverts to white on green.
@@ -222,7 +222,7 @@ The badge's materials, declared on the `/card` root (`src/pages/card.module.css`
 
 ### Named Rules
 **The One Voice Rule.** Green is the only accent on any screen. Its rarity is the point — rarity preserves the booking CTA.
-**The Three Bands Rule.** On `/consulting` green may own the surface in exactly three regions: stats, testimonials, closing CTA. A case-study page gets one: the closing CTA. `/card` gets none: field and glass only. Everywhere else green stays a stroke, a fill on one button, or a line.
+**The Three Bands Rule.** On the homepage green may own the surface in exactly three regions: stats, testimonials, closing CTA. A case-study page gets one: the closing CTA. `/card` gets none: field and glass only. Everywhere else green stays a stroke, a fill on one button, or a line.
 
 ## Typography
 
@@ -239,7 +239,7 @@ The badge's materials, declared on the `/card` root (`src/pages/card.module.css`
 - **Body** (400, 1rem, 1.65): Descriptions, bullets (0.95rem in service lists), testimonial quotes (1.1rem italic).
 - **Label** (600, 0.75rem, 0.02em spacing): Pill tags, category badges (0.8rem bold in work cards), testimonial roles.
 
-### `/consulting` display face
+### Homepage display face
 **Besley Variable** (self-hosted woff2, preloaded, with a width-matched `Besley Fallback` over Georgia Bold at `size-adjust: 105.5%` so the swap does not reflow headings).
 
 - **Consulting Display** (700, `clamp(2.5rem, 6vw, 5.5rem)`, 1.04, -0.025em): The H1 only, set on two lines at desktop.
@@ -251,8 +251,8 @@ The badge's materials, declared on the `/card` root (`src/pages/card.module.css`
 Body, labels, and microcopy stay in the system sans on these surfaces too. On `/card` the role (1rem, 600), the line under it (muted), the row labels (the Label role), the row values (1rem, 600, tabular numerals), and every button are system sans.
 
 ### Named Rules
-**The Display-Once Rule.** Anton italic with stroke appears in the site header and nowhere else. Section hierarchy stays in the system sans on every page except `/consulting`, its case studies, and `/card`.
-**The Serif-For-Claims Rule.** On `/consulting` and the case studies Besley carries headings, titles, numerals, and client quotes, the things a visitor skims; on `/card` it sets the name and nothing else. It never sets body copy, buttons, or microcopy, and it is never stroked, italicised, or rotated.
+**The Display-Once Rule.** Anton italic with stroke appears in the site header and nowhere else. Section hierarchy stays in the system sans on every page except the homepage, its case studies, and `/card`.
+**The Serif-For-Claims Rule.** On the homepage and the case studies Besley carries headings, titles, numerals, and client quotes, the things a visitor skims; on `/card` it sets the name and nothing else. It never sets body copy, buttons, or microcopy, and it is never stroked, italicised, or rotated.
 
 ## Layout
 
@@ -265,7 +265,7 @@ Centered `container` with full-bleed section bands. Base section rhythm is gener
 - Header: split row (copy left, portrait right) flipping to `column-reverse` centered under 996px to match Docusaurus navbar breakpoint.
 - Spacing scale in use: 8px, 16px, 24px (1.5rem), 32px (2rem), 64px (4rem section).
 
-### `/consulting` page order and rhythm
+### Homepage order and rhythm
 Hero → stats band (drenched) → problem rows → proof → engagements → testimonials (drenched) → FAQ → closing CTA (drenched) → contact form. Each problem row links to the proof row of the client who was in that situation, so proof sits directly under the problem and before the ask. The page shell is a single `<main>` that owns the page tokens; sections own their own styles.
 
 - Sections pad 4–6rem vertically with more space above a heading than below it; the container width is unchanged.
@@ -296,14 +296,14 @@ Flat by default. Depth is feedback, not decoration — surfaces sit flush with h
 - **Testimonial pop** (`filter: drop-shadow(0px 20px 10px #0008)` with `scale(0.85 → 1)`): Testimonial cards on hover.
 - **Inset field** (`box-shadow: inset 0.2rem 0.2rem 0.5rem grey`): Neumorphic contact inputs at rest, lifting to outer shadow on focus.
 
-- **Proof screenshot frame** (`box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 16px 28px -10px rgba(0, 0, 0, 0.4)`, `/consulting` and the case studies only): one of the system's two resting shadows (the other is the `/card` glass badge). On `/consulting` the four redacted Portico screenshots sit on a plane tilted `rotateY(9deg) rotateX(4deg)` and shift with the pointer in the full motion tier; on a case study the frames sit flat: screenshots (`CaseFrames`) in justified rows that share one height and never upscale a capture, a recording (`CaseFigure framed`) on its own. The Portico captures are redacted in the files themselves: the browser chrome and the D2L registration token are painted out at the original pixel size.
+- **Proof screenshot frame** (`box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16), 0 16px 28px -10px rgba(0, 0, 0, 0.4)`, the homepage and the case studies only): one of the system's two resting shadows (the other is the `/card` glass badge). On the homepage the four redacted Portico screenshots sit on a plane tilted `rotateY(9deg) rotateX(4deg)` and shift with the pointer in the full motion tier; on a case study the frames sit flat: screenshots (`CaseFrames`) in justified rows that share one height and never upscale a capture, a recording (`CaseFigure framed`) on its own. The Portico captures are redacted in the files themselves: the browser chrome and the D2L registration token are painted out at the original pixel size.
 - **Glass badge rest** (`box-shadow: 0 1px 2px rgba(16, 48, 32, 0.06), 0 32px 64px -28px rgba(16, 56, 36, 0.42)` in light, `0 1px 2px rgba(0, 0, 0, 0.3), 0 32px 64px -24px rgba(0, 0, 0, 0.75)` in dark, `/card` only): one soft offset resting shadow under the badge, because a held pane only reads as an object when it sits off the ground. The light value is tinted toward the forest green rather than neutral black. Nothing inside the badge carries a resting shadow: the portrait mat, rows, tiles, and QR plate are hairline-only.
 
 ### Glass Material (`/card` only)
 The badge is the one frosted surface in the system, user-pinned. It blurs the tick field behind it through `backdrop-filter: blur(3px) saturate(1.8)` over the thin Glass Tint, light enough that the ticks and the release line still move behind it. Two pseudo-elements finish it: a 1px gradient ring (Glass Edge), masked down to the badge's edge, whose angle, a registered `<angle>` property (`--card-edge-angle`, resting at 150deg, lit from the top left), turns its bright end toward a fine pointer; and a radial sheen (80% by 55%, white at 85% in light and 24% in dark, fading out by 72%) at `--card-sheen-x` / `--card-sheen-y`, resting at the top left and following the pointer in the full tier. Text holds AA because the field quietens ticks under the name block (`data-field-quiet`) and the rows and buttons carry the denser Glass Fill. When `backdrop-filter` is unsupported, or the visitor prefers reduced transparency, the badge drops to Glass Solid.
 
 ### Named Rules
-**The Flat-By-Default Rule.** No persistent shadows at rest except hairlines. Shadows appear only as a response to hover, focus, or tilt. There are two exceptions, each because the shadow is what makes the thing read as an object: the proof screenshot frame on `/consulting` and the case studies, and the glass badge on `/card`.
+**The Flat-By-Default Rule.** No persistent shadows at rest except hairlines. Shadows appear only as a response to hover, focus, or tilt. There are two exceptions, each because the shadow is what makes the thing read as an object: the proof screenshot frame on the homepage and the case studies, and the glass badge on `/card`.
 **The Held-Glass Rule.** Glass blur belongs to the `/card` badge alone: one pane, one resting shadow, one edge, one sheen. Cards, sections, bands, and the navbar never take a backdrop blur.
 **The Flat-Turn Rule.** Nothing that carries a backdrop blur, and no ancestor of it, takes a 3D transform (`rotateX`, `rotateY`, `perspective`): Chromium drops the blur under a non-axis-aligned 3D transform. Between the field and the badge nothing may set `filter`, `opacity` below 1, `mask`, or `clip-path`, since each starts a new backdrop root and cuts the glass off from the field. The badge turns over with a 2D `scaleX` and leans with a 2D translate.
 
@@ -317,7 +317,7 @@ Gently rounded rectangles; pills and the `/card` portrait are the fully round ex
 - Testimonials: small radius (0.25em) with deliberate rotation (-4deg / 4deg alternating, settling to 0deg on hover) and angled gradient edges.
 - Inputs: large soft well (16px / 1rem radius, 326px × 64px field with inner shadow).
 - Borders: 1px neutral hairline for cards, 2px green stroke for primary/outline buttons.
-- `/consulting`: the hero portrait tile and proof screenshot frames use 12px; the recommended engagement card carries a 2px green border and a "Start here" pill tab (999px radius, the shared `tag--pill` shape) straddling its top edge. Drenched bands are square-edged and full-bleed.
+- The homepage: the hero portrait tile and proof screenshot frames use 12px; the recommended engagement card carries a 2px green border and a "Start here" pill tab (999px radius, the shared `tag--pill` shape) straddling its top edge. Drenched bands are square-edged and full-bleed.
 - The release line itself is a 2px stroke with a 20px pilot dot (3px knockout ring in the page color), the same in the hero field and the proof spine.
 - `/card` follows the same ladder from the inside out: 8px for inner squares (row icon wells, personal marks, hover tips, the QR image), 12px for rows, buttons, profile tiles, and the back button, 16px for the QR plate, and 24px for the badge. The 24px badge radius is a scoped exception for the largest held surface, not a step in the rounded scale; base cards stay at 8–12px. The portrait is a circle in a 5px Glass Fill mat with an inset hairline.
 
@@ -330,11 +330,11 @@ Restrained and confident. White fill with 2px green stroke and green text at res
 - **Primary:** White background, green text/border; hover inverts to green fill.
 - **Secondary / Ghost:** Transparent with green stroke; hover fills green.
 - **Focus:** 3px ring in the theme green at a 3px offset (BookCta, summaries, links); on drenched bands the ring is white, because green on the drench ground is 1.3:1.
-- **Solid (`/consulting`, light theme):** the hero CTA and the recommended engagement card's CTA fill forest green with white text (4.6:1), hovering to Drench Forest (#277148). Every other booking button on the page stays outline, so the filled one is always the one to press. In the dark theme the white button already carries the weight.
+- **Solid (the homepage, light theme):** the hero CTA and the recommended engagement card's CTA fill forest green with white text (4.6:1), hovering to Drench Forest (#277148). Every other booking button on the page stays outline, so the filled one is always the one to press. In the dark theme the white button already carries the weight.
 - **On a drenched band:** white fill, Drench Forest text, hover darkens the fill slightly; the microcopy beneath is white.
 - **Magnetic lean:** in the full motion tier a booking button follows the pointer by a few pixels and springs back; it never moves in the touch or reduced tiers.
 - **On the `/card` glass:** a softer 12px radius and a 48px minimum height, full width in the badge (Share and QR code split one row), each with a leading stroke icon; a press nudges 1px down. Three weights, one each:
-  - **Solid, Save contact:** the one solid control. Forest fill with white text in light (4.56:1), hovering to Drench Forest; in dark a white fill with Drench Deep text (7.3:1), as on `/consulting`, where the white button carries the weight.
+  - **Solid, Save contact:** the one solid control. Forest fill with white text in light (4.56:1), hovering to Drench Forest; in dark a white fill with Drench Deep text (7.3:1), as on the homepage, where the white button carries the weight.
   - **Outline, Book a call:** a 2px border and text in Forest Ink in light (5.4:1 on the glass) and Mint Signal in dark; hover fills with that green.
   - **Quiet, Share and QR code:** Glass Fill with a 1px Glass Rule border (the rule is the border, so edges line up with the rows), ink text, green icon; hover densifies the fill and turns the rule green. Share hands off to the native share sheet, or copies the link where there is none, and its label says which ("Share" / "Copy link", then "Link copied").
 
@@ -360,18 +360,18 @@ Docusaurus navbar with Home title, logo (`logo.svg` / `logoDark.svg`), left Blog
 ### Signature Components
 - **Header hero:** Particle field behind split hero, stroked italic title, grayscale portrait that tilts in 3D and reveals a color character layer on hover.
 - **Testimonial collage:** Alternating angled cards with rotated avatar tiles (grayscale → color on hover) and highlight-marker names.
-- **Logos marquee:** Infinite 25s scroll track with edge fade masks in primary green, pausing on hover, items dimmed (grayscale + 0.7 opacity) until hovered. On the `/consulting` stats band the logos are knocked out to white (78% opacity) and the fades take the band color; on hover a logo returns to its original colors on a light `#fcfbf7` plate (8px radius), the same chip the proof section uses, because the originals are dark marks that sink into the green.
-- **Release-line tick field** (`SignalField`, `/consulting`): a canvas of about 4,000 one-pixel ticks. They begin as slow random noise, a pilot dot sweeps left to right in about 1.8s and the ticks align behind it into one line (2px, with the pilot dot), then the line settles. The pointer locally disorders ticks within about 120px and they re-settle. Ticks quieten under text so body copy keeps AA contrast. It colors itself from CSS variables (`--field-tick`, `--field-line`, `--field-pilot`, `--field-ring`, `--field-gain`, `--field-tick-gain`) so a host can recolor it; the closing CTA renders it once, already settled, in white on the green band, with no release line and no brightening (`data-field-noline` on the band): every tick points at the copy, so the ground converges on the one action. The hero's anchor sets `data-field-rise`, so its line climbs past the portrait instead of dropping.
+- **Logos marquee:** Infinite 25s scroll track with edge fade masks in primary green, pausing on hover, items dimmed (grayscale + 0.7 opacity) until hovered. On the homepage stats band the logos are knocked out to white (78% opacity) and the fades take the band color; on hover a logo returns to its original colors on a light `#fcfbf7` plate (8px radius), the same chip the proof section uses, because the originals are dark marks that sink into the green.
+- **Release-line tick field** (`SignalField`, the homepage): a canvas of about 4,000 one-pixel ticks. They begin as slow random noise, a pilot dot sweeps left to right in about 1.8s and the ticks align behind it into one line (2px, with the pilot dot), then the line settles. The pointer locally disorders ticks within about 120px and they re-settle. Ticks quieten under text so body copy keeps AA contrast. It colors itself from CSS variables (`--field-tick`, `--field-line`, `--field-pilot`, `--field-ring`, `--field-gain`, `--field-tick-gain`) so a host can recolor it; the closing CTA renders it once, already settled, in white on the green band, with no release line and no brightening (`data-field-noline` on the band): every tick points at the copy, so the ground converges on the one action. The hero's anchor sets `data-field-rise`, so its line climbs past the portrait instead of dropping.
 - **Problem rows** (`PainGroups`): three situations in the visitor's words, each opened by the 2px signal stroke and ending in a jump to the matching client in the proof section. Every situation is a published case study; none is hypothetical.
 - **Count-up numerals:** an `aria-hidden` overlay counts up over the real, already-final text, once, on first view; the DOM text and layout never change.
-- **Case-study system** (`src/components/CaseStudy/`, `/case-studies/*`): every study composes the same parts in the same order. Outcome H1 in Besley, a first-person lede, and a facts ledger (client on the logo plate, engagement linking to the offers, length, industry); a ruled numeral ledger with a footnote for windows and estimates; the lead client quote in the Consulting Quote face with a hung opening mark and no side bar; then four fixed H2s on the release-line spine (Where things stood, How we worked, What I built, What changed), one node per section filling as it reveals, collapsing to the 2px opening stroke under 997px; a `<details>` tech stack; the other two studies from `registry.ts`; and `FinalCta`. From 997px the facts ledger stands beside the H1 and lede as a column of ruled rows (7/12 to 5/12), and each story section is an editorial row: the H2 in 4/12 beside its node, the body in 8/12. Prose holds near 68ch, chart and video take the body column, and screenshot frames run the full content width. The index lists the studies as ledger rows on the same spine, in `/consulting` order.
+- **Case-study system** (`src/components/CaseStudy/`, `/case-studies/*`): every study composes the same parts in the same order. Outcome H1 in Besley, a first-person lede, and a facts ledger (client on the logo plate, engagement linking to the offers, length, industry); a ruled numeral ledger with a footnote for windows and estimates; the lead client quote in the Consulting Quote face with a hung opening mark and no side bar; then four fixed H2s on the release-line spine (Where things stood, How we worked, What I built, What changed), one node per section filling as it reveals, collapsing to the 2px opening stroke under 997px; a `<details>` tech stack; the other two studies from `registry.ts`; and `FinalCta`. From 997px the facts ledger stands beside the H1 and lede as a column of ruled rows (7/12 to 5/12), and each story section is an editorial row: the H2 in 4/12 beside its node, the body in 8/12. Prose holds near 68ch, chart and video take the body column, and screenshot frames run the full content width. The index lists the studies as ledger rows on the same spine, in the homepage order.
 - **Glass badge** (`/card`): the digital business card, two faces in one pane over the full-viewport `SignalField` (`hero` variant; the portrait is the field's anchor with `data-field-rise`, so the line enters behind it and climbs past; the name, role, and line are `data-field-quiet`).
   - **Front:** the round portrait, the name in Besley, the role, and one plain line; phone and email as glass rows readable without a tap (a 40px green-tinted icon well, then a muted label over the value); the three button weights; then profiles in a deliberate two-step hierarchy: work profiles (LinkedIn, GitHub, the website) as 44px glass tiles with green marks that fill green on hover, and personal profiles (Instagram, Facebook) as 36px untiled marks in muted grey, a step back. Profile marks carry an inverse-colored hover tip, hidden under `(hover: none)` because on touch it would only flash on tap.
   - **Back:** the branded QR on a white plate, the name again, and a caption; a 44px glass back button sits in the top-left corner. Escape also turns the badge back.
   - **Turn:** "QR code" turns the badge over in place: it narrows to its edge (`scaleX` to 0, 180ms, ease-in), the faces swap before paint, and it opens again (340ms on `--c-ease`). Focus moves to the new face's control, and the hidden face is `inert`. A 2D turn, never `rotateY` (see the Flat-Turn Rule).
-- **Stroke icons** (`src/components/Icons`): one set on a 20px grid, 2px stroke, round caps and joins, `currentColor`, sized at 1em: the arrows and chevron on `/consulting` and the case studies; Phone, Mail, Calendar, Share, QR code, Add contact, and Check on `/card`. Profile marks are the one filled exception: FontAwesome brand marks (and its solid globe for the website), drawn inline from the icon data so they size in the server render.
+- **Stroke icons** (`src/components/Icons`): one set on a 20px grid, 2px stroke, round caps and joins, `currentColor`, sized at 1em: the arrows and chevron on the homepage and the case studies; Phone, Mail, Calendar, Share, QR code, Add contact, and Check on `/card`. Profile marks are the one filled exception: FontAwesome brand marks (and its solid globe for the website), drawn inline from the icon data so they size in the server render.
 
-### Motion tiers (`/consulting` and `/card`)
+### Motion tiers (the homepage and `/card`)
 Motion is chosen by `useMotionTier()`: `full` (fine pointer), `touch` (settle once, then freeze, no pointer effects), `reduced` (a static finished state, no animation loop). The server render and first client render are always `reduced`, so nothing hides or shifts on hydration. Shared tokens live on the page root: `--c-ease: cubic-bezier(0.22, 1, 0.36, 1)`, `--c-dur-fast: 160ms`, `--c-dur-reveal: 420ms`, `--c-dur-settle: 900ms`. Only transform and opacity animate.
 
 On `/card` the root mirrors `--c-ease` and `--c-dur-fast`. In the full tier the badge leans up to 6px toward the pointer (a 2D translate), the sheen follows it, and the edge's bright end turns to face it, all easing back over 0.5s on `--c-ease` when the pointer leaves; the typed sheen and edge properties are what let them ease. In the touch tier there are no pointer effects but the turn still animates; in the reduced tier the faces swap instantly. Under `prefers-reduced-motion` every transition and transform on the card is off. Hover feedback on rows, tiles, and buttons is a fill, rule, and color change at `--c-dur-fast`; whatever moves, moves by transform.
@@ -386,9 +386,9 @@ Concrete guardrails grounded in the shipped code.
 - **Do** reserve Anton italic + stroke for the site header; set all section titles in the system sans.
 - **Do** preserve external CTA attributes (`target="_blank" rel="noopener noreferrer"`) on cal.com and outbound links.
 - **Do** collapse 3-col stats and 2-col secondary grids to 1 column under 768px, and the header split under 996px.
-- **Do** (on `/consulting`) make exactly one booking button per view the solid one, and keep the drenched bands to stats, testimonials, and the closing CTA.
-- **Do** (on `/consulting`) check white text against the drench ground in both themes (5.9:1 light, 7.3:1 dark) before putting copy on a green band.
-- **Do** (on `/consulting`) ship every motion effect with a `reduced` tier that shows the finished state and an SSR render that matches it.
+- **Do** (on the homepage) make exactly one booking button per view the solid one, and keep the drenched bands to stats, testimonials, and the closing CTA.
+- **Do** (on the homepage) check white text against the drench ground in both themes (5.9:1 light, 7.3:1 dark) before putting copy on a green band.
+- **Do** (on the homepage) ship every motion effect with a `reduced` tier that shows the finished state and an SSR render that matches it.
 - **Do** (on `/card`) keep Save contact the one solid control; Book a call stays outline, and Share and QR code stay quiet glass.
 - **Do** (on `/card`) set green text and marks on the glass in Forest Ink (#29784c) in light and Mint Signal in dark, and give anything on the glass that carries text the denser Glass Fill.
 - **Do** (on `/card`) give the glass an opaque fallback: Glass Solid when `backdrop-filter` is unsupported and under `prefers-reduced-transparency`.
@@ -398,7 +398,7 @@ Concrete guardrails grounded in the shipped code.
 - **Don't** apply persistent drop shadows or glass blur to base cards — lift is feedback only. The `/card` badge is the one scoped glass surface, and its resting shadow is not a pattern for cards.
 - **Don't** put a 3D transform on the `/card` badge or any ancestor of it, or set `filter`, `opacity` below 1, `mask`, or `clip-path` between the field and the badge; each one cuts the badge's blur. Turn and lean in 2D.
 - **Don't** reuse display rotation, text-stroke, or testimonial tilt outside their signature components.
-- **Don't** invent testimonials, client names, stats, or pricing beyond `Testimonials`, `LogosCarousel`, `FeaturedWork`, and `PRODUCT.md` evidence. Proof cards on `/consulting` come only from the published case studies; an unapproved client stays a claim-free placeholder.
+- **Don't** invent testimonials, client names, stats, or pricing beyond `Testimonials`, `LogosCarousel`, and `PRODUCT.md` evidence. Proof cards on the homepage come only from the published case studies; an unapproved client stays a claim-free placeholder.
 - **Don't** put section kickers, eyebrows, or numbered section labels above headings. The heading carries its own weight.
-- **Don't** set Besley on body copy, buttons, or microcopy, and don't use it outside `/consulting`, its case studies, and the name on `/card` until that page replaces `/`.
+- **Don't** set Besley on body copy, buttons, or microcopy, and don't use it outside the homepage, its case studies, and the name on `/card`.
 - **Don't** use Mint Signal (#25c2a0) as a ground under white text; use the drench steps.

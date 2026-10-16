@@ -1,5 +1,5 @@
-/* /card: a frosted glass badge held over the /consulting release-line field.
-   Tokens mirror consulting.module.css; change them together.
+/* /card: a frosted glass badge held over the homepage release-line field.
+   Tokens mirror index.module.css; change them together.
 
    Layering: .root is the field's positioned ancestor, so the SignalField
    (absolute, z 0) covers the page and the badge (z 1) blurs it through
@@ -9,7 +9,7 @@
    and stays in flow at every size. */
 
 /* Width-matched stand-in for Besley 700 (same values as
-   consulting.module.css and CaseStudy: one global face name, so keep the
+   index.module.css and CaseStudy: one global face name, so keep the
    copies identical). */
 @font-face {
   font-family: "Besley Fallback";
@@ -433,7 +433,7 @@
   box-shadow: 0 10px 22px -10px rgba(16, 56, 36, 0.55);
 }
 
-/* Dark: the white button carries the weight, as on /consulting; deep green
+/* Dark: the white button carries the weight, as on the homepage; deep green
    ink on white is 7.3:1. */
 :global([data-theme="dark"]) .solid,
 :global([data-theme="dark"]) .solid:visited {

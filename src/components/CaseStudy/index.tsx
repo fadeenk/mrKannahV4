@@ -27,7 +27,7 @@ import styles from "./styles.module.css";
 export { CASE_STUDIES, getCaseStudy } from "./registry";
 
 /*
- * Case-study pages: the /consulting world extended to its proof pages.
+ * Case-study pages: the homepage world extended to its proof pages.
  * Every study composes the same parts in the same order (see
  * docs/superpowers/specs/2026-10-15-case-studies-redesign.md):
  *
@@ -44,7 +44,7 @@ export { CASE_STUDIES, getCaseStudy } from "./registry";
  */
 
 /** Where every engagement label points. */
-const ENGAGEMENTS_HREF = "/consulting#engagements";
+const ENGAGEMENTS_HREF = "/#engagements";
 
 /* ── Layout ── */
 
@@ -69,8 +69,8 @@ type CaseStudyLayoutProps = {
 );
 
 /**
- * Page shell: owns the /consulting page tokens (they cascade from the
- * `<main>`), loads Besley the way /consulting does, and closes every study
+ * Page shell: owns the homepage tokens (they cascade from the
+ * `<main>`), loads Besley the way the homepage does, and closes every study
  * with the other study and the shared drenched CTA band. The index
  * variant keeps the shell and the band and drops the study-only parts.
  */
