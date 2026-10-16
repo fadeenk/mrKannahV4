@@ -95,9 +95,9 @@ export default function ConsultingHero(): JSX.Element {
           <p className={styles.sub}>
             I&apos;m Fadee Kannah, co-founder of CourseKey and still a{" "}
             <span className={styles.nowrap}>hands-on</span> engineer. I join
-            SaaS teams and ship the work that keeps slipping,
+            SaaS teams and ship the roadmap work that keeps slipping,
             from customer requests to AI features. Every pull request goes
-            through your review.
+            through your team&apos;s review.
           </p>
           <div className={styles.ctas}>
             <div className={styles.primary}>
