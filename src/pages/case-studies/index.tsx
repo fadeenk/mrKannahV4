@@ -1,123 +1,86 @@
-import Layout from "@theme/Layout";
+import React, { type JSX } from "react";
+import Link from "@docusaurus/Link";
 import Heading from "@theme/Heading";
+import CaseStudyLayout, {
+  CASE_STUDIES,
+  CaseFootLink,
+  CaseIntro,
+  CasePlate,
+  CaseTicks,
+} from "@site/src/components/CaseStudy";
+import { ArrowRight } from "@site/src/components/Icons";
+import Reveal from "@site/src/components/Reveal";
+import styles from "./index.module.css";
 
-import type { JSX } from "react";
-
-type CaseStudy = {
-  title: string;
-  client: string;
-  engagement: string;
-  outcome: string;
-  to: string;
-  status: "live" | "soon";
-};
-
-const caseStudies: CaseStudy[] = [
-  {
-    title: "AI POC Behind a $70M Insurance Launch",
-    client: "American Growth Insurance",
-    engagement: "4-week POC · Project-Based AI Delivery",
-    outcome:
-      "Demo platform used through stealth to launch with ~$70M from Atomic + Rockbridge.",
-    to: "/case-studies/american-growth-insurance",
-    status: "live",
-  },
-  {
-    title: "Embedded Retainer That Shipped the Success Backlog",
-    client: "Portico",
-    engagement: "Ongoing retainer · Embedded Delivery Partner",
-    outcome:
-      "24 initiatives in 9 months — roadmap, reports, and LMS interop without diverting core eng.",
-    to: "/case-studies/portico-embedded-retainer",
-    status: "live",
-  },
-  {
-    title: "AI POC to Continuous Delivery",
-    client: "AI delivery client",
-    engagement: "Assessment → Project · CI and eval harness first",
-    outcome: "POC hardened into a production delivery path.",
-    to: "/case-studies/ai-poc-to-delivery",
-    status: "soon",
-  },
-];
-
-function CaseCard({ study }: { study: CaseStudy }): JSX.Element {
-  return (
-    <div className="card" style={{ marginBottom: "1rem" }}>
-      <div className="card__body">
-        <Heading as="h3" style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-          {study.status === "live" ? (
-            <a href={study.to}>{study.title}</a>
-          ) : (
-            <>{study.title}</>
-          )}
-        </Heading>
-        <p style={{ marginBottom: "0.5rem" }}>
-          <strong>{study.client}</strong> · {study.engagement}
-        </p>
-        <p style={{ marginBottom: "0.5rem" }}>{study.outcome}</p>
-        {study.status === "live" ? (
-          <a href={study.to}>Read the case study →</a>
-        ) : (
-          <span
-            style={{
-              fontSize: "0.85rem",
-              background: "var(--ifm-color-emphasis-200)",
-              padding: "0.2rem 0.5rem",
-              borderRadius: "4px",
-              fontWeight: "bold",
-            }}
-          >
-            Coming soon
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
-
+/*
+ * The case-study index: the two studies as ledger rows on the release
+ * line, in /consulting order. Every value comes from the registry
+ * (src/components/CaseStudy/registry.ts), the same source as the "More case
+ * studies" row at the foot of each study.
+ */
 export default function CaseStudiesIndex(): JSX.Element {
   return (
-    <Layout
-      title="Case Studies"
-      description="Client case studies: AI POCs and embedded delivery with measurable outcomes"
+    <CaseStudyLayout
+      variant="index"
+      title="Case studies"
+      description="What I shipped for Portico and American Growth Insurance, what changed for each, and how we worked together."
     >
-      <div className="hero hero--primary" style={{ display: "block" }}>
-        <div className="container" style={{ marginTop: "10px" }}>
-          <h1 className="hero__title">Case Studies</h1>
-          <p className="hero__subtitle">
-            How engineering teams used focused AI delivery to unblock funding,
-            shipping, and reliability — told as client outcomes, not tech
-            demos.
-          </p>
-        </div>
-      </div>
-      <div className="container" style={{ marginTop: "2rem", marginBottom: "2rem" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
-          {caseStudies.map((study) => (
-            <CaseCard key={study.to} study={study} />
-          ))}
-        </div>
-        <div className="text--center" style={{ marginTop: "2rem" }}>
-          <a
-            href="https://cal.com/kannah/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button button--primary button--lg"
-          >
-            Book a 30-min fit call
-          </a>
-          <p style={{ marginTop: "0.5rem" }}>
-            <a href="/showcase">Or browse the technical showcase →</a>
-          </p>
-        </div>
-      </div>
-    </Layout>
+      <CaseIntro
+        title="Case studies"
+        lede="Here are two clients, what I shipped for each, and what changed. Each ran on a different engagement, so each shows a different way to work with me."
+      />
+
+      <ol className={styles.ledger} role="list">
+        {CASE_STUDIES.map((study, i) => (
+          <li key={study.slug} className={styles.row}>
+            {i === 0 ? (
+              <span className={styles.lead}>
+                <CaseTicks className={styles.ticks} />
+              </span>
+            ) : null}
+            <span className={styles.node} aria-hidden="true" />
+            <Reveal className={styles.rowBody} delay={i * 60}>
+              {/* Source order is the reading order (who, the headline, the
+                  figure, the outcome); the grid places the figure in its
+                  own column at desktop. */}
+              <article className={styles.card}>
+                <div className={styles.identity}>
+                  <CasePlate
+                    logo={study.logo}
+                    client={study.client}
+                    eager={i < 2}
+                  />
+                  <p className={styles.client}>{study.client}</p>
+                  <p className={styles.engagement}>{study.engagement}</p>
+                </div>
+                <Heading as="h2" className={styles.title}>
+                  {study.headline}
+                </Heading>
+                <p className={styles.stat}>
+                  <span className={styles.numeral}>{study.numeral}</span>{" "}
+                  <span className={styles.statLabel}>{study.numeralLabel}</span>
+                </p>
+                <p className={styles.outcome}>{study.outcome}</p>
+                <Link
+                  to={study.path}
+                  className={styles.link}
+                  aria-label={`Read the case study, ${study.client}`}
+                >
+                  Read the case study
+                  <ArrowRight className={styles.arrow} />
+                </Link>
+              </article>
+            </Reveal>
+          </li>
+        ))}
+      </ol>
+
+      <CaseFootLink
+        to="/showcase"
+        note="Older projects and technical write-ups are in the showcase."
+      >
+        Browse the technical showcase
+      </CaseFootLink>
+    </CaseStudyLayout>
   );
 }

@@ -18,7 +18,13 @@
  * - `[data-field-quiet]` descendants: ticks under them are attenuated so
  *   text keeps its contrast.
  * - `[data-field-anchor]` descendant: the release line passes through its
- *   lower third (the portrait tile on the hero).
+ *   lower third (the portrait tile on the hero). Add `data-field-rise` to it
+ *   and the line climbs after the anchor instead of dropping to the lower
+ *   edge (the hero's: it rises toward the top right, past the portrait).
+ * - `data-field-noline` on the host: no release line at all. Every tick points
+ *   toward the centre of the `[data-field-quiet]` block (else the centre of
+ *   the field), and none are cleared or lifted (the closing CTA's: an even
+ *   ground that converges on the one action).
  *
  * Colors come from CSS custom properties on the canvas (see styles.module.css):
  * --sf-tick, --sf-line, --sf-pilot, --sf-ring, --sf-gain. A parent overrides
@@ -45,17 +51,17 @@ const MAX_SPACING = 24;
 
 /* Timeline (seconds) */
 const DWELL = 0.55; // disorder shown before the release starts
-const SWEEP = 1.35; // pilot crosses the field; ticks align right behind it
-const ORDER_DUR = 0.5; // one tick turning into line
-const FAR_LAG = 0.28; // ticks far from the line follow a beat later
+const SWEEP = 1.8; // pilot crosses the field; ticks align right behind it
+const ORDER_DUR = 0.65; // one tick turning into line
+const FAR_LAG = 0.36; // ticks far from the line follow a beat later
 const PILOT_PAD = 14; // px the pilot travels beyond each edge
 
 /* Ordered state */
 const MAX_TILT = 0.62; // rad; ticks lean toward the line this much, far away
 const TILT_REACH = 260; // px over which the lean builds
 const NEAR_REACH = 104; // px: brightening around the line
-const LINE_WIDTH = 2; // same stroke as the RolloutRail
-const PILOT_R = 10; // 1.25rem pilot, as in the RolloutRail
+const LINE_WIDTH = 2; // same stroke as the proof spine
+const PILOT_R = 10; // 1.25rem pilot dot
 const PILOT_RING = 3;
 
 /* Alpha model */
@@ -115,6 +121,8 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
   let pilotColor = "#2e8555";
   let ringColor = "#fff";
   let gain = 1;
+  /* Ticks only (the line keeps `gain`): lets a host quiet the ground so one stroke dominates. */
+  let tickGain = 1;
 
   /* Geometry */
   let W = 0;
@@ -137,6 +145,8 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
   let ya = 0;
   let yE = 0;
   let xa = 0;
+  /** False when the host opts out with `data-field-noline`. */
+  let showLine = true;
 
   /* State */
   let clock = 0; // seconds of unpaused time
@@ -172,6 +182,8 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
     ringColor = pick("--sf-ring", ringColor);
     const g = parseFloat(pick("--sf-gain", "1"));
     gain = Number.isFinite(g) ? g : 1;
+    const tg = parseFloat(pick("--sf-tick-gain", "1"));
+    tickGain = Number.isFinite(tg) ? tg : 1;
   }
 
   function layout(): void {
@@ -189,8 +201,11 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
     ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     /* Release line: flat, through the anchor's lower third, then down to the
-       section's lower edge where the next band's hairline picks it up. */
+       section's lower edge where the next band's hairline picks it up. With
+       `data-field-rise` the second half is mirrored about the flat level, so
+       it climbs by as much as it would have dropped. */
     const anchor = host.querySelector("[data-field-anchor]");
+    showLine = !host.hasAttribute("data-field-noline");
     if (anchor) {
       const r = anchor.getBoundingClientRect();
       /* The bend starts left of the tile so the drop after it is a slope, not a knee. */
@@ -198,6 +213,9 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
       ya = r.top - box.top + r.height * 0.82;
       y0 = ya + 10;
       yE = H - LINE_WIDTH / 2;
+      if (anchor.hasAttribute("data-field-rise")) {
+        yE = Math.max(LINE_WIDTH / 2 + 2, 2 * ya - yE);
+      }
     } else {
       xa = W * 0.6;
       ya = H * 0.7;
@@ -245,6 +263,25 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
       ]);
     });
 
+    /* Where ticks point when there is no line: the middle of the quiet
+       (copy) block, else the middle of the field. */
+    let tx = W / 2;
+    let ty = H / 2;
+    if (rects.length > 0) {
+      let l = Infinity;
+      let t = Infinity;
+      let rr = -Infinity;
+      let b = -Infinity;
+      for (const q of rects) {
+        l = Math.min(l, q[0]);
+        t = Math.min(t, q[1]);
+        rr = Math.max(rr, q[2]);
+        b = Math.max(b, q[3]);
+      }
+      tx = (l + rr) / 2;
+      ty = (t + b) / 2;
+    }
+
     let i = 0;
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++, i++) {
@@ -255,11 +292,18 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
         const ly = lineYAt(x);
         const dy = y - ly;
         const dist = Math.abs(dy);
-        const slope = Math.atan2(lineYAt(x + 3) - lineYAt(x - 3), 6);
-        const tilt = MAX_TILT * smooth(dist / TILT_REACH);
-        oa[i] = slope + (dy < 0 ? tilt : -tilt);
-        prox[i] = Math.exp(-(dist * dist) / (NEAR_REACH * NEAR_REACH));
-        skip[i] = dist < LINE_WIDTH + 1.5 ? 1 : 0;
+        if (showLine) {
+          const slope = Math.atan2(lineYAt(x + 3) - lineYAt(x - 3), 6);
+          const tilt = MAX_TILT * smooth(dist / TILT_REACH);
+          oa[i] = slope + (dy < 0 ? tilt : -tilt);
+          prox[i] = Math.exp(-(dist * dist) / (NEAR_REACH * NEAR_REACH));
+          skip[i] = dist < LINE_WIDTH + 1.5 ? 1 : 0;
+        } else {
+          /* No line: point at the copy, and clear no row. */
+          oa[i] = Math.atan2(ty - y, tx - x);
+          prox[i] = 0;
+          skip[i] = 0;
+        }
         phase[i] = hash(i, 1);
         delay[i] =
           (SWEEP * (x + PILOT_PAD)) / (W + PILOT_PAD * 2) +
@@ -326,7 +370,7 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
     const pilotX = sweeping
       ? -PILOT_PAD + (W + PILOT_PAD * 2) * (s / SWEEP)
       : null;
-    const tailFade = s === Infinity ? 0 : 1 - smooth((s - SWEEP) / 0.5);
+    const tailFade = s === Infinity ? 0 : 1 - smooth((s - SWEEP) / 0.65);
     const baseLen = spacing * 0.74;
     const buckets: Path2D[] = [];
     const used: boolean[] = [];
@@ -363,7 +407,7 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
       }
       alpha += 0.34 * c;
       alpha *= quiet[i] + (1 - quiet[i]) * 0.45 * c;
-      alpha *= gain;
+      alpha *= gain * tickGain;
       const bi = Math.min(BUCKETS, Math.round(alpha * BUCKETS)) - 1;
       if (bi < 0) {
         continue;
@@ -390,7 +434,7 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
 
     /* The release line: solid behind the pilot (shipped), absent ahead of it. */
     const limit = s === Infinity ? W : sweeping ? (pilotX as number) : s > SWEEP ? W : -1;
-    if (limit > 0) {
+    if (showLine && limit > 0) {
       ctx.globalAlpha = Math.min(1, 0.92 * gain + 0.08);
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = LINE_WIDTH;
@@ -509,8 +553,8 @@ export function createField({ canvas, wrap, mode }: FieldOptions): FieldHandle {
 
   let io: IntersectionObserver | null = null;
   if (animates) {
-    io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
+    io = new IntersectionObserver((entries) => {
+      visible = entries[entries.length - 1].isIntersecting;
       if (visible) {
         if (needsLoop()) {
           schedule();

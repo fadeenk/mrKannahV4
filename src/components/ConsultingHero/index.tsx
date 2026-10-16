@@ -49,6 +49,7 @@ function PortraitTile(): JSX.Element {
       ref={ref}
       className={`${styles.portrait} ${styles[tier]}`}
       data-field-anchor=""
+      data-field-rise=""
       onPointerMove={lean}
       onPointerLeave={unlean}
     >
@@ -73,6 +74,9 @@ function PortraitTile(): JSX.Element {
         decoding="async"
         fetchPriority="low"
       />
+      <span aria-hidden="true" className={styles.nameplate}>
+        Fadee Kannah
+      </span>
     </div>
   );
 }
@@ -83,23 +87,24 @@ export default function ConsultingHero(): JSX.Element {
       <SignalField variant="hero" />
       <div className={`container ${styles.inner}`}>
         <Heading as="h1" className={styles.title} data-field-quiet="">
-          <span className={styles.line}>
-            Rewiring to <span className={styles.keep}>AI-first</span> without
-          </span>{" "}
-          <span className={styles.line}>breaking production?</span>
+          <span className={styles.line}>Your roadmap is bigger</span>{" "}
+          <span className={styles.line}>than your team.</span>
         </Heading>
 
         <div className={styles.copy} data-field-quiet="">
           <p className={styles.sub}>
-            I help vertical SaaS teams ship AI into real workflows — faster
-            delivery, same reliability, engineering ownership intact.
+            I&apos;m Fadee Kannah, co-founder of CourseKey and still a{" "}
+            <span className={styles.nowrap}>hands-on</span> engineer. I join
+            SaaS teams and ship the work that keeps slipping,
+            from customer requests to AI features. Every pull request goes
+            through your review.
           </p>
           <div className={styles.ctas}>
             <div className={styles.primary}>
               <BookCta variant="close" microcopy="" emphasis="solid" />
             </div>
             <a className={styles.secondary} href="#engagements">
-              See how we work
+              See how I work
               <ArrowRight className={styles.secondaryArrow} />
             </a>
             <p className={styles.micro}>{CTA_MICROCOPY}</p>

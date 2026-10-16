@@ -1,7 +1,6 @@
 import Layout from "@theme/Layout";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import styles from "./showcase.module.css";
 import Gallery from "@site/src/components/Gallery";
 
 import type { JSX } from "react";
@@ -190,7 +189,7 @@ const Abandoned: App[] = [
 
 function renderApp(app: App): JSX.Element {
   return (
-    <div className={styles.app} key={app.title}>
+    <div key={app.title}>
       {app.thumbnail && (
         <div
           style={{

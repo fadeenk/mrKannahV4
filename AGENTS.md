@@ -1,185 +1,23 @@
-# AGENTS.md - Development Guide for mrKannahV4
+# AGENTS.md
 
-## Project Overview
+Docusaurus portfolio site (React 19, TypeScript) for a technology consultant. Projects in `static/` are served as-is; none of this applies to them.
 
-This is a Docusaurus 3.9.2 personal portfolio website built with React 19 and TypeScript. It showcases services, featured work, skills, and testimonials for a technology consultant.
+## Read before UI work
 
-## Build Commands
+- `PRODUCT.md` and `DESIGN.md`: product context and the design system, including its Do's and Don'ts. `.impeccable/` holds the design sidecar and per-surface direction contracts.
+- `docs/superpowers/`: specs and plans, local only and gitignored. `docs/` publishes at `/blog`, so `docusaurus.config.ts` also excludes `superpowers/**`.
+- Client proof appears in `src/pages/case-studies/`, `src/components/ProofShowcase`, `LogosCarousel` and the `/consulting` page.
 
-```bash
-# Start development server with hot reload
-npm start
+## Conventions
 
-# Build for production
-npm run build
+- Components: `src/components/<PascalCase>/index.tsx`, a default-export function returning `JSX.Element` (`import type { JSX } from "react"`), props type above it, styles in `styles.module.css`. Other files are kebab-case.
+- Shared primitives are Infima and `src/css/custom.css` classes (`section`, `card--elevated`, `button--primary`). Component styling goes in CSS modules.
+- Imports use `@site/src/...`, `@theme/...`, `@docusaurus/...`, ordered external, Docusaurus, local.
+- External links carry `target="_blank" rel="noopener noreferrer"`.
+- Reviewers apply `CODING_STANDARDS.md`.
 
-# Run TypeScript type checking
-npm run typecheck
+## Verify
 
-# Serve the production build locally
-npm run serve
-
-# Clear Docusaurus cache
-npm run clear
-```
-
-## Code Style Guidelines
-
-### TypeScript
-
-- Use TypeScript for all files (`.tsx` for components, `.ts` for utilities)
-- Extend `@docusaurus/tsconfig` - see `tsconfig.json`
-- Use `import type { JSX } from "react"` for type-only imports
-- Prefer explicit type annotations for function parameters and return types
-
-```typescript
-// Good
-import type { JSX } from "react";
-import React from "react";
-
-type Props = {
-  title: string;
-  description: string;
-};
-
-export default function MyComponent({ title }: Props): JSX.Element {
-  return <div>{title}</div>;
-}
-```
-
-### Imports
-
-- Use Docusaurus path aliases for internal imports:
-  - `@site/src/components/...` - local components
-  - `@theme/...` - Docusaurus built-in components (Layout, Heading, etc.)
-  - `@docusaurus/...` - Docusaurus core modules
-
-```typescript
-// Good imports
-import Layout from "@theme/Layout";
-import Heading from "@theme/Heading";
-import Contact from "@site/src/components/Contact";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-```
-
-- Order imports: external → Docusaurus → local components
-
-### Components
-
-- Use `index.tsx` pattern for component directories with default export
-- Components should be functional components returning `JSX.Element`
-- Define types for component props above the component
-
-```typescript
-// src/components/MyComponent/index.tsx
-import React, { type JSX } from "react";
-import Heading from "@theme/Heading";
-
-type MyComponentProps = {
-  title: string;
-  items: string[];
-};
-
-export default function MyComponent({ title, items }: MyComponentProps): JSX.Element {
-  return (
-    <div>
-      <Heading as="h2">{title}</Heading>
-      {/* content */}
-    </div>
-  );
-}
-```
-
-### File Organization
-
-```
-src/
-├── components/          # Reusable React components
-│   ├── ComponentName/
-│   │   └── index.tsx
-│   └── index.ts (if single component)
-├── pages/               # Docusaurus pages (file-based routing)
-│   ├── index.tsx        # Home page
-│   └── subfolder/       # Nested pages
-├── theme/               # Custom theme overrides
-└── css/                 # Custom styles (if needed)
-```
-
-### Styling
-
-- Use Docusaurus/Infima CSS classes for consistent styling
-- Use inline styles sparingly for dynamic values
-- Common Infima classes: `container`, `card`, `card__body`, `hero`, `hero--primary`, `section`, `button--primary`, `margin-top--md`, `text--center`
-
-```typescript
-// Using Infima classes
-<div className="card">
-  <div className="card__body">
-    <h3 className="hero__title">Title</h3>
-  </div>
-</div>
-
-// Inline styles for dynamic values
-<div style={{ display: "flex", gap: "1rem" }}>
-```
-
-### Naming Conventions
-
-- **Files**: kebab-case (e.g., `my-component.tsx`, `index.tsx`)
-- **Components**: PascalCase (e.g., `MyComponent`, `FeaturedWork`)
-- **Types/Interfaces**: PascalCase with descriptive names (e.g., `FeaturedWorkItem`)
-- **Variables**: camelCase
-
-### Error Handling
-
-- No formal error handling patterns required
-- For external links, always use `target="_blank" rel="noopener noreferrer"`
-- Use TypeScript null checks when accessing optional properties
-
-### Type Checking
-
-Run `npm run typecheck` before committing to catch type errors. This project uses strict TypeScript settings from `@docusaurus/tsconfig`.
-
-## Adding New Features
-
-### Adding a New Page
-
-1. Create a new `.tsx` file in `src/pages/`
-2. Export a default component function
-3. The file path determines the URL (e.g., `src/pages/about.tsx` → `/about`)
-
-### Adding a New Component
-
-1. Create a new folder in `src/components/`
-2. Add `index.tsx` with the component code
-3. Import using `@site/src/components/ComponentName`
-
-### Adding External Links
-
-Always include security attributes:
-```tsx
-<a href="https://example.com" target="_blank" rel="noopener noreferrer">
-  Link Text
-</a>
-```
-
-## Dependencies
-
-Key dependencies:
-- `@docusaurus/core` - Docusaurus framework
-- `react` / `react-dom` - React 19
-- `@fortawesome/react-fontawesome` - Icons
-- `@tsparticles/react` - Particle effects
-- `react-player` - Video/audio playback
-- `react-photo-album` - Photo galleries
-
-## Development Workflow
-
-1. Run `npm start` for local development
-2. Make changes to `src/pages/` or `src/components/`
-3. Run `npm run typecheck` to verify types
-4. Run `npm run build` to test production build
-
-# Important
-
-None of this applies to projects in the static folder. Those are just static files that are served as-is.
+- `npm run typecheck`, then `npm run build && npm run check:build`. CI runs the same.
+- Check the browser console on the production build (`npm run serve`) as well as `npm start`: React #418 hydration errors surfaced only there.
+- Full-page screenshots taller than about 16,000 device px wrap onto themselves. Capture per section or at DPR 1.

@@ -1,5 +1,4 @@
 import Layout from "@theme/Layout";
-import styles from "./showcase.module.css";
 import Gallery from "@site/src/components/Gallery";
 
 import type { JSX } from "react";
@@ -42,7 +41,7 @@ const projects: Hardware[] = [
 
 function renderApp(project: Hardware): JSX.Element {
   return (
-    <div className={styles.app} key={project.title}>
+    <div key={project.title}>
       {project.thumbnail && (
         <div
           style={{

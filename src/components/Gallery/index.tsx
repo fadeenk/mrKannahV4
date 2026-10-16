@@ -40,8 +40,12 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
     return /\.(mp4|webm|ogg|avi|mov|wmv|flv|mkv)$/i.test(src);
   };
 
-  // Helper function to generate video thumbnail with play button overlay
-  const generateVideoThumbnail = (videoSrc: string): Promise<ImageData> => {
+  // Helper function to generate video thumbnail with play button overlay.
+  // `alt` is the authored description, carried through to the thumbnail.
+  const generateVideoThumbnail = (
+    videoSrc: string,
+    alt?: string,
+  ): Promise<ImageData> => {
     return new Promise((resolve) => {
       const video = document.createElement("video");
       video.crossOrigin = "anonymous";
@@ -56,13 +60,14 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
       video.onseeked = () => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
-        
+
         if (!ctx) {
             resolve({
                 src: videoSrc,
                 width: video.videoWidth,
                 height: video.videoHeight,
                 isVideo: true,
+                alt,
             });
             return;
         }
@@ -83,6 +88,7 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
           width: video.videoWidth,
           height: video.videoHeight,
           isVideo: true,
+          alt,
         });
       };
 
@@ -96,6 +102,7 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
                 width: 400,
                 height: 300,
                 isVideo: true,
+                alt,
             });
             return;
         }
@@ -116,6 +123,7 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
           width: 400,
           height: 300,
           isVideo: true,
+          alt,
         });
       };
 
@@ -154,8 +162,12 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
     ctx.fill();
   };
 
-  // Helper function to load image dimensions
-  const loadImageDimensions = (src: string): Promise<ImageData> => {
+  // Helper function to load image dimensions. `alt` is the authored
+  // description, kept alongside the measured size.
+  const loadImageDimensions = (
+    src: string,
+    alt?: string,
+  ): Promise<ImageData> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = src;
@@ -165,6 +177,7 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
           width: img.width,
           height: img.height,
           isVideo: false,
+          alt,
         });
       };
       img.onerror = () => {
@@ -173,6 +186,7 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
           width: 400,
           height: 300,
           isVideo: false,
+          alt,
         });
       };
     });
@@ -182,6 +196,7 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
     Promise.all(
       photos.map((obj) => {
         const src = typeof obj === "string" ? obj : obj.src;
+        const alt = typeof obj === "string" ? undefined : obj.alt;
 
         // If dimensions are already provided, use them
         if (typeof obj !== "string" && obj.width && obj.height) {
@@ -193,10 +208,10 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
 
         // Check if it's a video
         if (isVideo(src)) {
-          return generateVideoThumbnail(src);
+          return generateVideoThumbnail(src, alt);
         } else {
           // It's an image
-          return loadImageDimensions(src);
+          return loadImageDimensions(src, alt);
         }
       })
     ).then((images) => setImages(images));
@@ -314,13 +329,22 @@ const Gallery = ({ photos, shouldLoop = false }: GalleryProps): JSX.Element => {
     videoSrc: img.isVideo ? img.src : undefined,
   }));
 
-  // Map to format that RowsPhotoAlbum expects
-  const mappedPhotos = images.map((img) => ({
-    src: img.thumbnail || img.src,
-    width: img.width || 400,
-    height: img.height || 300,
-    alt: img.alt || "",
-  }));
+  // Map to format that RowsPhotoAlbum expects. `label` becomes the
+  // aria-label of each lightbox trigger button, so every button has a name
+  // even when no alt text was authored.
+  const mappedPhotos = images.map((img, i) => {
+    const kind = img.isVideo ? "video" : "image";
+    const action = img.isVideo ? "Play" : "Open";
+    return {
+      src: img.thumbnail || img.src,
+      width: img.width || 400,
+      height: img.height || 300,
+      alt: img.alt || "",
+      label: img.alt
+        ? `${action} ${kind}: ${img.alt}`
+        : `${action} ${kind} ${i + 1} of ${images.length}`,
+    };
+  });
 
   return (
     <>

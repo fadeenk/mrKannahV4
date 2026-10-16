@@ -1,3 +1,5 @@
+import React from "react";
+import type { JSX } from "react";
 import Layout from "@theme/Layout";
 import Head from "@docusaurus/Head";
 import Testimonials from "@site/src/components/Testimonials";
@@ -9,13 +11,10 @@ import EngagementOffers from "@site/src/components/EngagementOffers";
 import ProofShowcase from "@site/src/components/ProofShowcase";
 import FitFaq from "@site/src/components/FitFaq";
 import FinalCta from "@site/src/components/FinalCta";
-import { useHasMotionClass } from "@site/src/components/MotionTier";
+import { useMotionTier } from "@site/src/components/MotionTier";
 import "@fontsource-variable/besley/wght.css";
 import besleyLatin from "@fontsource-variable/besley/files/besley-latin-wght-normal.woff2";
 import styles from "./consulting.module.css";
-
-import React from "react";
-import type { JSX } from "react";
 
 /**
  * /consulting: draft of the consulting-led homepage. Shell only; each
@@ -23,11 +22,11 @@ import type { JSX } from "react";
  * out of the navbar until it replaces `/`.
  */
 export default function Consulting(): JSX.Element {
-  useHasMotionClass();
+  const tier = useMotionTier();
   return (
     <Layout
-      title="AI Delivery Consulting for SaaS Teams"
-      description="Kannah Consulting helps SaaS engineering teams ship AI into production without sacrificing reliability. Assessment, project-based, and embedded delivery engagements."
+      title="Senior engineering for SaaS teams"
+      description="Fadee Kannah, co-founder of CourseKey, joins SaaS teams and ships the work that keeps slipping, from customer requests to AI features. Start with an assessment, a fixed-scope project, or an embedded engagement."
     >
       <Head>
         <meta name="robots" content="noindex" />
@@ -39,16 +38,21 @@ export default function Consulting(): JSX.Element {
           crossOrigin="anonymous"
         />
       </Head>
-      <main className={styles.root}>
+      <main className={styles.root} data-tier={tier}>
         <ConsultingHero />
         <StatsBand />
         <PainGroups />
-        <EngagementOffers />
         <ProofShowcase />
-        <Testimonials />
+        <EngagementOffers />
+        <Testimonials
+          heading="What people I’ve worked with say"
+          only={["Luke Sophinos", "Anthony Bull", "Cathy Pucher"]}
+          hideCta
+          tone="onGreen"
+        />
         <FitFaq />
         <FinalCta />
-        <Contact />
+        <Contact hideBooking />
       </main>
     </Layout>
   );

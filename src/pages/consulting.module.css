@@ -1,6 +1,9 @@
 /* Page shell for /consulting. Owns the page-scoped design tokens that every
    section reads (they cascade from .root). Section styles live with their
-   components. */
+   components. The case studies carry a copy of these tokens and of the
+   Besley Fallback face in src/components/CaseStudy/styles.module.css; change
+   both together (the face is one global name, so a drifted copy wins
+   silently). */
 
 /* Width-matched stand-in for Besley 700 so the font swap does not reflow
    headings. size-adjust = Besley 700 width / Georgia Bold width (measured:
@@ -24,7 +27,7 @@
   /* Green is the only accent. The signal is the theme primary. */
   --c-signal: var(--ifm-color-primary);
 
-  /* Drenched green bands (stats, final CTA). White text must hold AA here. */
+  /* Drenched green bands (stats, testimonials, final CTA). White text must hold AA here. */
   --c-drench-bg: var(--ifm-color-primary-darker);
   --c-on-drench: #fff;
 }
@@ -38,6 +41,55 @@
   );
 }
 
+/* Testimonials is a shared component styled as Infima's primary hero. Bring
+   its band onto the page's drench color (neon mint in dark mode fails white
+   text and fights the deep bands) and its H2 into the display face, without
+   editing the component. */
+.root > :global(.hero--primary) {
+  background: var(--c-drench-bg);
+  color: var(--c-on-drench);
+}
+
+.root > :global(.hero--primary) :global(.hero__title) {
+  font-family: var(--c-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--c-on-drench);
+  text-wrap: balance;
+}
+
+/* The collage runs the container's full width by default, about 150
+   characters a line at desktop. Hold the quotes near a reading measure. */
+.root > :global(.hero--primary) ul {
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+/* Focus ring on the Testimonials band: the default green ring is 1.3:1 on the
+   drench ground, so keyboard focus needs the same white ring as the other
+   green bands. */
+.root > :global(.hero--primary) a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Contact intro: Infima's 1.5rem hero subtitle outweighs the "Prefer email?"
+   lead above it and the form below. Match it to body-lede scale. */
+.root :global(#contact) :global(.hero__subtitle) {
+  font-size: 1.125rem;
+  max-width: 34rem;
+  text-wrap: balance;
+}
+
 .root ::selection {
   background: color-mix(in srgb, var(--ifm-color-primary) 30%, transparent);
+}
+
+/* In-page jumps (problem rows to their client, hero to engagements) glide
+   instead of cutting, unless the visitor asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(html):has(.root) {
+    scroll-behavior: smooth;
+  }
 }

@@ -18,7 +18,10 @@ export type SignalFieldProps = {
  *   wrapper's parent).
  * - `data-field-quiet` on text blocks: ticks under them are attenuated.
  * - `data-field-anchor` on an element: the release line passes through its
- *   lower third.
+ *   lower third. Add `data-field-rise` and it climbs after the element
+ *   instead of dropping to the lower edge.
+ * - `data-field-noline` on the host: no line; every tick points at the
+ *   `data-field-quiet` block instead.
  * - CSS: set --field-tick / --field-line / --field-pilot / --field-ring on
  *   the parent to recolor. "settled" defaults to white ticks and line for a
  *   drenched green band.
@@ -45,6 +48,8 @@ export default function SignalField({
         if (!cancelled) {
           destroy = createField({ canvas, wrap, mode }).destroy;
         }
+      }).catch(() => {
+        /* Chunk failed to load: the canvas stays transparent; nothing depends on it. */
       });
     };
 

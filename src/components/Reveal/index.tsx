@@ -49,8 +49,8 @@ export default function Reveal({
     }
     setState("pending");
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
           setState("done");
           observer.disconnect();
         }

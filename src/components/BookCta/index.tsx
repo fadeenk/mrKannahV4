@@ -1,17 +1,11 @@
 import React, { useEffect, useRef, type JSX } from "react";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import { ArrowUpRight } from "@site/src/components/Icons";
+import { CAL_URL, calUrl, type CtaVariant } from "./cal";
+import { CTA_MICROCOPY } from "./copy";
 import styles from "./styles.module.css";
 
-export const CAL_URL = "https://cal.com/kannah/30min";
-
-export const CTA_MICROCOPY = "30 min · proposal in 48h · no prep needed";
-
-export type CtaVariant = "assessment" | "project" | "retainer" | "close";
-
-export function calUrl(variant: CtaVariant): string {
-  return `${CAL_URL}?variant=${variant}`;
-}
+export { CAL_URL, CTA_MICROCOPY, calUrl, type CtaVariant };
 
 type BookCtaProps = {
   variant?: CtaVariant;
@@ -22,6 +16,8 @@ type BookCtaProps = {
   microcopy?: string;
   /** "onGreen" inverts the button and microcopy for drenched green bands. */
   tone?: "default" | "onGreen";
+  /** "solid" fills the button green in the light theme (the hero CTA). */
+  emphasis?: "outline" | "solid";
 };
 
 /** Max pointer pull in px; the button leans toward a fine pointer. */
@@ -63,6 +59,7 @@ export default function BookCta({
   block = false,
   microcopy = CTA_MICROCOPY,
   tone = "default",
+  emphasis = "outline",
 }: BookCtaProps): JSX.Element {
   const magnetRef = useRef<HTMLDivElement>(null);
   useMagnet(magnetRef);
@@ -79,18 +76,20 @@ export default function BookCta({
           href={calUrl(variant)}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Book a 30-min fit call, opens in new tab"
-          className={`button button--primary ${block ? "button--block" : "button--lg"} ${onGreen ? styles.onGreen : ""}`}
+          aria-label="Book a free 30-min call, opens in new tab"
+          className={`button button--primary ${block ? "button--block" : "button--lg"} ${onGreen ? styles.onGreen : ""} ${emphasis === "solid" ? styles.solid : ""}`}
         >
-          Book a 30-min fit call
+          Book a free 30-min call
           <ArrowUpRight className={styles.arrow} />
         </a>
       </div>
-      <p
-        className={`${styles.microcopy} ${alignStart ? styles.microStart : styles.microCenter} ${onGreen ? styles.microOnGreen : ""}`}
-      >
-        {microcopy}
-      </p>
+      {microcopy ? (
+        <p
+          className={`${styles.microcopy} ${alignStart ? styles.microStart : styles.microCenter} ${onGreen ? styles.microOnGreen : ""}`}
+        >
+          {microcopy}
+        </p>
+      ) : null}
     </div>
   );
 }

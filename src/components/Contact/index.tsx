@@ -1,5 +1,7 @@
 import React, { useEffect, useState, type CSSProperties, type JSX } from "react";
 import Heading from "@theme/Heading";
+import { CTA_MICROCOPY } from "@site/src/components/BookCta/copy";
+import { ArrowUpRight } from "@site/src/components/Icons";
 
 const WORKER_URL =
   "https://mrkannah-contact-worker.mrkannah.workers.dev";
@@ -81,7 +83,14 @@ const textareaStyle: CSSProperties = {
   resize: "vertical",
 };
 
-export default function Contact(): JSX.Element {
+type ContactProps = {
+  /** Hide the heading + booking button above the form (page already has one). */
+  hideBooking?: boolean;
+};
+
+export default function Contact({
+  hideBooking = false,
+}: ContactProps): JSX.Element {
   const [name, setName] = useState(() => readDraft().name);
   const [email, setEmail] = useState(() => readDraft().email);
   const [message, setMessage] = useState(() => readDraft().message);
@@ -166,17 +175,15 @@ export default function Contact(): JSX.Element {
     return (
       <section className="container">
         <Heading as="h2" className="hero__title">
-          Thank you for reaching out!
+          Thanks for reaching out.
         </Heading>
-        <p className="hero__subtitle">
-          I&apos;ll get back to you as soon as possible.
-        </p>
+        <p className="hero__subtitle">I&apos;ll reply within 48 hours.</p>
       </section>
     );
   }
   return (
     <div id="contact" className="hero">
-      <style>
+      <style suppressHydrationWarning>
         {`
         .contact-field input:focus-visible,
         .contact-field textarea:focus-visible {
@@ -194,39 +201,46 @@ export default function Contact(): JSX.Element {
         `}
       </style>
       <section className="container" style={{ minWidth: 0 }}>
-        <Heading as="h3" className="hero__title text--center">
-          Get a scoped plan for your AI work
-        </Heading>
-        <div className="text--center" style={{ marginBottom: "2rem" }}>
-          <a
-            href="https://cal.com/kannah/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Book a 30-min fit call, opens in new tab"
-            className="button button--primary button--lg"
-          >
-            Book a 30-min fit call{" "}
-            <span aria-hidden="true" style={{ fontSize: "0.85em", marginLeft: "0.25rem" }}>
-              ↗
-            </span>
-          </a>
-          <p style={{ fontSize: "1rem", marginTop: "0.5rem", marginBottom: 0 }}>
-            30 min · proposal in 48h · no prep needed
-          </p>
-        </div>
-        <Heading as="h4" className="text--center" style={{ marginBottom: "0.5rem" }}>
-          Prefer email?
-        </Heading>
-        <p className="hero__subtitle text--center" style={{ marginBottom: "1rem" }}>
-          Fill out the form below and I will get back to you as soon as possible.
-        </p>
-        <p
+        {hideBooking ? null : (
+          <>
+            <Heading as="h3" className="hero__title text--center">
+              Get a scoped plan for your project
+            </Heading>
+            <div className="text--center" style={{ marginBottom: "2rem" }}>
+              <a
+                href="https://cal.com/kannah/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Book a free 30-min call, opens in new tab"
+                className="button button--primary button--lg"
+              >
+                Book a free 30-min call
+                <ArrowUpRight style={{ marginLeft: "0.4rem", fontSize: "1.05em" }} />
+              </a>
+              <p style={{ fontSize: "1rem", marginTop: "0.5rem", marginBottom: 0 }}>
+                {CTA_MICROCOPY}
+              </p>
+            </div>
+          </>
+        )}
+        <Heading
+          as={hideBooking ? "h3" : "h4"}
           className="text--center"
-          style={{ fontSize: "0.9rem", marginBottom: "1.5rem", opacity: 0.85 }}
+          style={{ marginBottom: "0.5rem" }}
         >
-          No spam, reply within 48h.
-          {restored && " Draft restored from this device."}
+          Prefer to write?
+        </Heading>
+        <p className="hero__subtitle text--center" style={{ margin: "0 auto 1.5rem" }}>
+          Send a message and I&apos;ll reply within 48 hours.
         </p>
+        {restored ? (
+          <p
+            className="text--center"
+            style={{ fontSize: "0.9rem", marginTop: "-0.75rem", marginBottom: "1.5rem", opacity: 0.85 }}
+          >
+            Draft restored from this device.
+          </p>
+        ) : null}
         <form onSubmit={handleSubmit} style={formStyle} noValidate={false}>
           {errorMessage && (
             <div

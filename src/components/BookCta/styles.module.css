@@ -29,11 +29,11 @@
     color 0.2s ease;
 }
 
-:global(.hasMotion) .magnetic :global(.button--primary) {
+:global([data-tier="full"]) .magnetic :global(.button--primary) {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-:global(.hasMotion) .magnetic:hover :global(.button--primary) {
+:global([data-tier="full"]) .magnetic:hover :global(.button--primary) {
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
 }
 
@@ -58,16 +58,32 @@
 }
 
 /* Drenched green band: inverted button, white-ish microcopy. */
-.onGreen,
-.onGreen:hover {
+:global([data-theme]) :global(.button--primary).onGreen,
+:global([data-theme]) :global(.button--primary).onGreen:hover {
   background-color: #fff;
   border-color: #fff;
   color: var(--c-drench-bg, var(--ifm-color-primary-darker));
 }
 
-.onGreen:hover {
+:global([data-theme]) :global(.button--primary).onGreen:hover {
   background-color: color-mix(in srgb, #fff 88%, var(--c-drench-bg, #000));
   color: var(--c-drench-bg, var(--ifm-color-primary-darker));
+}
+
+/* Solid: the page's one filled primary (hero). Light theme only; in the dark
+   theme the white button already carries the weight. White on #2e8555 is
+   4.56:1, on the darker hover step 5.9:1. */
+:global([data-theme="light"]) .solid,
+:global([data-theme="light"]) .solid:visited {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+:global([data-theme="light"]) .solid:hover {
+  background-color: var(--ifm-color-primary-darker);
+  border-color: var(--ifm-color-primary-darker);
+  color: #fff;
 }
 
 .microOnGreen {
@@ -79,7 +95,7 @@
   outline-offset: 3px;
 }
 
-.onGreen:focus-visible {
+.magnetic a.onGreen:focus-visible {
   outline-color: #fff;
 }
 

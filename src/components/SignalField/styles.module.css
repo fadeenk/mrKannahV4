@@ -5,10 +5,11 @@
   --sf-tick: var(--field-tick, var(--ifm-color-primary));
   --sf-line: var(--field-line, var(--ifm-color-primary));
   --sf-pilot: var(--field-pilot, var(--ifm-color-primary));
-  /* The pilot's knockout ring matches the page, like the RolloutRail's
-     (Infima's light background is transparent, so light needs #fff). */
+  /* The pilot's knockout ring matches the page (Infima's light background
+     is transparent, so light needs #fff). */
   --sf-ring: var(--field-ring, #fff);
   --sf-gain: var(--field-gain, 1);
+  --sf-tick-gain: var(--field-tick-gain, 1);
   position: absolute;
   inset: 0;
   z-index: 0;

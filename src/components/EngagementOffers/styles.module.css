@@ -1,24 +1,206 @@
+/* Engagements: three comparable cards. Flat at rest (1px hairline), lift on
+   hover only. On desktop the cards share subgrid rows so each labeled spec
+   (You get / You need / Case study / what shapes the work) sits on the same
+   line in every card. Everything is visible; nothing opens or closes. */
+
+.wrap:global(.section) {
+  --eo-accent: var(--ifm-color-primary-darkest);
+  --eo-rule: var(--ifm-color-emphasis-200);
+  padding-block: clamp(4rem, 7vw, 6rem);
+}
+
+:global([data-theme="dark"]) .wrap {
+  --eo-accent: var(--ifm-color-primary-lightest);
+}
+
 .grid3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
-.card {
+/* Reveal wrapper = grid item. */
+.cell {
   display: flex;
+  min-width: 0;
+}
+
+.cell .card {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  min-width: 0;
+  padding: 1.75rem 1.5rem 1.5rem;
+  transition:
+    transform var(--c-dur-fast, 160ms) var(--c-ease, ease),
+    box-shadow var(--c-dur-fast, 160ms) var(--c-ease, ease);
 }
 
-.cardHighlight {
-  border-color: var(--ifm-color-primary);
+/* Recommended entry: 2px primary border (padding gives the extra pixel back
+   so content stays aligned with its neighbours) and a faint green wash. */
+.cell .cardHighlight {
   border-width: 2px;
+  border-color: var(--ifm-color-primary);
+  padding: calc(1.75rem - 1px) calc(1.5rem - 1px) calc(1.5rem - 1px);
+  background: color-mix(
+    in srgb,
+    var(--ifm-color-primary) 4%,
+    var(--ifm-card-background-color, var(--ifm-background-surface-color))
+  );
 }
 
-.card a:focus-visible {
+/* "Start here": solid tab straddling the top border. White on the drench
+   token: 5.9:1 light, 7.3:1 dark. Absolute, so it never shifts the rows. */
+.cell .card .badge {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.7rem;
+  border-color: var(--c-drench-bg, var(--ifm-color-primary-darker));
+  background: var(--c-drench-bg, var(--ifm-color-primary-darker));
+  color: var(--c-on-drench, #fff);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.head {
+  margin: 0;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+.meta {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.blurb {
+  margin: 0.875rem 0 1.25rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* Labeled rows: scan down a card or across the three. */
+.specs {
+  margin: 0;
+}
+
+.spec {
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--eo-rule);
+}
+
+.spec dt {
+  margin: 0 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--eo-accent);
+}
+
+.spec dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* The copy continues a sentence ("You get ... a written plan"); stood
+   alone under its label it reads as a sentence start. Presentation only. */
+.spec dd::first-letter {
+  text-transform: uppercase;
+}
+
+.proofLink {
+  font-weight: 600;
+  color: var(--eo-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.proofLink:hover {
+  color: var(--eo-accent);
+  text-decoration-thickness: 2px;
+}
+
+.proofLink:focus-visible {
+  border-radius: 4px;
   outline: 3px solid var(--ifm-color-primary);
   outline-offset: 2px;
-  border-radius: 4px;
+}
+
+.cta {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+/* BookCta's own top margin is for standalone use. */
+.cta :global(.cta-container) {
+  margin-top: 0;
+}
+
+/* The fourth way in, said once and quietly: it has no card because it has
+   no case study on this page yet, only the testimonials. */
+.advisory {
+  max-width: 62ch;
+  margin: 2rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.advisory strong {
+  color: var(--ifm-font-color-base);
+}
+
+/* ≥997px with subgrid: one shared set of rows across the three cards
+   (head, blurb, four specs, cta). Anything else keeps the flex-column cards
+   above. */
+@media (min-width: 997px) {
+  @supports (grid-template-rows: subgrid) {
+    .grid3 {
+      column-gap: 1.25rem;
+      row-gap: 0;
+    }
+
+    .cell {
+      display: grid;
+      grid-row: span 7;
+      grid-template-rows: subgrid;
+    }
+
+    .cell .card {
+      display: grid;
+      grid-row: 1 / -1;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+
+    .specs {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+    }
+
+    .cta {
+      margin-top: 0;
+    }
+  }
 }
 
 @media screen and (max-width: 996px) {
@@ -27,9 +209,18 @@
   }
 }
 
+/* No sticky hover on touch. */
+@media (hover: none) {
+  .cell .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .cardHighlight {
+  .cell .card,
+  .cell .card:hover {
+    transform: none;
     transition: none;
   }
 }

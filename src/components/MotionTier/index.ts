@@ -1,4 +1,4 @@
-import { useEffect, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 
 /**
  * Motion tiers for the /consulting page.
@@ -34,17 +34,4 @@ function getServerSnapshot(): MotionTier {
 
 export function useMotionTier(): MotionTier {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-}
-
-/**
- * Mirrors tier "full" onto <html class="hasMotion"> for CSS hooks.
- * Call once, from the page shell.
- */
-export function useHasMotionClass(): void {
-  const tier = useMotionTier();
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("hasMotion", tier === "full");
-    return () => root.classList.remove("hasMotion");
-  }, [tier]);
 }

@@ -1,53 +1,71 @@
 import React, { type JSX } from "react";
-import RolloutRail, { type RailGate } from "@site/src/components/RolloutRail";
+import Heading from "@theme/Heading";
+import { ArrowDown } from "@site/src/components/Icons";
+import Reveal from "@site/src/components/Reveal";
 import SectionHeader from "@site/src/components/SectionHeader";
+import styles from "./styles.module.css";
 
-const painGroups: readonly [RailGate, RailGate, RailGate] = [
+type Situation = {
+  /** What the visitor would say, in their words. */
+  quote: string;
+  body: string;
+  client: string;
+  /** Anchor of the matching client in ProofShowcase. */
+  href: string;
+};
+
+/*
+ * Each situation is a published case study, told from the client's side
+ * before the work started. Facts come only from:
+ *   - Portico: src/pages/case-studies/portico-embedded-retainer.tsx
+ *   - AGI:     src/pages/case-studies/american-growth-insurance.tsx
+ * Order matches the ProofShowcase rows the links jump to.
+ */
+const situations: readonly Situation[] = [
   {
-    title: "Stuck pilots",
-    body: "Your AI pilot has lived in staging for weeks. Every rollout plan feels like it risks production.",
-    proof:
-      "Example: sandboxed rollout, eval harness, rollback plan — shipped to prod without an incident.",
-    route: "See assessment details",
-    routeLabel:
-      "See assessment details: AI Delivery and Reliability Assessment in engagements section",
-    href: "#engagements",
+    quote: "Customers keep asking for things our engineers can’t get to.",
+    body: "Custom reports, integrations, documentation. Your engineers belong on the roadmap, and your customers shouldn’t have to wait.",
+    client: "Portico",
+    href: "#proof-portico",
   },
   {
-    title: "At-risk delivery",
-    body: "Legacy constraints and delivery bottlenecks. Adding AI looks like it will destabilize what works.",
-    proof:
-      "Example: CI and coverage first, then AI-assisted triage — lead time down, prod stable.",
-    route: "See project details",
-    routeLabel:
-      "See project details: Project-Based AI Delivery in engagements section",
-    href: "#engagements",
-  },
-  {
-    title: "Overloaded team",
-    body: "Roadmap is full and senior bandwidth is thin. AI work waits because no one can own it safely.",
-    proof:
-      "Example: embedded senior owner for one workstream — in your repo, to prod with your team.",
-    route: "See retainer details",
-    routeLabel:
-      "See retainer details: Embedded AI Delivery Partner in engagements section",
-    href: "#engagements",
+    quote: "We need something real to show investors, and we need it in weeks.",
+    body: "Slides won’t hold up in diligence. Investors and early customers want to use a working product, not hear about one.",
+    client: "American Growth Insurance",
+    href: "#proof-agi",
   },
 ];
 
-/** "01": the three gates (RolloutRail). Rest builder owns this folder. */
+/**
+ * The problem, in the visitor's words. Ruled rows (the FAQ's vocabulary at a
+ * larger scale): the quote on the left, what it looks like day to day and a
+ * jump to the client who was there on the right.
+ */
 export default function PainGroups(): JSX.Element {
   return (
-    <RolloutRail
-      gates={painGroups}
-      header={
+    <section className={`section section--alt ${styles.wrap}`}>
+      <div className="container">
         <SectionHeader
-          index="01"
-          label="Sound familiar?"
-          title="Three gates between your AI pilot and production"
-          lede="The teams I get called in for are stuck at one of them."
+          title="Sound familiar?"
+          lede="The teams I get called in for usually say one of these."
         />
-      }
-    />
+        <ol className={styles.list} role="list">
+          {situations.map((s, i) => (
+            <Reveal as="li" key={s.client} delay={i * 60} className={styles.row}>
+              <Heading as="h3" className={styles.quote}>
+                “{s.quote}”
+              </Heading>
+              <div className={styles.side}>
+                <p className={styles.body}>{s.body}</p>
+                <a href={s.href} className={styles.jump}>
+                  How it went at {s.client}
+                  <ArrowDown className={styles.jumpArrow} />
+                </a>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
+    </section>
   );
 }

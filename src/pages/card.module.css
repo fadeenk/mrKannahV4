@@ -1,124 +1,266 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap);
+/* /card: a frosted glass badge held over the /consulting release-line field.
+   Tokens mirror consulting.module.css; change them together.
 
-:root {
-  --card-primary: #2e8555;
-  --card-primary-light: #25c2a0;
-  --card-primary-dark: #29784c;
-  --card-gradient: linear-gradient(135deg, #e8f5ec 0%, #c8e6d0 50%, #a8dab8 100%);
-  --card-glass: rgba(255, 255, 255, 0.7);
-  --card-glass-border: rgba(46, 133, 85, 0.3);
-  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  --card-text: #1a1a1a;
-  --card-text-muted: #555555;
-  --card-icon-color: #2e8555;
-  --card-action-bg: #2e8555;
-  --card-action-text: #ffffff;
+   Layering: .root is the field's positioned ancestor, so the SignalField
+   (absolute, z 0) covers the page and the badge (z 1) blurs it through
+   backdrop-filter. Nothing between them may set filter, opacity below 1,
+   mask or clip-path: each would cut the badge off from the field. The badge
+   is a one-cell grid holding both faces, so it is as tall as the taller face
+   and stays in flow at every size. */
+
+/* Width-matched stand-in for Besley 700 (same values as
+   consulting.module.css and CaseStudy: one global face name, so keep the
+   copies identical). */
+@font-face {
+  font-family: "Besley Fallback";
+  src: local("Georgia Bold"), local("Georgia-Bold");
+  font-weight: 700;
+  size-adjust: 105.5%;
 }
 
-[data-theme="dark"] {
-  --card-primary: #25c2a0;
-  --card-primary-light: #3cad6e;
-  --card-primary-dark: #1fa588;
-  --card-gradient: linear-gradient(135deg, #0f2922 0%, #1a3d33 50%, #25c2a0 100%);
-  --card-glass: rgba(255, 255, 255, 0.08);
-  --card-glass-border: rgba(255, 255, 255, 0.15);
-  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  --card-text: #ffffff;
-  --card-text-muted: rgba(255, 255, 255, 0.7);
-  --card-icon-color: #25c2a0;
-  --card-action-bg: #25c2a0;
-  --card-action-text: #0f2922;
+/* The sheen's position eases back to rest when the pointer leaves, which
+   needs typed properties. */
+@property --card-sheen-x {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 24%;
 }
 
-.pageWrapper {
-  /* min-height: calc(100vh - var(--ifm-navbar-height)); */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  background: var(--ifm-background-color);
+@property --card-sheen-y {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
 }
 
-.cardContainer {
-  perspective: 1000px;
-  width: 100%;
-  max-width: 400px;
+@property --card-edge-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 150deg;
 }
 
-.card {
+/* Chromeless: no navbar on the card (Layout drops the footer). The
+   browser's own surfaces take the page ground. */
+:global(html):has(.root) :global(.navbar) {
+  display: none;
+}
+
+:global(html):has(.root) {
+  background-color: var(--ifm-color-emphasis-100);
+  scrollbar-color: var(--ifm-color-emphasis-400) transparent;
+}
+
+:global(html[data-theme="dark"]):has(.root) {
+  background-color: var(--ifm-background-color);
+}
+
+.root {
+  --c-display:
+    "Besley Variable", "Besley Fallback", Georgia, "Times New Roman", serif;
+  --c-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --c-dur-fast: 160ms;
+
+  --card-ground: var(--ifm-color-emphasis-100);
+  --card-ink: var(--ifm-font-color-base);
+  --card-muted: var(--ifm-color-emphasis-700);
+  /* Green is the only accent: icons, strokes, the solid fill. */
+  --card-accent: var(--ifm-color-primary);
+  /* Green text on the glass: the darker step holds 5.4:1 where the primary
+     would sit near 4.4:1. */
+  --card-accent-ink: var(--ifm-color-primary-dark);
+
+  /* The glass. Tint and blur are tuned together: a thin tint and a light
+     blur, so the ticks behind still read as soft moving shapes. Text keeps
+     AA because the field quietens ticks under the name block
+     (data-field-quiet) and rows and buttons carry a denser fill. */
+  --glass-tint: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.16) 52%,
+    rgba(236, 246, 240, 0.3) 100%
+  );
+  --glass-solid: #fbfcfb;
+  --glass-blur: 3px;
+  /* The light-catching edge, bright where the light comes from (it turns
+     toward a fine pointer through --card-edge-angle) and green where it leaves. */
+  --edge-lit: rgba(255, 255, 255, 1);
+  --edge-mid: rgba(255, 255, 255, 0.4);
+  --edge-turn: rgba(46, 133, 85, 0.18);
+  --edge-shade: rgba(46, 133, 85, 0.45);
+  /* Rows, tiles and quiet buttons: a second, denser layer of the same glass. */
+  --glass-fill: rgba(255, 255, 255, 0.62);
+  --glass-fill-hover: rgba(255, 255, 255, 0.9);
+  --glass-rule: rgba(28, 30, 33, 0.1);
+  --glass-shadow:
+    0 1px 2px rgba(16, 48, 32, 0.06),
+    0 32px 64px -28px rgba(16, 56, 36, 0.42);
+  --sheen: rgba(255, 255, 255, 0.85);
+
+  /* The field: the pilot's knockout ring is the page ground. */
+  --field-ring: var(--card-ground);
+
   position: relative;
-  width: 100%;
-  min-height: 580px;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(0.75rem, 4vh, 3rem) clamp(0.75rem, 4vw, 3rem);
+  overflow-x: clip;
+  background: var(--card-ground);
+  color: var(--card-ink);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.card.flipped {
-  transform: rotateY(180deg);
+:global([data-theme="dark"]) .root {
+  --card-ground: var(--ifm-background-color);
+  --card-accent-ink: var(--ifm-color-primary);
+  --glass-tint: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.025) 52%,
+    rgba(37, 194, 160, 0.06) 100%
+  );
+  --glass-solid: #24282a;
+  --edge-lit: rgba(255, 255, 255, 0.55);
+  --edge-mid: rgba(255, 255, 255, 0.1);
+  --edge-turn: rgba(37, 194, 160, 0.14);
+  --edge-shade: rgba(37, 194, 160, 0.45);
+  --glass-fill: rgba(255, 255, 255, 0.06);
+  --glass-fill-hover: rgba(255, 255, 255, 0.12);
+  --glass-rule: rgba(255, 255, 255, 0.12);
+  --glass-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 32px 64px -24px rgba(0, 0, 0, 0.75);
+  --sheen: rgba(255, 255, 255, 0.24);
 }
 
-.cardFront,
-.cardBack {
+.root ::selection {
+  background: color-mix(in srgb, var(--ifm-color-primary) 30%, transparent);
+}
+
+.root :is(a, button):focus-visible {
+  outline: 3px solid var(--card-accent);
+  outline-offset: 3px;
+}
+
+.srOnly {
   position: absolute;
-  width: 100%;
-  min-height: 580px;
-  backface-visibility: hidden;
-  border-radius: 24px;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
   overflow: hidden;
-  background: var(--ifm-background-color);
-  box-shadow: var(--card-shadow);
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.cardBack {
-  transform: rotateY(180deg);
+/* ---- The badge --------------------------------------------------------- */
+
+.lean {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 26rem);
 }
 
-.cardBackground {
+/* Full tier: the badge leans a few px toward the pointer (set by the page).
+   2D only: a 3D rotation here would switch off the badge's backdrop blur. */
+.root[data-tier="full"] .lean {
+  transform: translate(var(--lean-x, 0px), var(--lean-y, 0px));
+  transition:
+    transform 0.5s var(--c-ease),
+    --card-sheen-x 0.5s var(--c-ease),
+    --card-sheen-y 0.5s var(--c-ease),
+    --card-edge-angle 0.5s var(--c-ease);
+}
+
+.badge {
+  position: relative;
+  display: grid;
+  border-radius: 24px;
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.8);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.8);
+  box-shadow: var(--glass-shadow);
+}
+
+/* The edge that catches the light: a 1px gradient ring. */
+.badge::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background: var(--card-gradient);
-  opacity: 0.95;
+  z-index: 2;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    var(--card-edge-angle),
+    var(--edge-lit) 0%,
+    var(--edge-mid) 34%,
+    var(--edge-turn) 70%,
+    var(--edge-shade) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
-.gradientOrb {
+/* The sheen: a soft highlight across the glass, at rest from the top left;
+   in the full tier it follows the pointer. Under the content. */
+.badge::after {
+  content: "";
   position: absolute;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(46, 133, 85, 0.4) 0%, transparent 70%);
-  top: -30px;
-  right: -30px;
-  border-radius: 50%;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    80% 55% at var(--card-sheen-x) var(--card-sheen-y),
+    var(--sheen),
+    transparent 72%
+  );
+  pointer-events: none;
 }
 
-.gradientOrb2 {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(37, 194, 160, 0.3) 0%, transparent 70%);
-  bottom: 20px;
-  left: -20px;
-  border-radius: 50%;
-}
-
-.profileSection {
+.face {
   position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  min-width: 0;
+  padding: clamp(1.25rem, 6vw, 2rem);
+}
+
+.face[aria-hidden="true"] {
+  visibility: hidden;
+}
+
+/* ---- Front ------------------------------------------------------------- */
+
+.front {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.identity {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem 1.5rem 1.5rem;
+  text-align: center;
 }
 
-.profileImageWrapper {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+.portrait {
+  width: 132px;
+  aspect-ratio: 1;
   padding: 5px;
-  background: var(--card-glass);
-  border: 3px solid var(--card-glass-border);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  background: var(--glass-fill);
+  box-shadow: inset 0 0 0 1px var(--glass-rule);
 }
 
-.profileImage {
+.photo {
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -126,245 +268,575 @@
 }
 
 .name {
-  margin: 1.25rem 0 0.5rem;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.75rem;
+  margin: 1rem 0 0;
+  font-family: var(--c-display);
+  font-size: clamp(1.875rem, 8vw, 2.25rem);
   font-weight: 700;
-  color: var(--card-text);
-  text-align: center;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--card-ink);
+  text-wrap: balance;
 }
 
-.title {
-  margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+.role {
+  margin: 0.5rem 0 0;
   font-size: 1rem;
-  font-weight: 400;
-  color: var(--card-text-muted);
-  text-align: center;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: balance;
 }
 
-.linksSection {
-  position: relative;
-  padding: 1rem 1.5rem 2rem;
+.line {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--card-muted);
+  text-wrap: balance;
 }
 
-.linkGroup {
+.details {
   display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.linkGroup:last-child {
-  margin-bottom: 0;
-  margin-top: 1.5rem;
+  flex-direction: column;
   gap: 1rem;
 }
 
-.linkButton {
+/* Phone and email, readable without a tap. */
+.rows {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: var(--card-glass);
-  border: 1px solid var(--card-glass-border);
-  color: var(--card-icon-color);
+  gap: 0.75rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 0.875rem 0.5rem 0.5rem;
+  border-radius: 12px;
+  background: var(--glass-fill);
+  box-shadow: inset 0 0 0 1px var(--glass-rule);
+  color: var(--card-ink);
   text-decoration: none;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  position: relative;
+  transition:
+    background-color var(--c-dur-fast) ease,
+    box-shadow var(--c-dur-fast) ease;
 }
 
-.linkButton:hover {
-  background: var(--card-icon-color);
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+.row:hover {
+  color: var(--card-ink);
+  text-decoration: none;
+  background: var(--glass-fill-hover);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--card-accent) 50%, transparent);
 }
 
-.linkButton svg {
-  font-size: 1.4rem;
+.rowIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card-accent) 13%, transparent);
+  color: var(--card-accent-ink);
+  font-size: 1.125rem;
 }
 
-.actionButton {
+.rowText {
   display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rowLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--card-muted);
+}
+
+.rowValue {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+/* Save contact (solid), Book a call (outline), then Share and QR (quiet). */
+.actions {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.25rem;
-  border-radius: 14px;
-  background: var(--card-action-bg);
-  border: none;
-  color: var(--card-action-text);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.9rem;
+  min-height: 3rem;
+  margin: 0;
+  padding: 0.625rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.25s ease;
-  flex: 1;
-  position: relative;
+  appearance: none;
+  transition:
+    background-color var(--c-dur-fast) ease,
+    border-color var(--c-dur-fast) ease,
+    color var(--c-dur-fast) ease,
+    box-shadow var(--c-dur-fast) ease,
+    transform var(--c-dur-fast) var(--c-ease);
 }
 
-.actionButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.button:hover {
   text-decoration: none;
 }
 
-.actionButton svg {
+.button:active {
+  transform: translateY(1px);
+}
+
+.buttonIcon {
+  flex: none;
+  font-size: 1.125rem;
+}
+
+/* White on #2e8555 is 4.56:1; on the darker hover step 5.9:1. */
+.solid,
+.solid:visited {
+  border-color: var(--card-accent);
+  background: var(--card-accent);
+  color: #fff;
+}
+
+.solid:hover {
+  border-color: var(--ifm-color-primary-darker);
+  background: var(--ifm-color-primary-darker);
+  color: #fff;
+  box-shadow: 0 10px 22px -10px rgba(16, 56, 36, 0.55);
+}
+
+/* Dark: the white button carries the weight, as on /consulting; deep green
+   ink on white is 7.3:1. */
+:global([data-theme="dark"]) .solid,
+:global([data-theme="dark"]) .solid:visited {
+  border-color: #fff;
+  background: #fff;
+  color: #136251;
+}
+
+:global([data-theme="dark"]) .solid:hover {
+  border-color: color-mix(in srgb, #fff 86%, var(--ifm-color-primary));
+  background: color-mix(in srgb, #fff 86%, var(--ifm-color-primary));
+  color: #136251;
+  box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.7);
+}
+
+.outline,
+.outline:visited {
+  border-color: var(--card-accent-ink);
+  background: transparent;
+  color: var(--card-accent-ink);
+}
+
+.outline:hover {
+  border-color: var(--card-accent-ink);
+  background: var(--card-accent-ink);
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .outline:hover {
+  color: var(--card-ground);
+}
+
+/* The rule is the border itself, so the button's edge lines up with the
+   rows and the solid and outline buttons. */
+.quiet {
+  border-width: 1px;
+  border-color: var(--glass-rule);
+  background: var(--glass-fill);
+  color: var(--card-ink);
+}
+
+.quiet .buttonIcon {
+  color: var(--card-accent-ink);
+}
+
+.quiet:hover {
+  border-color: color-mix(in srgb, var(--card-accent) 50%, transparent);
+  background: var(--glass-fill-hover);
+}
+
+.quiet[data-status="copied"] {
+  color: var(--card-accent-ink);
+}
+
+/* Work profiles as tiles on the left; the personal pair smaller, grey and
+   untiled on the right, so they sit a step back. */
+.profiles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--glass-rule);
+}
+
+.work,
+.personal {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work {
+  gap: 0.5rem;
+}
+
+.personal {
+  gap: 0.125rem;
+}
+
+.tile,
+.mini {
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  transition:
+    background-color var(--c-dur-fast) ease,
+    box-shadow var(--c-dur-fast) ease,
+    color var(--c-dur-fast) ease;
+}
+
+.tile {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 12px;
+  background: var(--glass-fill);
+  box-shadow: inset 0 0 0 1px var(--glass-rule);
+  color: var(--card-accent-ink);
+  font-size: 1.25rem;
+}
+
+.tile:hover {
+  background: var(--card-accent-ink);
+  box-shadow: none;
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .tile:hover {
+  color: var(--card-ground);
+}
+
+.mini {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 8px;
+  color: var(--card-muted);
   font-size: 1rem;
+}
+
+.mini:hover {
+  background: var(--glass-fill);
+  color: var(--card-ink);
+}
+
+.tip {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  z-index: 3;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 8px;
+  background: var(--ifm-font-color-base);
+  color: var(--ifm-background-surface-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  pointer-events: none;
+  transition:
+    opacity var(--c-dur-fast) ease,
+    transform var(--c-dur-fast) var(--c-ease);
+}
+
+.tile:is(:hover, :focus-visible) .tip,
+.mini:is(:hover, :focus-visible) .tip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Touch has no hover: the tip would only flash on tap. */
+@media (hover: none) {
+  .tip {
+    display: none;
+  }
+}
+
+/* ---- Back: the QR ------------------------------------------------------- */
+
+.back {
+  display: grid;
+  place-items: center;
 }
 
 .backButton {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
+  top: clamp(1rem, 4vw, 1.25rem);
+  left: clamp(1rem, 4vw, 1.25rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
   border-radius: 12px;
-  background: var(--card-glass);
-  border: 1px solid var(--card-glass-border);
-  color: var(--card-text);
+  background: var(--glass-fill);
+  box-shadow: inset 0 0 0 1px var(--glass-rule);
+  color: var(--card-ink);
+  font-size: 1.25rem;
   cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.backButton .tooltip {
-  left: 0;
-  transform: none;
-}
-
-.backButton:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-  bottom: auto;
-  top: calc(100% + 8px);
-  left: 0;
-  transform: none;
-}
-
-.backButton:hover .tooltip::after {
-  left: 20px;
-  top: auto;
-  bottom: 100%;
-  border-top-color: transparent;
-  border-bottom-color: #ffffff;
-}
-
-[data-theme="dark"] .backButton:hover .tooltip::after {
-  border-bottom-color: #333333;
+  transition: background-color var(--c-dur-fast) ease;
 }
 
 .backButton:hover {
-  background: var(--card-icon-color);
-  color: #fff;
+  background: var(--glass-fill-hover);
 }
 
-.backButton svg {
-  font-size: 1.1rem;
-}
-
-.qrSection {
-  position: relative;
+.qr {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 580px;
-  padding: 2rem;
+  gap: 1.25rem;
+  width: 100%;
+  margin: 0;
+  padding-top: 2.5rem;
+}
+
+/* A white plate in both themes: QR scanners want dark on light. */
+.plate {
+  width: min(100%, 22rem);
+  padding: 0.625rem;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--glass-rule);
 }
 
 .qrImage {
+  display: block;
   width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  background: #fff;
-  padding: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
-.tooltip {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.5rem 0.75rem;
-  background: #ffffff;
-  color: #1a1a1a;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  white-space: nowrap;
+  height: auto;
   border-radius: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
-  z-index: 100;
-  pointer-events: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #ffffff;
+.qrCaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--card-muted);
 }
 
-[data-theme="dark"] .tooltip {
-  background: #333333;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+.qrName {
+  font-family: var(--c-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--card-ink);
 }
 
-[data-theme="dark"] .tooltip::after {
-  border-top-color: #333333;
-}
+/* ---- Sizes ------------------------------------------------------------- */
 
-.linkButton:hover .tooltip,
-.actionButton:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-  bottom: calc(100% + 8px);
-}
-
-.qrLabel {
-  margin: 1.5rem 0 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1rem;
-  color: var(--card-text-muted);
-}
-
-@media (max-width: 480px) {
-  .pageWrapper {
-    padding: 1rem;
+@media (max-width: 360px) {
+  .portrait {
+    width: 104px;
   }
 
-  .cardContainer {
-    max-width: 100%;
+  .face {
+    padding: 1.25rem 1rem;
+  }
+
+  .row {
+    padding-right: 0.625rem;
+  }
+
+  .button {
+    padding-inline: 0.75rem;
+  }
+}
+
+/* Short portrait screens (Safari with its bars, an iPhone SE): tighten the
+   badge so QR code stays above the fold for the in-person moment and, from
+   about 660px tall, the whole front face fits. */
+@media (orientation: portrait) and (max-height: 740px) {
+  .face {
+    padding-block: 1rem;
+  }
+
+  .front {
+    gap: 1rem;
+  }
+
+  .portrait {
+    width: 92px;
   }
 
   .name {
-    font-size: 1.5rem;
+    margin-top: 0.625rem;
   }
 
-  .linkButton {
-    width: 48px;
-    height: 48px;
+  .details {
+    gap: 0.75rem;
   }
 
-  .actionButton {
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+  .row {
+    min-height: 3rem;
+  }
+
+  .button {
+    min-height: 2.75rem;
+  }
+
+  .profiles {
+    padding-top: 0.75rem;
+  }
+}
+
+/* Landscape phone: two columns, so the badge fits a short screen. Identity
+   and profiles on the left; contact rows and actions on the right. */
+@media (orientation: landscape) and (max-height: 34rem) {
+  .lean {
+    width: min(100%, 46rem);
+  }
+
+  .face {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .front {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "identity rows"
+      "identity actions"
+      "profiles actions";
+    gap: 0.75rem 2rem;
+    align-items: start;
+  }
+
+  .details {
+    display: contents;
+  }
+
+  .identity {
+    grid-area: identity;
+  }
+
+  .rows {
+    grid-area: rows;
+  }
+
+  .actions {
+    grid-area: actions;
+  }
+
+  .profiles {
+    grid-area: profiles;
+    align-self: end;
+  }
+
+  .portrait {
+    width: 88px;
+  }
+
+  .name {
+    margin-top: 0.75rem;
+    font-size: 1.75rem;
+  }
+
+  .row {
+    min-height: 3rem;
+  }
+
+  .button {
+    min-height: 2.75rem;
+  }
+
+  /* Side by side, the plate clears the back button in the top-left corner. */
+  .qr {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 0;
+    padding-left: 3.25rem;
+  }
+
+  .plate {
+    width: min(50%, calc(100svh - 7rem));
+  }
+
+  .qrCaption {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* ---- Fallbacks --------------------------------------------------------- */
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .badge {
+    background: var(--glass-solid);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .badge {
+    background: var(--glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root .lean,
+  .button,
+  .button:active {
+    transition: none;
+    transform: none;
+  }
+
+  .row,
+  .tile,
+  .mini,
+  .tip,
+  .backButton {
+    transition: none;
   }
 }

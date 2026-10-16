@@ -12,8 +12,8 @@
   align-items: center;
   overflow: hidden;
   /* Short enough that the stats band below peeks into the first viewport. */
-  min-height: clamp(34rem, calc(100vh - var(--ifm-navbar-height, 60px) - 6.5rem), 47rem);
-  min-height: clamp(34rem, calc(100svh - var(--ifm-navbar-height, 60px) - 6.5rem), 47rem);
+  min-height: clamp(34rem, calc(100vh - var(--ifm-navbar-height, 60px) - 9.75rem), 47rem);
+  min-height: clamp(34rem, calc(100svh - var(--ifm-navbar-height, 60px) - 9.75rem), 47rem);
   padding: clamp(2.5rem, 6vh, 4.5rem) 0 clamp(2.75rem, 7vh, 4.25rem);
 }
 
@@ -44,11 +44,11 @@
   text-wrap: balance;
 }
 
-.keep {
+/* ── Copy ── */
+.nowrap {
   white-space: nowrap;
 }
 
-/* ── Copy ── */
 .copy {
   max-width: 34rem;
 }
@@ -183,10 +183,27 @@
   opacity: 1;
 }
 
+/* Name tag: the only place the hero says who is speaking. */
+.nameplate {
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 0;
+  padding: 2.25rem 0.9rem 0.75rem;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
 .touch .character {
+  border-radius: 12px;
   opacity: 1;
   transition-duration: 700ms;
-  transition-delay: 1.5s;
+  transition-delay: 1.9s;
 }
 
 /* ── Desktop: headline spans the row; copy left, portrait right ── */
@@ -201,10 +218,8 @@
     grid-column: 1 / -1;
   }
 
-  /* Two lines, never wrapped. Besley runs about 14.5em on the long line, far
-     wider than a 7/12 column, so the headline spans the row. Between 1100 and
-     1440px wide it may pass the container's right edge, but stays inside the
-     viewport (6vw keeps the line under 90vw). */
+  /* Two lines, never wrapped. The long line is wider than a 7/12 column, so
+     the headline spans the row. 6vw keeps it inside the viewport. */
   .line {
     display: block;
     white-space: nowrap;
