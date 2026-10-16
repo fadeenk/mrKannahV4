@@ -62,7 +62,7 @@ Explicitly undecided: role and prominence of personal routes (`datingProfile`, `
 
 Real proof that must not be fabricated, with paths:
 
-- Stats: 18+ years, $45M+ raised for clients, 40-60% infra reduction (`src/pages/index.tsx` StatsBar).
+- Stats: years building software (counted live from June 2008), $105M+ raised for clients, 40-60% infra reduction (`src/components/StatsBand`).
 - Testimonials: `src/components/Testimonials/index.tsx`.
 - Client logos: `src/components/LogosCarousel/index.tsx`.
 - Founder story: Iraq → Turkey → US refugee via UN (2008), ESL to top of class, SDSU Computer Engineering + CS, web business, CourseKey technical co-founder (`src/pages/about.mdx`).

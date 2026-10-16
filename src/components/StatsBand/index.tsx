@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type JSX } from "react";
+import React, { useEffect, useMemo, useRef, useState, type JSX } from "react";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import LogosCarousel from "@site/src/components/LogosCarousel";
 import styles from "./styles.module.css";
@@ -9,11 +9,22 @@ type Stat = {
   label: string;
 };
 
-const stats: readonly Stat[] = [
-  { value: "18+", label: "Years building software companies" },
-  { value: "$45M+", label: "Raised for Clients" },
-  { value: "40-60%", label: "Infrastructure Cost Reduction" },
-];
+/** Month is zero-based: June 2008, when the career in software began. */
+const CAREER_START = { year: 2008, month: 5 };
+
+/** Whole years since the career start, so the "+" stays honest. */
+function yearsBuilding(now: Date): number {
+  const years = now.getFullYear() - CAREER_START.year;
+  return now.getMonth() < CAREER_START.month ? years - 1 : years;
+}
+
+function buildStats(years: number): readonly Stat[] {
+  return [
+    { value: `${years}+`, label: "Years building software companies" },
+    { value: "$105M+", label: "Raised for Clients" },
+    { value: "40-60%", label: "Infrastructure Cost Reduction" },
+  ];
+}
 
 /** Count-up length (ms) and the lag between neighbouring stats. */
 const COUNT_MS = 1500;
@@ -107,6 +118,14 @@ export default function StatsBand(): JSX.Element {
   const tier = useMotionTier();
   const gridRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<Phase>("off");
+  // The server render bakes in the build date; refresh from the visitor's
+  // clock after mount so a stale build never shows an old year count.
+  const [years, setYears] = useState(() => yearsBuilding(new Date()));
+  const stats = useMemo(() => buildStats(years), [years]);
+
+  useEffect(() => {
+    setYears(yearsBuilding(new Date()));
+  }, []);
 
   useEffect(() => {
     const el = gridRef.current;
