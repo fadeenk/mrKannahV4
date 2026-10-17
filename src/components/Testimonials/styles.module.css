@@ -188,3 +188,27 @@
   background: #fff;
   margin-right: 2px;
 }
+
+/* On a drenched green band the cards stay white and every accent (name tag,
+   photo frame, role chip, source link) takes the band's own green, so the
+   tag's half-transparent edge melts into the band as it was drawn to. The
+   card is white in both themes, so its text is fixed dark rather than
+   following the page's (light-in-dark) text color. */
+.onGreen {
+  --testimonialBackground: #fff;
+  --testimonialAccent: var(--c-drench-bg, var(--ifm-color-primary-darker));
+}
+
+.onGreen .description p {
+  color: #1a1a1a;
+}
+
+/* The page's white focus ring (right for the green band) vanishes on the
+   white card, and the Source link is the one focusable element inside one.
+   Ring it in the accent instead: the band green is 5.9:1 on white in light
+   and the deep teal higher in dark. The extra .member out-ranks the page rule
+   (.root > .hero--primary a:focus-visible) whichever sheet loads last. */
+.onGreen .member .description a:focus-visible {
+  outline: 3px solid var(--testimonialAccent);
+  outline-offset: 2px;
+}

@@ -46,6 +46,15 @@ const config: Config = {
           routeBasePath: "/blog",
           sidebarPath: "./sidebars.ts",
           tagsBasePath: "tags",
+          // `docs/` is published at /blog. Keep internal specs and plans out
+          // (this replaces Docusaurus's default excludes, so they are repeated).
+          exclude: [
+            "**/_*.{js,jsx,ts,tsx,md,mdx}",
+            "**/_*/**",
+            "**/*.test.{js,jsx,ts,tsx}",
+            "**/__tests__/**",
+            "superpowers/**",
+          ],
         },
         gtag: {
           trackingID: "G-QRPFQQWH20",
@@ -87,6 +96,10 @@ const config: Config = {
           position: "left",
           to: "/showcase",
           items: [
+            {
+              label: "Case Studies",
+              to: "/case-studies",
+            },
             {
               label: "Apps",
               to: "/showcase/Apps",

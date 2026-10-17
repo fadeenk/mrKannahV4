@@ -1,0 +1,1102 @@
+/* Case-study pages: the homepage world extended to its proof pages.
+   Masthead and facts ledger, numeral ledger, Besley quotes, the story on the
+   release-line spine, screenshot frames, and the stack disclosure. Green is
+   the only accent; text sits on the page ground in both themes, and only the
+   logo gets the light plate. Flat at rest; the screenshot frame carries the
+   one resting shadow.
+
+   Motion: section entrances use Reveal, and each spine node fills as its
+   section reveals. The server render and the reduced tier never enter the
+   "pending" state, so they show the finished, filled spine. Only transform
+   and opacity animate. */
+
+/* Same width-matched stand-in for Besley 700 as
+   src/pages/index.module.css, so the font swap does not reflow the H1. */
+@font-face {
+  font-family: "Besley Fallback";
+  src: local("Georgia Bold"), local("Georgia-Bold");
+  font-weight: 700;
+  size-adjust: 105.5%;
+}
+
+/* ── Page tokens ──
+   The --c-* block mirrors .root in src/pages/index.module.css (keep the
+   two in sync): FinalCta, BookCta, SectionHeader, and Reveal read them. */
+.root {
+  --c-display:
+    "Besley Variable", "Besley Fallback", Georgia, "Times New Roman", serif;
+  --c-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --c-dur-fast: 160ms;
+  --c-dur-reveal: 420ms;
+  --c-dur-settle: 900ms;
+  --c-signal: var(--ifm-color-primary);
+  --c-drench-bg: var(--ifm-color-primary-darker);
+  --c-on-drench: #fff;
+
+  /* Text links and numerals: forest-darker in light (5.9:1 on white), mint
+     lighter in dark (9.5:1 on #1b1b1d). */
+  --cs-go-text: var(--ifm-color-primary-darker);
+  --cs-ink: var(--ifm-font-color-base);
+  --cs-muted: var(--ifm-color-emphasis-700);
+  --cs-rule: var(--ifm-color-emphasis-300);
+  /* Infima's light --ifm-background-color is transparent; the node knockout
+     needs an opaque fill that matches the page. */
+  --cs-surface: #fff;
+  --cs-measure: 68ch;
+  --cs-radius: 12px;
+  --cs-h1: clamp(2.25rem, 4.6vw, 4rem);
+  --cs-h2: clamp(1.75rem, 3.2vw, 2.5rem);
+  /* Between the two columns of the masthead and of each story section. */
+  --cs-col-gap: clamp(2.5rem, 4.5vw, 4.5rem);
+  --cs-node: 20px;
+  --cs-spine: 3rem;
+  --cs-lead-h: 56px;
+}
+
+[data-theme="dark"] .root {
+  /* Mint Signal fails with white text (2.3:1); drop to the deep ramp. */
+  --c-drench-bg: color-mix(
+    in srgb,
+    var(--ifm-color-primary-darkest) 72%,
+    #000
+  );
+  --cs-go-text: var(--ifm-color-primary-lighter);
+  --cs-surface: var(--ifm-background-color);
+}
+
+.root ::selection {
+  background: color-mix(in srgb, var(--ifm-color-primary) 30%, transparent);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page {
+  padding-top: 1.25rem;
+  padding-bottom: clamp(3.5rem, 7vw, 5rem);
+}
+
+/* The index has no back link: its height (2.75rem) moves into the padding,
+   so the H1 sits where it does on a study page. */
+.pageIndex {
+  padding-top: 4rem;
+}
+
+/* ── Links ── */
+.back,
+.textLink,
+.clientLink {
+  border-radius: 4px;
+  color: var(--cs-go-text);
+  text-underline-offset: 3px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.textLink,
+.clientLink {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.back:hover,
+.textLink:hover,
+.clientLink:hover {
+  color: var(--cs-go-text);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.back:focus-visible,
+.textLink:focus-visible,
+.clientLink:focus-visible {
+  outline: 3px solid var(--c-signal);
+  outline-offset: 2px;
+}
+
+.backArrow {
+  flex: none;
+  transition: transform var(--c-dur-fast) var(--c-ease);
+}
+
+.back:hover .backArrow {
+  transform: translateX(-3px);
+}
+
+.clientArrow {
+  margin-left: 0.15em;
+  vertical-align: -0.1em;
+}
+
+/* In running copy: pull back the glyph's own right margin so punctuation
+   after the link does not float. */
+.sourceArrow {
+  margin: 0 -0.2em 0 0.1em;
+  vertical-align: -0.1em;
+}
+
+/* Links written into the story prose and the numbers' footnote. */
+.body a,
+.footnote a {
+  color: var(--cs-go-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.body a:hover,
+.footnote a:hover {
+  color: var(--cs-go-text);
+  text-decoration-thickness: 2px;
+}
+
+.body a:focus-visible,
+.footnote a:focus-visible {
+  outline: 3px solid var(--c-signal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Masthead ── */
+.masthead {
+  margin-top: clamp(1rem, 2.5vw, 2rem);
+}
+
+.headline {
+  max-width: 20ch;
+  margin: 0 0 1.25rem;
+  font-family: var(--c-display);
+  font-size: var(--cs-h1);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 60ch;
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
+  text-wrap: pretty;
+}
+
+/* Facts ledger: term/value rows between hairlines on phones and, from 997px,
+   in the masthead's right column; a two-column grid on tablets. */
+.facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+  padding: 0;
+  border-block: 1px solid var(--cs-rule);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: baseline;
+  min-width: 0;
+  padding: 0.875rem 0;
+}
+
+.fact + .fact {
+  border-top: 1px solid var(--cs-rule);
+}
+
+.fact dt {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--cs-muted);
+}
+
+.fact dd {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--cs-ink);
+}
+
+.factClient {
+  align-items: start;
+}
+
+/* Sit "Client" on the plate's centre line. */
+.factClient dt {
+  padding-top: 0.7rem;
+}
+
+.factClient dd {
+  font-weight: 400;
+}
+
+.about {
+  margin: 0.6rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* Tablets: the ledger as a two-column grid under the lede. */
+@media (min-width: 769px) and (max-width: 996px) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1.5rem, 3vw, 2.5rem);
+    row-gap: 1.5rem;
+    padding: 1.25rem 0 1.5rem;
+  }
+
+  .fact {
+    display: block;
+    padding: 0;
+  }
+
+  .fact + .fact {
+    border-top: 0;
+  }
+
+  .fact dt {
+    margin: 0 0 0.5rem;
+  }
+
+  .factClient dt {
+    padding-top: 0;
+  }
+
+  .about {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Desktop: H1 and lede in 7/12, the ledger beside them in 5/12. Its top rule
+   sits on the H1's cap line, and the lede row takes any spare height so the
+   lede stays under the H1. */
+@media (min-width: 997px) {
+  .mastheadSplit {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: auto 1fr;
+    column-gap: var(--cs-col-gap);
+  }
+
+  .mastheadSplit .headline,
+  .mastheadSplit .lede {
+    grid-column: 1;
+  }
+
+  .mastheadSplit .facts {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+    /* Besley's cap top, measured: 0.19em below the H1's line box. */
+    margin-top: calc(var(--cs-h1) * 0.19);
+  }
+}
+
+/* The linked name takes its own line; the description reads under it. */
+.about .clientLink {
+  display: block;
+  width: fit-content;
+}
+
+/* No client URL: the same line, plain. */
+.clientName {
+  display: block;
+  font-weight: 600;
+  color: var(--cs-ink);
+}
+
+/* Logos are dark marks on transparent: keep them on a light plate in both
+   themes (the ProofShowcase chip). */
+/* A block, not inline: no line-box strut above it, so the plate's top is
+   the cell's top and the term beside it can sit on its centre line. */
+.plate {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  height: 2.5rem;
+  padding: 0 0.875rem;
+  border-radius: 8px;
+  background: #fcfbf7;
+  border: 1px solid rgba(28, 30, 33, 0.14);
+}
+
+.plate img {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  height: 1.625rem;
+  width: auto;
+  object-fit: contain;
+}
+
+/* A long wordmark (about 15:1) sets at cap height, not plate height. */
+.plateWide img {
+  height: 0.875rem;
+}
+
+/* ── Numbers ── */
+.stats {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.statList {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0;
+  padding-inline: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.stat:first-child {
+  padding-left: 0;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--cs-rule);
+}
+
+.statValue {
+  font-family: var(--c-display);
+  font-size: clamp(2.75rem, 5.4vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  color: var(--cs-go-text);
+}
+
+.statText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--cs-ink);
+  text-wrap: balance;
+}
+
+.statNote {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--cs-muted);
+}
+
+.footnote {
+  max-width: var(--cs-measure);
+  margin: 1.5rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cs-muted);
+}
+
+/* ── Quotes ──
+   The opening mark hangs outside the text edge so the words line up with
+   the H1 (lead) or the section prose (inline). No side bar. */
+.quote {
+  margin: 0;
+}
+
+.quoteText {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--c-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cs-ink);
+}
+
+.quoteText p {
+  margin: 0;
+  text-indent: -0.42em;
+  text-wrap: pretty;
+}
+
+.quoteLead {
+  margin-top: clamp(4rem, 8vw, 6rem);
+}
+
+.quoteLead .quoteText {
+  max-width: 26em;
+  font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+  line-height: 1.18;
+}
+
+.quoteInline {
+  margin-block: 2.25rem;
+}
+
+.quoteInline .quoteText {
+  max-width: 30em;
+  font-size: clamp(1.25rem, 1.8vw, 1.75rem);
+  line-height: 1.25;
+}
+
+/* Attribution, opened by the release line's 2px stroke. */
+.quoteBy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.6rem;
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.quoteBy::before {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 1.75rem;
+  height: 2px;
+  background: var(--c-signal);
+}
+
+.quoteName {
+  font-weight: 600;
+  color: var(--cs-ink);
+}
+
+.quoteRole {
+  color: var(--cs-muted);
+}
+
+/* ── Story on the spine ──
+   ProofShowcase geometry: a 2px line from each node down to the next, 20px
+   hollow-ring nodes filled green with a 3px knockout in the page color. The
+   node sits on the centre of the H2's first line. The first section draws
+   the line in from a run of straightening ticks; the last stops at its node. */
+.spine {
+  --node-y: calc(var(--cs-h2) * 0.56);
+  position: relative;
+  padding: 0 0 clamp(3.5rem, 6vw, 4.5rem) var(--cs-spine);
+}
+
+.spine:not(.spine ~ .spine) {
+  margin-top: calc(var(--cs-lead-h) + clamp(2.5rem, 5vw, 3.5rem));
+}
+
+/* Segment from this node to the next node's centre. */
+.spine::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--cs-node) / 2 - 1px);
+  top: var(--node-y);
+  bottom: calc(var(--node-y) * -1);
+  width: 2px;
+  background: var(--c-signal);
+}
+
+.spine:not(:has(~ .spine))::before {
+  display: none;
+}
+
+/* First section: the line comes in from the tick run to the first node. */
+.spine:not(.spine ~ .spine)::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--cs-node) / 2 - 1px);
+  top: 0;
+  width: 2px;
+  height: var(--node-y);
+  background: var(--c-signal);
+}
+
+.ticks {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(var(--cs-lead-h) * -1);
+  overflow: visible;
+  fill: none;
+  stroke: var(--c-signal);
+  stroke-width: 1.5;
+}
+
+.spine:not(.spine ~ .spine) > .ticks {
+  display: block;
+}
+
+.node {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: calc(var(--node-y) - var(--cs-node) / 2);
+  width: var(--cs-node);
+  height: var(--cs-node);
+  border-radius: 50%;
+  border: 2px solid var(--c-signal);
+  background: var(--cs-surface);
+  box-shadow: 0 0 0 3px var(--cs-surface);
+}
+
+/* Filled is the default (server render, reduced tier, already on screen). A
+   section held back by Reveal shows a hollow ring that fills as it enters. */
+.node::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--c-signal);
+}
+
+.spine:has(> .spineContent[data-reveal="pending"]) .node::after {
+  transform: scale(0);
+}
+
+.spine:has(> .spineContent[data-reveal="done"]) .node::after {
+  transition: transform var(--c-dur-reveal) var(--c-ease) 180ms;
+}
+
+.spineTitle {
+  margin: 0 0 1.25rem;
+  font-family: var(--c-display);
+  font-size: var(--cs-h2);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.body {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+/* Prose holds a reading measure; media (.wide) runs the content width.
+   :where() keeps this at one class so each part's own width wins. */
+.body > :where(:not(.wide)) {
+  max-width: var(--cs-measure);
+}
+
+.body > :last-child {
+  margin-bottom: 0;
+}
+
+.body p {
+  text-wrap: pretty;
+}
+
+/* Desktop: an editorial row, the H2 in a 4/12 column beside its node and the
+   body in 8/12. The node and the 2px line keep their geometry: the H2 still
+   opens the section, so --node-y still finds its first line. */
+@media (min-width: 997px) {
+  .spineContent {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    column-gap: var(--cs-col-gap);
+    align-items: start;
+  }
+
+  .spineTitle {
+    margin: 0;
+  }
+
+  /* Screenshot frames take both columns. The H2 column is half the body
+     column (1fr : 2fr), and a percentage margin resolves against the body. */
+  .body > .bleed {
+    margin-left: calc(-50% - var(--cs-col-gap));
+  }
+}
+
+/* ── Bold-fact list ── */
+.list {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  position: relative;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+/* The release line's stroke as the marker. */
+.listItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.75rem;
+  height: 2px;
+  background: var(--c-signal);
+}
+
+.listFact {
+  font-weight: 700;
+  color: var(--cs-ink);
+}
+
+/* ── Media ── */
+.wide {
+  max-width: none;
+}
+
+.figure {
+  margin: 2.25rem 0;
+}
+
+.caption {
+  max-width: var(--cs-measure);
+  margin-top: 0.875rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cs-muted);
+  text-wrap: pretty;
+}
+
+/* Justified rows, set from CaseFrames: --ar is a frame's aspect, --full-w
+   its width at the file's size, --row-w the row's width (gaps aside) when
+   its smallest capture renders 1:1, and --row-gaps the gaps in the row. */
+.frames {
+  --frame-gap: clamp(1rem, 2.5vw, 1.75rem);
+  display: grid;
+  gap: var(--frame-gap);
+}
+
+/* Equal heights without measuring: each frame grows in proportion to its
+   aspect from a zero basis (the ProofShowcase strip). The row stops at the
+   1:1 width, so no capture is upscaled. */
+.frameRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--frame-gap);
+  max-width: calc(var(--row-w) * 1px + var(--row-gaps) * var(--frame-gap));
+}
+
+.frame,
+.figureFrame {
+  position: relative;
+  border-radius: var(--cs-radius);
+  background: #1f1f21;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.16),
+    0 16px 28px -10px rgba(0, 0, 0, 0.4);
+}
+
+.frame {
+  flex: var(--ar) 1 0%;
+  min-width: 0;
+  aspect-ratio: var(--ar);
+}
+
+.figureFrame {
+  overflow: hidden;
+}
+
+/* The image covers the frame; --crop-y picks the rows a crop keeps. */
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  object-position: 50% var(--crop-y, 0%);
+}
+
+/* Inner hairline: gives dark captures a defined edge on a dark page too. */
+.frame::after,
+.figureFrame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .frame,
+[data-theme="dark"] .figureFrame {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 18px 32px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* A screen recording: its width/height attributes set the aspect before
+   metadata loads, and the frame is capped so a near-square capture stays
+   about half a laptop screen tall. */
+.figureFrame:has(> .video) {
+  max-width: 44rem;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #1f1f21;
+}
+
+/* Inset: the frame clips anything outside it. */
+.video:focus-visible {
+  outline: 3px solid var(--c-signal);
+  outline-offset: -3px;
+}
+
+/* ── Tech stack ── */
+.stack {
+  max-width: 48rem;
+  margin: 0 0 0 var(--cs-spine);
+  border-block: 1px solid var(--cs-rule);
+}
+
+.stackSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  /* Bleeds into the gutter so the focus ring clears the text while the
+     label stays on the content edge. */
+  margin-inline: -0.5rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.stackSummary::-webkit-details-marker {
+  display: none;
+}
+
+.stackSummary:focus-visible {
+  outline: 3px solid var(--c-signal);
+  outline-offset: 2px;
+}
+
+.stackTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.stackSummary:hover .stackTitle {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.stackChevron {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--cs-go-text);
+  transition: transform var(--c-dur-fast) var(--c-ease);
+}
+
+.stack[open] .stackChevron {
+  transform: rotate(180deg);
+}
+
+.stackGroups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1.5rem 2.5rem;
+  padding: 1rem 0 1.75rem;
+}
+
+.stackGroupTitle {
+  margin: 0 0 0.6rem;
+  font-family: var(--c-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stackItems {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stackItems li {
+  margin: 0;
+  padding: 0.2rem 0;
+  line-height: 1.5;
+}
+
+/* ── Foot link: a quiet same-site link closing the body ── */
+/* The stack's width, so a sentence and its link sit on one line. */
+.footLink {
+  max-width: 48rem;
+  margin: 2.5rem 0 0 var(--cs-spine);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cs-muted);
+}
+
+.footArrow {
+  margin-left: 0.3em;
+  vertical-align: -0.12em;
+  transition: transform var(--c-dur-fast) var(--c-ease);
+}
+
+.footLink a:hover .footArrow {
+  transform: translateX(3px);
+}
+
+/* ── More case studies ── */
+.more {
+  padding: clamp(3.5rem, 7vw, 5rem) 0 clamp(4rem, 8vw, 6rem);
+  border-top: 1px solid var(--cs-rule);
+}
+
+.moreList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moreItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.75rem;
+  border: 1px solid var(--cs-rule);
+  border-radius: var(--cs-radius);
+  transition:
+    transform var(--c-dur-fast) var(--c-ease),
+    box-shadow var(--c-dur-fast) var(--c-ease),
+    border-color var(--c-dur-fast) var(--c-ease);
+}
+
+.moreItem:hover {
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-emphasis-400);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.moreTitle {
+  margin: 0;
+  font-family: var(--c-display);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.moreLink {
+  color: var(--cs-ink);
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.moreLink:hover {
+  color: var(--cs-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--c-signal);
+  text-decoration-thickness: 2px;
+}
+
+/* The whole card is the target, one tab stop. */
+.moreLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--cs-radius);
+}
+
+.moreLink:focus-visible {
+  outline: none;
+}
+
+.moreLink:focus-visible::after {
+  outline: 3px solid var(--c-signal);
+  outline-offset: 3px;
+}
+
+.moreArrow {
+  vertical-align: -0.12em;
+  color: var(--cs-go-text);
+  transition: transform var(--c-dur-fast) var(--c-ease);
+}
+
+.moreItem:hover .moreArrow {
+  transform: translateX(3px);
+}
+
+.moreMeta {
+  margin: auto 0 0;
+  font-size: 1rem;
+  color: var(--cs-muted);
+}
+
+/* ── Narrow: the spine becomes a 2px stroke opening each section ── */
+@media (max-width: 996px) {
+  .statList {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.75rem;
+  }
+
+  .stat:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .spine,
+  .spine:not(.spine ~ .spine) {
+    margin-top: 0;
+    padding: 1.75rem 0 3rem;
+    border-top: 1px solid var(--cs-rule);
+  }
+
+  .spine:not(.spine ~ .spine) {
+    margin-top: clamp(3rem, 8vw, 4rem);
+  }
+
+  /* The line's 2px weight over the 1px rule, as on the problem rows. */
+  .spine::before,
+  .spine:not(:has(~ .spine))::before {
+    display: block;
+    top: -1px;
+    left: 0;
+    bottom: auto;
+    width: 2.5rem;
+    height: 2px;
+  }
+
+  .spine:not(.spine ~ .spine)::after,
+  .spine:not(.spine ~ .spine) > .ticks,
+  .node {
+    display: none;
+  }
+
+  .stack,
+  .footLink {
+    margin-left: 0;
+  }
+
+  .moreList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── Phones: ledgers become rows (the facts ledger is rows by default) ── */
+@media (max-width: 768px) {
+  /* Ledger rows: numeral left, label right, hairline between. */
+  .statList {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0;
+  }
+
+  .stat,
+  .stat:first-child,
+  .stat:nth-child(odd) {
+    display: grid;
+    /* Without subgrid each row sizes alone: never narrower than the
+       numeral, so a wide value ("4–100+") can't run into its label. */
+    grid-template-columns: minmax(7.5rem, max-content) minmax(0, 1fr);
+    grid-column: 1 / -1;
+    column-gap: 1.25rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-left: 0;
+  }
+
+  .stat + .stat {
+    border-left: 0;
+    border-top: 1px solid var(--cs-rule);
+  }
+
+  .statValue {
+    font-size: 2.5rem;
+  }
+
+  /* One frame per line, each at its own aspect and never past its file
+     width. */
+  .frameRow {
+    flex-direction: column;
+    max-width: none;
+  }
+
+  .frame {
+    flex: none;
+    width: 100%;
+    max-width: calc(var(--full-w) * 1px);
+  }
+
+  .moreItem {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@supports (grid-template-columns: subgrid) {
+  @media (max-width: 768px) {
+    .statList {
+      grid-template-columns: max-content minmax(0, 1fr);
+      column-gap: 1.25rem;
+    }
+
+    .stat,
+    .stat:first-child,
+    .stat:nth-child(odd) {
+      grid-template-columns: subgrid;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backArrow,
+  .moreItem,
+  .moreArrow,
+  .stackChevron,
+  .footArrow {
+    transition: none;
+  }
+
+  .moreItem:hover,
+  .moreItem:hover .moreArrow,
+  .back:hover .backArrow,
+  .footLink a:hover .footArrow {
+    transform: none;
+  }
+}

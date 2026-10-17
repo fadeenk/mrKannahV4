@@ -1,0 +1,281 @@
+/* Homepage hero. The H1 is the LCP element and renders with the server
+   markup; the field behind it (SignalField) arrives later and never moves
+   layout. Display type is Besley via --c-display (page tokens). */
+
+.hero {
+  --hero-hairline: var(--ifm-color-emphasis-200);
+  --hero-link: var(--ifm-color-primary-darker);
+  --tile-shadow: rgba(0, 0, 0, 0.42);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Short enough that the stats band below peeks into the first viewport. */
+  min-height: clamp(34rem, calc(100vh - var(--ifm-navbar-height, 60px) - 9.75rem), 47rem);
+  min-height: clamp(34rem, calc(100svh - var(--ifm-navbar-height, 60px) - 9.75rem), 47rem);
+  padding: clamp(2.5rem, 6vh, 4.5rem) 0 clamp(2.75rem, 7vh, 4.25rem);
+}
+
+:global([data-theme="dark"]) .hero {
+  --hero-link: var(--ifm-color-primary);
+  --tile-shadow: rgba(0, 0, 0, 0.7);
+}
+
+/* Also carries Infima's .container (width, gutters, xl step), so the hero
+   shares its left edge with every section below. */
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.5rem;
+}
+
+/* ── Headline ── */
+.title {
+  margin: 0;
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ifm-font-color-base);
+  text-wrap: balance;
+}
+
+/* ── Copy ── */
+
+.copy {
+  max-width: 34rem;
+}
+
+.sub {
+  margin: 0 0 1.75rem;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* Desktop: button and link share a row, microcopy under both. Phone: the
+   microcopy stays attached to the button, the link follows. */
+.ctas {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "primary secondary"
+    "micro micro";
+  align-items: center;
+  column-gap: 1.5rem;
+}
+
+.primary {
+  grid-area: primary;
+}
+
+/* BookCta carries a global top margin for centered use; here the row owns spacing. */
+.ctas :global(.cta-container) {
+  margin-top: 0;
+}
+
+.secondary {
+  grid-area: secondary;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 3rem;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hero-link);
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.secondary:hover {
+  color: var(--hero-link);
+  text-decoration: underline;
+}
+
+.secondary:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.secondaryArrow {
+  flex: none;
+  transition: transform var(--c-dur-fast, 160ms) var(--c-ease, ease-out);
+}
+
+.secondary:hover .secondaryArrow {
+  transform: translateX(3px);
+}
+
+.micro {
+  grid-area: micro;
+  margin: 0.75rem 0 0;
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* ── Portrait tile ──
+   Resting: flat grayscale photo with a hairline. Hover (tier "full" only):
+   the plate tilts back and the colour cutout steps forward, as in the old
+   header, softened. Touch: the colour cutout arrives once, as the pilot
+   passes. Reduced: colour on hover, no movement. */
+.portrait {
+  position: relative;
+  z-index: 1;
+  width: clamp(10rem, 21vw, 17rem);
+  aspect-ratio: 4 / 5;
+  perspective: 1600px;
+}
+
+.plate {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1b1b1d;
+  box-shadow: 0 0 0 1px var(--hero-hairline);
+  transition:
+    transform var(--c-dur-reveal, 420ms) var(--c-ease, ease-out),
+    box-shadow var(--c-dur-reveal, 420ms) var(--c-ease, ease-out);
+}
+
+.cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.character {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--c-dur-reveal, 420ms) var(--c-ease, ease-out),
+    transform var(--c-dur-reveal, 420ms) var(--c-ease, ease-out);
+}
+
+.full:hover .plate {
+  transform: translateY(-2%) rotateX(calc(14deg + var(--rx, 0deg)))
+    rotateY(var(--ry, 0deg));
+  box-shadow: 2px 35px 32px -8px var(--tile-shadow);
+}
+
+.full:hover .character {
+  opacity: 1;
+  transform: translate3d(-4%, -8%, 90px);
+}
+
+.reduced:hover .character {
+  opacity: 1;
+}
+
+/* Name tag: the only place the hero says who is speaking. */
+.nameplate {
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 0;
+  padding: 2.25rem 0.9rem 0.75rem;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.touch .character {
+  border-radius: 12px;
+  opacity: 1;
+  transition-duration: 700ms;
+  transition-delay: 1.9s;
+}
+
+/* ── Desktop: headline spans the row; copy left, portrait right ── */
+@media (min-width: 997px) {
+  .inner {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 2rem;
+  }
+
+  .title {
+    grid-column: 1 / -1;
+  }
+
+  /* Two lines, never wrapped. The long line is wider than a 7/12 column, so
+     the headline spans the row. 6vw keeps it inside the viewport. */
+  .line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .copy {
+    grid-column: 1 / 8;
+  }
+
+  .portrait {
+    grid-column: 9 / -1;
+    justify-self: end;
+    align-self: start;
+  }
+}
+
+/* ── Tablet / phone: single column, headline first ── */
+@media (max-width: 996px) {
+  .hero {
+    min-height: 0;
+    padding-top: 2rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .inner {
+    row-gap: 1.25rem;
+  }
+
+  .sub {
+    margin-bottom: 1.25rem;
+  }
+
+  .ctas {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "primary"
+      "micro"
+      "secondary";
+    justify-items: start;
+  }
+
+  .micro {
+    margin-top: 0.5rem;
+  }
+
+  .portrait {
+    margin-top: 1.25rem;
+    width: clamp(9.5rem, 44vw, 14rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate,
+  .character,
+  .secondaryArrow {
+    transition: none;
+  }
+
+  .touch .character {
+    transition-delay: 0s;
+  }
+}

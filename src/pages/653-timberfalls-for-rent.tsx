@@ -163,7 +163,7 @@ export default function HouseForRent(): JSX.Element {
         </div>
 
         {/* Gallery Section */}
-        <div id="images" className={styles.gallerySection}>
+        <div id="images">
           <Gallery photos={houseImages} />
         </div>
 

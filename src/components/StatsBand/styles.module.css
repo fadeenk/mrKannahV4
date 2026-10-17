@@ -1,0 +1,225 @@
+/* Stats band: the first of the page's three drenched green bands.
+   White on --c-drench-bg: 5.9:1 light, 7.3:1 dark (checked numerically).
+   Top edge is square and flush with the hero's field; the 1px lighter
+   hairline carries the release line's stroke across the seam (the hero's
+   line climbs away before it, so it is the same stroke, not the same path). */
+
+.band {
+  --band-rule: rgba(255, 255, 255, 0.24);
+  --band-text: rgba(255, 255, 255, 0.92);
+  position: relative;
+  padding: 4rem 0 3.5rem;
+  background: var(--c-drench-bg, var(--ifm-color-primary-darker));
+  color: var(--c-on-drench, #fff);
+}
+
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.34);
+  pointer-events: none;
+}
+
+/* Green selection would vanish on a green surface. */
+.band ::selection {
+  background: #fff;
+  color: var(--c-drench-bg, var(--ifm-color-primary-darker));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.stat:first-child {
+  padding-left: 0;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--band-rule);
+}
+
+/* Numerals. The overlay (.ticker) sits exactly over .final: same font, same
+   tabular figures, so swapping them at the end of the count is invisible. */
+.value {
+  position: relative;
+  display: block;
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  font-size: clamp(2.75rem, 5.4vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.final[data-counting] {
+  opacity: 0;
+}
+
+.ticker {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.label {
+  max-width: 16rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--band-text);
+  text-wrap: balance;
+}
+
+/* Client logo wall: white-mono knock-out so every PNG reads on the green in
+   both themes; on hover a logo returns to its own colors on a light plate
+   (the same chip the proof section uses), since the originals are dark marks
+   that would sink into the green. LogosCarousel lives in global CSS (green
+   edge fades, grayscale filter); these overrides retune it for this band
+   without touching it. */
+.logos {
+  margin-top: 2.5rem;
+}
+
+.logos :global(.logos-carousel) {
+  margin-top: 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--band-rule);
+}
+
+.logos :global(.logos-carousel-track-wrapper)::before {
+  background: linear-gradient(
+    to right,
+    var(--c-drench-bg, var(--ifm-color-primary-darker)),
+    transparent
+  );
+}
+
+.logos :global(.logos-carousel-track-wrapper)::after {
+  background: linear-gradient(
+    to left,
+    var(--c-drench-bg, var(--ifm-color-primary-darker)),
+    transparent
+  );
+}
+
+/* Trailing margin instead of flex gap: the duplicated set then measures
+   exactly half the track, so translateX(-50%) loops with no 1.5rem jump. */
+.logos :global(.logos-carousel-track) {
+  gap: 0;
+}
+
+/* The plate's padding is there at rest (transparent) so hovering never moves
+   the track; the margin is the 3rem gap minus the padding either side. */
+.logos :global(.logos-carousel-item) {
+  margin-right: 1.25rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 8px;
+  background: transparent;
+  filter: brightness(0) invert(1) opacity(0.78);
+  transition:
+    filter 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .logos :global(.logos-carousel-item):hover {
+    background: #fcfbf7;
+    filter: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .band {
+    padding: 3.5rem 0 3rem;
+  }
+
+  /* Ledger rows: numeral left, label right, hairline between. */
+  .grid {
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+  }
+
+  .stat,
+  .stat:first-child {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    grid-column: 1 / -1;
+    column-gap: 1.25rem;
+    align-items: baseline;
+    padding: 1.1rem 0;
+  }
+
+  .stat + .stat {
+    border-left: 0;
+    border-top: 1px solid var(--band-rule);
+  }
+
+  .value {
+    font-size: 2.5rem;
+  }
+
+  .label {
+    max-width: none;
+  }
+
+  .logos {
+    margin-top: 1.5rem;
+  }
+}
+
+@supports (grid-template-columns: subgrid) {
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: max-content minmax(0, 1fr);
+      column-gap: 1.25rem;
+    }
+
+    .stat,
+    .stat:first-child {
+      grid-template-columns: subgrid;
+    }
+  }
+}
+
+@media print {
+  .final[data-counting] {
+    opacity: 1;
+  }
+
+  .ticker {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No marquee: show the logos once, wrapped, with the duplicate set gone. */
+  .logos :global(.logos-carousel-track) {
+    flex-wrap: wrap;
+    width: auto;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .logos :global(.logos-carousel-item) {
+    margin-right: 0;
+  }
+
+  .logos :global(.logos-carousel-item[aria-hidden="true"]) {
+    display: none;
+  }
+
+  .logos :global(.logos-carousel-track-wrapper)::before,
+  .logos :global(.logos-carousel-track-wrapper)::after {
+    display: none;
+  }
+}

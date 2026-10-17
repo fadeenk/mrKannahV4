@@ -1,0 +1,50 @@
+/* SignalField: the canvas fills its positioned parent and never takes
+   pointer events (the hosting section listens instead). Colors are plain
+   custom properties the engine reads; parents recolor via --field-*. */
+.field {
+  --sf-tick: var(--field-tick, var(--ifm-color-primary));
+  --sf-line: var(--field-line, var(--ifm-color-primary));
+  --sf-pilot: var(--field-pilot, var(--ifm-color-primary));
+  /* The pilot's knockout ring matches the page (Infima's light background
+     is transparent, so light needs #fff). */
+  --sf-ring: var(--field-ring, #fff);
+  --sf-gain: var(--field-gain, 1);
+  --sf-tick-gain: var(--field-tick-gain, 1);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+:global([data-theme="dark"]) .field {
+  --sf-ring: var(--field-ring, var(--ifm-background-color));
+  --sf-gain: var(--field-gain, 0.82);
+}
+
+/* Closing band: the field sits on drenched green, so ink flips to white. */
+.field[data-variant="settled"] {
+  --sf-tick: var(--field-tick, var(--c-on-drench, #fff));
+  --sf-line: var(--field-line, var(--c-on-drench, #fff));
+  --sf-pilot: var(--field-pilot, var(--c-on-drench, #fff));
+  --sf-ring: var(--field-ring, var(--c-drench-bg, transparent));
+  --sf-gain: var(--field-gain, 0.7);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 520ms var(--c-ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.canvas[data-ready="true"] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canvas {
+    transition: none;
+  }
+}

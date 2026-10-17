@@ -1,0 +1,98 @@
+.figure {
+  margin: 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.legendCount {
+  color: var(--ifm-color-emphasis-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.swatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.swatchPrimary,
+.barPrimary {
+  fill: var(--ifm-color-primary);
+  background: var(--ifm-color-primary);
+}
+
+.swatchSecondary,
+.barSecondary {
+  fill: color-mix(in srgb, var(--ifm-color-primary) 38%, transparent);
+  background: color-mix(in srgb, var(--ifm-color-primary) 38%, transparent);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  overflow: visible;
+}
+
+.axis {
+  stroke: var(--ifm-color-emphasis-500);
+  stroke-width: 1;
+}
+
+.grid {
+  stroke: var(--ifm-color-emphasis-200);
+  stroke-width: 1;
+}
+
+.groupRule {
+  stroke: var(--ifm-color-emphasis-400);
+  stroke-width: 1;
+}
+
+.tickLabel,
+.groupLabel,
+.total,
+.totalZero {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tickLabel,
+.groupLabel,
+.totalZero {
+  fill: var(--ifm-color-emphasis-700);
+}
+
+.total {
+  fill: var(--ifm-font-color-base);
+  font-weight: 600;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

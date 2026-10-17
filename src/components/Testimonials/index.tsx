@@ -55,40 +55,70 @@ function Testimonial({ name, img, description, link, title }: Testimonial) {
   return (
     <li className={styles.member}>
       <div className={styles.thumb}>
-        <img src={img} />
+        <img src={img} alt="" loading="lazy" decoding="async" />
       </div>
       <div className={styles.description}>
         <h3 className={styles.testimonialName}>{name}</h3>
         <p>{description}</p>
-        {link && <a href={link}>Source</a>}
+        {link && (
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            Source
+          </a>
+        )}
         <span>{title}</span>
       </div>
     </li>
   );
 }
 
-export default function Testimonials(): JSX.Element {
+type TestimonialsProps = {
+  heading?: string;
+  /** Names to show, in list order. Shows everyone when omitted. */
+  only?: readonly string[];
+  /** Drops the booking button, for pages that already end in one. */
+  hideCta?: boolean;
+  /**
+   * "onGreen" re-skins the cards (white, with the band's own green as the
+   * accent). It does not paint the band: the host page supplies that
+   * (the homepage does, in src/pages/index.module.css).
+   */
+  tone?: "default" | "onGreen";
+};
+
+export default function Testimonials({
+  heading = "What People I have worked with say",
+  only,
+  hideCta = false,
+  tone = "default",
+}: TestimonialsProps): JSX.Element {
+  const list = only
+    ? TestimonialList.filter((t) => only.includes(t.name))
+    : TestimonialList;
   return (
-    <section className="hero hero--primary">
+    <section
+      className={`hero hero--primary ${tone === "onGreen" ? styles.onGreen : ""}`}
+    >
       <div className="container">
         <Heading as="h2" className="hero__title text--center">
-          What People I have worked with say
+          {heading}
         </Heading>
         <ul className={styles.team}>
-          {TestimonialList.map((props, idx) => (
-            <Testimonial key={idx} {...props} />
+          {list.map((props) => (
+            <Testimonial key={props.name} {...props} />
           ))}
         </ul>
-        <div className="text--center margin-top--lg">
-          <a
-            href="https://cal.com/kannah/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button button--primary button--lg"
-          >
-            Ready to Transform Your Tech Vision?
-          </a>
-        </div>
+        {hideCta ? null : (
+          <div className="text--center margin-top--lg">
+            <a
+              href="https://cal.com/kannah/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button button--primary button--lg"
+            >
+              Ready to Transform Your Tech Vision?
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );
