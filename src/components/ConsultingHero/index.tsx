@@ -96,7 +96,7 @@ export default function ConsultingHero(): JSX.Element {
             I&apos;m Fadee Kannah, technical co-founder of CourseKey, where I
             built the platform from concept to scale. I join SaaS teams and
             build what they need next, from customer requests to AI features.
-            Every pull request goes through your team&apos;s review.
+            Your team reviews everything I write before it ships.
           </p>
           <div className={styles.ctas}>
             <div className={styles.primary}>
