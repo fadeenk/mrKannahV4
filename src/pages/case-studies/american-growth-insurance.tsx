@@ -15,14 +15,11 @@ import CaseStudyLayout, {
   type CaseStat,
 } from "@site/src/components/CaseStudy";
 
-// TODO(approval): Luke Sophinos and American Growth Insurance must sign off
-// on three things before this page ships:
-//   1. The lead quote. It is a fresh draft: the sales deck built in front of
-//      an agency owner, and "Investors saw the same thing" are new.
-//   2. Luke's title (see TODO(title) at the quote).
-//   3. Whether the demo video can stay public. The recording shows an
-//      agency's name, street address, and phone number on the generated
-//      slide, Fadee's name in the app sidebar, and a qa.agencycloud.ai URL.
+/*
+ * Luke Sophinos and American Growth Insurance approved this page and his
+ * quote as written (2026-10-16). A change to the copy or the quote needs
+ * their sign-off again. Still open: his title (see TODO(title) at the quote).
+ */
 
 const STUDY = getCaseStudy("american-growth-insurance");
 
@@ -114,8 +111,7 @@ export default function AmericanGrowthInsurance(): JSX.Element {
         }
       />
 
-      {/* TODO(approval): draft quote, Luke has not approved this wording.
-          TODO(title): Luke's title is unconfirmed, so the attribution is name
+      {/* TODO(title): Luke's title is unconfirmed, so the attribution is name
           and company only. Candidates conflict: "CEO & Founder" in
           src/components/Testimonials, "Co-Founder / Advisor" on the previous
           version of this page. Add it here and make the homepage match once
