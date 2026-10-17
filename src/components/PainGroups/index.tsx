@@ -12,14 +12,17 @@ type Situation = {
   client: string;
   /** Anchor of the matching client in ProofShowcase. */
   href: string;
+  /** Link text, when "How it went at <client>" would repeat the row above. */
+  jump?: string;
 };
 
 /*
  * Each situation is a published case study, told from the client's side
- * before the work started. Facts come only from:
+ * before the work started. AGI backs two: the AI feature inside an existing
+ * product, and the working demo for investors. Facts come only from:
  *   - Portico: src/pages/case-studies/portico-embedded-retainer.tsx
  *   - AGI:     src/pages/case-studies/american-growth-insurance.tsx
- * Order matches the ProofShowcase rows the links jump to.
+ * Order follows the ProofShowcase rows the links jump to (AGI's two sit together).
  */
 const situations: readonly Situation[] = [
   {
@@ -27,6 +30,13 @@ const situations: readonly Situation[] = [
     body: "Custom reports, integrations, documentation. Your engineers belong on the roadmap, and your customers shouldn’t have to wait.",
     client: "Portico",
     href: "#proof-portico",
+  },
+  {
+    quote: "We want AI inside the app we already have, not a separate tool.",
+    body: "A demo on the side is easy. In your product it has to work with your sign-in and be safe to put in front of customers.",
+    client: "American Growth Insurance",
+    href: "#proof-agi",
+    jump: "See the assistant I built for American Growth Insurance",
   },
   {
     quote: "We need something real to show investors, and we need it in weeks.",
@@ -51,14 +61,14 @@ export default function PainGroups(): JSX.Element {
         />
         <ol className={styles.list} role="list">
           {situations.map((s, i) => (
-            <Reveal as="li" key={s.client} delay={i * 60} className={styles.row}>
+            <Reveal as="li" key={s.quote} delay={i * 60} className={styles.row}>
               <Heading as="h3" className={styles.quote}>
                 “{s.quote}”
               </Heading>
               <div className={styles.side}>
                 <p className={styles.body}>{s.body}</p>
                 <a href={s.href} className={styles.jump}>
-                  How it went at {s.client}
+                  {s.jump ?? `How it went at ${s.client}`}
                   <ArrowDown className={styles.jumpArrow} />
                 </a>
               </div>
