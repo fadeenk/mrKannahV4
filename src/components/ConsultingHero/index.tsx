@@ -93,11 +93,10 @@ export default function ConsultingHero(): JSX.Element {
 
         <div className={styles.copy} data-field-quiet="">
           <p className={styles.sub}>
-            I&apos;m Fadee Kannah, co-founder of CourseKey and still a{" "}
-            <span className={styles.nowrap}>hands-on</span> engineer. I join
-            SaaS teams and ship the roadmap work that keeps slipping,
-            from customer requests to AI features. Every pull request goes
-            through your team&apos;s review.
+            I&apos;m Fadee Kannah, technical co-founder of CourseKey, where I
+            built the platform from concept to scale. I join SaaS teams and
+            build what they need next, from customer requests to AI features.
+            Every pull request goes through your team&apos;s review.
           </p>
           <div className={styles.ctas}>
             <div className={styles.primary}>

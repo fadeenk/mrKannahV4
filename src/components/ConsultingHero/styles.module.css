@@ -45,9 +45,6 @@
 }
 
 /* ── Copy ── */
-.nowrap {
-  white-space: nowrap;
-}
 
 .copy {
   max-width: 34rem;
