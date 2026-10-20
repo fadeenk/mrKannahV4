@@ -21,7 +21,7 @@ function yearsBuilding(now: Date): number {
 function buildStats(years: number): readonly Stat[] {
   return [
     { value: `${years}+`, label: "Years building software companies" },
-    { value: "$105M+", label: "Raised for Clients" },
+    { value: "$100M+", label: "Raised for Clients" },
     { value: "40-60%", label: "Infrastructure Cost Reduction" },
   ];
 }
