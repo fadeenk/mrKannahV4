@@ -1,4 +1,10 @@
-import React, { type CSSProperties, type JSX, type ReactNode } from "react";
+import React, {
+  useEffect,
+  useRef,
+  type CSSProperties,
+  type JSX,
+  type ReactNode,
+} from "react";
 import "@fontsource-variable/besley/wght.css";
 import besleyLatin from "@fontsource-variable/besley/files/besley-latin-wght-normal.woff2";
 import Head from "@docusaurus/Head";
@@ -6,6 +12,10 @@ import Link from "@docusaurus/Link";
 import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
 import Heading from "@theme/Heading";
 import Layout from "@theme/Layout";
+import CountValue, {
+  STAGGER_MS,
+  useCountPhase,
+} from "@site/src/components/CountUp";
 import FinalCta from "@site/src/components/FinalCta";
 import {
   ArrowLeft,
@@ -25,11 +35,15 @@ import {
 import styles from "./styles.module.css";
 
 export { CASE_STUDIES, getCaseStudy } from "./registry";
+export type { CaseLogo } from "./registry";
 
 /*
  * Case-study pages: the homepage world extended to its proof pages.
  * Every study composes the same parts in the same order (see
- * docs/superpowers/specs/2026-10-15-case-studies-redesign.md):
+ * docs/superpowers/specs/2026-10-15-case-studies-redesign.md). The About page
+ * (src/pages/about.tsx) composes the same shell and parts in its own order:
+ * the `page` layout variant with a full-bleed AboutHero, CaseBody, CaseStats
+ * (`countUp`), SpineSection chapters (`when`, `scrub`), CaseFold, CaseFootLink:
  *
  *   <CaseStudyLayout>        back link ... More case studies, FinalCta
  *     <CaseMasthead />       H1, lede, facts ledger
@@ -66,6 +80,14 @@ type CaseStudyLayoutProps = {
       variant: "index";
       slug?: undefined;
     }
+  | {
+      /**
+       * A page that opens full-bleed (the About hero) and sets its own
+       * container with CaseBody: the shell and the closing band, nothing else.
+       */
+      variant: "page";
+      slug?: undefined;
+    }
 );
 
 /**
@@ -91,7 +113,9 @@ export default function CaseStudyLayout(
         />
       </Head>
       <main className={styles.root} data-tier={tier}>
-        {props.variant === "index" ? (
+        {props.variant === "page" ? (
+          children
+        ) : props.variant === "index" ? (
           <div className={`container ${styles.page} ${styles.pageIndex}`}>
             {children}
           </div>
@@ -110,6 +134,18 @@ export default function CaseStudyLayout(
         <FinalCta />
       </main>
     </Layout>
+  );
+}
+
+/**
+ * The content container for a `page` layout, sitting under a full-bleed
+ * hero: the same width and bottom padding as a study, no top padding.
+ */
+export function CaseBody({ children }: { children: ReactNode }): JSX.Element {
+  return (
+    <div className={`container ${styles.page} ${styles.pageBody}`}>
+      {children}
+    </div>
   );
 }
 
@@ -256,16 +292,37 @@ type CaseStatsProps = {
   stats: readonly CaseStat[];
   /** One line for windows and estimates. */
   footnote?: ReactNode;
+  /**
+   * Count the numerals up once on first view, as the homepage stats band
+   * does (components/CountUp). Off by default: the studies keep static
+   * numerals.
+   */
+  countUp?: boolean;
 };
 
 /** Ruled numeral ledger: columns at desktop, ledger rows on phones. */
-export function CaseStats({ stats, footnote }: CaseStatsProps): JSX.Element {
+export function CaseStats({
+  stats,
+  footnote,
+  countUp = false,
+}: CaseStatsProps): JSX.Element {
+  const listRef = useRef<HTMLUListElement>(null);
+  const phase = useCountPhase(listRef, countUp);
   return (
     <div className={styles.stats}>
-      <ul className={styles.statList} role="list">
-        {stats.map((stat) => (
+      <ul className={styles.statList} role="list" ref={listRef}>
+        {stats.map((stat, i) => (
           <li key={stat.value} className={styles.stat}>
-            <span className={styles.statValue}>{stat.value}</span>
+            {countUp ? (
+              <CountValue
+                value={stat.value}
+                phase={phase}
+                delay={i * STAGGER_MS}
+                className={styles.statValue}
+              />
+            ) : (
+              <span className={styles.statValue}>{stat.value}</span>
+            )}
             <span className={styles.statText}>
               <span className={styles.statLabel}>{stat.label}</span>
               {stat.note ? (
@@ -377,8 +434,21 @@ function TickRun({
 
 export { TickRun as CaseTicks };
 
-type CaseSectionProps = {
-  title: CaseSectionTitle;
+type SpineSectionProps = {
+  title: ReactNode;
+  /**
+   * Optional date line under the H2 (a page that tells its own story: when
+   * the chapter happened). Set under the heading, never above it.
+   */
+  when?: ReactNode;
+  /**
+   * Draw the line with scroll, as the homepage's proof spine does: each
+   * segment draws as a reading line at 62% of the viewport passes through it
+   * and each node fills as the line reaches it (CSS scroll-driven animation,
+   * from 997px, when motion is allowed). Off for the case studies, whose
+   * nodes fill as their section reveals.
+   */
+  scrub?: boolean;
   /**
    * Prose, CaseList, CaseQuote: capped near 68ch. CaseFigure runs the body
    * column; CaseFrames runs the full content width.
@@ -387,24 +457,65 @@ type CaseSectionProps = {
 };
 
 /**
- * One story section on the spine: a node per section, the 2px line joining
- * them, and the node filling as the section reveals. From 997px the H2 sits
- * in a left column beside the body; under 997px the two stack and the spine
- * becomes a 2px stroke opening each section.
+ * One chapter on the spine: a node per section, the 2px line joining them,
+ * and the node filling as the section reveals. From 997px the H2 sits in a
+ * left column beside the body; under 997px the two stack and the spine
+ * becomes a 2px stroke opening each section. A study uses CaseSection (its
+ * four fixed titles); a page that tells its own story uses this.
  */
-export function CaseSection({ title, children }: CaseSectionProps): JSX.Element {
+export function SpineSection({
+  title,
+  when,
+  scrub = false,
+  children,
+}: SpineSectionProps): JSX.Element {
+  const heading = (
+    <Heading as="h2" className={styles.spineTitle}>
+      {title}
+    </Heading>
+  );
+  // One line, or several: each is its own block, so a screen reader pauses
+  // between them where a <br> would run them together.
+  const whenLines: ReactNode[] = Array.isArray(when)
+    ? when
+    : when
+      ? [when]
+      : [];
   return (
-    <section className={styles.spine}>
+    <section
+      className={scrub ? `${styles.spine} ${styles.spineScrub}` : styles.spine}
+    >
       <TickRun />
       <span className={styles.node} aria-hidden="true" />
       <Reveal className={styles.spineContent}>
-        <Heading as="h2" className={styles.spineTitle}>
-          {title}
-        </Heading>
+        {whenLines.length > 0 ? (
+          <div className={styles.spineHead}>
+            {heading}
+            <p className={styles.spineWhen}>
+              {whenLines.map((line, i) => (
+                <span key={i} className={styles.spineWhenLine}>
+                  {line}
+                </span>
+              ))}
+            </p>
+          </div>
+        ) : (
+          heading
+        )}
         <div className={styles.body}>{children}</div>
       </Reveal>
     </section>
   );
+}
+
+/** A case-study section: `SpineSection` with the four fixed titles. */
+export function CaseSection({
+  title,
+  children,
+}: Pick<SpineSectionProps, "children"> & {
+  title: CaseSectionTitle;
+}): JSX.Element {
+  return <SpineSection title={title}>{children}</SpineSection>;
 }
 
 /* ── Lists ── */
@@ -636,6 +747,11 @@ export function CaseExternalLink({
 }
 
 type CaseFootLinkProps = {
+  /**
+   * Which edge it sits on from 997px: the spine's (the default, a study) or
+   * the chapters' body column (a page whose last block, a CaseFold, is in it).
+   */
+  align?: "spine" | "body";
   to: string;
   /** The link text; it stands on its own. */
   children: ReactNode;
@@ -645,12 +761,15 @@ type CaseFootLinkProps = {
 
 /** A quiet same-site link at the end of the page body. */
 export function CaseFootLink({
+  align = "spine",
   to,
   children,
   note,
 }: CaseFootLinkProps): JSX.Element {
   return (
-    <p className={styles.footLink}>
+    <p
+      className={`${styles.footLink} ${align === "body" ? styles.footLinkBody : ""}`}
+    >
       {note ? <>{note} </> : null}
       <Link to={to} className={styles.textLink}>
         {children}
@@ -703,6 +822,66 @@ export function CaseStack({
           </div>
         ))}
       </div>
+    </details>
+  );
+}
+
+/* ── Folded prose ── */
+
+type CaseFoldProps = {
+  /** Summary text: the disclosure's H2. */
+  label: string;
+  /** Prose and H3s, set on a reading measure. */
+  children: ReactNode;
+};
+
+/**
+ * Longer reading behind a native disclosure, in the stack's frame. The
+ * summary holds the H2. A URL or in-page link whose hash names an id inside
+ * opens the fold and scrolls to it; the browser alone scrolls to the closed
+ * fold's summary and stops, before the content has a position.
+ */
+export function CaseFold({ label, children }: CaseFoldProps): JSX.Element {
+  const ref = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    const reveal = (hash: string): void => {
+      const fold = ref.current;
+      let target: HTMLElement | null = null;
+      try {
+        target = hash ? document.getElementById(decodeURIComponent(hash)) : null;
+      } catch {
+        // A malformed escape (a lone "%") names nothing; leave the page be.
+        return;
+      }
+      if (fold && target && fold.contains(target)) {
+        fold.open = true;
+        target.scrollIntoView();
+      }
+    };
+    const onHashChange = (): void => reveal(window.location.hash.slice(1));
+    // Clicking the same in-page link again, after the fold was closed, fires
+    // no hashchange, so catch the click itself.
+    const onClick = (event: MouseEvent): void => {
+      const link = (event.target as Element | null)?.closest("a[href^='#']");
+      reveal(link?.getAttribute("href")?.slice(1) ?? "");
+    };
+    onHashChange();
+    window.addEventListener("hashchange", onHashChange);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+  return (
+    <details ref={ref} className={styles.fold}>
+      <summary className={styles.stackSummary}>
+        <Heading as="h2" className={styles.stackTitle}>
+          {label}
+        </Heading>
+        <ChevronDown className={styles.stackChevron} />
+      </summary>
+      <div className={styles.foldBody}>{children}</div>
     </details>
   );
 }

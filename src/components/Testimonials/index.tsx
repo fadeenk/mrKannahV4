@@ -11,7 +11,8 @@ type Testimonial = {
   link?: string;
 };
 
-const TestimonialList: Testimonial[] = [
+/** Exported so a page can quote one testimonial without copying its words. */
+export const TestimonialList: Testimonial[] = [
   {
     name: "Luke Sophinos",
     img: "/img/testimonials/luke.jpg",

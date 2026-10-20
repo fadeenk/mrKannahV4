@@ -1,0 +1,206 @@
+/* /about hero. Same field, portrait and type as the homepage hero
+   (src/components/ConsultingHero), with a longer H1: two lines at desktop,
+   sized to the row instead of the homepage's 6vw. Display type is Besley via
+   --c-display (the CaseStudy layout's page tokens). The portrait tile's own
+   styles live with ConsultingHero; it reads --hero-hairline and --tile-shadow,
+   which are set here. */
+
+.hero {
+  --hero-hairline: var(--ifm-color-emphasis-200);
+  --hero-link: var(--ifm-color-primary-darker);
+  --tile-shadow: rgba(0, 0, 0, 0.42);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Short enough that the numeral ledger below begins inside the first
+     viewport. */
+  min-height: clamp(30rem, calc(100vh - var(--ifm-navbar-height, 60px) - 12rem), 40rem);
+  min-height: clamp(30rem, calc(100svh - var(--ifm-navbar-height, 60px) - 12rem), 40rem);
+  padding: clamp(2.5rem, 6vh, 4.5rem) 0 clamp(2.5rem, 6vh, 3.75rem);
+}
+
+:global([data-theme="dark"]) .hero {
+  --hero-link: var(--ifm-color-primary);
+  --tile-shadow: rgba(0, 0, 0, 0.7);
+}
+
+/* The page continues under the hero in the same ground, so the field fades
+   out at its lower edge instead of stopping at a hard line. */
+.field {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 72%, transparent 100%);
+}
+
+/* Also carries Infima's .container, so the hero shares its left edge with
+   every section below. */
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.5rem;
+}
+
+/* ── Headline ── */
+.title {
+  margin: 0;
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  /* The case-study H1 step (--cs-h1, 4.6vw to 4rem). Its long line is about
+     17em, so two sentences fit the row from 997px up. */
+  font-size: var(--cs-h1, clamp(2.25rem, 4.6vw, 4rem));
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--ifm-font-color-base);
+  text-wrap: balance;
+}
+
+/* ── Copy ── */
+.copy {
+  max-width: 36rem;
+}
+
+.sub {
+  margin: 0 0 1.75rem;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-800);
+  text-wrap: pretty;
+}
+
+/* Desktop: button and link share a row, microcopy under both. Phone: the
+   microcopy stays attached to the button, the link follows. */
+.ctas {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "primary secondary"
+    "micro micro";
+  align-items: center;
+  column-gap: 1.5rem;
+}
+
+.primary {
+  grid-area: primary;
+}
+
+/* BookCta carries a global top margin for centered use; here the row owns spacing. */
+.ctas :global(.cta-container) {
+  margin-top: 0;
+}
+
+.secondary {
+  grid-area: secondary;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 3rem;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hero-link);
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.secondary:hover {
+  color: var(--hero-link);
+  text-decoration: underline;
+}
+
+.secondary:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.secondaryArrow {
+  flex: none;
+  transition: transform var(--c-dur-fast, 160ms) var(--c-ease, ease-out);
+}
+
+.secondary:hover .secondaryArrow {
+  transform: translateX(3px);
+}
+
+.micro {
+  grid-area: micro;
+  margin: 0.75rem 0 0;
+  font-size: 1rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* The tile sizes itself (ConsultingHero); this only places it. */
+.portrait {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Desktop: headline spans the row; copy left, portrait right ── */
+@media (min-width: 997px) {
+  .inner {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 2rem;
+  }
+
+  .title {
+    grid-column: 1 / -1;
+  }
+
+  /* Two lines: each is a sentence, and the long one fits the row from 997px
+     up at the default text size. It is allowed to wrap, so a larger root
+     font size wraps the line instead of clipping it inside the hero. */
+  .line {
+    display: block;
+  }
+
+  .copy {
+    grid-column: 1 / 8;
+  }
+
+  .portrait {
+    grid-column: 9 / -1;
+    justify-self: end;
+    align-self: start;
+  }
+}
+
+/* ── Tablet / phone: single column, headline first ── */
+@media (max-width: 996px) {
+  .hero {
+    min-height: 0;
+    padding-top: 2rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .inner {
+    row-gap: 1.25rem;
+  }
+
+  .sub {
+    margin-bottom: 1.25rem;
+  }
+
+  .ctas {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "primary"
+      "micro"
+      "secondary";
+    justify-items: start;
+  }
+
+  .micro {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secondaryArrow {
+    transition: none;
+  }
+}

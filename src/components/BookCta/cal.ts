@@ -4,7 +4,13 @@
  */
 export const CAL_URL = "https://cal.com/kannah/30min";
 
-export type CtaVariant = "assessment" | "project" | "retainer" | "close" | "card";
+export type CtaVariant =
+  | "assessment"
+  | "project"
+  | "retainer"
+  | "close"
+  | "card"
+  | "about";
 
 export function calUrl(variant: CtaVariant): string {
   return `${CAL_URL}?variant=${variant}`;

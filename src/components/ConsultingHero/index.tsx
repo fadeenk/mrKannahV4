@@ -22,7 +22,8 @@ const COVER_ALT = "Fadee Kannah, technology consultant";
 const LEAN_Y = 10;
 const LEAN_X = 6;
 
-function PortraitTile(): JSX.Element {
+/** Also the About hero's portrait; it sets `--hero-hairline` and `--tile-shadow` itself. */
+export function PortraitTile(): JSX.Element {
   const tier = useMotionTier();
   const ref = useRef<HTMLDivElement>(null);
   const cover = useBaseUrl("/img/fadee-hero.webp");

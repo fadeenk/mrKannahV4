@@ -91,6 +91,12 @@
   padding-top: 4rem;
 }
 
+/* A page that opens with a full-bleed hero (/about): the hero supplies the
+   top space, so the body starts flush under it. */
+.pageBody {
+  padding-top: 0;
+}
+
 /* ── Links ── */
 .back,
 .textLink,
@@ -152,9 +158,10 @@
   vertical-align: -0.1em;
 }
 
-/* Links written into the story prose and the numbers' footnote. */
+/* Links written into the story prose, the numbers' footnote, and the fold. */
 .body a,
-.footnote a {
+.footnote a,
+.foldBody a {
   color: var(--cs-go-text);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -162,13 +169,15 @@
 }
 
 .body a:hover,
-.footnote a:hover {
+.footnote a:hover,
+.foldBody a:hover {
   color: var(--cs-go-text);
   text-decoration-thickness: 2px;
 }
 
 .body a:focus-visible,
-.footnote a:focus-visible {
+.footnote a:focus-visible,
+.foldBody a:focus-visible {
   outline: 3px solid var(--c-signal);
   outline-offset: 2px;
   border-radius: 4px;
@@ -586,6 +595,49 @@
   transition: transform var(--c-dur-reveal) var(--c-ease) 180ms;
 }
 
+/* ── Scroll-driven spine (`scrub`, /about) ──
+   The homepage's proof spine (ProofShowcase): the line is drawn by scroll,
+   not by a section revealing. A reading line sits at 62% of the viewport;
+   each segment draws downward as it passes through it, and each node fills
+   as the line reaches it. Progressive: the finished spine is the default,
+   and the reveal-based fill above still runs where scroll-driven animation
+   is unsupported or from under 997px, where the spine is a short stroke. A
+   running scroll-driven animation overrides the reveal-based node fill. */
+@keyframes drawDown {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes lightNode {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (min-width: 997px) and (prefers-reduced-motion: no-preference) {
+    .spineScrub::before {
+      transform-origin: top center;
+      animation: drawDown linear both;
+      animation-timeline: view(block 62% 38%);
+      animation-range: cover 0% cover 100%;
+    }
+
+    .spineScrub .node::after {
+      animation: lightNode linear both;
+      animation-timeline: view(block 62% 38%);
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
 .spineTitle {
   margin: 0 0 1.25rem;
   font-family: var(--c-display);
@@ -594,6 +646,28 @@
   line-height: 1.12;
   letter-spacing: -0.01em;
   text-wrap: balance;
+}
+
+/* The H2 and its date line, one grid cell; only built when a chapter has a
+   date line. */
+.spineHead {
+  min-width: 0;
+}
+
+/* A chapter's date line, under its H2 in the left column (CaseSection has
+   none). Muted label type; the heading keeps the weight. */
+.spineWhen {
+  margin: -0.75rem 0 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--cs-muted);
+}
+
+/* Each line of a date line is its own block. */
+.spineWhenLine {
+  display: block;
 }
 
 .body {
@@ -628,6 +702,10 @@
 
   .spineTitle {
     margin: 0;
+  }
+
+  .spineWhen {
+    margin: 0.75rem 0 0;
   }
 
   /* Screenshot frames take both columns. The H2 column is half the body
@@ -825,8 +903,35 @@
   transition: transform var(--c-dur-fast) var(--c-ease);
 }
 
-.stack[open] .stackChevron {
+.stack[open] .stackChevron,
+.fold[open] .stackChevron {
   transform: rotate(180deg);
+}
+
+/* Folded prose (CaseFold). From 997px it sits in the story's body column,
+   under the chapters' prose and not under their headings: one third of the
+   room after the spine and the gap, plus the gap, in from the left. */
+.fold {
+  --fold-col: calc((100% - var(--cs-spine) - var(--cs-col-gap)) / 3);
+  max-width: 48rem;
+  margin: 0 0 0 var(--cs-spine);
+  border-block: 1px solid var(--cs-rule);
+}
+
+@media (min-width: 997px) {
+  .fold {
+    margin-left: calc(var(--cs-spine) + var(--fold-col) + var(--cs-col-gap));
+    max-width: calc(var(--fold-col) * 2);
+  }
+}
+
+/* The summary is the fold's H2 and sets in the display face, a step above
+   the H3s it holds (1.5rem over 1.25rem). */
+.fold .stackTitle {
+  font-family: var(--c-display);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .stackGroups {
@@ -856,6 +961,36 @@
   line-height: 1.5;
 }
 
+/* Folded prose (CaseFold): the story body's type on the stack's frame. */
+.foldBody {
+  padding: 0.5rem 0 2.25rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.foldBody p {
+  max-width: var(--cs-measure);
+  margin: 0 0 1.1rem;
+  text-wrap: pretty;
+}
+
+.foldBody h3 {
+  /* A link to #school lands below the sticky navbar. */
+  scroll-margin-top: calc(var(--ifm-navbar-height, 60px) + 1rem);
+  margin: 2.25rem 0 0.75rem;
+  font-family: var(--c-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.foldBody h3:first-child {
+  margin-top: 0.75rem;
+}
+
+
 /* ── Foot link: a quiet same-site link closing the body ── */
 /* The stack's width, so a sentence and its link sit on one line. */
 .footLink {
@@ -874,6 +1009,18 @@
 
 .footLink a:hover .footArrow {
   transform: translateX(3px);
+}
+
+/* On the body column's left edge, where a CaseFold above it sits. */
+.footLinkBody {
+  --fold-col: calc((100% - var(--cs-spine) - var(--cs-col-gap)) / 3);
+}
+
+@media (min-width: 997px) {
+  .footLinkBody {
+    margin-left: calc(var(--cs-spine) + var(--fold-col) + var(--cs-col-gap));
+    max-width: calc(var(--fold-col) * 2);
+  }
 }
 
 /* ── More case studies ── */
@@ -1011,6 +1158,7 @@
   }
 
   .stack,
+  .fold,
   .footLink {
     margin-left: 0;
   }

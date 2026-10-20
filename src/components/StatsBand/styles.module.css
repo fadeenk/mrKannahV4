@@ -48,8 +48,9 @@
   border-left: 1px solid var(--band-rule);
 }
 
-/* Numerals. The overlay (.ticker) sits exactly over .final: same font, same
-   tabular figures, so swapping them at the end of the count is invisible. */
+/* Numerals. The count-up overlay (components/CountUp) sits exactly over the
+   final text and inherits this type, so swapping them at the end of the
+   count is invisible. */
 .value {
   position: relative;
   display: block;
@@ -61,16 +62,6 @@
   font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
   color: #fff;
-}
-
-.final[data-counting] {
-  opacity: 0;
-}
-
-.ticker {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .label {
@@ -189,16 +180,6 @@
     .stat:first-child {
       grid-template-columns: subgrid;
     }
-  }
-}
-
-@media print {
-  .final[data-counting] {
-    opacity: 1;
-  }
-
-  .ticker {
-    display: none;
   }
 }
 

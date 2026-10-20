@@ -1,0 +1,28 @@
+/* Count-up overlay. The ticker sits exactly over the final text: same font,
+   same tabular figures (both inherit the value's type), so swapping them at
+   the end of the count is invisible. */
+.count {
+  position: relative;
+}
+
+.final[data-counting] {
+  opacity: 0;
+}
+
+.ticker {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* A page printed before its numerals were seen still prints the real values,
+   not the zeroed overlay. */
+@media print {
+  .final[data-counting] {
+    opacity: 1;
+  }
+
+  .ticker {
+    display: none;
+  }
+}
