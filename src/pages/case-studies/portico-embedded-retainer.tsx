@@ -14,10 +14,10 @@ import CaseStudyLayout, {
 } from "@site/src/components/CaseStudy";
 
 /*
- * Portico approved this page as written (2026-10-15), Tina Tran's quote
- * included. Written so a school reading it would trust Portico more: happier
- * clients, enhanced reporting, and a Success team with its own engineer. A
- * change to the copy needs Portico's sign-off again.
+ * Portico requested edits (2026-10-20) for final approval: Shannon Weitz's
+ * quote, new Portico description. Written so a school reading it would trust
+ * Portico more: happier clients, enhanced reporting, and a Success team with
+ * its own engineer. A change to the copy needs Portico's sign-off again.
  */
 
 const STUDY = getCaseStudy("portico-embedded-retainer");
@@ -126,7 +126,7 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
         headline="24 customer initiatives shipped for Portico’s Success team in 9 months."
         lede="For two years I’ve been the embedded engineer for Portico’s Success team. I take their customer requests from plan to deploy, and the reports and fixes I ship leave Portico’s clients happier."
         clientUrl="https://porticoedu.com/"
-        about="Operations software for career schools: attendance, student records and CRM, financial aid, and clinical work."
+        about="Portico's software and services help career schools simplify operations, stay compliant, and grow with confidence."
         length="2 years, ongoing"
         industry="EdTech"
       />
@@ -138,13 +138,14 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
 
       <CaseQuote
         variant="lead"
-        name="Tina Tran"
-        title="VP of Success"
+        name="Shannon Weitz"
+        title="Client Success"
         company="Portico"
       >
-        When a school asks for something our roadmap can&rsquo;t fit yet, I
-        send it to Fadee. He takes it from the ticket to production, and our
-        engineers stay on the roadmap. Our schools are happier for it.
+        When Portico receives certain edge case requests that are not near
+        term on our road map, Fadee is able to step in and facilitate. This
+        helps Portico continue to deliver on its promise of being a true
+        partner to our schools.
       </CaseQuote>
 
       <CaseSection title="Where things stood">
