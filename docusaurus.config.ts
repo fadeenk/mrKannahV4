@@ -85,12 +85,6 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
-          position: "left",
-          label: "Blog",
-        },
-        {
           type: "dropdown",
           label: "Showcase",
           position: "left",
@@ -125,11 +119,6 @@ const config: Config = {
         {
           href: "/about",
           label: "About",
-          position: "left",
-        },
-        {
-          href: "/datingProfile",
-          label: "💖",
           position: "left",
         },
         {
