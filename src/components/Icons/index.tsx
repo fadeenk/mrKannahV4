@@ -54,6 +54,15 @@ export function ArrowDown({ className }: IconProps): JSX.Element {
   );
 }
 
+/** Play marker on a video poster. */
+export function Play({ className }: IconProps): JSX.Element {
+  return (
+    <svg {...baseProps} className={className}>
+      <path d="M6.5 4.5v11l9-5.5z" />
+    </svg>
+  );
+}
+
 /** Disclosure marker: points down when closed; the host rotates it open. */
 export function ChevronDown({ className }: IconProps): JSX.Element {
   return (

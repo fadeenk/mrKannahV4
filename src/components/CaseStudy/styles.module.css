@@ -161,7 +161,8 @@
 /* Links written into the story prose, the numbers' footnote, and the fold. */
 .body a,
 .footnote a,
-.foldBody a {
+.foldBody a,
+.fact a {
   color: var(--cs-go-text);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -170,14 +171,16 @@
 
 .body a:hover,
 .footnote a:hover,
-.foldBody a:hover {
+.foldBody a:hover,
+.fact a:hover {
   color: var(--cs-go-text);
   text-decoration-thickness: 2px;
 }
 
 .body a:focus-visible,
 .footnote a:focus-visible,
-.foldBody a:focus-visible {
+.foldBody a:focus-visible,
+.fact a:focus-visible {
   outline: 3px solid var(--c-signal);
   outline-offset: 2px;
   border-radius: 4px;

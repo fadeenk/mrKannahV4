@@ -1,5 +1,6 @@
 import React, { type JSX } from "react";
 import Link from "@docusaurus/Link";
+import useBrokenLinks from "@docusaurus/useBrokenLinks";
 import AboutHero from "@site/src/components/AboutHero";
 import CaseStudyLayout, {
   CaseBody,
@@ -82,11 +83,16 @@ const LUKE_QUOTE = LUKE?.description
   .trim();
 
 export default function About(): JSX.Element {
+  // The fold's headings are plain <h3 id>s (no hover anchor link), so tell
+  // Docusaurus's anchor check they exist; /about#school is linked from the blog.
+  const brokenLinks = useBrokenLinks();
+  brokenLinks.collectAnchor("school");
+  brokenLinks.collectAnchor("early-code");
   return (
     <CaseStudyLayout
       variant="page"
       title="About Fadee Kannah"
-      description="Fadee Kannah co-founded CourseKey, took it to a $30M exit to private equity, and now consults for SaaS teams including Portico and American Growth Insurance."
+      description="Fadee Kannah built CourseKey's platform, which exited to private equity for $30M, and now consults for SaaS teams including Portico and American Growth Insurance."
     >
       <AboutHero />
 
@@ -386,7 +392,7 @@ export default function About(): JSX.Element {
         <CaseFootLink
           align="body"
           to="/showcase"
-          note="Older projects, apps and awards are in the showcase."
+          note="The technical write-ups behind this work are in the showcase."
         >
           Browse the technical showcase
         </CaseFootLink>

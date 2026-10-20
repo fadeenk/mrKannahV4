@@ -248,7 +248,7 @@ export default function AmericanGrowthInsurance(): JSX.Element {
 
       <CaseStack groups={STACK} />
 
-      <CaseFootLink to="/showcase/SuperAgentIntegration">
+      <CaseFootLink to="/showcase/ai-assistant">
         Read the technical write-up for this build
       </CaseFootLink>
     </CaseStudyLayout>

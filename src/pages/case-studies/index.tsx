@@ -23,11 +23,11 @@ export default function CaseStudiesIndex(): JSX.Element {
     <CaseStudyLayout
       variant="index"
       title="Case studies"
-      description="What I shipped for Portico and American Growth Insurance, what changed for each, and how we worked together."
+      description="Two case studies: two years embedded with Portico’s Success team, and a four-week fixed-scope AI assistant I built for American Growth Insurance."
     >
       <CaseIntro
         title="Case studies"
-        lede="Here are two clients, what I shipped for each, and what changed. Each ran on a different engagement, so each shows a different way to work with me."
+        lede="Two clients, two ways of working together. I’ve been embedded with Portico’s Success team for two years. For American Growth Insurance, I built an AI assistant into their app in a four-week, fixed-scope project."
       />
 
       <ol className={styles.ledger} role="list">
@@ -77,9 +77,9 @@ export default function CaseStudiesIndex(): JSX.Element {
 
       <CaseFootLink
         to="/showcase"
-        note="Older projects and technical write-ups are in the showcase."
+        note="The showcase has the technical write-up of American Growth Insurance’s assistant, and my other builds."
       >
-        Browse the technical showcase
+        Browse the showcase
       </CaseFootLink>
     </CaseStudyLayout>
   );

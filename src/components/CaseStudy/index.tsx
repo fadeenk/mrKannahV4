@@ -88,6 +88,14 @@ type CaseStudyLayoutProps = {
       variant: "page";
       slug?: undefined;
     }
+  | {
+      /**
+       * A showcase write-up (src/pages/showcase): a study's shell with its
+       * back link pointing to the showcase, and no "More case studies" row.
+       */
+      variant: "work";
+      slug?: undefined;
+    }
 );
 
 /**
@@ -119,13 +127,15 @@ export default function CaseStudyLayout(
           <div className={`container ${styles.page} ${styles.pageIndex}`}>
             {children}
           </div>
+        ) : props.variant === "work" ? (
+          <div className={`container ${styles.page}`}>
+            <CaseBack to="/showcase">All work</CaseBack>
+            <article>{children}</article>
+          </div>
         ) : (
           <>
             <div className={`container ${styles.page}`}>
-              <Link to="/case-studies" className={styles.back}>
-                <ArrowLeft className={styles.backArrow} />
-                All case studies
-              </Link>
+              <CaseBack to="/case-studies">All case studies</CaseBack>
               <article>{children}</article>
             </div>
             <MoreCaseStudies slug={props.slug} />
@@ -134,6 +144,22 @@ export default function CaseStudyLayout(
         <FinalCta />
       </main>
     </Layout>
+  );
+}
+
+/** The quiet back link that opens a study or a write-up. */
+export function CaseBack({
+  to,
+  children,
+}: {
+  to: string;
+  children: ReactNode;
+}): JSX.Element {
+  return (
+    <Link to={to} className={styles.back}>
+      <ArrowLeft className={styles.backArrow} />
+      {children}
+    </Link>
   );
 }
 
@@ -193,6 +219,46 @@ export function CaseIntro({ title, lede }: CaseIntroProps): JSX.Element {
         {title}
       </Heading>
       <p className={styles.lede}>{lede}</p>
+    </header>
+  );
+}
+
+export type CaseFactRow = {
+  label: string;
+  value: ReactNode;
+};
+
+type CaseHeaderProps = {
+  /** The page's H1. */
+  title: ReactNode;
+  lede: ReactNode;
+  /** Term and value rows, beside the H1 and lede from 997px. */
+  facts: readonly CaseFactRow[];
+};
+
+/**
+ * H1, lede and a facts ledger for a page with no registry client (a showcase
+ * write-up): the same masthead as a study, with plain term and value rows.
+ */
+export function CaseHeader({
+  title,
+  lede,
+  facts,
+}: CaseHeaderProps): JSX.Element {
+  return (
+    <header className={`${styles.masthead} ${styles.mastheadSplit}`}>
+      <Heading as="h1" className={styles.headline}>
+        {title}
+      </Heading>
+      <p className={styles.lede}>{lede}</p>
+      <dl className={styles.facts}>
+        {facts.map((fact) => (
+          <div key={fact.label} className={styles.fact}>
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
     </header>
   );
 }
@@ -700,12 +766,18 @@ type CaseVideoProps = {
   label: string;
   /** Second to show as the still before play (a media fragment). */
   still?: number;
+  /**
+   * A poster image (site path). With one, nothing of the file loads until
+   * play; without one, the metadata and a still frame load up front.
+   */
+  poster?: string;
 };
 
 /**
- * A screen recording with native controls, for a framed CaseFigure. Only
- * metadata loads up front; the fragment makes the browser paint a real
- * frame as the still. Capped in width so a tall capture leaves room to read.
+ * A screen recording with native controls, for a framed CaseFigure. Without a
+ * poster only metadata loads up front, and the fragment makes the browser
+ * paint a real frame as the still; with a poster the file waits for play.
+ * Capped in width so a tall capture leaves room to read.
  */
 export function CaseVideo({
   src,
@@ -713,16 +785,18 @@ export function CaseVideo({
   height,
   label,
   still = 1,
+  poster,
 }: CaseVideoProps): JSX.Element {
   const { withBaseUrl } = useBaseUrlUtils();
   return (
     <video
       className={styles.video}
-      src={`${withBaseUrl(src)}#t=${still}`}
+      src={poster ? withBaseUrl(src) : `${withBaseUrl(src)}#t=${still}`}
+      poster={poster ? withBaseUrl(poster) : undefined}
       width={width}
       height={height}
       controls
-      preload="metadata"
+      preload={poster ? "none" : "metadata"}
       playsInline
       aria-label={label}
     />

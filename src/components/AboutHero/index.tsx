@@ -19,7 +19,8 @@ export default function AboutHero(): JSX.Element {
       <SignalField variant="hero" className={styles.field} />
       <div className={`container ${styles.inner}`}>
         <Heading as="h1" className={styles.title} data-field-quiet="">
-          <span className={styles.line}>I took CourseKey to a $30M exit.</span>{" "}
+          <span className={styles.line}>I built CourseKey&rsquo;s platform.</span>{" "}
+          <span className={styles.line}>It exited for $30M.</span>{" "}
           <span className={styles.line}>Now I join SaaS teams.</span>
         </Heading>
 

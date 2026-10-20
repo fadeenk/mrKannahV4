@@ -85,36 +85,14 @@ const config: Config = {
       },
       items: [
         {
-          type: "dropdown",
+          to: "/case-studies",
+          label: "Case Studies",
+          position: "left",
+        },
+        {
+          to: "/showcase",
           label: "Showcase",
           position: "left",
-          to: "/showcase",
-          items: [
-            {
-              label: "Case Studies",
-              to: "/case-studies",
-            },
-            {
-              label: "Apps",
-              to: "/showcase/Apps",
-            },
-            {
-              label: "Businesses",
-              to: "/showcase/Businesses",
-            },
-            {
-              label: "Hardware",
-              to: "/showcase/Hardware",
-            },
-            {
-              label: "Other",
-              to: "/showcase/Other",
-            },
-            {
-              label: "Websites",
-              to: "/showcase/Websites",
-            },
-          ],
         },
         {
           href: "/about",

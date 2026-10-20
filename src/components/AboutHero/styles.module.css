@@ -1,5 +1,5 @@
 /* /about hero. Same field, portrait and type as the homepage hero
-   (src/components/ConsultingHero), with a longer H1: two lines at desktop,
+   (src/components/ConsultingHero), with a longer H1: three lines at desktop,
    sized to the row instead of the homepage's 6vw. Display type is Besley via
    --c-display (the CaseStudy layout's page tokens). The portrait tile's own
    styles live with ConsultingHero; it reads --hero-hairline and --tile-shadow,
@@ -47,8 +47,8 @@
 .title {
   margin: 0;
   font-family: var(--c-display, Georgia, "Times New Roman", serif);
-  /* The case-study H1 step (--cs-h1, 4.6vw to 4rem). Its long line is about
-     17em, so two sentences fit the row from 997px up. */
+  /* The case-study H1 step (--cs-h1, 4.6vw to 4rem). Three short sentences,
+     each on its own line from 997px up. */
   font-size: var(--cs-h1, clamp(2.25rem, 4.6vw, 4rem));
   font-weight: 700;
   line-height: 1.06;
@@ -151,7 +151,7 @@
     grid-column: 1 / -1;
   }
 
-  /* Two lines: each is a sentence, and the long one fits the row from 997px
+  /* Three lines: each is a sentence, and the longest fits the row from 997px
      up at the default text size. It is allowed to wrap, so a larger root
      font size wraps the line instead of clipping it inside the hero. */
   .line {

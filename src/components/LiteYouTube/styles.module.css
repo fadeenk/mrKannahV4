@@ -1,0 +1,113 @@
+/* A click-to-load YouTube video in the screenshot frame (the one resting
+   shadow: 12px radius, hairline, dark-theme depth). Reads the page tokens
+   (--c-*) from the layout it sits in. */
+.figure {
+  margin: 0;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1f1f21;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.16),
+    0 16px 28px -10px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .frame {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 18px 32px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* Inner hairline: gives a dark poster a defined edge on a dark page too. */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.play {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Inset: the frame clips anything outside it. */
+.play:focus-visible {
+  outline: 3px solid var(--c-signal, #2e8555);
+  outline-offset: -3px;
+}
+
+.poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+  transform: translate(-50%, -50%);
+  transition: transform var(--c-dur-fast, 160ms) var(--c-ease, ease-out);
+}
+
+.play:hover .badge {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  /* The triangle's weight sits left of its box; nudge it to look centred. */
+  margin-left: 0.15rem;
+}
+
+.player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.caption {
+  max-width: 68ch;
+  margin-top: 0.875rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+  text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+
+  .play:hover .badge {
+    transform: translate(-50%, -50%);
+  }
+}
