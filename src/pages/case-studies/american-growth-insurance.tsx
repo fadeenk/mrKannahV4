@@ -18,7 +18,10 @@ import CaseStudyLayout, {
 /*
  * Luke Sophinos and American Growth Insurance approved this page and his
  * quote as written (2026-10-16). A change to the copy or the quote needs
- * their sign-off again. Still open: his title (see TODO(title) at the quote).
+ * their sign-off again.
+ * 2026-10-21: the last "What changed" item (the product changed direction
+ * after testing) was added from Fadee's account. It is NOT approved yet:
+ * send it to AGI before this ships.
  */
 
 const STUDY = getCaseStudy("american-growth-insurance");
@@ -83,8 +86,9 @@ export default function AmericanGrowthInsurance(): JSX.Element {
   return (
     <CaseStudyLayout
       slug={STUDY.slug}
-      title="American Growth Insurance case study: an AI assistant in 4 weeks"
-      description="In a 4-week fixed-scope project, I built an AI assistant into American Growth Insurance’s existing app. They used it with design-partner agencies in stealth."
+      title="American Growth Insurance: 4-week AI assistant"
+      description="In a 4-week fixed-scope project, I built an AI assistant into American Growth Insurance’s existing app, which design-partner agencies used in stealth."
+      image="/img/og/american-growth-insurance.png"
     >
       {/* No company URL on record, so the client name renders unlinked. */}
       <CaseMasthead
@@ -111,15 +115,14 @@ export default function AmericanGrowthInsurance(): JSX.Element {
         }
       />
 
-      {/* Luke's title is unconfirmed, so the attribution is name and company only. */}
       <CaseQuote
         variant="lead"
         name="Luke Sophinos"
         company="American Growth Insurance"
       >
         During stealth, I could open our app in front of an agency owner and
-        have the assistant build a sales deck while they watched. Investors
-        saw the same thing. Fadee built it inside the app we already had.
+        have the assistant build a sales deck while they watched. Investors saw
+        the same thing. Fadee built it inside the app we already had.
       </CaseQuote>
 
       <CaseSection title="Where things stood">
@@ -130,33 +133,33 @@ export default function AmericanGrowthInsurance(): JSX.Element {
           agencies.
         </p>
         <p>
-          Before launch, while still in stealth, AGI needed a working product
-          to show about 10 U.S. agencies that were working with them as design
-          partners. Slides weren&rsquo;t going to hold up in investor
-          diligence. The product had to handle real agency work: reading
-          documents, research, running code, and writing content. It also
-          needed secure sign-in, isolated code execution, and audit logs.
+          Before launch, while still in stealth, AGI needed a working product to
+          show about 10 U.S. agencies that were working with them as design
+          partners. Slides weren&rsquo;t going to hold up in investor diligence.
+          The product had to handle real agency work: reading documents,
+          research, running code, and writing content. It also needed secure
+          sign-in, isolated code execution, and audit logs.
         </p>
       </CaseSection>
 
       <CaseSection title="How we worked">
         <p>
           This was a Fixed-Scope Project: 4 weeks, with success written down
-          before I started. Done meant a working demo, the infrastructure to
-          run it, and a handoff.
+          before I started. Done meant a working demo, the infrastructure to run
+          it, and a handoff.
         </p>
         <p>
-          I built it inside the app they already had, in their repo and on
-          their team&rsquo;s cadence, and kept it consistent with the
-          app&rsquo;s existing design.
+          I built it inside the app they already had, in their repo and on their
+          team&rsquo;s cadence, and kept it consistent with the app&rsquo;s
+          existing design.
         </p>
       </CaseSection>
 
       <CaseSection title="What I built">
         <p>
-          I built the assistant, SuperAgent, into their app on two backends.
-          The app&rsquo;s own backend handles sign-in, users, and saved data,
-          and a second backend runs the AI tools and workflows.
+          I built the assistant, SuperAgent, into their app on two backends. The
+          app&rsquo;s own backend handles sign-in, users, and saved data, and a
+          second backend runs the AI tools and workflows.
         </p>
         <CaseList
           items={[
@@ -192,6 +195,7 @@ export default function AmericanGrowthInsurance(): JSX.Element {
         >
           <CaseVideo
             src="/img/showcase/superAgent.mp4"
+            poster="/img/showcase/ai-assistant-poster.jpg"
             width={1266}
             height={912}
             label="Screen recording of the SuperAgent assistant in AGI’s app building an insurance sales deck from a short conversation."
@@ -232,11 +236,16 @@ export default function AmericanGrowthInsurance(): JSX.Element {
                     PR Newswire release
                   </CaseExternalLink>{" "}
                   report ~$70M in committed equity from Atomic and Rockbridge
-                  Growth Equity, a first acquisition closed, and a path to
-                  $10M+ in revenue through a roll-up. Those are AGI&rsquo;s
-                  results as a company. My part was the assistant.
+                  Growth Equity, a first acquisition closed, and a path to $10M+
+                  in revenue through a roll-up. Those are AGI&rsquo;s results as
+                  a company. My part was the assistant.
                 </>
               ),
+            },
+            {
+              fact: "The assistant was used to test the product and to raise capital.",
+              detail:
+                "What AGI learned in that testing led to a strategic pivot, and a new team rebuilt the product.",
             },
           ]}
         />

@@ -1,5 +1,6 @@
 import React, { type JSX } from "react";
 import CaseStudyLayout, {
+  CaseBreakdown,
   CaseFrames,
   CaseList,
   CaseMasthead,
@@ -8,6 +9,7 @@ import CaseStudyLayout, {
   CaseStack,
   CaseStats,
   getCaseStudy,
+  type CaseListItem,
   type CaseShot,
   type CaseStackGroup,
   type CaseStat,
@@ -18,6 +20,8 @@ import CaseStudyLayout, {
  * quote, new Portico description. Written so a school reading it would trust
  * Portico more: happier clients, enhanced reporting, and a Success team with
  * its own engineer. A change to the copy needs Portico's sign-off again.
+ * 2026-10-21: the hours breakdown moved out of the Tech stack fold into How
+ * we worked. The words are unchanged; only where it sits and how it is set.
  */
 
 const STUDY = getCaseStudy("portico-embedded-retainer");
@@ -104,13 +108,16 @@ const STACK: readonly CaseStackGroup[] = [
     title: "Infrastructure and delivery",
     items: ["AWS Serverless", "Staging validation and deployment support"],
   },
+];
+
+/* Each line is the original sentence, split into a bold figure and the rest. */
+const HOURS: readonly CaseListItem[] = [
+  { fact: "About 124 hours", detail: "on attendance and reporting" },
+  { fact: "68+ hours", detail: "on integrations and data infrastructure" },
   {
-    title: "Where the tracked hours went",
-    items: [
-      "About 124 hours on attendance and reporting",
-      "68+ hours on integrations and data infrastructure",
-      "130 logged entries on testing, debugging, pull requests, staging validation, and deployment",
-    ],
+    fact: "130 logged entries",
+    detail:
+      "on testing, debugging, pull requests, staging validation, and deployment",
   },
 ];
 
@@ -118,8 +125,9 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
   return (
     <CaseStudyLayout
       slug={STUDY.slug}
-      title="Portico case study: 24 customer initiatives in 9 months"
-      description="For two years I’ve been the embedded engineer for Portico’s Success team: 24 customer initiatives in 9 months, and reports and fixes that left Portico’s clients happier."
+      title="Portico case study: 24 initiatives in 9 months"
+      description="Two years as the embedded engineer on Portico’s Success team: 24 customer initiatives in 9 months, and reports and fixes that left clients happier."
+      image="/img/og/portico-embedded-retainer.png"
     >
       <CaseMasthead
         study={STUDY}
@@ -136,16 +144,11 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
         footnote="The 24 covers this year’s tracked work. Year one ran on a prepaid block of hours and wasn’t tracked item by item."
       />
 
-      <CaseQuote
-        variant="lead"
-        name="Shannon Weitz"
-        title="Client Success"
-        company="Portico"
-      >
-        When Portico receives certain edge case requests that are not near
-        term on our road map, Fadee is able to step in and facilitate. This
-        helps Portico continue to deliver on its promise of being a true
-        partner to our schools.
+      <CaseQuote variant="lead" name="Shannon Weitz" title="" company="Portico">
+        When Portico receives certain edge case requests that are not near-term
+        on our roadmap, Fadee is able to step in and facilitate. This helps
+        Portico continue to deliver on its promise of being a true partner to
+        our schools.
       </CaseQuote>
 
       <CaseSection title="Where things stood">
@@ -159,18 +162,18 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
         <p>
           Portico wanted its Success team to deliver on customer requests
           quickly, while core engineering stayed on the product roadmap. Those
-          requests came straight from schools: roadmap features, custom
-          reports, and documentation. So the Success team got its own engineer.
+          requests came straight from schools: roadmap features, custom reports,
+          and documentation. So the Success team got its own engineer.
         </p>
       </CaseSection>
 
       <CaseSection title="How we worked">
         <p>
-          I sit between Portico&rsquo;s Success team and their engineers.
-          Nearly every request reaches me as a Success-team ticket, and I take
-          it from plan and design through build, staging, and deploy. I&rsquo;m
-          in their chat, meetings, and code review like anyone else on the
-          team, and their engineers review and QA everything before it ships.
+          I sit between Portico&rsquo;s Success team and their engineers. Nearly
+          every request reaches me as a Success-team ticket, and I take it from
+          plan and design through build, staging, and deploy. I&rsquo;m in their
+          chat, meetings, and code review like anyone else on the team, and
+          their engineers review and QA everything before it ships.
         </p>
         <p>
           We started with a prepaid block of 10 hours a month. It now runs from
@@ -178,12 +181,13 @@ export default function PorticoEmbeddedRetainer(): JSX.Element {
           Portico signed on before I offered the weekly retainer, which is why
           their terms are in monthly hours.
         </p>
+        <CaseBreakdown title="Where the tracked hours went" items={HOURS} />
       </CaseSection>
 
       <CaseSection title="What I built">
         <p>
-          I work across their web app, backend, database, and internal
-          services, on new features, fixes, and reports for customers and for
+          I work across their web app, backend, database, and internal services,
+          on new features, fixes, and reports for customers and for
           Portico&rsquo;s own staff.
         </p>
         <CaseList
