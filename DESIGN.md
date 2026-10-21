@@ -185,8 +185,8 @@ One accent family in two theme expressions, plus Infima neutrals for structure.
 
 ### Primary
 - **Forest Canopy** (#2e8555): Default light-theme primary. Buttons, links, badges, testimonial accents, section dividers (`src/css/custom.css`).
-- **Pine Shadow** (#205d3b): Darkest light ramp, particle dots in light theme, header stroke base (`src/components/Header/header.css`).
-- **Meadow** (#3cad6e): Lightest light ramp, particle links in light theme (`src/components/Header/header.css`).
+- **Pine Shadow** (#205d3b): Darkest light ramp, deepest theme step.
+- **Meadow** (#3cad6e): Lightest light ramp.
 - **Mint Signal** (#25c2a0): Default dark-theme primary. Same roles as Forest Canopy when `[data-theme="dark"]`.
 - **Deep Teal** (#1a8870): Darkest dark ramp, particle links in dark theme.
 - **Mint Glow** (#4fddbf): Lightest dark ramp, particle dots in dark theme.
@@ -198,9 +198,9 @@ Full ramps are normative in `src/css/custom.css`: light `#29784c, #277148, #205d
 - **Infima Surface** (`var(--ifm-background-surface-color)`): Service cards, testimonial cards, elevated cards.
 - **Infima Emphasis Wash** (`var(--ifm-color-emphasis-100)`): Testimonial section band (`section--testimonials`).
 - **Hairline** (`var(--ifm-color-emphasis-200)`): Card borders, stats-bar top/bottom rules.
-- **Ink / Muted** (#1a1a1a / #555555 in light card scope; `var(--ifm-font-color-base)` + `var(--ifm-color-emphasis-700)` elsewhere): Body copy and subheadlines. The `card-ink` / `card-muted` tokens belong to that light card scope (FeaturedWork), not to the `/card` page, whose ink and muted text follow the Infima pair in both themes.
+- **Ink / Muted** (#1a1a1a / #555555 in light card scope; `var(--ifm-font-color-base)` + `var(--ifm-color-emphasis-700)` elsewhere): Body copy and subheadlines.
 
-Functional one-offs, not system accents: View Details blue (#1976d2 in `FeaturedWork`), iFolio AI badge gradient (#667eea → #764ba2). Do not promote these to palette roles.
+Functional one-offs, not system accents: link blue (#1976d2, historic) and the iFolio AI badge gradient (#667eea → #764ba2, historic). Do not promote these to palette roles.
 
 - **Logo Plate** (#fcfbf7, 1px `rgba(28, 30, 33, 0.14)` border, 8px radius): the warm light chip behind client logos in both themes, because the logos are dark marks on transparent. It sits behind the logo only; text never sits on it, so copy keeps following the theme (ProofShowcase, the case studies, the stats-band marquee on hover).
 ### Drenched Bands (the homepage only)
@@ -263,7 +263,7 @@ Centered `container` with full-bleed section bands. Base section rhythm is gener
 - Engagement: `repeat(auto-fit, minmax(280px, 1fr))` with 1.5rem gap.
 - Stats: 3 equal columns centered, collapsing to 1 column under 768px.
 - Secondary services: 2 columns collapsing to 1 under 768px.
-- Header: split row (copy left, portrait right) flipping to `column-reverse` centered under 996px to match Docusaurus navbar breakpoint.
+- Hero: split row (copy left, portrait right) flipping to `column-reverse` centered under 996px to match Docusaurus navbar breakpoint.
 - Spacing scale in use: 8px, 16px, 24px (1.5rem), 32px (2rem), 64px (4rem section).
 
 ### Homepage order and rhythm
@@ -299,7 +299,7 @@ Flat by default. Depth is feedback, not decoration — surfaces sit flush with h
 - **Card hover lift** (`box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12)` with `translateY(-2px)`): Elevated cards (`src/css/custom.css`).
 - **Service lift** (`box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)` with `translateY(-4px)`): Service cards.
 - **Button lift** (`box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2)` with `translateY(-1px)`): Primary buttons.
-- **Portrait tilt shadow** (`box-shadow: 2px 35px 32px -8px var(--profileShadowColor)`): Header portrait on hover with 3D tilt (`perspective(900px) rotateX(25deg)`).
+- **Portrait tilt shadow**: Hero portrait tile on hover with tilt (`src/components/ConsultingHero/`).
 - **Testimonial pop** (`filter: drop-shadow(0px 20px 10px #0008)` with `scale(0.85 → 1)`): Testimonial cards on hover.
 - **Inset field** (`box-shadow: inset 0.2rem 0.2rem 0.5rem grey`): Neumorphic contact inputs at rest, lifting to outer shadow on focus.
 
@@ -331,7 +331,7 @@ Gently rounded rectangles; pills and the `/card` portrait are the fully round ex
 ## Components
 
 ### Buttons
-Restrained and confident. White fill with 2px green stroke and green text at rest (8px radius, 12px 24px padding, 600 weight); fills green with white text and lifts on hover. Header CTAs follow the same contract in particle greens (primary filled, secondary outline, both lifting -2px on hover).
+Restrained and confident. White fill with 2px green stroke and green text at rest (8px radius, 12px 24px padding, 600 weight); fills green with white text and lifts on hover. Hero CTAs follow the same contract (primary filled, secondary outline, both lifting -2px on hover).
 
 - **Shape:** Soft rectangle (8px radius).
 - **Primary:** White background, green text/border; hover inverts to green fill.
@@ -365,7 +365,7 @@ Restrained and confident. White fill with 2px green stroke and green text at res
 Docusaurus navbar with Home title, logo (`logo.svg` / `logoDark.svg`), left Case Studies, Showcase (a plain link, no dropdown) and About, then the 💼 card shortcut; Blog is hidden from the bar. Dark footer with copyright only. Mobile collapses at 996px per Docusaurus default. `/card` is chromeless: no navbar and no footer.
 
 ### Signature Components
-- **Header hero:** Particle field behind split hero, stroked italic title, grayscale portrait that tilts in 3D and reveals a color character layer on hover.
+- **Consulting hero:** Release-line tick field behind split hero, portrait tile that tilts on hover and reveals a color layer.
 - **Testimonial collage:** Alternating angled cards with rotated avatar tiles (grayscale → color on hover) and highlight-marker names.
 - **Logos marquee:** Infinite 25s scroll track with edge fade masks in primary green, pausing on hover, items dimmed (grayscale + 0.7 opacity) until hovered. On the homepage stats band the logos are knocked out to white (78% opacity) and the fades take the band color; on hover a logo returns to its original colors on a light `#fcfbf7` plate (8px radius), the same chip the proof section uses, because the originals are dark marks that sink into the green.
 - **Release-line tick field** (`SignalField`, the homepage): a canvas of about 4,000 one-pixel ticks. They begin as slow random noise, a pilot dot sweeps left to right in about 1.8s and the ticks align behind it into one line (2px, with the pilot dot), then the line settles. The pointer locally disorders ticks within about 120px and they re-settle. Ticks quieten under text so body copy keeps AA contrast. It colors itself from CSS variables (`--field-tick`, `--field-line`, `--field-pilot`, `--field-ring`, `--field-gain`, `--field-tick-gain`) so a host can recolor it; the closing CTA renders it once, already settled, in white on the green band, with no release line and no brightening (`data-field-noline` on the band): every tick points at the copy, so the ground converges on the one action. The hero's anchor sets `data-field-rise`, so its line climbs past the portrait instead of dropping.

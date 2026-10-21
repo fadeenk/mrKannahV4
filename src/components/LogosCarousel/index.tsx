@@ -43,7 +43,6 @@ export default function LogosCarousel(): JSX.Element {
                   height={32}
                   loading="lazy"
                   decoding="async"
-                  tabIndex={-1}
                 />
               ) : (
                 <span>{logo.name}</span>

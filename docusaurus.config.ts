@@ -95,13 +95,14 @@ const config: Config = {
           position: "left",
         },
         {
-          href: "/about",
+          to: "/about",
           label: "About",
           position: "left",
         },
         {
-          href: "/card",
+          to: "/card",
           label: "💼",
+          ariaLabel: "Digital business card",
           position: "left",
         },
       ],

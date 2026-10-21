@@ -2,6 +2,7 @@ import React, { useEffect, useState, type CSSProperties, type JSX } from "react"
 import Heading from "@theme/Heading";
 import { CTA_MICROCOPY } from "@site/src/components/BookCta/copy";
 import { ArrowUpRight } from "@site/src/components/Icons";
+import styles from "./styles.module.css";
 
 const WORKER_URL =
   "https://mrkannah-contact-worker.mrkannah.workers.dev";
@@ -183,23 +184,6 @@ export default function Contact({
   }
   return (
     <div id="contact" className="hero">
-      <style suppressHydrationWarning>
-        {`
-        .contact-field input:focus-visible,
-        .contact-field textarea:focus-visible {
-          outline: 3px solid var(--ifm-color-primary);
-          outline-offset: 2px;
-          border-color: var(--ifm-color-primary);
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .contact-field input,
-          .contact-field textarea {
-            transition: none;
-            animation: none;
-          }
-        }
-        `}
-      </style>
       <section className="container" style={{ minWidth: 0 }}>
         {hideBooking ? null : (
           <>
@@ -253,7 +237,7 @@ export default function Contact({
               <a href={`mailto:${myEmail}`}>{myEmail}</a>
             </div>
           )}
-          <div className="contact-field" style={fieldStyle}>
+          <div className={styles.field} style={fieldStyle}>
             <label htmlFor="contact-name" style={labelStyle}>
               Name
             </label>
@@ -271,7 +255,7 @@ export default function Contact({
               aria-required="true"
             />
           </div>
-          <div className="contact-field" style={fieldStyle}>
+          <div className={styles.field} style={fieldStyle}>
             <label htmlFor="contact-email" style={labelStyle}>
               Email
             </label>
@@ -290,7 +274,7 @@ export default function Contact({
               aria-required="true"
             />
           </div>
-          <div className="contact-field" style={fieldStyle}>
+          <div className={styles.field} style={fieldStyle}>
             <label htmlFor="contact-message" style={labelStyle}>
               Message
             </label>

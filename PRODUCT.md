@@ -43,12 +43,12 @@ A generic agency sells capacity; this product sells founder-to-production accoun
 
 Confirmed functionality:
 
-- Home (`src/pages/index.tsx`): the consulting-led page: hero, stats band with client logos, pain groups, proof showcase, engagement offers, testimonials, fit FAQ, closing CTA, contact.
+- Home (`src/pages/index.tsx`): the consulting-led page: hero, stats band with selected-work logos, pain groups, proof showcase, engagement offers, testimonials, fit FAQ, closing CTA, contact.
 - Showcase (`src/pages/showcase/`): the index plus four write-ups (`ai-assistant`, `agent-platform`, `ifolio`, `meetinghero`), with smaller builds and recognition on the index. Data in `src/data/showcase.ts`. Case Studies are their own top-level nav item.
-- Blog docs at `/blog` (`docs/`, `sidebars.ts`), About (`src/pages/about.tsx`), plus goals, podcasts, summit, years, card, datingProfile, 653-timberfalls-for-rent.
+- Blog docs at `/blog` (`docs/`, `sidebars.ts`), About (`src/pages/about.tsx`), plus goals, podcasts, summit, years, card, 653-timberfalls-for-rent. `datingProfile` was intentionally removed (commit "Remove dating page"); its images now live under `docs/Yearly/2024/`.
 - Technical constraints: Docusaurus 3.10.2 + React 19 + TypeScript strict, static export to `build/`, `onBrokenLinks: throw`, English-only, gtag `G-QRPFQQWH20`.
 
-Explicitly undecided: role and prominence of personal routes (`datingProfile`, `card`, `653-timberfalls-for-rent`, `years`, `goals`, `summit`) in the consulting funnel — preserve routes, do not assume funnel relevance.
+Explicitly undecided: role and prominence of personal routes (`card`, `653-timberfalls-for-rent`, `years`, `goals`, `summit`) in the consulting funnel — preserve routes, do not assume funnel relevance.
 
 ## Brand Commitments
 
@@ -67,7 +67,7 @@ Real proof that must not be fabricated, with paths:
 - Client logos: `src/components/LogosCarousel/index.tsx`.
 - Founder story: Iraq → Turkey → US refugee via UN (2008), ESL to top of class, SDSU Computer Engineering + CS, web business, CourseKey technical co-founder (`src/pages/about.tsx`).
 - Showcase facts (`src/data/showcase.ts`): the AI assistant is the American Growth Insurance project (4 weeks; the case study is approved as written); the agent platform (8 days, four industries) names no client; both are built on the Suna agent framework (fadeenk/suna is a fork of kortix-ai/suna taken under Apache-2.0; upstream has since changed its license, so never call it "open source" and name no license, at Fadee's request); iFolio (48 days, 224 AI sessions, 5 models; live app and repo are public); MeetingHero.ai (launched May 17, 2025; 39 users; shut down October 2025). PureFrame is made with Lawrence Benjamin.
-- CourseKey and after (`src/pages/about.tsx`): $9M Series B led by SignalFire, 200+ career colleges, "architected the platform" (TechCrunch, 2021-03-03); two US patents as co-inventor (US10212542B2, US10551496B2); PSG's investment announced 2025-01-07, with the $30M figure and the word "exit" Fadee's own statement (the announcement prints no amount and calls it a "strategic growth investment"); MeetingHero.ai built Dec 2024, launched May 2025, shut down Oct 2025 with 39 users (its shutdown statement); clients Atomic, Portico, American Growth Insurance.
+- CourseKey and after (`src/pages/about.tsx`): $9M Series B led by SignalFire, 200+ career colleges, "architected the platform" (TechCrunch, 2021-03-03); two US patents as co-inventor (US10212542B2, US10551496B2); PSG's investment announced 2025-01-07 ($30M exit); MeetingHero.ai built Dec 2024, launched May 2025, shut down Oct 2025 with 39 users (its shutdown statement); clients Atomic, Portico, American Growth Insurance.
 - Contact: `src/components/Contact/index.tsx`, Gallery where used.
 
 Absences future work must not invent: no fabricated client names, testimonials, benchmarks, pricing, or licensing beyond what components/docs contain.
@@ -77,4 +77,6 @@ Absences future work must not invent: no fabricated client names, testimonials, 
 1. Proof over claims — every promise pairs with a stat, logo, testimonial, or shipped showcase item.
 2. Operator accountability — advice is backed by hands-on building and production ownership.
 3. Speed to fundable value — prioritize fastest path to launch, measurable cost/perf gain, and team velocity.
+4. Flexible entry, clear next step — three engagement models, one primary action: talk.
+surable cost/perf gain, and team velocity.
 4. Flexible entry, clear next step — three engagement models, one primary action: talk.

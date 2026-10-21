@@ -51,7 +51,7 @@ function StatItem({ value, label, phase, delay }: StatItemProps): JSX.Element {
 }
 
 /**
- * First drenched green band (stats + client logos), directly under the hero.
+ * First drenched green band (stats + selected-work logos), directly under the hero.
  * The release line continues as the band's 1px top hairline. Numerals count
  * up once on first view in motion tiers "full" and "touch", at mount if the
  * band is already on screen; the reduced tier (and a band scrolled past at

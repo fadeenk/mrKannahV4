@@ -87,7 +87,7 @@ type TestimonialsProps = {
 };
 
 export default function Testimonials({
-  heading = "What People I have worked with say",
+  heading = "What people I have worked with say",
   only,
   hideCta = false,
   tone = "default",

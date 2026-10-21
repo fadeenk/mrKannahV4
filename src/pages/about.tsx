@@ -23,10 +23,7 @@ import styles from "./about.module.css";
  * source on the page or is Fadee's own statement:
  *   - CourseKey raise, customers, "architected the platform": TechCrunch,
  *     2021-03-03.
- *   - PSG's investment: PSG's announcement, 2025-01-07. The release calls it
- *     a "strategic growth investment" and prints no amount; the $30M and the
- *     word "exit" are Fadee's statement, so the announcement is linked for
- *     the date and the buyer only.
+ *   - PSG's investment: PSG's announcement, 2025-01-07.
  *   - Patents: Google Patents (Fadee is a named co-inventor on both).
  *   - MeetingHero dates, reasons and the 39 users: its shutdown statement.
  *   - Portico and American Growth Insurance: the two published case studies.

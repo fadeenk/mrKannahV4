@@ -378,7 +378,7 @@ export function CaseStats({
     <div className={styles.stats}>
       <ul className={styles.statList} role="list" ref={listRef}>
         {stats.map((stat, i) => (
-          <li key={stat.value} className={styles.stat}>
+          <li key={i} className={styles.stat}>
             {countUp ? (
               <CountValue
                 value={stat.value}
