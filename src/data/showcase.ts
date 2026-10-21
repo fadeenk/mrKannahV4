@@ -4,7 +4,8 @@
  *   - ai-assistant: the American Growth Insurance case study (approved
  *     as written) and the old SuperAgent Integration page.
  *   - agent-platform: the old Customizable Agentic Platform page.
- *   - ifolio: the old iFolio page and the public repo and live app.
+ *   - ifolio: the old iFolio page and the public repo and live app; its
+ *     recording is a made-up portfolio (see IFOLIO_RECORDING).
  *   - meetinghero: its shutdown statement (fadeenk.github.io/meetinghero.ai/
  *     shutdown), its landing page, and the 2025 recap's demo videos.
  *   - Suna: Fadee built both AI projects on it. The link is his fork
@@ -72,27 +73,6 @@ export const PROJECTS: readonly ShowcaseProject[] = [
     ],
   },
   {
-    slug: "agent-platform",
-    path: "/showcase/agent-platform",
-    rowTitle: "White-label agent platform",
-    when: ["8 days", "Four industries"],
-    summary:
-      "One AI agent platform, deployed for four industries: therapy, home health, pharmacists and financial advisors. Each has its own domain and branding. I built it on the Suna agent framework in 8 days.",
-    facts: [
-      {
-        label: "Industries",
-        value: "Therapy, home health, pharmacists, financial advisors",
-      },
-      { label: "Length", value: "8 days" },
-      {
-        label: "Outcome",
-        value: "Went live; the client tested the market, then pivoted",
-      },
-      { label: "Built on", value: "Suna agent framework", href: SUNA_URL },
-      { label: "Stack", value: "Next.js, FastAPI, Supabase, AWS CDK" },
-    ],
-  },
-  {
     slug: "ifolio",
     path: "/showcase/ifolio",
     rowTitle: "iFolio",
@@ -112,6 +92,27 @@ export const PROJECTS: readonly ShowcaseProject[] = [
       },
       { label: "Length", value: "48 days" },
       { label: "Stack", value: "Nuxt, Vue, TypeScript, Cloudflare Worker" },
+    ],
+  },
+  {
+    slug: "agent-platform",
+    path: "/showcase/agent-platform",
+    rowTitle: "White-label agent platform",
+    when: ["8 days", "Four industries"],
+    summary:
+      "One AI agent platform, deployed for four industries: therapy, home health, pharmacists and financial advisors. Each has its own domain and branding. I built it on the Suna agent framework in 8 days.",
+    facts: [
+      {
+        label: "Industries",
+        value: "Therapy, home health, pharmacists, financial advisors",
+      },
+      { label: "Length", value: "8 days" },
+      {
+        label: "Outcome",
+        value: "Went live; the client tested the market, then pivoted",
+      },
+      { label: "Built on", value: "Suna agent framework", href: SUNA_URL },
+      { label: "Stack", value: "Next.js, FastAPI, Supabase, AWS CDK" },
     ],
   },
   {
@@ -423,6 +424,32 @@ export const AI_ASSISTANT_RECORDING: ScreenRecording = {
     "The assistant researching a topic and drafting a sales deck, inside the app. It takes the request at 0:03, asks follow-up questions at 0:11, runs its tools from 0:13, and has the slide outline by 0:26.",
   label:
     "Recording of the AI assistant researching a topic and drafting a sales deck inside American Growth Insurance’s app",
+};
+
+/*
+ * iFolio's launch video, made with the brag tool from the real app running on a
+ * generated vault (brag-output/work/gen-data.mjs in the InvestmentFolio repo):
+ * 6 accounts, 1,844 transactions and every number synthetic, so it shows no real
+ * balances or account numbers. That is why the caption says the portfolio is
+ * made up. The soundtrack (music and key ticks) is kept; it plays only on
+ * click. Re-encoded from the 23.5 s 1080p original (5.4 MB) with ffmpeg:
+ * 1280x720, H.264 crf 24, AAC 128k, fast-start, 2026-10-21.
+ * ifolio-poster.jpg is the frame at 7 s, the dashboard.
+ *
+ * The timestamps in the caption are positions in the video, checked against
+ * frames: the passphrase is typed from 0:01 and "Decrypting key" runs at 0:03;
+ * the dashboard lands at 0:04, positions at 0:08, the NVDA filter at 0:12,
+ * income at 0:15, the lock at 0:17, and the end card from 0:20.
+ */
+export const IFOLIO_RECORDING: ScreenRecording = {
+  src: "/img/showcase/ifolio.mp4",
+  poster: "/img/showcase/ifolio-poster.jpg",
+  width: 1280,
+  height: 720,
+  caption:
+    "A walkthrough of iFolio with a made-up portfolio, not mine. It unlocks the encrypted vault at 0:03, shows the dashboard at 0:04, the open positions at 0:08, filters the 1,844 transactions by symbol at 0:12 and the monthly income at 0:15, then locks again at 0:17.",
+  label:
+    "Recording of iFolio with a made-up portfolio: unlocking the encrypted vault, then the dashboard, positions, transactions and income, then locking it again",
 };
 
 export const AGENT_PLATFORM_RECORDING: ScreenRecording = {

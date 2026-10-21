@@ -1,9 +1,11 @@
 import React, { type JSX } from "react";
 import CaseStudyLayout, {
+  CaseFigure,
   CaseFootLink,
   CaseHeader,
   CaseList,
   CaseStack,
+  CaseVideo,
   SpineSection,
   type CaseFactRow,
   type CaseListItem,
@@ -11,16 +13,19 @@ import CaseStudyLayout, {
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
 import { ArrowRight } from "@site/src/components/Icons";
-import { getProject } from "@site/src/data/showcase";
+import { IFOLIO_RECORDING, getProject } from "@site/src/data/showcase";
 import styles from "./showcase.module.css";
 
 /*
  * iFolio, rewritten from the old page. No screenshots: the captures the old
- * page used show real account balances and account numbers, so the figure
- * here draws the trust boundary instead: what stays on the device, and the two
- * things outside it. The token counts and "$0 total cost" from the old page are
- * left out; the sessions, days and models stay. "Never reaches a server" is
- * not claimed: prices come through a Worker, and Sheets sync is opt-in.
+ * page used show real account balances and account numbers. The recording
+ * runs on a generated, made-up portfolio (see IFOLIO_RECORDING), and the
+ * figure below it draws the trust boundary: what stays on the device, and the
+ * two things outside it. The token counts and "$0 total cost" from the old
+ * page are left out; the sessions, days and models stay. "Never reaches a
+ * server" is not claimed: prices come through a Worker, and Sheets sync is
+ * opt-in. The video's own lines ("can't see your portfolio", "Gone from
+ * memory") are kept, since that figure sits right under it.
  */
 
 const PROJECT = getProject("ifolio");
@@ -158,6 +163,16 @@ export default function IFolio(): JSX.Element {
         lede="iFolio tracks an investment portfolio in the browser. Your portfolio is encrypted on your device with AES-256-GCM. I built it with AI agents in 48 days."
         facts={FACTS}
       />
+
+      <CaseFigure framed caption={IFOLIO_RECORDING.caption}>
+        <CaseVideo
+          src={IFOLIO_RECORDING.src}
+          poster={IFOLIO_RECORDING.poster}
+          width={IFOLIO_RECORDING.width}
+          height={IFOLIO_RECORDING.height}
+          label={IFOLIO_RECORDING.label}
+        />
+      </CaseFigure>
 
       <figure className={styles.flowFigure}>
         <div className={styles.device}>

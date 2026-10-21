@@ -44,7 +44,7 @@ A generic agency sells capacity; this product sells founder-to-production accoun
 Confirmed functionality:
 
 - Home (`src/pages/index.tsx`): the consulting-led page: hero, stats band with selected-work logos, pain groups, proof showcase, engagement offers, testimonials, fit FAQ, closing CTA, contact.
-- Showcase (`src/pages/showcase/`): the index plus four write-ups (`ai-assistant`, `agent-platform`, `ifolio`, `meetinghero`), with smaller builds and recognition on the index. Data in `src/data/showcase.ts`. Case Studies are their own top-level nav item.
+- Showcase (`src/pages/showcase/`): the index plus four write-ups (`ai-assistant`, `ifolio`, `agent-platform`, `meetinghero`), with smaller builds and recognition on the index. Data in `src/data/showcase.ts`. Case Studies are their own top-level nav item.
 - Blog docs at `/blog` (`docs/`, `sidebars.ts`), About (`src/pages/about.tsx`), plus goals, podcasts, summit, years, card, 653-timberfalls-for-rent. `datingProfile` was intentionally removed (commit "Remove dating page"); its images now live under `docs/Yearly/2024/`.
 - Technical constraints: Docusaurus 3.10.2 + React 19 + TypeScript strict, static export to `build/`, `onBrokenLinks: throw`, English-only, gtag `G-QRPFQQWH20`.
 

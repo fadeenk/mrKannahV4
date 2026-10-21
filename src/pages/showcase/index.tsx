@@ -14,6 +14,7 @@ import LiteYouTube from "@site/src/components/LiteYouTube";
 import {
   AGENT_PLATFORM_RECORDING,
   AI_ASSISTANT_RECORDING,
+  IFOLIO_RECORDING,
   MEETINGHERO_INTRO,
   PROJECTS,
   RECOGNITION,
@@ -26,11 +27,11 @@ import styles from "./showcase.module.css";
 /*
  * The showcase index: the proof spine from the homepage, extended to every
  * project. One release line runs down the page with a node per project, each
- * with its recording (or, for iFolio, no screenshots: its account data is
- * real) and a link to its write-up. The smaller builds carry their own
- * recordings and the recognition ledger its certificates and covers. Facts
- * live in src/data/showcase.ts, shared with the write-ups. Case Studies are
- * their own section of the site.
+ * with its recording (iFolio's runs on a made-up portfolio, since the real
+ * account data can't be shown) and a link to its write-up. The smaller builds
+ * carry their own recordings and the recognition ledger its certificates and
+ * covers. Facts live in src/data/showcase.ts, shared with the write-ups. Case
+ * Studies are their own section of the site.
  */
 
 /** A ledger entry's small image; it opens the full-size one in a new tab. */
@@ -83,6 +84,18 @@ function Media({ project }: { project: ShowcaseProject }): JSX.Element | null {
           />
         </CaseFigure>
       );
+    case "ifolio":
+      return (
+        <CaseFigure framed caption={IFOLIO_RECORDING.caption}>
+          <CaseVideo
+            src={IFOLIO_RECORDING.src}
+            poster={IFOLIO_RECORDING.poster}
+            width={IFOLIO_RECORDING.width}
+            height={IFOLIO_RECORDING.height}
+            label={IFOLIO_RECORDING.label}
+          />
+        </CaseFigure>
+      );
     case "meetinghero":
       return (
         <div className={styles.lead}>
@@ -104,7 +117,7 @@ export default function Showcase(): JSX.Element {
     <CaseStudyLayout
       variant="index"
       title="Showcase"
-      description="An AI assistant in a client’s app, a white-label agent platform, the iFolio portfolio tracker and MeetingHero.ai: four projects I built, with write-ups."
+      description="An AI assistant in a client’s app, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: four projects I built, with write-ups."
       image="/img/og/showcase.png"
     >
       <CaseIntro
