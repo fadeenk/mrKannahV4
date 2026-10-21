@@ -517,8 +517,9 @@ type SpineSectionProps = {
    * Draw the line with scroll, as the homepage's proof spine does: each
    * segment draws as a reading line at 62% of the viewport passes through it
    * and each node fills as the line reaches it (CSS scroll-driven animation,
-   * from 997px, when motion is allowed). Off for the case studies, whose
-   * nodes fill as their section reveals.
+   * from 997px, when motion is allowed). On for showcase, about, and case
+   * studies; without scroll-driven animation the nodes fill as their section
+   * reveals.
    */
   scrub?: boolean;
   /**
@@ -529,11 +530,13 @@ type SpineSectionProps = {
 };
 
 /**
- * One chapter on the spine: a node per section, the 2px line joining them,
- * and the node filling as the section reveals. From 997px the H2 sits in a
- * left column beside the body; under 997px the two stack and the spine
- * becomes a 2px stroke opening each section. A study uses CaseSection (its
- * four fixed titles); a page that tells its own story uses this.
+ * One chapter on the spine: a node per section, the 2px line joining them.
+ * With `scrub` the line draws by scroll and each node fills as the reading
+ * line reaches it; without it the node fills as the section reveals. From
+ * 997px the H2 sits in a left column beside the body; under 997px the two
+ * stack and the spine becomes a 2px stroke opening each section. A study
+ * uses CaseSection (its four fixed titles, always scrubbed); a page that
+ * tells its own story uses this.
  */
 export function SpineSection({
   title,
@@ -580,14 +583,18 @@ export function SpineSection({
   );
 }
 
-/** A case-study section: `SpineSection` with the four fixed titles. */
+/** A case-study section: `SpineSection` with the four fixed titles, always scrubbed. */
 export function CaseSection({
   title,
   children,
 }: Pick<SpineSectionProps, "children"> & {
   title: CaseSectionTitle;
 }): JSX.Element {
-  return <SpineSection title={title}>{children}</SpineSection>;
+  return (
+    <SpineSection scrub title={title}>
+      {children}
+    </SpineSection>
+  );
 }
 
 /* ── Lists ── */
