@@ -4,9 +4,11 @@ import CaseStudyLayout, {
   CaseFootLink,
   CaseHeader,
   CaseList,
+  CaseStack,
   SpineSection,
   type CaseFactRow,
   type CaseListItem,
+  type CaseStackGroup,
 } from "@site/src/components/CaseStudy";
 import LiteYouTube from "@site/src/components/LiteYouTube";
 import {
@@ -20,10 +22,11 @@ import styles from "./showcase.module.css";
 /*
  * MeetingHero.ai, from its shutdown statement, its landing page and the
  * 2025 recap's demo videos. The statement is Fadee's own. No testimonials
- * (a shut-down product quoting praise reads oddly) and no stack section
- * until one is supplied. Each demo loads only when played. The alpha and
- * beta demos are not shown: their frames show other people's names, calendar
- * entries and work emails.
+ * (a shut-down product quoting praise reads oddly). The stack is read from
+ * the manifests and config of the private MeetingHero repo (frontend/ and
+ * server/); the repo is private, so it is not linked. Each demo loads only
+ * when played. The alpha and beta demos are not shown: their frames show
+ * other people's names, calendar entries and work emails.
  */
 
 const FACTS: readonly CaseFactRow[] = [
@@ -65,12 +68,54 @@ const NUMBERS: readonly CaseListItem[] = [
   },
 ];
 
+const STACK: readonly CaseStackGroup[] = [
+  {
+    title: "Frontend",
+    items: ["Vue 3, TypeScript, and Vite", "Quasar and Pinia", "Chart.js"],
+  },
+  {
+    title: "Backend and data",
+    items: [
+      "Node.js, Express, and TypeScript",
+      "PostgreSQL with Sequelize",
+      "Sign-in with Google, Microsoft, or an email link (Passport)",
+      "Scheduled jobs for research, delivery, and usage limits",
+    ],
+  },
+  {
+    title: "AI and research",
+    items: [
+      "Google Gemini 2.5 Flash and OpenAI GPT-4o mini",
+      "Google Programmable Search and Google News for people and company context",
+      "Puppeteer for headless-browser research",
+    ],
+  },
+  {
+    title: "Integrations and billing",
+    items: [
+      "Google Calendar API and Microsoft Graph",
+      "SendGrid for email",
+      "Stripe subscriptions",
+    ],
+  },
+  {
+    title: "Infrastructure and delivery",
+    items: [
+      "AWS Elastic Beanstalk for the API, Amplify for the web app",
+      "Docker",
+      "GitHub Actions CI with Vitest tests and Biome checks",
+      "Sentry error monitoring",
+    ],
+  },
+];
+
 export default function MeetingHero(): JSX.Element {
   return (
     <CaseStudyLayout
       variant="work"
       title="MeetingHero.ai, and why I shut it down"
       description="MeetingHero.ai researched the people you were about to meet and put a briefing in your calendar or inbox. I launched it in May 2025 and shut it down in October."
+      image="/img/og/meetinghero.png"
     >
       <CaseHeader
         title="MeetingHero.ai, and why I shut it down"
@@ -149,6 +194,8 @@ export default function MeetingHero(): JSX.Element {
           .
         </p>
       </SpineSection>
+
+      <CaseStack groups={STACK} />
 
       <CaseFootLink to="/showcase">Back to all work</CaseFootLink>
     </CaseStudyLayout>

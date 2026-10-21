@@ -11,7 +11,7 @@ import besleyLatin from "@fontsource-variable/besley/files/besley-latin-wght-nor
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import Head from "@docusaurus/Head";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { useColorMode } from "@docusaurus/theme-common";
+import { PageMetadata, useColorMode } from "@docusaurus/theme-common";
 import Layout from "@theme/Layout";
 import {
   ArrowLeft,
@@ -313,10 +313,11 @@ export default function Card(): JSX.Element {
 
   return (
     <Layout
-      title="Virtual Business Card"
+      title="Fadee Kannah: digital business card"
       description="Fadee Kannah's contact card: call, email, book a free 30-minute call, or save the contact to your phone."
       noFooter
     >
+      <PageMetadata image="/img/og/card.png" />
       <Head>
         <link
           rel="preload"

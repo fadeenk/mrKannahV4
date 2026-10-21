@@ -62,7 +62,7 @@ Explicitly undecided: role and prominence of personal routes (`card`, `653-timbe
 
 Real proof that must not be fabricated, with paths:
 
-- Stats: years building software (counted live from June 2008), $100M+ raised for clients, 40-60% infra reduction (`src/components/StatsBand`).
+- Stats: years building software (counted live from June 2008), $100M+ raised by companies built for ($30M CourseKey, ~$70M American Growth Insurance), 2 US patents as co-inventor (`src/components/StatsBand`). The "40-60% infrastructure cost reduction" stat was removed on 2026-10-21 (it named no engagement); do not reintroduce it without one.
 - Testimonials: `src/components/Testimonials/index.tsx`.
 - Client logos: `src/components/LogosCarousel/index.tsx`.
 - Founder story: Iraq → Turkey → US refugee via UN (2008), ESL to top of class, SDSU Computer Engineering + CS, web business, CourseKey technical co-founder (`src/pages/about.tsx`).

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
+import NoIndex from '@site/src/components/NoIndex';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import podcastData from '../data/podcasts.json';
 import clsx from 'clsx'; // Assuming clsx is available in Docusaurus projects by default
@@ -52,6 +53,7 @@ export default function PodcastPage() {
     <Layout
       title={`Podcasts`}
       description="List of podcasts I listen to">
+      <NoIndex />
       <main className="container margin-vert--lg">
         <h1>Podcasts</h1>
         <p>A tracked list of podcasts I listen to or have listened to.</p>

@@ -14,7 +14,12 @@ import CaseStudyLayout, {
   type CaseStackGroup,
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
-import { AGI_CASE_STUDY, SUNA_URL, getProject } from "@site/src/data/showcase";
+import {
+  AGI_CASE_STUDY,
+  AI_ASSISTANT_RECORDING,
+  SUNA_URL,
+  getProject,
+} from "@site/src/data/showcase";
 
 /*
  * The technical side of the American Growth Insurance assistant (the old
@@ -128,6 +133,7 @@ export default function AiAssistant(): JSX.Element {
       variant="work"
       title="AI assistant for American Growth Insurance"
       description="The technical side of the AI assistant I built into American Growth Insurance’s existing app in 4 weeks, on the Suna agent framework."
+      image="/img/og/ai-assistant.png"
     >
       <CaseHeader
         title="AI assistant for American Growth Insurance"
@@ -146,16 +152,13 @@ export default function AiAssistant(): JSX.Element {
         facts={FACTS}
       />
 
-      <CaseFigure
-        framed
-        caption="The assistant researching a topic and drafting a sales deck, inside the app."
-      >
+      <CaseFigure framed caption={AI_ASSISTANT_RECORDING.caption}>
         <CaseVideo
-          src="/img/showcase/superAgent.mp4"
-          poster="/img/showcase/ai-assistant-poster.jpg"
-          width={1266}
-          height={912}
-          label="Recording of the AI assistant researching a topic and drafting a sales deck inside American Growth Insurance’s app"
+          src={AI_ASSISTANT_RECORDING.src}
+          poster={AI_ASSISTANT_RECORDING.poster}
+          width={AI_ASSISTANT_RECORDING.width}
+          height={AI_ASSISTANT_RECORDING.height}
+          label={AI_ASSISTANT_RECORDING.label}
         />
       </CaseFigure>
 

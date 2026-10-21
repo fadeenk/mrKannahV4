@@ -64,7 +64,8 @@
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-areas:
     "primary secondary"
-    "micro micro";
+    "micro micro"
+    "fit fit";
   align-items: center;
   column-gap: 1.5rem;
 }
@@ -118,6 +119,17 @@
   margin: 0.75rem 0 0;
   font-size: 1rem;
   color: var(--ifm-color-emphasis-700);
+}
+
+/* Who the page is for, and where a first-version founder goes instead. */
+.fit {
+  grid-area: fit;
+  max-width: 32rem;
+  margin: 0.375rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-700);
+  text-wrap: pretty;
 }
 
 /* ── Portrait tile ──
@@ -226,10 +238,14 @@
     grid-column: 1 / 8;
   }
 
+  /* The release line runs through the portrait's lower third. Sitting the
+     portrait a little lower keeps the line under the fit sentence instead
+     of through it. */
   .portrait {
     grid-column: 9 / -1;
     justify-self: end;
     align-self: start;
+    margin-top: 3.5rem;
   }
 }
 
@@ -254,12 +270,17 @@
     grid-template-areas:
       "primary"
       "micro"
-      "secondary";
+      "secondary"
+      "fit";
     justify-items: start;
   }
 
   .micro {
     margin-top: 0.5rem;
+  }
+
+  .fit {
+    margin-top: 0.25rem;
   }
 
   .portrait {

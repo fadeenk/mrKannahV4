@@ -44,6 +44,10 @@ const config: Config = {
       {
         docs: {
           routeBasePath: "/blog",
+          // The blog is reachable by direct link only. noindex asks search
+          // engines to drop URLs they already hold; robots.txt must not block
+          // these routes, or the tag would never be read.
+          versions: { current: { noIndex: true } },
           sidebarPath: "./sidebars.ts",
           tagsBasePath: "tags",
           // `docs/` is published at /blog. Keep internal specs and plans out
@@ -60,6 +64,23 @@ const config: Config = {
           trackingID: "G-QRPFQQWH20",
           anonymizeIP: true,
         },
+        // The sitemap lists only the pages a visitor reaches from the homepage
+        // and navbar. The routes below stay reachable by direct link and are
+        // kept out of search on purpose (static/robots.txt blocks them too).
+        sitemap: {
+          ignorePatterns: [
+            "/blog",
+            "/blog/**",
+            "/goals",
+            "/goals/**",
+            "/years",
+            "/years/**",
+            "/podcasts",
+            "/podcasts/**",
+            "/653-timberfalls-for-rent",
+            "/653-timberfalls-for-rent/**",
+          ],
+        },
         blog: false,
         theme: {
           customCss: "./src/css/custom.css",
@@ -69,8 +90,10 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: "./img/fadee.jpg",
+    // Fallback social card for any page that sets none (each page in the
+    // sitemap sets its own; see scripts/og-cards.mjs). No leading "./":
+    // Docusaurus joins it onto the site URL, and "./" ends up in the link.
+    image: "img/og/home.png",
     docs: {
       sidebar: {
         hideable: true,

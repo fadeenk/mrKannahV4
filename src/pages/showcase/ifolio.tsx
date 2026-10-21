@@ -149,8 +149,9 @@ export default function IFolio(): JSX.Element {
   return (
     <CaseStudyLayout
       variant="work"
-      title="iFolio: a portfolio tracker that runs in your browser"
+      title="iFolio: a portfolio tracker in your browser"
       description="iFolio tracks an investment portfolio in the browser, with your portfolio encrypted on your device. I built it with AI agents in 48 days."
+      image="/img/og/ifolio.png"
     >
       <CaseHeader
         title="iFolio: a portfolio tracker that runs in your browser"

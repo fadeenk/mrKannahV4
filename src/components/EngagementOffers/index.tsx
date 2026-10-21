@@ -41,7 +41,7 @@ const offers: readonly Offer[] = [
     meta: "Fixed scope · timeline set at scoping",
     blurb: "When you can say what done looks like before we start.",
     get: "an MVP, a feature, or a rebuild, shipped to production.",
-    need: "a clear definition of done and one engineer on your side.",
+    need: "a clear definition of done and someone who can decide scope with me.",
     proof: {
       client: "American Growth Insurance",
       href: "/case-studies/american-growth-insurance",
@@ -49,7 +49,7 @@ const offers: readonly Offer[] = [
     },
     extraLabel: "What defines done",
     extra:
-      "Before work starts, we write down the scope, who owns what, and how we’ll know it worked. The work happens in your repo, on your CI.",
+      "Before work starts, we write down the scope, who owns what, and how we’ll know it worked. The work happens in your repo, on your CI, or in a new repo I set up for you.",
   },
   {
     variant: "retainer",
@@ -89,7 +89,7 @@ export default function EngagementOffers(): JSX.Element {
       <div className="container">
         <SectionHeader
           title="Three ways to work together"
-          lede="Start with an assessment if you’re not sure what you need. Go straight to a project or a retainer if you are."
+          lede="Start with an assessment if you’re not sure what you need. Go straight to a project or a retainer if you are. Pricing comes in a written proposal within 48 hours of our free call."
         />
         <div className={styles.grid3}>
           {offers.map((offer, i) => (

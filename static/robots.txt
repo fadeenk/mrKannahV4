@@ -1,6 +1,11 @@
+# /blog, /goals, /years, /podcasts and /653-timberfalls-for-rent are left out of
+# the sitemap and carry a noindex tag. They are deliberately not disallowed
+# here: a crawler has to fetch a page to see its noindex. Once search engines
+# have dropped them, add Disallow lines for them.
 User-agent: *
 Disallow: /490/
 Disallow: /HealthEscort/
+Disallow: /mar/
 Disallow: */tags/
 Disallow: */categories/
 

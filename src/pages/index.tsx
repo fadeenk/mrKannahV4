@@ -2,6 +2,7 @@ import React from "react";
 import type { JSX } from "react";
 import Layout from "@theme/Layout";
 import Head from "@docusaurus/Head";
+import { PageMetadata } from "@docusaurus/theme-common";
 import Testimonials from "@site/src/components/Testimonials";
 import Contact from "@site/src/components/Contact";
 import ConsultingHero from "@site/src/components/ConsultingHero";
@@ -22,8 +23,9 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title="Senior engineering for SaaS teams"
-      description="Fadee Kannah, co-founder of CourseKey, joins SaaS teams and ships the work that keeps slipping, from customer requests to AI features. Start with an assessment, a fixed-scope project, or an embedded engagement."
+      description="CourseKey co-founder Fadee Kannah joins SaaS teams and ships the work that keeps slipping: an assessment, a fixed-scope project, or an embedded engagement."
     >
+      <PageMetadata image="/img/og/home.png" />
       <Head>
         <link
           rel="preload"

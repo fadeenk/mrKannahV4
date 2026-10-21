@@ -13,12 +13,18 @@ import CaseStudyLayout, {
   type CaseStackGroup,
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
-import { SUNA_URL, getProject } from "@site/src/data/showcase";
+import {
+  AGENT_PLATFORM_RECORDING,
+  SUNA_URL,
+  getProject,
+} from "@site/src/data/showcase";
 
 /*
  * The white-label agent platform (the old Customizable Agentic Platform
  * page), rewritten from the facts on it. The client is not named: the page
- * says only the four industries. Built on the Suna agent framework.
+ * says only the four industries. Built on the Suna agent framework. The
+ * outcome (live, marketed with Meta ads, then the client pivoted) is as
+ * Fadee told it, 2026-10-21.
  */
 
 const PROJECT = getProject("agent-platform");
@@ -95,6 +101,7 @@ export default function AgentPlatform(): JSX.Element {
       variant="work"
       title="One agent platform for four industries"
       description="A white-label AI agent platform I built on the Suna agent framework and deployed for four industries in 8 days."
+      image="/img/og/agent-platform.png"
     >
       <CaseHeader
         title="One agent platform for four industries"
@@ -113,16 +120,13 @@ export default function AgentPlatform(): JSX.Element {
         facts={FACTS}
       />
 
-      <CaseFigure
-        framed
-        caption="The financial advisors version: its landing page, then the agent working through a research task."
-      >
+      <CaseFigure framed caption={AGENT_PLATFORM_RECORDING.caption}>
         <CaseVideo
-          src="/img/showcase/agentic.mp4"
-          poster="/img/showcase/agent-platform-poster.jpg"
-          width={1100}
-          height={792}
-          label="Recording of the financial advisors version of the agent platform: its landing page, then the agent working through a research task"
+          src={AGENT_PLATFORM_RECORDING.src}
+          poster={AGENT_PLATFORM_RECORDING.poster}
+          width={AGENT_PLATFORM_RECORDING.width}
+          height={AGENT_PLATFORM_RECORDING.height}
+          label={AGENT_PLATFORM_RECORDING.label}
         />
       </CaseFigure>
 
@@ -147,6 +151,15 @@ export default function AgentPlatform(): JSX.Element {
         <p>
           It came together in 8 days through pre-built framework components
           and automated deployment pipelines.
+        </p>
+      </SpineSection>
+
+      <SpineSection scrub title="What happened next">
+        <p>
+          All four versions went live. The client marketed them with Meta ads
+          and collected a lot of metrics and data. Based on what they learned,
+          they decided not to pursue any of the four and pivoted to something
+          different.
         </p>
       </SpineSection>
 

@@ -18,7 +18,7 @@ const faqs: readonly Faq[] = [
   {
     question: "What access do you need?",
     answer:
-      "Your repo, your CI, and one engineer on your side to work with. Nobody has to reorganize around me.",
+      "Your repo and your CI if you have them, and someone who can decide scope with me. If you have no engineers yet, I set up the repo and hand it over. Nobody has to reorganize around me.",
   },
   {
     question: "Do you only do AI work?",

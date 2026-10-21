@@ -749,6 +749,19 @@
   color: var(--cs-ink);
 }
 
+/* A titled list in a section's body (CaseBreakdown). */
+.breakdown {
+  margin-top: 2rem;
+}
+
+.breakdownTitle {
+  margin: 0 0 0.9rem;
+  font-family: var(--c-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 /* ── Media ── */
 .wide {
   max-width: none;
@@ -838,8 +851,12 @@
 /* A screen recording: its width/height attributes set the aspect before
    metadata loads, and the frame is capped so a near-square capture stays
    about half a laptop screen tall. */
-.figureFrame:has(> .video) {
+.figureFrame:has(> .videoBox) {
   max-width: 44rem;
+}
+
+.videoBox {
+  position: relative;
 }
 
 .video {
@@ -853,6 +870,65 @@
 .video:focus-visible {
   outline: 3px solid var(--c-signal);
   outline-offset: -3px;
+}
+
+/* The play cue over a recording that has not started. It covers the whole
+   frame, so a tap anywhere starts it; the badge is the YouTube embeds' own
+   (components/LiteYouTube), so every recording on the site starts the same
+   way. */
+.videoPlay {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.videoPlay:focus-visible {
+  outline: 3px solid var(--c-signal);
+  outline-offset: -3px;
+}
+
+.videoBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+  transform: translate(-50%, -50%);
+  transition: transform var(--c-dur-fast, 160ms) var(--c-ease, ease-out);
+}
+
+.videoPlay:hover .videoBadge {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.videoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  /* The triangle's weight sits left of its box; nudge it to look centred. */
+  margin-left: 0.15rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .videoBadge {
+    transition: none;
+  }
+
+  .videoPlay:hover .videoBadge {
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* ── Tech stack ── */

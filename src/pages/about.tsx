@@ -89,7 +89,8 @@ export default function About(): JSX.Element {
     <CaseStudyLayout
       variant="page"
       title="About Fadee Kannah"
-      description="Fadee Kannah built CourseKey's platform, which exited to private equity for $30M, and now consults for SaaS teams including Portico and American Growth Insurance."
+      description="Fadee Kannah built CourseKey's platform, which exited for $30M, and now consults for SaaS teams like Portico and American Growth Insurance."
+      image="/img/og/about.png"
     >
       <AboutHero />
 

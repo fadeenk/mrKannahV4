@@ -1,6 +1,7 @@
 import React, {
   useEffect,
   useRef,
+  useState,
   type CSSProperties,
   type JSX,
   type ReactNode,
@@ -10,6 +11,7 @@ import besleyLatin from "@fontsource-variable/besley/files/besley-latin-wght-nor
 import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
+import { PageMetadata } from "@docusaurus/theme-common";
 import Heading from "@theme/Heading";
 import Layout from "@theme/Layout";
 import CountValue, {
@@ -22,6 +24,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   ChevronDown,
+  Play,
 } from "@site/src/components/Icons";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import Reveal from "@site/src/components/Reveal";
@@ -67,6 +70,8 @@ type CaseStudyLayoutProps = {
   title: string;
   /** Meta description. */
   description: string;
+  /** The page's social preview card: a site path under /img/og. */
+  image?: string;
   children: ReactNode;
 } & (
   | {
@@ -107,10 +112,11 @@ type CaseStudyLayoutProps = {
 export default function CaseStudyLayout(
   props: CaseStudyLayoutProps,
 ): JSX.Element {
-  const { title, description, children } = props;
+  const { title, description, image, children } = props;
   const tier = useMotionTier();
   return (
     <Layout title={title} description={description}>
+      {image ? <PageMetadata image={image} /> : null}
       <Head>
         <link
           rel="preload"
@@ -611,6 +617,27 @@ export function CaseList({
   );
 }
 
+/**
+ * A titled bold-fact list set in a section's body: for figures a reader
+ * should see without opening anything (the stack's groups sit in a fold).
+ */
+export function CaseBreakdown({
+  title,
+  items,
+}: {
+  title: string;
+  items: readonly CaseListItem[];
+}): JSX.Element {
+  return (
+    <div className={styles.breakdown}>
+      <Heading as="h3" className={styles.breakdownTitle}>
+        {title}
+      </Heading>
+      <CaseList items={items} />
+    </div>
+  );
+}
+
 /* ── Media ── */
 
 export type CaseShot = {
@@ -777,7 +804,10 @@ type CaseVideoProps = {
  * A screen recording with native controls, for a framed CaseFigure. Without a
  * poster only metadata loads up front, and the fragment makes the browser
  * paint a real frame as the still; with a poster the file waits for play.
- * Capped in width so a tall capture leaves room to read.
+ * Capped in width so a tall capture leaves room to read. Until it starts, a
+ * play badge (the same one the YouTube embeds wear) sits over it, so a
+ * recording never reads as a screenshot. The badge is the one tab stop before
+ * play; the native player takes over, with its own controls, once it runs.
  */
 export function CaseVideo({
   src,
@@ -788,18 +818,42 @@ export function CaseVideo({
   poster,
 }: CaseVideoProps): JSX.Element {
   const { withBaseUrl } = useBaseUrlUtils();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+  const start = (): void => {
+    setStarted(true);
+    // A failed start leaves the native controls (and their error) in charge.
+    void videoRef.current?.play().catch(() => undefined);
+  };
   return (
-    <video
-      className={styles.video}
-      src={poster ? withBaseUrl(src) : `${withBaseUrl(src)}#t=${still}`}
-      poster={poster ? withBaseUrl(poster) : undefined}
-      width={width}
-      height={height}
-      controls
-      preload={poster ? "none" : "metadata"}
-      playsInline
-      aria-label={label}
-    />
+    <div className={styles.videoBox}>
+      <video
+        ref={videoRef}
+        className={styles.video}
+        src={poster ? withBaseUrl(src) : `${withBaseUrl(src)}#t=${still}`}
+        poster={poster ? withBaseUrl(poster) : undefined}
+        width={width}
+        height={height}
+        controls
+        preload={poster ? "none" : "metadata"}
+        playsInline
+        aria-label={label}
+        tabIndex={started ? undefined : -1}
+        onPlay={() => setStarted(true)}
+      />
+      {started ? null : (
+        <button
+          type="button"
+          className={styles.videoPlay}
+          onClick={start}
+          aria-label={`Play: ${label}`}
+        >
+          <span className={styles.videoBadge}>
+            <Play className={styles.videoIcon} />
+          </span>
+        </button>
+      )}
+    </div>
   );
 }
 

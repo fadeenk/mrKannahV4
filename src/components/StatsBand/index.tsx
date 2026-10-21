@@ -11,6 +11,8 @@ type Stat = {
   /** Final text. Always what the DOM, SSR, and assistive tech see. */
   value: string;
   label: string;
+  /** What the figure is made of, under the label. */
+  note?: string;
 };
 
 /** Month is zero-based: June 2008, when the career in software began. */
@@ -25,8 +27,15 @@ function yearsBuilding(now: Date): number {
 function buildStats(years: number): readonly Stat[] {
   return [
     { value: `${years}+`, label: "Years building software companies" },
-    { value: "$100M+", label: "Raised for Clients" },
-    { value: "40-60%", label: "Infrastructure Cost Reduction" },
+    // CourseKey: PSG's 2025 investment, a figure Fadee states himself.
+    // AGI: committed equity at its July 2026 launch (AGI's own result).
+    {
+      value: "$100M+",
+      label: "Raised by companies I’ve built for",
+      note: "$30M CourseKey · ~$70M American Growth Insurance",
+    },
+    // Fadee is a named co-inventor on both (src/pages/about.tsx links them).
+    { value: "2", label: "US patents as co-inventor" },
   ];
 }
 
@@ -36,7 +45,13 @@ type StatItemProps = Stat & {
 };
 
 /** One stat: the count-up numeral (see components/CountUp) over its label. */
-function StatItem({ value, label, phase, delay }: StatItemProps): JSX.Element {
+function StatItem({
+  value,
+  label,
+  note,
+  phase,
+  delay,
+}: StatItemProps): JSX.Element {
   return (
     <div className={styles.stat}>
       <CountValue
@@ -45,7 +60,10 @@ function StatItem({ value, label, phase, delay }: StatItemProps): JSX.Element {
         delay={delay}
         className={styles.value}
       />
-      <span className={styles.label}>{label}</span>
+      <span className={styles.text}>
+        <span className={styles.label}>{label}</span>
+        {note ? <span className={styles.note}>{note}</span> : null}
+      </span>
     </div>
   );
 }

@@ -108,6 +108,10 @@ export default function ConsultingHero(): JSX.Element {
               <ArrowRight className={styles.secondaryArrow} />
             </a>
             <p className={styles.micro}>{CTA_MICROCOPY}</p>
+            <p className={styles.fit}>
+              Built for SaaS teams with a live product. Building a first
+              version instead? That&apos;s a fixed-scope project.
+            </p>
           </div>
         </div>
 

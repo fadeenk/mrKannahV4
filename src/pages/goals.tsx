@@ -1,5 +1,6 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
+import NoIndex from "@site/src/components/NoIndex";
 import { useState, type JSX } from "react";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -187,6 +188,7 @@ export default function Home(): JSX.Element {
         title={`Yearly reviews links`}
         description={`${siteConfig.tagline}`}
       >
+        <NoIndex />
         <input
           type="password"
           className="passwordProtectedDoc"
@@ -200,6 +202,7 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout title={`Goals information`} description={`${siteConfig.tagline}`}>
+      <NoIndex />
       <div className="container">
         <Tabs className="tabs--block">
           {Object.keys(goals).map((category) => (

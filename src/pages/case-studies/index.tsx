@@ -24,6 +24,7 @@ export default function CaseStudiesIndex(): JSX.Element {
       variant="index"
       title="Case studies"
       description="Two case studies: two years embedded with Portico’s Success team, and a four-week fixed-scope AI assistant I built for American Growth Insurance."
+      image="/img/og/case-studies.png"
     >
       <CaseIntro
         title="Case studies"

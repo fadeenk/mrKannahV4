@@ -12,6 +12,8 @@ import FactValue from "@site/src/components/FactValue";
 import { ArrowRight } from "@site/src/components/Icons";
 import LiteYouTube from "@site/src/components/LiteYouTube";
 import {
+  AGENT_PLATFORM_RECORDING,
+  AI_ASSISTANT_RECORDING,
   MEETINGHERO_INTRO,
   PROJECTS,
   RECOGNITION,
@@ -59,31 +61,25 @@ function Media({ project }: { project: ShowcaseProject }): JSX.Element | null {
   switch (project.slug) {
     case "ai-assistant":
       return (
-        <CaseFigure
-          framed
-          caption="The assistant researching a topic and drafting a sales deck, inside the app."
-        >
+        <CaseFigure framed caption={AI_ASSISTANT_RECORDING.caption}>
           <CaseVideo
-            src="/img/showcase/superAgent.mp4"
-            poster="/img/showcase/ai-assistant-poster.jpg"
-            width={1266}
-            height={912}
-            label="Recording of the AI assistant researching a topic and drafting a sales deck inside American Growth Insurance’s app"
+            src={AI_ASSISTANT_RECORDING.src}
+            poster={AI_ASSISTANT_RECORDING.poster}
+            width={AI_ASSISTANT_RECORDING.width}
+            height={AI_ASSISTANT_RECORDING.height}
+            label={AI_ASSISTANT_RECORDING.label}
           />
         </CaseFigure>
       );
     case "agent-platform":
       return (
-        <CaseFigure
-          framed
-          caption="The financial advisors version: its landing page, then the agent working through a research task."
-        >
+        <CaseFigure framed caption={AGENT_PLATFORM_RECORDING.caption}>
           <CaseVideo
-            src="/img/showcase/agentic.mp4"
-            poster="/img/showcase/agent-platform-poster.jpg"
-            width={1100}
-            height={792}
-            label="Recording of the financial advisors version of the agent platform: its landing page, then the agent working through a research task"
+            src={AGENT_PLATFORM_RECORDING.src}
+            poster={AGENT_PLATFORM_RECORDING.poster}
+            width={AGENT_PLATFORM_RECORDING.width}
+            height={AGENT_PLATFORM_RECORDING.height}
+            label={AGENT_PLATFORM_RECORDING.label}
           />
         </CaseFigure>
       );
@@ -108,7 +104,8 @@ export default function Showcase(): JSX.Element {
     <CaseStudyLayout
       variant="index"
       title="Showcase"
-      description="An AI assistant inside a client’s app, a white-label agent platform, the iFolio portfolio tracker and MeetingHero.ai: four projects I built, each with a write-up."
+      description="An AI assistant in a client’s app, a white-label agent platform, the iFolio portfolio tracker and MeetingHero.ai: four projects I built, with write-ups."
+      image="/img/og/showcase.png"
     >
       <CaseIntro
         title="Showcase"

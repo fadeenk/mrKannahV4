@@ -84,6 +84,10 @@ export const PROJECTS: readonly ShowcaseProject[] = [
         value: "Therapy, home health, pharmacists, financial advisors",
       },
       { label: "Length", value: "8 days" },
+      {
+        label: "Outcome",
+        value: "Went live; the client tested the market, then pivoted",
+      },
       { label: "Built on", value: "Suna agent framework", href: SUNA_URL },
       { label: "Stack", value: "Next.js, FastAPI, Supabase, AWS CDK" },
     ],
@@ -372,3 +376,62 @@ export const MEETINGHERO_LAUNCH: MeetingHeroDemo = {
 };
 
 export const MEETINGHERO_RELAUNCH_URL = "https://www.youtube.com/watch?v=6ZWbnt96Who";
+
+export type ScreenRecording = {
+  /** Site path of the MP4. */
+  src: string;
+  /** Site path of the poster still, a frame of the cut. */
+  poster: string;
+  /** Intrinsic pixel size of the file. */
+  width: number;
+  height: number;
+  caption: string;
+  /** What the recording shows, for assistive tech. */
+  label: string;
+};
+
+/*
+ * The two screen recordings that carry the AI work. Both are cuts of longer
+ * original captures; the originals are in git at 8adc5ac (static/img/showcase).
+ * Cut with ffmpeg 7.0 (H.264, crf 25, no audio, fast-start), 2026-10-21.
+ *
+ * superAgent.mp4 (the AI assistant), 29.8 s at normal speed: original 7.9-18.3 s
+ * and 24.3-43.7 s. Left out: the opening (a browser tooltip with the client's QA
+ * hostname, and the model picker), a detour to the conversations list (other chat
+ * titles), and the jump to an older chat for another agency after 43.88 s (its
+ * address and phone were on screen). It ends on the 12-slide outline, not on
+ * rendered slides, so the American Growth Insurance case study's approved caption
+ * ("gets the finished slides back") says a little more than this clip shows.
+ * ai-assistant-poster.jpg is the frame at the end of the cut.
+ *
+ * agentic.mp4 (the agent platform), 50.0 s: a highlight cut of the 2:15 original.
+ * Landing page 0-8.5 s at normal speed (the testimonials strip, 8.5-13 s, is the
+ * demo product's own marketing copy and is cut); 13-19.5 s at 2x; the prompt and
+ * send 19.5-26.1 s at normal speed; then the agent's work at 2x to 4x (26.1-37 s
+ * at 4x, 37-45 s at 2x, 45-80 s at 3x, 80-103 s at 4x); ending on the rendered
+ * report at normal speed (103-110.5 s). The caption says it is sped up.
+ * agent-platform-poster.jpg is the frame at 49 s, the report.
+ *
+ * The timestamps in the captions are positions in the cuts, checked against frames.
+ */
+export const AI_ASSISTANT_RECORDING: ScreenRecording = {
+  src: "/img/showcase/superAgent.mp4",
+  poster: "/img/showcase/ai-assistant-poster.jpg",
+  width: 1266,
+  height: 912,
+  caption:
+    "The assistant researching a topic and drafting a sales deck, inside the app. It takes the request at 0:03, asks follow-up questions at 0:11, runs its tools from 0:13, and has the slide outline by 0:26.",
+  label:
+    "Recording of the AI assistant researching a topic and drafting a sales deck inside American Growth Insurance’s app",
+};
+
+export const AGENT_PLATFORM_RECORDING: ScreenRecording = {
+  src: "/img/showcase/agentic.mp4",
+  poster: "/img/showcase/agent-platform-poster.jpg",
+  width: 1100,
+  height: 792,
+  caption:
+    "The financial advisors version: its landing page, then the agent working through a research task, sped up 2 to 4 times while it works. It plans its tasks at 0:20, researches the web from 0:24, and has written its report by 0:44.",
+  label:
+    "Recording of the financial advisors version of the agent platform: its landing page, then the agent researching a topic and writing a report",
+};
