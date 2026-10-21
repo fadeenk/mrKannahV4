@@ -87,7 +87,7 @@ const ADDED: readonly CaseListItem[] = [
   },
 ];
 
-/** The same list as the case study's tech stack. */
+/** The stack in the case study's four groups, with Suna as the agent framework. */
 const STACK: readonly CaseStackGroup[] = [
   {
     title: "Frontend",

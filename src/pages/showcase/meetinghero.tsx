@@ -27,7 +27,7 @@ import styles from "./showcase.module.css";
  */
 
 const FACTS: readonly CaseFactRow[] = [
-  { label: "Built", value: "December 2024 to October 2025" },
+  { label: "Ran", value: "December 2024 to October 2025" },
   { label: "Launched", value: "May 17, 2025" },
   { label: "Users", value: "39 served, 7,402 meetings analyzed" },
   { label: "Plans", value: "$4.99 to $9.99 a month, with a 7-day trial" },

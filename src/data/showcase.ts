@@ -280,7 +280,7 @@ export const RECOGNITION: readonly RecognitionItem[] = [
     year: "2024",
     title: "Speaker at TechAlley Las Vegas",
     detail:
-      "I have presented at TechAlley several times, sharing my story with the community there. The most recent was in 2024. The cover is from the Vegas Edition of June 2022.",
+      "I have presented at TechAlley multiple times, sharing my story with the community there. The most recent was in 2024. The cover is from the Vegas Edition of June 2022.",
     image: {
       src: "/img/showcase/recognition-techalley-2022.jpg",
       thumb: "/img/showcase/recognition-techalley-2022-thumb.jpg",
@@ -325,9 +325,9 @@ export const RECOGNITION: readonly RecognitionItem[] = [
   },
   {
     year: "2014",
-    title: "Selected as a student leader, San Diego State University",
+    title: "Selected as a STEM leader from SDSU’s MESA program",
     detail:
-      "The university’s news release lists me among the students selected to attend a student leadership conference.",
+      "SDSU’s MESA program sent 24 students to the invitation-only MESA Student Leadership Conference, chosen for their leadership skills. The university’s news release lists me among them.",
     source: {
       label: "SDSU News",
       href: "https://www.sdsu.edu/news/2014/12/leaders-stem",
@@ -366,7 +366,7 @@ export const MEETINGHERO_INTRO: MeetingHeroDemo = {
 
 export const MEETINGHERO_LAUNCH: MeetingHeroDemo = {
   id: "Oz72TtdGw-w",
-  label: "Launch demo",
+  label: "MeetingHero.ai launch demo",
   note: "At launch, May 17, 2025",
   poster: "/img/showcase/meetinghero-launch.jpg",
 };

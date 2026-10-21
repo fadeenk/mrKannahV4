@@ -1,8 +1,9 @@
 /* Showcase extras. The shell, spine, ledgers, figures, stack and closing band
    come from the CaseStudy parts (src/components/CaseStudy); these are the few
-   things only the showcase has: a row's facts and links, the smaller-builds
-   list, the recognition ledger, iFolio's data-flow figure, and MeetingHero's
-   demo grid. The --cs-* and --c-* tokens cascade from the layout's <main>. */
+   things only the showcase has: the click-to-load video that leads a row or
+   write-up, a row's facts and links, the smaller-builds list, the recognition
+   ledger, and iFolio's data-flow figure. The --cs-* and --c-* tokens cascade
+   from the layout's <main>. */
 
 /* The click-to-load video that leads a row or a write-up. */
 .lead {

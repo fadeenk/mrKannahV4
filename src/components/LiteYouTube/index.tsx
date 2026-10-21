@@ -43,7 +43,7 @@ export default function LiteYouTube({
         {playing ? (
           <iframe
             className={styles.player}
-            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`}
             title={title}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
@@ -72,7 +72,11 @@ export default function LiteYouTube({
         )}
       </div>
       <noscript>
-        <a href={`https://www.youtube.com/watch?v=${videoId}`}>
+        <a
+          href={`https://www.youtube.com/watch?v=${videoId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Watch {title} on YouTube
         </a>
       </noscript>
