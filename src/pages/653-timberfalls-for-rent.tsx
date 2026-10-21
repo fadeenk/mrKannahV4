@@ -1,5 +1,6 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
+import NoIndex from "@site/src/components/NoIndex";
 import styles from "./house-for-rent.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faFilePen } from "@fortawesome/free-solid-svg-icons";
@@ -56,6 +57,7 @@ export default function HouseForRent(): JSX.Element {
       title={`House for Rent - 653 Timberfalls Ln`}
       description={`Beautiful single-story home for rent in Henderson, NV`}
     >
+      <NoIndex />
       <div className={styles.flyerContainer}>
         {/* Top Banner Section */}
         <div className={styles.topBanner}>
@@ -163,7 +165,7 @@ export default function HouseForRent(): JSX.Element {
         </div>
 
         {/* Gallery Section */}
-        <div id="images" className={styles.gallerySection}>
+        <div id="images">
           <Gallery photos={houseImages} />
         </div>
 

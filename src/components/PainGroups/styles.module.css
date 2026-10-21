@@ -1,0 +1,116 @@
+/* Problem rows: the visitor's sentence left, the day-to-day and a jump to the
+   matching client right. Same ruled-row vocabulary as the FAQ, one size up:
+   these are read first and carry the page's argument. */
+
+.wrap:global(.section) {
+  --pg-link: var(--ifm-color-primary-darker);
+  padding-block: clamp(4rem, 7vw, 6rem);
+}
+
+:global([data-theme="dark"]) .wrap {
+  --pg-link: var(--ifm-color-primary);
+}
+
+.list {
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 0.75rem 4rem;
+  margin: 0;
+  padding: 2.25rem 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* The signal stroke: 2px green over the 1px rule, the release line's
+   weight. Decorative. */
+.row::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--ifm-color-primary);
+}
+
+/* The opening mark hangs outside the text edge so the words line up with
+   the rule and with the section heading. */
+.quote {
+  margin: 0;
+  max-width: 22em;
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-indent: -0.42em;
+  text-wrap: balance;
+}
+
+.side {
+  padding-top: 0.3rem;
+}
+
+.body {
+  margin: 0 0 0.75rem;
+  max-width: 46ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+  text-wrap: pretty;
+}
+
+.jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--pg-link);
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.jump:hover {
+  color: var(--pg-link);
+  text-decoration: underline;
+}
+
+.jump:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.jumpArrow {
+  flex: none;
+  transition: transform var(--c-dur-fast, 160ms) var(--c-ease, ease-out);
+}
+
+.jump:hover .jumpArrow {
+  transform: translateY(3px);
+}
+
+@media screen and (max-width: 996px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.75rem 0 1.25rem;
+  }
+
+  .side {
+    padding-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jumpArrow {
+    transition: none;
+  }
+}

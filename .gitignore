@@ -18,8 +18,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
+
+# Impeccable design-tool state: local only, never committed
+.impeccable/
 
 # Cloudflare Worker
 worker/node_modules
 .dev.vars
 .wrangler
+
+# Internal specs and plans: local only, never committed
+docs/superpowers/

@@ -1,0 +1,534 @@
+/* ── Proof: the release line arrives ──
+   Same stroke as the hero's release line: a 2px green line with
+   hollow-ring nodes that fill as the line reaches them. The line comes in as
+   ticks that straighten (static), then runs through two clients. Resting
+   depth lives on the screenshot frames only; cards stay flat with hairlines
+   and lift on hover.
+
+   Motion by tier (data-tier on the stage, set from useMotionTier):
+   - full     tilted plate at rest + pointer parallax (springs, see
+              use-strip-parallax.ts)
+   - touch    tilted at rest, no pointer effects
+   - reduced  untilted, static (the server render is also this state)
+   Under 997px the strip is a flat scroll-snap row. */
+
+.proof {
+  --proof-go: var(--c-signal, var(--ifm-color-primary));
+  --proof-go-text: var(--ifm-color-primary-darker);
+  --proof-ink: var(--ifm-font-color-base);
+  --proof-muted: var(--ifm-color-emphasis-700);
+  --proof-edge: var(--ifm-color-emphasis-300);
+  /* Infima's light --ifm-background-color is transparent; knockouts need an
+     opaque fill that matches the page. */
+  --proof-surface: #fff;
+  /* On arrival the system settles faintly green. */
+  --proof-wash: color-mix(in srgb, var(--proof-go) 6%, var(--proof-surface));
+  --card-pad: 1.75rem;
+  --plate: 2.5rem;
+  --node: 20px;
+  --lead-h: 56px;
+  --spine: 3rem;
+  --gap: 1.75rem;
+  --radius: 12px;
+  /* Node centre, measured from the card top. Every row starts with a plate,
+     so one value fits all. */
+  --node-y: calc(var(--card-pad) + var(--plate) / 2);
+}
+
+[data-theme="dark"] .proof {
+  --proof-go-text: var(--ifm-color-primary-lighter);
+  --proof-surface: var(--ifm-background-color);
+}
+
+/* ── Ledger: the line and its two nodes ── */
+.ledger {
+  list-style: none;
+  margin: calc(var(--lead-h) + 1.25rem) 0 0;
+  padding: 0;
+}
+
+.row {
+  position: relative;
+  margin: 0;
+  padding: 0 0 var(--gap) var(--spine);
+  /* PainGroups links here by id; land below the sticky navbar. */
+  scroll-margin-top: calc(var(--ifm-navbar-height, 60px) + 1.5rem);
+}
+
+.row:last-child {
+  padding-bottom: 0;
+}
+
+/* Segment from this node down to the next node's centre. */
+.row::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: calc(var(--node) / 2 - 1px);
+  top: var(--node-y);
+  bottom: calc(var(--node-y) * -1);
+  width: 2px;
+  background: var(--proof-go);
+  transform-origin: top center;
+}
+
+.row:last-child::before {
+  display: none;
+}
+
+/* The first row also carries the line from the card top to its node, and the
+   straightening ticks above it. */
+.rowFirst::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: calc(var(--node) / 2 - 1px);
+  top: 0;
+  width: 2px;
+  height: var(--node-y);
+  background: var(--proof-go);
+}
+
+.lead {
+  position: absolute;
+  left: 0;
+  top: calc(var(--lead-h) * -1);
+  width: var(--node);
+  height: var(--lead-h);
+  line-height: 0;
+}
+
+.ticks {
+  display: block;
+  overflow: visible;
+  fill: none;
+  stroke: var(--proof-go);
+  stroke-width: 1.5;
+}
+
+/* Hollow ring that fills with the signal once the line reaches it. Finished
+   state is the default. */
+.node {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: calc(var(--node-y) - var(--node) / 2);
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  border: 2px solid var(--proof-go);
+  background: var(--proof-surface);
+  box-shadow: 0 0 0 3px var(--proof-surface);
+}
+
+.node::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--proof-go);
+}
+
+/* ── Cards ── */
+.card {
+  position: relative;
+  padding: var(--card-pad);
+  border-radius: var(--radius);
+}
+
+.leadCard {
+  background: var(--proof-wash);
+}
+
+.partner {
+  border: 1px solid var(--proof-edge);
+  transition:
+    transform var(--c-dur-fast, 160ms) var(--c-ease, ease),
+    box-shadow var(--c-dur-fast, 160ms) var(--c-ease, ease),
+    border-color var(--c-dur-fast, 160ms) var(--c-ease, ease);
+}
+
+.partner:hover {
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-emphasis-400);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Identity | claim, shared by every row so the ledger keeps one rhythm. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: 2.5rem;
+  row-gap: 1.25rem;
+  align-items: start;
+}
+
+.plate {
+  display: inline-flex;
+  align-items: center;
+  height: var(--plate);
+  padding: 0 0.875rem;
+  border-radius: 8px;
+  /* Logos are dark on transparent: keep them on a light plate in both
+     themes (same chip the case-study pages use). */
+  background: #fcfbf7;
+  border: 1px solid rgba(28, 30, 33, 0.14);
+}
+
+.plate img {
+  display: block;
+  height: 1.625rem;
+  width: auto;
+}
+
+/* A long wordmark (about 15:1) at the plate's height would run past the
+   column; set it at cap height instead. */
+.plateWide img {
+  height: 0.875rem;
+}
+
+.name {
+  margin: 0.75rem 0 0.25rem;
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  font-weight: 700;
+  font-size: 1.625rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--proof-ink);
+}
+
+.nameLead {
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+}
+
+.sub {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--proof-muted);
+}
+
+.stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.75rem;
+  row-gap: 0.125rem;
+  margin: 0 0 0.75rem;
+}
+
+.numeral {
+  font-family: var(--c-display, Georgia, "Times New Roman", serif);
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
+  color: var(--proof-go-text);
+}
+
+.numeralLead {
+  font-size: clamp(3.25rem, 6vw, 4.75rem);
+  letter-spacing: -0.03em;
+}
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--proof-ink);
+}
+
+.copy {
+  margin: 0 0 0.25rem;
+  max-width: 46ch;
+  text-wrap: pretty;
+  color: var(--proof-ink);
+}
+
+/* ── Links ── */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--proof-go-text);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.link:hover {
+  color: var(--proof-go-text);
+  text-decoration: underline;
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--proof-go);
+  outline-offset: 2px;
+}
+
+.arrow {
+  flex: none;
+  transition: transform var(--c-dur-fast, 160ms) var(--c-ease, ease);
+}
+
+.link:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Whole card is the target (one tab stop): the link's box covers the card. */
+.stretch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.stretch:focus-visible {
+  outline: none;
+}
+
+.stretch:focus-visible::after {
+  outline: 3px solid var(--proof-go);
+  outline-offset: 3px;
+}
+
+.more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2rem;
+  margin: 1.25rem 0 0;
+  padding-left: var(--spine);
+}
+
+/* ── Portico screenshot plate ── */
+.figure {
+  margin: 1.5rem 0 0;
+}
+
+.stage {
+  perspective: 1600px;
+  perspective-origin: 50% 35%;
+  /* Room for the plate's near edge, which grows under perspective. */
+  padding: 1rem 1.25rem 1.5rem;
+}
+
+.arrive,
+.strip,
+.slot,
+.fill {
+  transform-style: preserve-3d;
+}
+
+.strip {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.strip:focus-visible {
+  outline: 3px solid var(--proof-go);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* Equal-height row without measuring: each frame grows in proportion to its
+   aspect ratio, so heights match and nothing overflows the card. */
+.slot {
+  display: grid;
+  flex: calc(var(--w) / var(--h)) 1 0%;
+  min-width: 0;
+  aspect-ratio: var(--w) / var(--h);
+}
+
+.fill {
+  display: grid;
+  min-height: 0;
+}
+
+.frame {
+  position: relative;
+  border-radius: var(--radius);
+  background: #1f1f21;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.16),
+    0 16px 28px -10px rgba(0, 0, 0, 0.4);
+}
+
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.cropBottom img {
+  object-position: 50% 100%;
+}
+
+/* Inner hairline: gives dark captures a defined edge on a dark page too. */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .frame {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 18px 32px -10px rgba(0, 0, 0, 0.75);
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.captionNote {
+  font-size: 0.95rem;
+  color: var(--proof-muted);
+}
+
+/* Tilted plate: left edge nearest, top edge back, like a contact sheet laid
+   on a desk. Pointer parallax adds a few degrees (--px / --py, -1..1). */
+@media (min-width: 997px) {
+  .stage[data-tier="full"] .strip,
+  .stage[data-tier="touch"] .strip {
+    transform: rotateX(calc(4deg + var(--py, 0) * -3deg))
+      rotateY(calc(9deg + var(--px, 0) * 4deg));
+  }
+
+  /* Frames float at their own depth; the pointer shifts them by depth. */
+  .stage[data-tier="full"] .frame,
+  .stage[data-tier="touch"] .frame {
+    transform: translate3d(
+      calc(var(--px, 0) * var(--depth, 0) * 10px),
+      calc(var(--py, 0) * var(--depth, 0) * 6px),
+      var(--z, 0px)
+    );
+  }
+
+  .stage[data-tier="full"]:hover .frame {
+    will-change: transform;
+  }
+}
+
+/* ── Scroll-driven arrival (progressive: finished state is the default) ── */
+@keyframes drawDown {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes lightNode {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* The plate turns in from flat as it enters the viewport. Start values are
+   the negative of the resting tilt, so the sum begins at zero. */
+@keyframes turnIn {
+  from {
+    transform: translateY(1.5rem) rotateX(-4deg) rotateY(-9deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Reading line at 62% of the viewport: each segment
+       draws as it passes, each node fills as the line reaches it. */
+    .row::before {
+      animation: drawDown linear both;
+      animation-timeline: view(block 62% 38%);
+      animation-range: cover 0% cover 100%;
+    }
+
+    .node::after {
+      animation: lightNode linear both;
+      animation-timeline: view(block 62% 38%);
+      animation-range: cover 0% cover 100%;
+    }
+  }
+
+  @media (min-width: 997px) and (prefers-reduced-motion: no-preference) {
+    .stage[data-tier="full"] .arrive,
+    .stage[data-tier="touch"] .arrive {
+      animation: turnIn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+/* ── Narrow: single column, flat scroll-snap row of frames ── */
+@media (max-width: 996px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stage {
+    perspective: none;
+    padding: 0;
+    margin-inline: calc(var(--card-pad) * -1);
+  }
+
+  .strip {
+    gap: 0.875rem;
+    padding: 0.5rem var(--card-pad) 1.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--card-pad);
+    border-radius: 0;
+  }
+
+  .slot {
+    flex: none;
+    height: 13rem;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .proof {
+    --card-pad: 1.25rem;
+    --spine: 2.5rem;
+    --gap: 1.25rem;
+  }
+
+  .slot {
+    height: 11.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner,
+  .arrow {
+    transition: none;
+  }
+
+  .partner:hover,
+  .link:hover .arrow {
+    transform: none;
+  }
+}

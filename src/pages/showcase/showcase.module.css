@@ -1,384 +1,351 @@
-/*==================================
-      TIMELINE
-  ==================================*/
+/* Showcase extras. The shell, spine, ledgers, figures, stack and closing band
+   come from the CaseStudy parts (src/components/CaseStudy); these are the few
+   things only the showcase has: the click-to-load video that leads a row or
+   write-up, a row's facts and links, the smaller-builds list, the recognition
+   ledger, and iFolio's data-flow figure. The --cs-* and --c-* tokens cascade
+   from the layout's <main>. */
 
-.timeline {
-  line-height: 1.4em;
+/* The click-to-load video that leads a row or a write-up. */
+.lead {
+  margin: 2.25rem 0;
+}
+
+/* ── A row's facts and links (index) ── */
+.facts {
+  display: grid;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-block: 1px solid var(--cs-rule);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+}
+
+.fact + .fact {
+  border-top: 1px solid var(--cs-rule);
+}
+
+.fact dt {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--cs-muted);
+}
+
+.fact dd {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--cs-ink);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin: 1.25rem 0 0;
+  font-weight: 600;
+}
+
+.linkArrow {
+  margin-left: 0.3em;
+  vertical-align: -0.12em;
+}
+
+/* ── Smaller builds ── */
+.builds {
+  margin: 0;
+  padding: 0;
   list-style: none;
+  border-top: 1px solid var(--cs-rule);
+}
+
+.build {
   margin: 0;
-  padding: 0;
-  width: 100%;
-}
-.timeline h1,
-.timeline h2,
-.timeline h3,
-.timeline h4,
-.timeline h5,
-.timeline h6 {
-  line-height: inherit;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--cs-rule);
 }
 
-/*----- TIMELINE ITEM -----*/
-.timeline-item {
-  padding-left: 40px;
-  position: relative;
-}
-.timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-/*----- TIMELINE INFO -----*/
-.timeline-info {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  margin: 0 0 0.5em 0;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/*----- TIMELINE MARKER -----*/
-.timeline-marker {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 15px;
-}
-.timeline-marker:before {
-  background: var(--particles-color);
-  border: 3px solid transparent;
-  border-radius: 100%;
-  content: "";
-  display: block;
-  height: 15px;
-  position: absolute;
-  top: 4px;
-  left: 0;
-  width: 15px;
-  transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
-}
-.timeline-marker:after {
-  content: "";
-  width: 3px;
-  background: var(--particles-links-color);
-  display: block;
-  position: absolute;
-  top: 30px;
-  bottom: 4px;
-  left: 8px;
-}
-.timeline-item:last-child .timeline-marker:after {
-  content: none;
-}
-
-.timeline-item:not(.period):hover .timeline-marker:before {
-  background: transparent;
-  border: 3px solid var(--particles-color);
-}
-
-/*----- TIMELINE CONTENT -----*/
-.timeline-content {
-  padding-bottom: 40px;
-}
-.timeline-content p:last-child {
-  margin-bottom: 0;
-}
-
-/*----- TIMELINE PERIOD -----*/
-.period {
-  padding: 0;
-}
-.period .timeline-info {
-  display: none;
-}
-.period .timeline-marker:before {
-  background: transparent;
-  content: "";
-  width: 15px;
-  height: auto;
-  border: none;
-  border-radius: 0;
-  top: 0;
-  bottom: 30px;
-  position: absolute;
-  border-top: 3px solid var(--particles-links-color);
-  border-bottom: 3px solid var(--particles-links-color);
-}
-.period .timeline-marker:after {
-  content: "";
-  height: 32px;
-  top: auto;
-}
-.period .timeline-content {
-  padding: 40px 0 70px;
-}
-.period .timeline-title {
-  margin: 0;
-}
-
-/*----------------------------------------------
-      MOD: MARKER OUTLINE
-  ----------------------------------------------*/
-.marker-outline .timeline-marker:before {
-  background: transparent;
-  border-color: var(--particles-color);
-}
-.marker-outline .timeline-item:hover .timeline-marker:before {
-  background: var(--particles-color);
-}
-
-.websiteCard {
-  margin: 15px;
-  width: 100%;
-  max-width: 350px;
-  min-height: 300px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
-}
-
-.websiteCardImage {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  background: var(--ifm-color-emphasis-100);
-}
-
-.websiteCardImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.3s ease;
-}
-
-.websiteCard:hover .websiteCardImage img {
-  transform: scale(1.05);
-}
-
-.websiteCard .card__body {
-  padding: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.websiteCard .card__body h3 {
-  margin: 0 0 8px 0;
+.buildName {
+  margin: 0 0 0.4rem;
+  font-family: var(--c-display);
   font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--ifm-color-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-.websiteCard .card__body h3 a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.websiteCard .card__body h3 a:hover {
-  color: var(--ifm-color-primary-dark);
-}
-
-.websiteCard .card__body p {
+.buildText {
   margin: 0;
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.9rem;
-  line-height: 1.5;
 }
 
-.websiteCardHero {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
-  justify-items: center;
-}
-
-.websiteCardHero p,
-.websiteCardHero h3 {
-  color: var(--ifm-font-color-base);
-}
-
-.websiteCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border-color: var(--ifm-color-primary);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .websiteCardHero {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .websiteCard {
-    max-width: 100%;
-    margin: 0;
-  }
-
-  .websiteCardImage {
-    height: 180px;
-  }
-}
-
-.ifolioStatsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .ifolioStatsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .ifolioStatsGrid {
-    gap: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .websiteCard {
-    max-width: 100%;
-  }
-
-  .websiteCardImage {
-    height: 160px;
-  }
-
-  .websiteCard .card__body {
-    padding: 15px;
-  }
-}
-
-/*==================================
-      AWARDS COMPONENT
-  ==================================*/
-
-.awardsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 24px;
-  margin: 40px 0;
-}
-
-.awardCard {
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  padding: 24px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.awardCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border-color: var(--ifm-color-primary);
-}
-
-.awardImage {
-  width: 100%;
-  height: 200px;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  background: var(--ifm-color-emphasis-100);
-}
-
-.awardImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.awardContent {
+.buildLinks {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.awardYear {
-  font-size: 0.9rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0.6rem 0 0;
   font-weight: 600;
-  color: var(--ifm-color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-.awardTitle {
+/* A smaller build's recording: the screenshot frame, held narrow (its
+   max-width is set per build) so it reads as a thumbnail of the row. */
+.buildMedia {
+  margin-top: 1rem;
+}
+
+.buildMedia > figure {
   margin: 0;
-  font-size: 1.4rem;
+}
+
+/* ── Recognition ── */
+.ledger {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--cs-rule);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  margin: 0;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--cs-rule);
+}
+
+.entryYear {
+  font-family: var(--c-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--cs-go-text);
+}
+
+.entryTitle {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.entryDetail {
+  margin: 0.25rem 0 0;
+}
+
+.entrySource {
+  margin: 0.4rem 0 0;
   font-weight: 600;
-  color: var(--ifm-color-emphasis-900);
+}
+
+/* The certificate, cover or photo: a small framed thumbnail that opens the
+   full-size image. */
+.entryImage {
+  position: relative;
+  align-self: start;
+  display: block;
+  width: 10rem;
+  line-height: 0;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 1px var(--cs-rule),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* A badge with its own round edge sits bare, with no frame around it. */
+.entryImageBare {
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.entryImage img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.entryImage:focus-visible {
+  outline: 3px solid var(--c-signal);
+  outline-offset: 3px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── iFolio: how data moves ──
+   A left-to-right row of four steps with arrows, so it reads as a flow and
+   not as a second timeline beside the spine. Nothing here is a screenshot,
+   so no account data is shown. */
+.flowFigure {
+  margin: 2.25rem 0 0;
+}
+
+.device {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-600);
+  border-radius: 12px;
+}
+
+/* The box's name sits on its top edge. */
+.deviceLabel {
+  position: absolute;
+  top: -0.7rem;
+  left: 1rem;
+  margin: 0;
+  padding: 0 0.5rem;
+  background: var(--cs-surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--cs-muted);
+}
+
+.outsideLabel {
+  margin: 1.25rem 0 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--cs-muted);
+}
+
+/* The two things outside the box, dashed: they are outside the boundary. */
+.outside {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.outsideItem {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: 1px dashed var(--ifm-color-emphasis-600);
+  border-radius: 8px;
+}
+
+.outsideName {
+  margin: 0;
+  font-weight: 700;
   line-height: 1.3;
 }
 
-.awardTitleLink {
-  color: var(--ifm-color-emphasis-900);
-  text-decoration: none;
-  transition: color 0.2s ease;
+.outsideText {
+  margin: 0.3rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-800);
 }
 
-.awardTitleLink:hover {
-  color: var(--ifm-color-primary);
-  text-decoration: underline;
-}
-
-.awardDescription {
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.75rem;
   margin: 0;
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.6;
+  padding: 0;
+  list-style: none;
+}
+
+.flowStep {
+  position: relative;
+  margin: 0;
+  padding: 1rem 0 0;
+  border-top: 2px solid var(--c-signal);
+}
+
+/* The arrow sits in the gap, on the line, pointing at the next step. */
+.flowArrow {
+  position: absolute;
+  top: -0.7rem;
+  right: -1.55rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.05rem;
+  color: var(--cs-go-text);
+  background: var(--cs-surface);
+}
+
+.flowName {
+  margin: 0;
+  font-family: var(--c-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.flowText {
+  margin: 0.4rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-800);
+  text-wrap: pretty;
+}
+
+.flowCaption {
+  max-width: var(--cs-measure);
+  margin-top: 1.5rem;
   font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cs-muted);
+  text-wrap: pretty;
 }
 
-/* Responsive adjustments for awards */
-@media (max-width: 768px) {
-  .awardsGrid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+/* Two across on tablets, one down on phones; the arrows only make sense in
+   a single row. */
+@media (max-width: 996px) {
+  .flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.5rem;
   }
 
-  .awardCard {
-    padding: 20px;
-  }
-
-  .awardImage {
-    height: 180px;
+  .flowArrow {
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
-  .awardsGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+@media (max-width: 640px) {
+  .flow,
+  .outside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .fact {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
   }
 
-  .awardCard {
-    padding: 16px;
+  .entry {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
   }
 
-  .awardTitle {
-    font-size: 1.2rem;
-  }
-
-  .awardDescription {
-    font-size: 0.95rem;
-  }
-
-  .awardImage {
-    height: 160px;
+  .entryImage {
+    grid-column: 2;
+    margin-top: 0.85rem;
   }
 }

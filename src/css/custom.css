@@ -15,6 +15,10 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* DESIGN.md type ramp (sanctioned sizes): display 75px/30px, headline
+     2.5rem (1.75rem mobile), title 1.25rem, body 1rem, bullets 0.95rem,
+     quote 1.1rem italic, label 0.75rem, work badge 0.8rem bold.
+     Off-ramp mapping: 1.2rem -> 1.25rem (title); 0.9rem -> 1rem (body). */
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -36,11 +40,6 @@
 .section--alt {
   background: var(--ifm-background-surface-color);
 }
-.section__header {
-  text-align: center;
-  margin-bottom: 1.25rem;
-}
-
 .card--elevated {
   background: var(--ifm-card-background-color, var(--ifm-background-color));
   border: 1px solid var(--ifm-color-emphasis-200, rgba(0, 0, 0, 0.08));
@@ -54,12 +53,44 @@
 }
 .tag--pill {
   border: 1px solid var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-darkest);
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   font-weight: 600;
   font-size: 0.75rem;
   display: inline-block;
+}
+
+a.tag--pill {
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+a.tag--pill:hover {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+a.tag--pill:active {
+  transform: translateY(1px);
+}
+
+a.tag--pill:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Dark theme: lightest mint keeps 9:1 on dark surfaces (#4fddbf on
+   #242526 = 9.09:1); #1a8870 alone is 3.51:1 and fails. */
+[data-theme="dark"] .tag--pill {
+  border-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme="dark"] a.tag--pill:hover {
+  background: var(--ifm-color-primary-lightest);
+  color: #1c1e21;
 }
 
 /* Button utilities */
@@ -86,6 +117,34 @@
   background: var(--ifm-color-primary);
 }
 
+.button--primary:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.button--primary.button--lg,
+.button--primary.button--block {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button--primary.button--block {
+  width: 100%;
+}
+
+.button--primary:active {
+  transform: translateY(0);
+}
+
+.button--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .button--outline {
   background: white;
   color: var(--ifm-color-primary);
@@ -97,6 +156,22 @@
   color: white;
 }
 
+/* Dark theme button contrast: #25c2a0 on white is 2.26:1 (fails AA).
+   Use pine #205d3b text (7.81:1 on white) to stay in the green voice
+   while passing. Hover fill uses mint-glow bg + ink text (9.89:1). */
+[data-theme="dark"] .button--primary,
+[data-theme="dark"] .button--outline {
+  color: #205d3b;
+  border-color: var(--ifm-color-primary);
+}
+
+[data-theme="dark"] .button--primary:hover,
+[data-theme="dark"] .button--outline:hover {
+  background: var(--ifm-color-primary-lightest);
+  border-color: var(--ifm-color-primary-lightest);
+  color: #1c1e21;
+}
+
 /* CTA container */
 .cta-container {
   display: flex;
@@ -104,6 +179,14 @@
   margin-top: 1.5rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.card__footer .cta-container {
+  margin-top: 0;
+}
+
+#engagements {
+  scroll-margin-top: var(--ifm-navbar-height, 60px);
 }
 
 .passwordProtectedDoc {
@@ -131,103 +214,25 @@
   }
 }
 
-.stats-bar {
-  padding: 2rem 0;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+/* Readable measure: cap hero subtitles + section prose at 65ch
+   (fixes 92/111-char line-length findings). Centered blocks re-center. */
+.hero__subtitle,
+.hero-subheadline {
+  max-width: 65ch;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  text-align: center;
+.section p {
+  max-width: 65ch;
 }
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
+.section .text--center p,
+.text--center .hero__subtitle {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--ifm-font-color);
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: var(--ifm-color-emphasis-200);
-}
-
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-/* Services */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.service-card {
-  background: var(--ifm-background-surface-color);
-  color: var(--ifm-font-color-base);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.service-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.service-title {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.service-bullets {
-  text-align: left;
-  padding-left: 1rem;
-}
-
-.service-bullets li {
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-}
-
-.engagement-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.secondary-services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-@media (max-width: 768px) {
-  .secondary-services-grid {
-    grid-template-columns: 1fr;
-  }
+img {
+  max-width: 100%;
 }
 
 /* Testimonials */
@@ -269,6 +274,7 @@
 .logos-carousel-track-wrapper {
   overflow: hidden;
   position: relative;
+  max-width: 100%;
 }
 
 .logos-carousel-track-wrapper::before,
@@ -294,13 +300,14 @@
 
 .logos-carousel-track {
   display: flex;
-  gap: 6rem;
+  gap: 3rem;
   align-items: center;
   animation: marquee-scroll 25s linear infinite;
   width: max-content;
 }
 
-.logos-carousel-track-wrapper:hover .logos-carousel-track {
+.logos-carousel-track-wrapper:hover .logos-carousel-track,
+.logos-carousel-track-wrapper:focus-within .logos-carousel-track {
   animation-play-state: paused;
 }
 
@@ -322,6 +329,18 @@
   height: 32px;
   width: auto;
   display: block;
+  aspect-ratio: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logos-carousel-track {
+    animation: none;
+  }
+
+  .card--elevated:hover,
+  .button--primary:hover {
+    transform: none;
+  }
 }
 
 @keyframes marquee-scroll {

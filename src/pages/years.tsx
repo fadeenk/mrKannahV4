@@ -1,5 +1,6 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
+import NoIndex from "@site/src/components/NoIndex";
 import { useState, type JSX } from "react";
 
 export const years: Record<number | string, string> = {
@@ -22,6 +23,7 @@ export default function Home(): JSX.Element {
         title={`Yearly reviews links`}
         description={`${siteConfig.tagline}`}
       >
+        <NoIndex />
         <input
           type="password"
           className="passwordProtectedDoc"
@@ -38,6 +40,7 @@ export default function Home(): JSX.Element {
       title={`Yearly reviews links`}
       description={`${siteConfig.tagline}`}
     >
+      <NoIndex />
       <div className="container">
         {Object.keys(years)
           .reverse()
