@@ -415,6 +415,19 @@
   .stage[data-tier="full"]:hover .frame {
     will-change: transform;
   }
+
+  /* Under the tilt the right-hand frames sit behind the flat wrapper's plane,
+     so the wrapper would take their clicks. Only the frames take the pointer;
+     the stage still hears it for the parallax. */
+  .stage[data-tier="full"] .arrive,
+  .stage[data-tier="touch"] .arrive {
+    pointer-events: none;
+  }
+
+  .stage[data-tier="full"] .frame,
+  .stage[data-tier="touch"] .frame {
+    pointer-events: auto;
+  }
 }
 
 /* ── Scroll-driven arrival (progressive: finished state is the default) ── */
