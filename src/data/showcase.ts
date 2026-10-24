@@ -60,28 +60,6 @@ export type ShowcaseProject = {
 
 export const PROJECTS: readonly ShowcaseProject[] = [
   {
-    slug: "ai-assistant",
-    path: "/showcase/ai-assistant",
-    rowTitle: "AI assistant in a client’s app",
-    when: ["4 weeks", "American Growth Insurance"],
-    summary:
-      "I built an AI assistant into American Growth Insurance’s existing app as a fixed-scope project, on the Suna agent framework. In the recording it researches a topic and drafts a sales deck.",
-    facts: [
-      {
-        label: "Client",
-        value: "American Growth Insurance",
-        href: AGI_CASE_STUDY,
-      },
-      { label: "Length", value: "4 weeks, fixed scope" },
-      {
-        label: "Built on",
-        value: "Suna agent framework",
-        href: SUNA_URL,
-        rest: "and AGI’s React, Express and PostgreSQL codebase",
-      },
-    ],
-  },
-  {
     slug: "videoarchiver",
     path: "/showcase/videoarchiver",
     rowTitle: "VideoArchiver",
@@ -102,6 +80,28 @@ export const PROJECTS: readonly ShowcaseProject[] = [
       {
         label: "Storage",
         value: "Google Drive, Dropbox and S3-compatible",
+      },
+    ],
+  },
+  {
+    slug: "ai-assistant",
+    path: "/showcase/ai-assistant",
+    rowTitle: "AI assistant in a client’s app",
+    when: ["4 weeks", "American Growth Insurance"],
+    summary:
+      "I built an AI assistant into American Growth Insurance’s existing app as a fixed-scope project, on the Suna agent framework. In the recording it researches a topic and drafts a sales deck.",
+    facts: [
+      {
+        label: "Client",
+        value: "American Growth Insurance",
+        href: AGI_CASE_STUDY,
+      },
+      { label: "Length", value: "4 weeks, fixed scope" },
+      {
+        label: "Built on",
+        value: "Suna agent framework",
+        href: SUNA_URL,
+        rest: "and AGI’s React, Express and PostgreSQL codebase",
       },
     ],
   },
@@ -419,7 +419,13 @@ export type ScreenRecording = {
   /** Intrinsic pixel size of the file. */
   width: number;
   height: number;
-  caption: string;
+  /** Shown under the recording. */
+  caption?: string;
+  /**
+   * Notes on the recording read only to assistive tech (CaseVideo's
+   * description), for a recording that shows no caption.
+   */
+  description?: string;
   /** What the recording shows, for assistive tech. */
   label: string;
 };
@@ -490,8 +496,10 @@ export const IFOLIO_RECORDING: ScreenRecording = {
  * real dashboard running in its demo mode (the VideoArchiver repo's
  * docs/demo-mode.md): the cameras Front Door, Driveway and Backyard and every
  * clip, time and file path are the demo's made-up seed, so it shows no real
- * footage, accounts or email addresses. That is why the caption says the
- * cameras and clips are made up. What the video changes in the real screens:
+ * footage, accounts or email addresses. That is why its description says the
+ * cameras and clips are made up. The recording shows no caption, at Fadee's
+ * request (2026-10-24): those notes go to assistive tech as the video's
+ * description instead. What the video changes in the real screens:
  *   - The support address under the setup picker and in the portal footer is
  *     removed, and so are the setup page's demo note, the pricing cards'
  *     buttons and Pro's store line. The page names no store.
@@ -509,8 +517,8 @@ export const IFOLIO_RECORDING: ScreenRecording = {
  * 2026-10-24 (3.4 MB). videoarchiver-poster.jpg is the frame at 5 s, the
  * events landing, also baked in as the video's first frame.
  *
- * The timestamps in the caption are positions in the video, checked against
- * frames of the site encode: setup from 0:06, the clip saved at 0:16, the clip
+ * The timestamps in the description are positions in the video, checked
+ * against frames of the site encode: setup from 0:06, the clip saved at 0:16, the clip
  * passing through from 0:22, the retrying row at 0:29 and saved at 0:32,
  * Replay pressed at 0:35, Devices at 0:37 and the plans at 0:45.
  */
@@ -519,7 +527,7 @@ export const VIDEOARCHIVER_RECORDING: ScreenRecording = {
   poster: "/img/showcase/videoarchiver-poster.jpg",
   width: 1280,
   height: 720,
-  caption:
+  description:
     "A walkthrough of VideoArchiver with made-up cameras and clips from its demo mode, not real footage. Setup starts at 0:06, a front-door clip is saved at 0:16, and from 0:22 a clip passes through without being stored. In the Events log a failed save retries at 0:29 and is saved at 0:32, and a failed clip is replayed at 0:35. Devices and Storage follow at 0:37, then the plans at 0:45.",
   label:
     "Recording of VideoArchiver with made-up cameras and clips: events landing, the three setup steps, one clip saved to Google Drive, the clip passing through without being stored, the Events log with a retry and a replay, the Devices and Storage pages, and the Free and Pro plans",

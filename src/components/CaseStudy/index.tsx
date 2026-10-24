@@ -1,5 +1,6 @@
 import React, {
   useEffect,
+  useId,
   useRef,
   useState,
   type CSSProperties,
@@ -805,6 +806,12 @@ type CaseVideoProps = {
    * play; without one, the metadata and a still frame load up front.
    */
   poster?: string;
+  /**
+   * Longer notes on the recording (what it shows, and when) for assistive
+   * tech only: the video and its play badge point at them with
+   * aria-describedby, and they are never shown on the page.
+   */
+  description?: string;
 };
 
 /**
@@ -815,6 +822,7 @@ type CaseVideoProps = {
  * play badge (the same one the YouTube embeds wear) sits over it, so a
  * recording never reads as a screenshot. The badge is the one tab stop before
  * play; the native player takes over, with its own controls, once it runs.
+ * A `description` is read to assistive tech and not shown.
  */
 export function CaseVideo({
   src,
@@ -823,9 +831,13 @@ export function CaseVideo({
   label,
   still = 1,
   poster,
+  description,
 }: CaseVideoProps): JSX.Element {
   const { withBaseUrl } = useBaseUrlUtils();
   const videoRef = useRef<HTMLVideoElement>(null);
+  // useId matches between the server render and hydration.
+  const descriptionId = useId();
+  const describedBy = description ? descriptionId : undefined;
   const [started, setStarted] = useState(false);
   const start = (): void => {
     setStarted(true);
@@ -845,15 +857,24 @@ export function CaseVideo({
         preload={poster ? "none" : "metadata"}
         playsInline
         aria-label={label}
+        aria-describedby={describedBy}
         tabIndex={started ? undefined : -1}
         onPlay={() => setStarted(true)}
       />
+      {/* Hidden from view and from reading order; a description reference
+          still reads hidden text. */}
+      {description ? (
+        <p id={descriptionId} hidden>
+          {description}
+        </p>
+      ) : null}
       {started ? null : (
         <button
           type="button"
           className={styles.videoPlay}
           onClick={start}
           aria-label={`Play: ${label}`}
+          aria-describedby={describedBy}
         >
           <span className={styles.videoBadge}>
             <Play className={styles.videoIcon} />

@@ -65,7 +65,7 @@ const CARDS = [
   {
     slug: "showcase",
     headline: "Five projects I built",
-    sub: "AI assistant, VideoArchiver, iFolio, agent platform, MeetingHero.ai",
+    sub: "VideoArchiver, AI assistant, iFolio, agent platform, MeetingHero.ai",
   },
   {
     slug: "ai-assistant",

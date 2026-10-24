@@ -27,13 +27,15 @@ import styles from "./showcase.module.css";
 
 /*
  * The showcase index: the proof spine from the homepage, extended to every
- * project. One release line runs down the page with a node per project, each
- * with its recording (iFolio's runs on a made-up portfolio, since the real
- * account data can't be shown, and VideoArchiver's on its dashboard's demo
- * mode, with made-up cameras and clips) and a link to its write-up. The smaller builds
- * carry their own recordings and the recognition ledger its certificates and
- * covers. Facts live in src/data/showcase.ts, shared with the write-ups. Case
- * Studies are their own section of the site.
+ * project, led by the most recent, VideoArchiver. One release line runs down
+ * the page with a node per project, each with its recording (iFolio's runs on
+ * a made-up portfolio, since the real account data can't be shown, and
+ * VideoArchiver's on its dashboard's demo mode, with made-up cameras and
+ * clips; its notes are read to assistive tech instead of shown as a caption)
+ * and a link to its write-up. The smaller builds carry their own recordings
+ * and the recognition ledger its certificates and covers. Facts live in
+ * src/data/showcase.ts, shared with the write-ups. Case Studies are their own
+ * section of the site.
  */
 
 /** A ledger entry's small image; it opens the full-size one in a new tab. */
@@ -76,13 +78,14 @@ function Media({ project }: { project: ShowcaseProject }): JSX.Element | null {
       );
     case "videoarchiver":
       return (
-        <CaseFigure framed caption={VIDEOARCHIVER_RECORDING.caption}>
+        <CaseFigure framed>
           <CaseVideo
             src={VIDEOARCHIVER_RECORDING.src}
             poster={VIDEOARCHIVER_RECORDING.poster}
             width={VIDEOARCHIVER_RECORDING.width}
             height={VIDEOARCHIVER_RECORDING.height}
             label={VIDEOARCHIVER_RECORDING.label}
+            description={VIDEOARCHIVER_RECORDING.description}
           />
         </CaseFigure>
       );
@@ -131,7 +134,7 @@ export default function Showcase(): JSX.Element {
     <CaseStudyLayout
       variant="index"
       title="Showcase"
-      description="An AI assistant in a client’s app, the VideoArchiver Ring clip archiver, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: five projects I built, with write-ups."
+      description="The VideoArchiver Ring clip archiver, an AI assistant in a client’s app, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: five projects I built, with write-ups."
       image="/img/og/showcase.png"
     >
       <CaseIntro
