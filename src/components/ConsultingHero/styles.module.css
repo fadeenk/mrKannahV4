@@ -44,6 +44,12 @@
   text-wrap: balance;
 }
 
+/* A longer headline (/vsaas) a size down, so at desktop each line still
+   holds one row inside the container. */
+.titleLong {
+  font-size: clamp(2.25rem, 4.2vw, 4rem);
+}
+
 /* ── Copy ── */
 
 .copy {
@@ -246,6 +252,12 @@
     justify-self: end;
     align-self: start;
     margin-top: 3.5rem;
+  }
+
+  /* /vsaas: its longer sub and Summit line run the copy a line deeper, so
+     the portrait, and the line with it, sits lower to match. */
+  .titleLong ~ .portrait {
+    margin-top: 5.5rem;
   }
 }
 

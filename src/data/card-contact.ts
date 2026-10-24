@@ -53,6 +53,13 @@ export const BOOKING: ContactLine = {
   href: calUrl("card"),
 };
 
+/**
+ * The page for vertical software people (src/pages/vsaas.tsx), tagged so a
+ * visit from the card is attributable in GA.
+ */
+export const VSAAS_HREF =
+  "/vsaas/?utm_source=card&utm_medium=link&utm_campaign=vsaas";
+
 export type Profile = ContactLine & { icon: IconDefinition };
 
 /** Work profiles: shown with the contact lines. */

@@ -8,7 +8,7 @@
  *   - Headline: Besley variable (latin) from @fontsource-variable/besley.
  *     The line under it is the system sans.
  *   - Mark: static/img/logoDark.svg with its fill set to white.
- *   - Portrait (home, about, card only): static/img/fadee-hero.webp, the
+ *   - Portrait (home, about, card, vsaas only): static/img/fadee-hero.webp, the
  *     grayscale 4:5 crop of static/img/fadee.jpg (provenance in
  *     src/components/ConsultingHero).
  *   - The tick run along the bottom is the release line: ticks that settle
@@ -17,6 +17,7 @@
  *
  * Run (needs Chrome):
  *   npm i --no-save playwright-core && node scripts/og-cards.mjs
+ * Name slugs to render only those cards: node scripts/og-cards.mjs vsaas
  * Set PLAYWRIGHT_CORE to a module path or file URL to use an install that
  * lives elsewhere, and CHROME_PATH to a browser other than the default Chrome.
  */
@@ -27,7 +28,10 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = join(root, "static", "img", "og");
 
-/** slug -> the card's headline and the line under it. */
+/**
+ * slug -> the card's headline and the line under it. `headlineMax` caps the
+ * headline's height in px (default 270), for a long one that needs room.
+ */
 const CARDS = [
   {
     slug: "home",
@@ -46,6 +50,15 @@ const CARDS = [
     headline: "Fadee Kannah",
     sub: "Digital business card",
     portrait: true,
+  },
+  {
+    slug: "vsaas",
+    headline: "I co-founded a vertical SaaS company. Now I build for yours.",
+    // The no-break space keeps "vertical SaaS" together when the sub wraps.
+    sub: "Fadee Kannah · Senior engineering for vertical\u00a0SaaS",
+    portrait: true,
+    // Three lines, not four: the sub wraps too, and four crowd the mark.
+    headlineMax: 200,
   },
   {
     slug: "case-studies",
@@ -182,6 +195,13 @@ async function loadChromium() {
   }
 }
 
+const only = process.argv.slice(2);
+const unknown = only.filter((slug) => !CARDS.some((card) => card.slug === slug));
+if (unknown.length > 0) {
+  throw new Error(`No card for: ${unknown.join(", ")}`);
+}
+const cards = only.length > 0 ? CARDS.filter((card) => only.includes(card.slug)) : CARDS;
+
 const chromium = await loadChromium();
 const browser = await chromium.launch(
   process.env.CHROME_PATH
@@ -191,7 +211,7 @@ const browser = await chromium.launch(
 mkdirSync(outDir, { recursive: true });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 
-for (const card of CARDS) {
+for (const card of cards) {
   await page.setContent(html(card), { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready);
   // Largest headline that fits: 88px down in 2px steps until it is short enough.
@@ -204,7 +224,7 @@ for (const card of CARDS) {
       h.style.fontSize = px + "px";
     }
     return px;
-  }, 270);
+  }, card.headlineMax ?? 270);
   const file = join(outDir, `${card.slug}.png`);
   await page.screenshot({ path: file, type: "png" });
   console.log(`${card.slug.padEnd(28)} ${String(size).padStart(2)}px  ${(statSync(file).size / 1024).toFixed(0)} KB`);

@@ -1,7 +1,10 @@
 import React, { useRef, type JSX } from "react";
 import Heading from "@theme/Heading";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import BookCta, { CTA_MICROCOPY } from "@site/src/components/BookCta";
+import BookCta, {
+  CTA_MICROCOPY,
+  type CtaVariant,
+} from "@site/src/components/BookCta";
 import { ArrowRight } from "@site/src/components/Icons";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import SignalField from "@site/src/components/SignalField";
@@ -82,36 +85,73 @@ export function PortraitTile(): JSX.Element {
   );
 }
 
-export default function ConsultingHero(): JSX.Element {
+const TITLE_LINES = ["Your roadmap is bigger", "than your team."] as const;
+
+const SUB =
+  "I'm Fadee Kannah, technical co-founder of CourseKey, where I built the platform from concept to scale. I join SaaS teams and build what they need next, from customer requests to AI features. Your team reviews everything I write before it ships.";
+
+const SECONDARY = { label: "See how I work", href: "#engagements" } as const;
+
+const FIT =
+  "Built for SaaS teams with a live product. Building a first version instead? That's a fixed-scope project.";
+
+type ConsultingHeroProps = {
+  /** The H1, one string per line. At desktop each line holds one row. */
+  titleLines?: readonly string[];
+  /** Sets a long headline a size down so its lines still fit one row each. */
+  longTitle?: boolean;
+  sub?: string;
+  /** Booking tag for the solid button (cal.com `variant`). */
+  variant?: CtaVariant;
+  /** The quiet link beside the button. A path or anchor; no new tab. */
+  secondary?: { label: string; href: string };
+  /** The small line under the microcopy. `null` drops it. */
+  fit?: string | null;
+};
+
+/**
+ * The homepage hero; /vsaas passes its own words. Every prop defaults to the
+ * homepage's copy, so the homepage renders it bare.
+ */
+export default function ConsultingHero({
+  titleLines = TITLE_LINES,
+  longTitle = false,
+  sub = SUB,
+  variant = "close",
+  secondary = SECONDARY,
+  fit = FIT,
+}: ConsultingHeroProps): JSX.Element {
   return (
     <section className={styles.hero} data-field-host="">
       <SignalField variant="hero" />
       <div className={`container ${styles.inner}`}>
-        <Heading as="h1" className={styles.title} data-field-quiet="">
-          <span className={styles.line}>Your roadmap is bigger</span>{" "}
-          <span className={styles.line}>than your team.</span>
+        <Heading
+          as="h1"
+          className={
+            longTitle ? `${styles.title} ${styles.titleLong}` : styles.title
+          }
+          data-field-quiet=""
+        >
+          {titleLines.map((line, i) => (
+            <React.Fragment key={line}>
+              {i > 0 ? " " : null}
+              <span className={styles.line}>{line}</span>
+            </React.Fragment>
+          ))}
         </Heading>
 
         <div className={styles.copy} data-field-quiet="">
-          <p className={styles.sub}>
-            I&apos;m Fadee Kannah, technical co-founder of CourseKey, where I
-            built the platform from concept to scale. I join SaaS teams and
-            build what they need next, from customer requests to AI features.
-            Your team reviews everything I write before it ships.
-          </p>
+          <p className={styles.sub}>{sub}</p>
           <div className={styles.ctas}>
             <div className={styles.primary}>
-              <BookCta variant="close" microcopy="" emphasis="solid" />
+              <BookCta variant={variant} microcopy="" emphasis="solid" />
             </div>
-            <a className={styles.secondary} href="#engagements">
-              See how I work
+            <a className={styles.secondary} href={secondary.href}>
+              {secondary.label}
               <ArrowRight className={styles.secondaryArrow} />
             </a>
             <p className={styles.micro}>{CTA_MICROCOPY}</p>
-            <p className={styles.fit}>
-              Built for SaaS teams with a live product. Building a first
-              version instead? That&apos;s a fixed-scope project.
-            </p>
+            {fit ? <p className={styles.fit}>{fit}</p> : null}
           </div>
         </div>
 

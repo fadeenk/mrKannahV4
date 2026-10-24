@@ -66,7 +66,8 @@ const config: Config = {
         },
         // The sitemap lists only the pages a visitor reaches from the homepage
         // and navbar. The routes below stay reachable by direct link and are
-        // kept out of search on purpose (static/robots.txt blocks them too).
+        // kept out of search on purpose: each carries a noindex tag, and
+        // static/robots.txt leaves them crawlable so search engines can read it.
         sitemap: {
           ignorePatterns: [
             "/blog",
@@ -79,6 +80,8 @@ const config: Config = {
             "/podcasts/**",
             "/653-timberfalls-for-rent",
             "/653-timberfalls-for-rent/**",
+            "/vsaas",
+            "/vsaas/**",
           ],
         },
         blog: false,

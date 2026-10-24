@@ -1,7 +1,8 @@
-# /blog, /goals, /years, /podcasts and /653-timberfalls-for-rent are left out of
-# the sitemap and carry a noindex tag. They are deliberately not disallowed
-# here: a crawler has to fetch a page to see its noindex. Once search engines
-# have dropped them, add Disallow lines for them.
+# /blog, /goals, /years, /podcasts, /653-timberfalls-for-rent and /vsaas are
+# left out of the sitemap and carry a noindex tag. They are deliberately not
+# disallowed here: a crawler has to fetch a page to see its noindex. Once search
+# engines have dropped them, add Disallow lines for them, except /vsaas: it is
+# shared on LinkedIn, whose link-preview bot obeys robots.txt.
 User-agent: *
 Disallow: /490/
 Disallow: /HealthEscort/

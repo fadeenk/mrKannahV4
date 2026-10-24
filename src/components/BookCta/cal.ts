@@ -10,7 +10,8 @@ export type CtaVariant =
   | "retainer"
   | "close"
   | "card"
-  | "about";
+  | "about"
+  | "vsaas";
 
 export function calUrl(variant: CtaVariant): string {
   return `${CAL_URL}?variant=${variant}`;

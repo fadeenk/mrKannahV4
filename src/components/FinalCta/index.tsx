@@ -1,5 +1,5 @@
 import React, { type JSX } from "react";
-import BookCta from "@site/src/components/BookCta";
+import BookCta, { type CtaVariant } from "@site/src/components/BookCta";
 import SectionHeader from "@site/src/components/SectionHeader";
 import SignalField from "@site/src/components/SignalField";
 import styles from "./styles.module.css";
@@ -13,7 +13,14 @@ import styles from "./styles.module.css";
  * is the point they aim at. A feathered scrim is the backstop so text holds
  * AA even if a tick lands behind it.
  */
-export default function FinalCta(): JSX.Element {
+type FinalCtaProps = {
+  /** Booking tag for the button (cal.com `variant`). */
+  variant?: CtaVariant;
+};
+
+export default function FinalCta({
+  variant = "close",
+}: FinalCtaProps): JSX.Element {
   return (
     <section className={styles.band} data-field-noline="">
       <SignalField variant="settled" className={styles.field} />
@@ -25,7 +32,7 @@ export default function FinalCta(): JSX.Element {
             align="center"
           />
           <div className={styles.cta}>
-            <BookCta center tone="onGreen" variant="close" />
+            <BookCta center tone="onGreen" variant={variant} />
           </div>
         </div>
       </div>

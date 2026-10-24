@@ -77,6 +77,9 @@ export default function BookCta({
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Book a free 30-min call, opens in new tab"
+          /* GA event per click; the link opens a new tab, so this page stays
+             to send it. gtag is absent in dev and when blocked. */
+          onClick={() => window.gtag?.("event", "book_click", { variant })}
           className={`button button--primary ${block ? "button--block" : "button--lg"} ${onGreen ? styles.onGreen : ""} ${emphasis === "solid" ? styles.solid : ""}`}
         >
           Book a free 30-min call
