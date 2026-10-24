@@ -328,12 +328,6 @@
   gap: 1rem;
 }
 
-.strip:focus-visible {
-  outline: 3px solid var(--proof-go);
-  outline-offset: 2px;
-  border-radius: var(--radius);
-}
-
 /* Equal-height row without measuring: each frame grows in proportion to its
    aspect ratio, so heights match and nothing overflows the card. */
 .slot {
