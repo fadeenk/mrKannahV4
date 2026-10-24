@@ -23,6 +23,8 @@ Personal portfolio and consulting acquisition site for Fadee Kannah (Mr. Kannah,
 
 What it does: explains services, engagement models, proof, and story, and routes to `https://cal.com/kannah/30min` for a free consultation and `/#engagements` for engagements.
 
+Booking links: every link to `https://cal.com/kannah/30min` is built by `calUrl` / `useCalUrl` (`src/components/BookCta/cal.ts`, `landing-campaign.ts`) and carries `variant=<placement>` plus UTM tags, because Cal.com saves only `utm_source`, `utm_medium`, `utm_campaign`, `utm_term` and `utm_content` on a booking. `utm_content` is the placement (the CTA variant). The trio defaults to `mrkannah.com` / `website` / `site` (`vsaas` on /vsaas); when the visitor landed with their own `utm_*` tags (QR, LinkedIn, the /card link), the first tagged landing in the browser session is forwarded instead, on every page. The server-rendered HTML always holds the default-tagged link. The vCard's link has fixed tags (`contact-card` / `vcf` / `site`, content `vcf`). `npm run check:build` fails on any untagged booking link.
+
 Success means: qualified consultation booked → consulting engagement started.
 
 ## Positioning

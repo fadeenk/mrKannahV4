@@ -11,7 +11,10 @@ import { calUrl } from "@site/src/components/BookCta/cal";
  * Contact facts for the /card page, kept apart from its layout so the
  * numbers are easy to find and change. Visible copy (the line under the
  * name, button labels) stays in the page. Keep these in step with
- * static/fadeekannah.vcf.
+ * static/fadeekannah.vcf. Its booking link is the same cal.com page with
+ * fixed tags of its own (utm_source=contact-card, utm_medium=vcf,
+ * utm_campaign=site, utm_content=vcf), since a saved contact has no page
+ * to read the visitor's tags from.
  */
 
 export const CARD_NAME = "Fadee Kannah";
@@ -46,7 +49,10 @@ export const WEBSITE: ContactLine = {
   href: "https://mrkannah.com",
 };
 
-/** Booking link, tagged so a booking from the card is attributable. */
+/**
+ * Booking link with the default tags (variant and utm_content "card"). The
+ * page swaps in the visitor's own landing tags after mount (useCalUrl).
+ */
 export const BOOKING: ContactLine = {
   label: "Book a free 30-min call",
   display: "cal.com/kannah/30min",

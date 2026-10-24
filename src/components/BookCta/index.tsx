@@ -2,10 +2,11 @@ import React, { useEffect, useRef, type JSX } from "react";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import { ArrowUpRight } from "@site/src/components/Icons";
 import { CAL_URL, calUrl, type CtaVariant } from "./cal";
+import { useCalUrl } from "./landing-campaign";
 import { CTA_MICROCOPY } from "./copy";
 import styles from "./styles.module.css";
 
-export { CAL_URL, CTA_MICROCOPY, calUrl, type CtaVariant };
+export { CAL_URL, CTA_MICROCOPY, calUrl, useCalUrl, type CtaVariant };
 
 type BookCtaProps = {
   variant?: CtaVariant;
@@ -62,6 +63,7 @@ export default function BookCta({
   emphasis = "outline",
 }: BookCtaProps): JSX.Element {
   const magnetRef = useRef<HTMLDivElement>(null);
+  const href = useCalUrl(variant);
   useMagnet(magnetRef);
   const alignStart = !center || block;
   const onGreen = tone === "onGreen";
@@ -73,7 +75,7 @@ export default function BookCta({
         className={`cta-container ${styles.magnetic} ${alignStart ? styles.alignStart : ""}`}
       >
         <a
-          href={calUrl(variant)}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Book a free 30-min call, opens in new tab"

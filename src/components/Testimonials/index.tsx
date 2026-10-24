@@ -1,4 +1,5 @@
 import Heading from "@theme/Heading";
+import { useCalUrl } from "@site/src/components/BookCta/landing-campaign";
 import styles from "./styles.module.css";
 
 import type { JSX } from "react";
@@ -92,6 +93,7 @@ export default function Testimonials({
   hideCta = false,
   tone = "default",
 }: TestimonialsProps): JSX.Element {
+  const bookHref = useCalUrl("testimonials");
   const list = only
     ? TestimonialList.filter((t) => only.includes(t.name))
     : TestimonialList;
@@ -111,7 +113,7 @@ export default function Testimonials({
         {hideCta ? null : (
           <div className="text--center margin-top--lg">
             <a
-              href="https://cal.com/kannah/30min"
+              href={bookHref}
               target="_blank"
               rel="noopener noreferrer"
               className="button button--primary button--lg"

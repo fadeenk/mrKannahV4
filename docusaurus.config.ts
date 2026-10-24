@@ -92,6 +92,9 @@ const config: Config = {
     ],
   ],
 
+  // Keeps a visitor's landing UTM tags for the booking links.
+  clientModules: ["./src/components/BookCta/landing-campaign.ts"],
+
   themeConfig: {
     // Fallback social card for any page that sets none (each page in the
     // sitemap sets its own; see scripts/og-cards.mjs). No leading "./":

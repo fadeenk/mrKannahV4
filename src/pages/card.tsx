@@ -22,6 +22,7 @@ import {
   QrCode,
   UserPlus,
 } from "@site/src/components/Icons";
+import { useCalUrl } from "@site/src/components/BookCta/landing-campaign";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import ShareButton from "@site/src/components/ShareButton";
 import SignalField from "@site/src/components/SignalField";
@@ -162,6 +163,8 @@ export default function Card(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const tier = useMotionTier();
   const [face, setFace] = useState<Face>("front");
+  /* BOOKING.href with the visitor's own landing tags, once mounted. */
+  const bookingHref = useCalUrl("card");
 
   const rootRef = useRef<HTMLElement>(null);
   const leanRef = useRef<HTMLDivElement>(null);
@@ -404,7 +407,7 @@ export default function Card(): JSX.Element {
                     <span>Save contact</span>
                   </a>
                   <a
-                    href={BOOKING.href}
+                    href={bookingHref}
                     className={`${styles.button} ${styles.outline}`}
                     target="_blank"
                     rel="noopener noreferrer"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, type CSSProperties, type JSX } from "react";
 import Heading from "@theme/Heading";
 import { CTA_MICROCOPY } from "@site/src/components/BookCta/copy";
+import { useCalUrl } from "@site/src/components/BookCta/landing-campaign";
 import { ArrowUpRight } from "@site/src/components/Icons";
 import styles from "./styles.module.css";
 
@@ -92,6 +93,7 @@ type ContactProps = {
 export default function Contact({
   hideBooking = false,
 }: ContactProps): JSX.Element {
+  const bookHref = useCalUrl("contact");
   const [name, setName] = useState(() => readDraft().name);
   const [email, setEmail] = useState(() => readDraft().email);
   const [message, setMessage] = useState(() => readDraft().message);
@@ -192,7 +194,7 @@ export default function Contact({
             </Heading>
             <div className="text--center" style={{ marginBottom: "2rem" }}>
               <a
-                href="https://cal.com/kannah/30min"
+                href={bookHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Book a free 30-min call, opens in new tab"

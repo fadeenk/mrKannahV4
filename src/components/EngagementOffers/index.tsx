@@ -8,7 +8,7 @@ import SectionHeader from "@site/src/components/SectionHeader";
 import styles from "./styles.module.css";
 
 type Offer = {
-  variant: Exclude<CtaVariant, "close" | "card" | "about" | "vsaas">;
+  variant: Extract<CtaVariant, "assessment" | "project" | "retainer">;
   highlight?: boolean;
   title: string;
   meta: string;
