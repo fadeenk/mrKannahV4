@@ -11,6 +11,7 @@ import CaseStudyLayout, {
 import FactValue from "@site/src/components/FactValue";
 import { ArrowRight } from "@site/src/components/Icons";
 import LiteYouTube from "@site/src/components/LiteYouTube";
+import ShowcaseRecording from "@site/src/components/ShowcaseRecording";
 import {
   AGENT_PLATFORM_RECORDING,
   AI_ASSISTANT_RECORDING,
@@ -19,6 +20,7 @@ import {
   PROJECTS,
   RECOGNITION,
   SMALL_BUILDS,
+  VIDEOARCHIVER_RECORDING,
   type RecognitionImage,
   type ShowcaseProject,
 } from "@site/src/data/showcase";
@@ -26,12 +28,15 @@ import styles from "./showcase.module.css";
 
 /*
  * The showcase index: the proof spine from the homepage, extended to every
- * project. One release line runs down the page with a node per project, each
- * with its recording (iFolio's runs on a made-up portfolio, since the real
- * account data can't be shown) and a link to its write-up. The smaller builds
- * carry their own recordings and the recognition ledger its certificates and
- * covers. Facts live in src/data/showcase.ts, shared with the write-ups. Case
- * Studies are their own section of the site.
+ * project, led by the most recent, VideoArchiver. One release line runs down
+ * the page with a node per project, each with its recording (iFolio's runs on
+ * a made-up portfolio, since the real account data can't be shown, and
+ * VideoArchiver's on its dashboard's demo mode, with made-up cameras and
+ * clips) and a link to its write-up. Every recording is a ShowcaseRecording:
+ * one short caption, and its details read to assistive tech. The smaller builds carry their own recordings
+ * and the recognition ledger its certificates and covers. Facts live in
+ * src/data/showcase.ts, shared with the write-ups. Case Studies are their own
+ * section of the site.
  */
 
 /** A ledger entry's small image; it opens the full-size one in a new tab. */
@@ -62,39 +67,19 @@ function Media({ project }: { project: ShowcaseProject }): JSX.Element | null {
   switch (project.slug) {
     case "ai-assistant":
       return (
-        <CaseFigure framed caption={AI_ASSISTANT_RECORDING.caption}>
-          <CaseVideo
-            src={AI_ASSISTANT_RECORDING.src}
-            poster={AI_ASSISTANT_RECORDING.poster}
-            width={AI_ASSISTANT_RECORDING.width}
-            height={AI_ASSISTANT_RECORDING.height}
-            label={AI_ASSISTANT_RECORDING.label}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={AI_ASSISTANT_RECORDING} />
+      );
+    case "videoarchiver":
+      return (
+        <ShowcaseRecording recording={VIDEOARCHIVER_RECORDING} />
       );
     case "agent-platform":
       return (
-        <CaseFigure framed caption={AGENT_PLATFORM_RECORDING.caption}>
-          <CaseVideo
-            src={AGENT_PLATFORM_RECORDING.src}
-            poster={AGENT_PLATFORM_RECORDING.poster}
-            width={AGENT_PLATFORM_RECORDING.width}
-            height={AGENT_PLATFORM_RECORDING.height}
-            label={AGENT_PLATFORM_RECORDING.label}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={AGENT_PLATFORM_RECORDING} />
       );
     case "ifolio":
       return (
-        <CaseFigure framed caption={IFOLIO_RECORDING.caption}>
-          <CaseVideo
-            src={IFOLIO_RECORDING.src}
-            poster={IFOLIO_RECORDING.poster}
-            width={IFOLIO_RECORDING.width}
-            height={IFOLIO_RECORDING.height}
-            label={IFOLIO_RECORDING.label}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={IFOLIO_RECORDING} />
       );
     case "meetinghero":
       return (
@@ -117,14 +102,14 @@ export default function Showcase(): JSX.Element {
     <CaseStudyLayout
       variant="index"
       title="Showcase"
-      description="An AI assistant in a client’s app, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: four projects I built, with write-ups."
+      description="The VideoArchiver Ring clip archiver, an AI assistant in a client’s app, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: five projects I built, with write-ups."
       image="/img/og/showcase.png"
     >
       <CaseIntro
         title="Showcase"
         lede={
           <>
-            Four projects I built, each with its own write-up, then smaller
+            Five projects I built, each with its own write-up, then smaller
             builds and recognition. The{" "}
             <Link to="/case-studies">case studies</Link> cover how I worked
             with clients.

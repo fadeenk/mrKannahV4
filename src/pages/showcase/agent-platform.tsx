@@ -1,18 +1,17 @@
 import React, { type JSX } from "react";
 import CaseStudyLayout, {
   CaseExternalLink,
-  CaseFigure,
   CaseFootLink,
   CaseHeader,
   CaseList,
   CaseStack,
-  CaseVideo,
   SpineSection,
   type CaseFactRow,
   type CaseListItem,
   type CaseStackGroup,
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
+import ShowcaseRecording from "@site/src/components/ShowcaseRecording";
 import {
   AGENT_PLATFORM_RECORDING,
   SUNA_URL,
@@ -120,15 +119,7 @@ export default function AgentPlatform(): JSX.Element {
         facts={FACTS}
       />
 
-      <CaseFigure framed caption={AGENT_PLATFORM_RECORDING.caption}>
-        <CaseVideo
-          src={AGENT_PLATFORM_RECORDING.src}
-          poster={AGENT_PLATFORM_RECORDING.poster}
-          width={AGENT_PLATFORM_RECORDING.width}
-          height={AGENT_PLATFORM_RECORDING.height}
-          label={AGENT_PLATFORM_RECORDING.label}
-        />
-      </CaseFigure>
+      <ShowcaseRecording recording={AGENT_PLATFORM_RECORDING} />
 
       <SpineSection scrub title="What it is">
         <p>

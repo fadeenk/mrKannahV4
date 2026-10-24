@@ -64,8 +64,8 @@ const CARDS = [
   },
   {
     slug: "showcase",
-    headline: "Four projects I built",
-    sub: "AI assistant, agent platform, iFolio, MeetingHero.ai",
+    headline: "Five projects I built",
+    sub: "VideoArchiver, AI assistant, iFolio, agent platform, MeetingHero.ai",
   },
   {
     slug: "ai-assistant",
@@ -76,6 +76,11 @@ const CARDS = [
     slug: "agent-platform",
     headline: "One agent platform for four industries",
     sub: "Built in 8 days",
+  },
+  {
+    slug: "videoarchiver",
+    headline: "VideoArchiver: your Ring clips in your own cloud",
+    sub: "My own live product · Since June 2026",
   },
   {
     slug: "ifolio",

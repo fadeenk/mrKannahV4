@@ -2,18 +2,17 @@ import React, { type JSX } from "react";
 import Link from "@docusaurus/Link";
 import CaseStudyLayout, {
   CaseExternalLink,
-  CaseFigure,
   CaseFootLink,
   CaseHeader,
   CaseList,
   CaseStack,
-  CaseVideo,
   SpineSection,
   type CaseFactRow,
   type CaseListItem,
   type CaseStackGroup,
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
+import ShowcaseRecording from "@site/src/components/ShowcaseRecording";
 import {
   AGI_CASE_STUDY,
   AI_ASSISTANT_RECORDING,
@@ -152,15 +151,7 @@ export default function AiAssistant(): JSX.Element {
         facts={FACTS}
       />
 
-      <CaseFigure framed caption={AI_ASSISTANT_RECORDING.caption}>
-        <CaseVideo
-          src={AI_ASSISTANT_RECORDING.src}
-          poster={AI_ASSISTANT_RECORDING.poster}
-          width={AI_ASSISTANT_RECORDING.width}
-          height={AI_ASSISTANT_RECORDING.height}
-          label={AI_ASSISTANT_RECORDING.label}
-        />
-      </CaseFigure>
+      <ShowcaseRecording recording={AI_ASSISTANT_RECORDING} />
 
       <SpineSection scrub title="What it does">
         <p>
