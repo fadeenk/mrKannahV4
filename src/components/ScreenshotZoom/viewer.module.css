@@ -1,0 +1,27 @@
+/* The lightbox in the site's own colors: a dark scrim in both themes (the
+   captures are dark-framed and sit best on one), white controls, and the
+   focus ring the rest of the site uses on dark grounds: white, 3px. */
+.viewer {
+  --yarl__color_backdrop: rgba(28, 30, 33, 0.96);
+  --yarl__color_button: rgba(255, 255, 255, 0.86);
+  --yarl__color_button_active: #fff;
+  --yarl__color_button_disabled: rgba(255, 255, 255, 0.35);
+  --yarl__button_filter: none;
+  --yarl__fade_animation_timing_function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="dark"] .viewer {
+  --yarl__color_backdrop: rgba(10, 10, 11, 0.97);
+}
+
+/* The library's buttons have no outline of their own. */
+.viewer :global(.yarl__button:focus-visible) {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+  border-radius: var(--ifm-global-radius, 0.4rem);
+}
+
+/* Soft corners, as on the tiles. */
+.viewer :global(.yarl__slide_image) {
+  border-radius: var(--ifm-global-radius, 0.4rem);
+}

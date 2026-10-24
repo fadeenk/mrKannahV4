@@ -1,6 +1,7 @@
 import React, {
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
@@ -29,6 +30,7 @@ import {
 } from "@site/src/components/Icons";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import Reveal from "@site/src/components/Reveal";
+import ScreenshotZoom, { ZoomTile } from "@site/src/components/ScreenshotZoom";
 import SectionHeader from "@site/src/components/SectionHeader";
 import {
   otherCaseStudies,
@@ -711,57 +713,77 @@ function frameGeometry(shot: CaseShot): {
  * Static screenshot frames in justified rows, the full content width. A row
  * never grows past the height at which its smallest capture renders 1:1, and
  * on phones each frame stands alone, capped at its file width. The aspect
- * comes from custom properties, so nothing shifts when the image loads.
+ * comes from custom properties, so nothing shifts when the image loads. Each
+ * frame opens the full capture in a zoomable view; the arrow keys move
+ * through every frame, row by row.
  */
 export function CaseFrames({ rows, caption }: CaseFramesProps): JSX.Element {
   const { withBaseUrl } = useBaseUrlUtils();
+  const zoomShots = useMemo(
+    () =>
+      rows.flat().map(({ src, alt, width, height }) => ({
+        src: withBaseUrl(src),
+        alt,
+        width,
+        height,
+      })),
+    [rows, withBaseUrl],
+  );
+  let zoomIndex = 0;
   return (
-    <figure className={`${styles.wide} ${styles.figure} ${styles.bleed}`}>
-      <div className={styles.frames}>
-        {rows.map((row) => {
-          const frames = row.map((shot) => ({
-            shot,
-            ...frameGeometry(shot),
-          }));
-          const rowHeight = Math.min(...frames.map((f) => f.fullHeight));
-          const rowAspect = frames.reduce((sum, f) => sum + f.aspect, 0);
-          const rowVars: CssVars = {
-            "--row-w": round(rowHeight * rowAspect),
-            "--row-gaps": frames.length - 1,
-          };
-          return (
-            <div
-              key={row.map((shot) => shot.src).join()}
-              className={styles.frameRow}
-              style={rowVars}
-            >
-              {frames.map(({ shot, aspect, fullHeight, cropY }) => {
-                const frameVars: CssVars = {
-                  "--ar": round(aspect),
-                  "--full-w": round(aspect * fullHeight),
-                  "--crop-y": `${round(cropY)}%`,
-                };
-                return (
-                  <div key={shot.src} className={styles.frame} style={frameVars}>
-                    <img
-                      src={withBaseUrl(shot.src)}
-                      alt={shot.alt}
-                      width={shot.width}
-                      height={shot.height}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-      {caption ? (
-        <figcaption className={styles.caption}>{caption}</figcaption>
-      ) : null}
-    </figure>
+    <ScreenshotZoom shots={zoomShots}>
+      <figure className={`${styles.wide} ${styles.figure} ${styles.bleed}`}>
+        <div className={styles.frames}>
+          {rows.map((row) => {
+            const frames = row.map((shot) => ({
+              shot,
+              ...frameGeometry(shot),
+            }));
+            const rowHeight = Math.min(...frames.map((f) => f.fullHeight));
+            const rowAspect = frames.reduce((sum, f) => sum + f.aspect, 0);
+            const rowVars: CssVars = {
+              "--row-w": round(rowHeight * rowAspect),
+              "--row-gaps": frames.length - 1,
+            };
+            return (
+              <div
+                key={row.map((shot) => shot.src).join()}
+                className={styles.frameRow}
+                style={rowVars}
+              >
+                {frames.map(({ shot, aspect, fullHeight, cropY }) => {
+                  const frameVars: CssVars = {
+                    "--ar": round(aspect),
+                    "--full-w": round(aspect * fullHeight),
+                    "--crop-y": `${round(cropY)}%`,
+                  };
+                  return (
+                    <ZoomTile
+                      key={shot.src}
+                      index={zoomIndex++}
+                      className={styles.frame}
+                      style={frameVars}
+                    >
+                      <img
+                        src={withBaseUrl(shot.src)}
+                        alt={shot.alt}
+                        width={shot.width}
+                        height={shot.height}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </ZoomTile>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+        {caption ? (
+          <figcaption className={styles.caption}>{caption}</figcaption>
+        ) : null}
+      </figure>
+    </ScreenshotZoom>
   );
 }
 

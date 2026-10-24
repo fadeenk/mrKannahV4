@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useRef,
-  useSyncExternalStore,
-  type CSSProperties,
-  type JSX,
-} from "react";
+import React, { useMemo, useRef, type CSSProperties, type JSX } from "react";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import Heading from "@theme/Heading";
@@ -12,6 +6,7 @@ import Reveal from "@site/src/components/Reveal";
 import SectionHeader from "@site/src/components/SectionHeader";
 import { ArrowRight } from "@site/src/components/Icons";
 import { useMotionTier } from "@site/src/components/MotionTier";
+import ScreenshotZoom, { ZoomTile } from "@site/src/components/ScreenshotZoom";
 import useStripParallax from "./use-strip-parallax";
 import styles from "./styles.module.css";
 
@@ -25,9 +20,6 @@ import styles from "./styles.module.css";
  * Each row is the outcome of one PainGroups situation, in the same order;
  * PainGroups links to the rows by id. No unattributed proof on this page.
  */
-
-/** Keep in sync with the tilt / scroller breakpoint in styles.module.css. */
-const WIDE_QUERY = "(min-width: 997px)";
 
 type Shot = {
   file: string;
@@ -125,22 +117,6 @@ function TickRun(): JSX.Element {
   );
 }
 
-function useMatchMedia(query: string): boolean {
-  const subscribe = useCallback(
-    (onChange: () => void) => {
-      const mq = window.matchMedia(query);
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
-    },
-    [query],
-  );
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(query).matches,
-    () => true,
-  );
-}
-
 function slotStyle(shot: Shot): CSSProperties {
   return {
     "--w": shot.width,
@@ -154,8 +130,18 @@ export default function ProofShowcase(): JSX.Element {
   const imgBase = useBaseUrl("/img/");
   const tier = useMotionTier();
   const stageRef = useRef<HTMLDivElement>(null);
-  const isWide = useMatchMedia(WIDE_QUERY);
   useStripParallax(stageRef, tier);
+  // The full files, for the zoomed view (the tiles show crops).
+  const zoomShots = useMemo(
+    () =>
+      SHOTS.map(({ file, alt, width, height }) => ({
+        src: `${imgBase}case-studies/${file}`,
+        alt,
+        width,
+        height,
+      })),
+    [imgBase],
+  );
 
   return (
     <section className={`section ${styles.proof}`}>
@@ -218,53 +204,55 @@ export default function ProofShowcase(): JSX.Element {
                 </div>
               </Reveal>
 
-              <figure className={styles.figure}>
-                <div ref={stageRef} className={styles.stage} data-tier={tier}>
-                  <div className={styles.arrive}>
-                    <div
-                      className={styles.strip}
-                      role="group"
-                      aria-label="Portico screenshots"
-                      tabIndex={isWide ? undefined : 0}
-                    >
-                      {SHOTS.map((shot, i) => (
-                        <div
-                          key={shot.file}
-                          className={styles.slot}
-                          style={slotStyle(shot)}
-                        >
-                          <Reveal className={styles.fill} delay={120 + i * 70}>
-                            <div
-                              className={`${styles.frame} ${shot.crop ? styles.cropBottom : ""}`}
-                            >
-                              <img
-                                src={`${imgBase}case-studies/${shot.file}`}
-                                alt={shot.alt}
-                                width={shot.width}
-                                height={shot.height}
-                                loading="lazy"
-                                decoding="async"
-                              />
-                            </div>
-                          </Reveal>
-                        </div>
-                      ))}
+              <ScreenshotZoom shots={zoomShots}>
+                <figure className={styles.figure}>
+                  <div ref={stageRef} className={styles.stage} data-tier={tier}>
+                    <div className={styles.arrive}>
+                      <div
+                        className={styles.strip}
+                        role="group"
+                        aria-label="Portico screenshots"
+                      >
+                        {SHOTS.map((shot, i) => (
+                          <div
+                            key={shot.file}
+                            className={styles.slot}
+                            style={slotStyle(shot)}
+                          >
+                            <Reveal className={styles.fill} delay={120 + i * 70}>
+                              <ZoomTile
+                                index={i}
+                                className={`${styles.frame} ${shot.crop ? styles.cropBottom : ""}`}
+                              >
+                                <img
+                                  src={`${imgBase}case-studies/${shot.file}`}
+                                  alt={shot.alt}
+                                  width={shot.width}
+                                  height={shot.height}
+                                  loading="lazy"
+                                  decoding="async"
+                                />
+                              </ZoomTile>
+                            </Reveal>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <figcaption className={styles.caption}>
-                  <Link
-                    to="/case-studies/portico-embedded-retainer"
-                    className={styles.link}
-                  >
-                    Portico, embedded retainer case study
-                    <ArrowRight className={styles.arrow} />
-                  </Link>
-                  <span className={styles.captionNote}>
-                    Redacted screenshots
-                  </span>
-                </figcaption>
-              </figure>
+                  <figcaption className={styles.caption}>
+                    <Link
+                      to="/case-studies/portico-embedded-retainer"
+                      className={styles.link}
+                    >
+                      Portico, embedded retainer case study
+                      <ArrowRight className={styles.arrow} />
+                    </Link>
+                    <span className={styles.captionNote}>
+                      Redacted screenshots
+                    </span>
+                  </figcaption>
+                </figure>
+              </ScreenshotZoom>
             </article>
           </li>
 

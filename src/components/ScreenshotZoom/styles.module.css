@@ -1,0 +1,64 @@
+/* The tile is the screenshot's own frame turned into a button, so the frame
+   keeps its size, crop, shadow and tilt (the caller's classes). This resets
+   the button and adds the zoom cue and the focus ring. */
+.tile {
+  display: block;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: zoom-in;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tile:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+
+/* A small magnifier in the corner says the frame opens. It sits over the
+   capture, so it carries its own dark ground in both themes. */
+.badge {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: rgba(28, 30, 33, 0.78);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+  color: #fff;
+  pointer-events: none;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.tile:hover .badge,
+.tile:focus-visible .badge {
+  background: rgba(28, 30, 33, 0.95);
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+
+  .tile:hover .badge,
+  .tile:focus-visible .badge {
+    transform: none;
+  }
+}
