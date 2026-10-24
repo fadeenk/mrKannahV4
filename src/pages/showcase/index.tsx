@@ -19,6 +19,7 @@ import {
   PROJECTS,
   RECOGNITION,
   SMALL_BUILDS,
+  VIDEOARCHIVER_RECORDING,
   type RecognitionImage,
   type ShowcaseProject,
 } from "@site/src/data/showcase";
@@ -28,7 +29,8 @@ import styles from "./showcase.module.css";
  * The showcase index: the proof spine from the homepage, extended to every
  * project. One release line runs down the page with a node per project, each
  * with its recording (iFolio's runs on a made-up portfolio, since the real
- * account data can't be shown) and a link to its write-up. The smaller builds
+ * account data can't be shown, and VideoArchiver's on its dashboard's demo
+ * mode, with made-up cameras and clips) and a link to its write-up. The smaller builds
  * carry their own recordings and the recognition ledger its certificates and
  * covers. Facts live in src/data/showcase.ts, shared with the write-ups. Case
  * Studies are their own section of the site.
@@ -69,6 +71,18 @@ function Media({ project }: { project: ShowcaseProject }): JSX.Element | null {
             width={AI_ASSISTANT_RECORDING.width}
             height={AI_ASSISTANT_RECORDING.height}
             label={AI_ASSISTANT_RECORDING.label}
+          />
+        </CaseFigure>
+      );
+    case "videoarchiver":
+      return (
+        <CaseFigure framed caption={VIDEOARCHIVER_RECORDING.caption}>
+          <CaseVideo
+            src={VIDEOARCHIVER_RECORDING.src}
+            poster={VIDEOARCHIVER_RECORDING.poster}
+            width={VIDEOARCHIVER_RECORDING.width}
+            height={VIDEOARCHIVER_RECORDING.height}
+            label={VIDEOARCHIVER_RECORDING.label}
           />
         </CaseFigure>
       );
@@ -117,14 +131,14 @@ export default function Showcase(): JSX.Element {
     <CaseStudyLayout
       variant="index"
       title="Showcase"
-      description="An AI assistant in a client’s app, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: four projects I built, with write-ups."
+      description="An AI assistant in a client’s app, the VideoArchiver Ring clip archiver, the iFolio portfolio tracker, a white-label agent platform and MeetingHero.ai: five projects I built, with write-ups."
       image="/img/og/showcase.png"
     >
       <CaseIntro
         title="Showcase"
         lede={
           <>
-            Four projects I built, each with its own write-up, then smaller
+            Five projects I built, each with its own write-up, then smaller
             builds and recognition. The{" "}
             <Link to="/case-studies">case studies</Link> cover how I worked
             with clients.

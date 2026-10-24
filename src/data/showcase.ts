@@ -1,8 +1,14 @@
 /*
  * What the showcase says about each project, in one place: the index rows
- * and the four write-ups read the same facts. Sources:
+ * and the five write-ups read the same facts. Sources:
  *   - ai-assistant: the American Growth Insurance case study (approved
  *     as written) and the old SuperAgent Integration page.
+ *   - videoarchiver: the live landing page (videoarchiver.mrkannah.com, the
+ *     dashboard's pages/index.vue) for every product claim and price, and the
+ *     VideoArchiver repo's git history and docs for the build numbers (see
+ *     VIDEOARCHIVER_BUILD). Its recording runs on the dashboard's demo mode,
+ *     with made-up cameras and clips (see VIDEOARCHIVER_RECORDING). How it is
+ *     built stays private: the page names tools in its stack and nothing more.
  *   - agent-platform: the old Customizable Agentic Platform page.
  *   - ifolio: the old iFolio page and the public repo and live app; its
  *     recording is a made-up portfolio (see IFOLIO_RECORDING).
@@ -21,8 +27,11 @@ export const MEETINGHERO_SHUTDOWN_URL =
   "https://fadeenk.github.io/meetinghero.ai/shutdown";
 export const AGI_CASE_STUDY = "/case-studies/american-growth-insurance";
 
+export const VIDEOARCHIVER_URL = "https://videoarchiver.mrkannah.com";
+
 export type ShowcaseSlug =
   | "ai-assistant"
+  | "videoarchiver"
   | "agent-platform"
   | "ifolio"
   | "meetinghero";
@@ -69,6 +78,30 @@ export const PROJECTS: readonly ShowcaseProject[] = [
         value: "Suna agent framework",
         href: SUNA_URL,
         rest: "and AGI’s React, Express and PostgreSQL codebase",
+      },
+    ],
+  },
+  {
+    slug: "videoarchiver",
+    path: "/showcase/videoarchiver",
+    rowTitle: "VideoArchiver",
+    when: ["Since June 2026", "Live product"],
+    summary:
+      "My own live product. VideoArchiver saves every Ring motion event and doorbell press to your own Google Drive, Dropbox or S3-compatible storage, automatically. Clips are streamed, never stored on our servers.",
+    facts: [
+      {
+        label: "Live site",
+        value: "videoarchiver.mrkannah.com",
+        href: VIDEOARCHIVER_URL,
+      },
+      { label: "Length", value: "Since June 2026" },
+      {
+        label: "Plans",
+        value: "Free, and Pro at $2.99 per device per month",
+      },
+      {
+        label: "Storage",
+        value: "Google Drive, Dropbox and S3-compatible",
       },
     ],
   },
@@ -451,6 +484,141 @@ export const IFOLIO_RECORDING: ScreenRecording = {
   label:
     "Recording of iFolio with a made-up portfolio: unlocking the encrypted vault, then the dashboard, positions, transactions and income, then locking it again",
 };
+
+/*
+ * VideoArchiver's 60-second walkthrough, made with the brag-slim tool from the
+ * real dashboard running in its demo mode (the VideoArchiver repo's
+ * docs/demo-mode.md): the cameras Front Door, Driveway and Backyard and every
+ * clip, time and file path are the demo's made-up seed, so it shows no real
+ * footage, accounts or email addresses. That is why the caption says the
+ * cameras and clips are made up. What the video changes in the real screens:
+ *   - The support address under the setup picker and in the portal footer is
+ *     removed, and so are the setup page's demo note, the pricing cards'
+ *     buttons and Pro's store line. The page names no store.
+ *   - The custody chain shows three of its five tags (verified source, never
+ *     stored, timestamped log).
+ *   - Rows are re-dated to the demo's day, 2026-09-18. The arriving Driveway
+ *     row is built from the real row markup and the real retrying chip. The
+ *     hook's fifth sample row and the Storage cards' latest clips read Saved.
+ *   - Setup ends on the press of Connect: the demo can't finish a real
+ *     storage connection.
+ * The narration is the earlier 22.5-second video's voice (edge-tts, en-US
+ * Andrew), and the music and effects are original, written for this cut in
+ * A major. The soundtrack plays only on click. Re-encoded from the 60 s 1080p master
+ * (12.6 MB) with ffmpeg: 1280x720, H.264 crf 24, AAC 128k, fast-start,
+ * 2026-10-24 (3.4 MB). videoarchiver-poster.jpg is the frame at 5 s, the
+ * events landing, also baked in as the video's first frame.
+ *
+ * The timestamps in the caption are positions in the video, checked against
+ * frames of the site encode: setup from 0:06, the clip saved at 0:16, the clip
+ * passing through from 0:22, the retrying row at 0:29 and saved at 0:32,
+ * Replay pressed at 0:35, Devices at 0:37 and the plans at 0:45.
+ */
+export const VIDEOARCHIVER_RECORDING: ScreenRecording = {
+  src: "/img/showcase/videoarchiver.mp4",
+  poster: "/img/showcase/videoarchiver-poster.jpg",
+  width: 1280,
+  height: 720,
+  caption:
+    "A walkthrough of VideoArchiver with made-up cameras and clips from its demo mode, not real footage. Setup starts at 0:06, a front-door clip is saved at 0:16, and from 0:22 a clip passes through without being stored. In the Events log a failed save retries at 0:29 and is saved at 0:32, and a failed clip is replayed at 0:35. Devices and Storage follow at 0:37, then the plans at 0:45.",
+  label:
+    "Recording of VideoArchiver with made-up cameras and clips: events landing, the three setup steps, one clip saved to Google Drive, the clip passing through without being stored, the Events log with a retry and a replay, the Devices and Storage pages, and the Free and Pro plans",
+};
+
+export type TranscriptPart = {
+  /** Where the part starts in the video. */
+  at: string;
+  /** The text burned into the picture. */
+  screen: string;
+  /** What the narrator says. */
+  voice: string;
+};
+
+/** The walkthrough's narration and on-screen text, scene by scene. */
+export const VIDEOARCHIVER_TRANSCRIPT: readonly TranscriptPart[] = [
+  {
+    at: "0:00",
+    screen:
+      "Every motion event. Every doorbell press. Saved to your own cloud, automatically.",
+    voice:
+      "Every Ring motion event and doorbell press, saved to your own cloud.",
+  },
+  {
+    at: "0:06",
+    screen:
+      "Three steps, then it runs itself. Install. Link your Ring account. Choose your storage.",
+    voice:
+      "Three steps: install, link your Ring account, and choose your storage. Then it runs itself.",
+  },
+  {
+    at: "0:13",
+    screen:
+      "Saved as it happens. Each clip lands in a folder named for the camera.",
+    voice:
+      "Each clip is saved as it happens, in a folder named for the camera.",
+  },
+  {
+    at: "0:20",
+    screen:
+      "Streamed, never stored. Clips pass through our servers without being saved. We never keep a copy.",
+    voice:
+      "Clips stream straight through, and are never stored on our servers.",
+  },
+  {
+    at: "0:28",
+    screen:
+      "Every clip, logged. Failures retry on their own. Anything that still can’t be saved gets a Replay button.",
+    voice:
+      "Every clip gets a row and a status. Failures retry on their own. And anything that still can’t be saved gets a Replay button.",
+  },
+  {
+    at: "0:37",
+    screen:
+      "Each device archives on its own. To Google Drive, Dropbox or S3-compatible storage.",
+    voice:
+      "Each device archives on its own, to Google Drive, Dropbox or S3-compatible storage.",
+  },
+  {
+    at: "0:45",
+    screen:
+      "Simple, per-device pricing. Free: 50 events per device each month, no credit card. Pro: $2.99 per device per month, unlimited.",
+    voice:
+      "Free covers fifty events per device a month. Pro removes the limit, for $2.99 per device.",
+  },
+  {
+    at: "0:52",
+    screen:
+      "VideoArchiver. Your Ring clips, automatically in your own cloud. videoarchiver.mrkannah.com. Free plan, no credit card required. Ring is a trademark of Amazon.com, Inc. VideoArchiver is not affiliated with or endorsed by Ring or Amazon.",
+    voice: "VideoArchiver. Your Ring clips, automatically in your own cloud.",
+  },
+];
+
+/*
+ * VideoArchiver's build, counted on 2026-10-24 from the VideoArchiver repo's
+ * main branch (its last commit is from 2026-10-22):
+ *   - commits: git rev-list --count main (932); first commit 2026-06-28;
+ *     days with a commit: the distinct author dates (60).
+ *   - AI: commits whose Co-Authored-By trailer names a Claude model (219:
+ *     Claude Sonnet 5.5 on 160, Claude Opus 5.5 on 59) and commits authored
+ *     by Google's Jules agent (16). The rest name no AI model (six carry a
+ *     Paperclip co-author line), so the history can't say which of them an
+ *     agent wrote; no session count is claimed.
+ *   - tests: tracked *.test.* and *.spec.* files (390). CI: the CI workflow
+ *     runs on every pull request and every push to main, and one of its
+ *     steps checks that every page has a demo version.
+ *   - decision records: docs/adr, 0001 to 0021.
+ *   - release records: docs/release-2026-10-09-pass-3.md and
+ *     docs/release-2026-10-16-db-audit.md (17 issues).
+ */
+export const VIDEOARCHIVER_BUILD = {
+  commits: 932,
+  firstCommit: "June 28, 2026",
+  commitDays: 60,
+  claudeCommits: 219,
+  julesCommits: 16,
+  testFiles: 390,
+  decisionRecords: 21,
+} as const;
 
 export const AGENT_PLATFORM_RECORDING: ScreenRecording = {
   src: "/img/showcase/agentic.mp4",
