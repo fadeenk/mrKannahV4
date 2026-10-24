@@ -1,11 +1,9 @@
 import React, { type JSX } from "react";
 import CaseStudyLayout, {
-  CaseFigure,
   CaseFootLink,
   CaseHeader,
   CaseList,
   CaseStack,
-  CaseVideo,
   SpineSection,
   type CaseFactRow,
   type CaseListItem,
@@ -13,6 +11,7 @@ import CaseStudyLayout, {
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
 import { ArrowRight } from "@site/src/components/Icons";
+import ShowcaseRecording from "@site/src/components/ShowcaseRecording";
 import { IFOLIO_RECORDING, getProject } from "@site/src/data/showcase";
 import styles from "./showcase.module.css";
 
@@ -164,15 +163,7 @@ export default function IFolio(): JSX.Element {
         facts={FACTS}
       />
 
-      <CaseFigure framed caption={IFOLIO_RECORDING.caption}>
-        <CaseVideo
-          src={IFOLIO_RECORDING.src}
-          poster={IFOLIO_RECORDING.poster}
-          width={IFOLIO_RECORDING.width}
-          height={IFOLIO_RECORDING.height}
-          label={IFOLIO_RECORDING.label}
-        />
-      </CaseFigure>
+      <ShowcaseRecording recording={IFOLIO_RECORDING} />
 
       <figure className={styles.flowFigure}>
         <div className={styles.device}>

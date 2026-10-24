@@ -1,19 +1,18 @@
 import React, { type JSX } from "react";
 import CaseStudyLayout, {
   CaseExternalLink,
-  CaseFigure,
   CaseFold,
   CaseFootLink,
   CaseHeader,
   CaseList,
   CaseStack,
-  CaseVideo,
   SpineSection,
   type CaseFactRow,
   type CaseListItem,
   type CaseStackGroup,
 } from "@site/src/components/CaseStudy";
 import FactValue from "@site/src/components/FactValue";
+import ShowcaseRecording from "@site/src/components/ShowcaseRecording";
 import {
   VIDEOARCHIVER_BUILD,
   VIDEOARCHIVER_RECORDING,
@@ -32,8 +31,7 @@ import styles from "./showcase.module.css";
  * release records, the commit history) and a stack of tool names, and never
  * how the pieces fit together. The one call to action is the live site; the
  * page names no store, install button or launch date. The recording runs on
- * the dashboard's demo mode (see VIDEOARCHIVER_RECORDING). It shows no
- * caption: its notes are the video's description for assistive tech, and its
+ * the dashboard's demo mode (see VIDEOARCHIVER_RECORDING), and its
  * transcript sits in a fold under it.
  */
 
@@ -129,16 +127,7 @@ export default function VideoArchiver(): JSX.Element {
         facts={FACTS}
       />
 
-      <CaseFigure framed>
-        <CaseVideo
-          src={VIDEOARCHIVER_RECORDING.src}
-          poster={VIDEOARCHIVER_RECORDING.poster}
-          width={VIDEOARCHIVER_RECORDING.width}
-          height={VIDEOARCHIVER_RECORDING.height}
-          label={VIDEOARCHIVER_RECORDING.label}
-          description={VIDEOARCHIVER_RECORDING.description}
-        />
-      </CaseFigure>
+      <ShowcaseRecording recording={VIDEOARCHIVER_RECORDING} />
 
       <div className={styles.transcriptFold}>
         <CaseFold label="Video transcript">

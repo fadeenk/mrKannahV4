@@ -419,13 +419,13 @@ export type ScreenRecording = {
   /** Intrinsic pixel size of the file. */
   width: number;
   height: number;
-  /** Shown under the recording. */
-  caption?: string;
+  /** One short line, shown under the recording. */
+  caption: string;
   /**
-   * Notes on the recording read only to assistive tech (CaseVideo's
-   * description), for a recording that shows no caption.
+   * The details (what happens, and when) for assistive tech only: the
+   * video's description, never shown. It doesn't repeat the caption.
    */
-  description?: string;
+  description: string;
   /** What the recording shows, for assistive tech. */
   label: string;
 };
@@ -452,7 +452,8 @@ export type ScreenRecording = {
  * report at normal speed (103-110.5 s). The caption says it is sped up.
  * agent-platform-poster.jpg is the frame at 49 s, the report.
  *
- * The timestamps in the captions are positions in the cuts, checked against frames.
+ * The timestamps in the descriptions are positions in the cuts, checked against
+ * frames.
  */
 export const AI_ASSISTANT_RECORDING: ScreenRecording = {
   src: "/img/showcase/superAgent.mp4",
@@ -460,7 +461,9 @@ export const AI_ASSISTANT_RECORDING: ScreenRecording = {
   width: 1266,
   height: 912,
   caption:
-    "The assistant researching a topic and drafting a sales deck, inside the app. It takes the request at 0:03, asks follow-up questions at 0:11, runs its tools from 0:13, and has the slide outline by 0:26.",
+    "The assistant researching a topic and drafting a sales deck, inside the app.",
+  description:
+    "The assistant takes the request at 0:03, asks follow-up questions at 0:11, runs its tools from 0:13, and has the slide outline by 0:26.",
   label:
     "Recording of the AI assistant researching a topic and drafting a sales deck inside American Growth Insurance’s app",
 };
@@ -475,8 +478,8 @@ export const AI_ASSISTANT_RECORDING: ScreenRecording = {
  * 1280x720, H.264 crf 24, AAC 128k, fast-start, 2026-10-21.
  * ifolio-poster.jpg is the frame at 7 s, the dashboard.
  *
- * The timestamps in the caption are positions in the video, checked against
- * frames: the passphrase is typed from 0:01 and "Decrypting key" runs at 0:03;
+ * The timestamps in the description are positions in the video, checked
+ * against frames: the passphrase is typed from 0:01 and "Decrypting key" runs at 0:03;
  * the dashboard lands at 0:04, positions at 0:08, the NVDA filter at 0:12,
  * income at 0:15, the lock at 0:17, and the end card from 0:20.
  */
@@ -485,8 +488,9 @@ export const IFOLIO_RECORDING: ScreenRecording = {
   poster: "/img/showcase/ifolio-poster.jpg",
   width: 1280,
   height: 720,
-  caption:
-    "A walkthrough of iFolio with a made-up portfolio, not mine. It unlocks the encrypted vault at 0:03, shows the dashboard at 0:04, the open positions at 0:08, filters the 1,844 transactions by symbol at 0:12 and the monthly income at 0:15, then locks again at 0:17.",
+  caption: "A walkthrough of iFolio with a made-up portfolio, not mine.",
+  description:
+    "iFolio unlocks the encrypted vault at 0:03, shows the dashboard at 0:04, the open positions at 0:08, filters the 1,844 transactions by symbol at 0:12 and the monthly income at 0:15, then locks again at 0:17.",
   label:
     "Recording of iFolio with a made-up portfolio: unlocking the encrypted vault, then the dashboard, positions, transactions and income, then locking it again",
 };
@@ -496,10 +500,8 @@ export const IFOLIO_RECORDING: ScreenRecording = {
  * real dashboard running in its demo mode (the VideoArchiver repo's
  * docs/demo-mode.md): the cameras Front Door, Driveway and Backyard and every
  * clip, time and file path are the demo's made-up seed, so it shows no real
- * footage, accounts or email addresses. That is why its description says the
- * cameras and clips are made up. The recording shows no caption, at Fadee's
- * request (2026-10-24): those notes go to assistive tech as the video's
- * description instead. What the video changes in the real screens:
+ * footage, accounts or email addresses. That is why the caption says the
+ * cameras and clips are made up. What the video changes in the real screens:
  *   - The support address under the setup picker and in the portal footer is
  *     removed, and so are the setup page's demo note, the pricing cards'
  *     buttons and Pro's store line. The page names no store.
@@ -518,17 +520,19 @@ export const IFOLIO_RECORDING: ScreenRecording = {
  * events landing, also baked in as the video's first frame.
  *
  * The timestamps in the description are positions in the video, checked
- * against frames of the site encode: setup from 0:06, the clip saved at 0:16, the clip
- * passing through from 0:22, the retrying row at 0:29 and saved at 0:32,
- * Replay pressed at 0:35, Devices at 0:37 and the plans at 0:45.
+ * against frames of the site encode: setup from 0:06, the clip saved at 0:16,
+ * the clip passing through from 0:22, the retrying row at 0:29 and saved at
+ * 0:32, Replay pressed at 0:35, Devices at 0:37 and the plans at 0:45.
  */
 export const VIDEOARCHIVER_RECORDING: ScreenRecording = {
   src: "/img/showcase/videoarchiver.mp4",
   poster: "/img/showcase/videoarchiver-poster.jpg",
   width: 1280,
   height: 720,
+  caption:
+    "A walkthrough of VideoArchiver with made-up cameras and clips from its demo mode.",
   description:
-    "A walkthrough of VideoArchiver with made-up cameras and clips from its demo mode, not real footage. Setup starts at 0:06, a front-door clip is saved at 0:16, and from 0:22 a clip passes through without being stored. In the Events log a failed save retries at 0:29 and is saved at 0:32, and a failed clip is replayed at 0:35. Devices and Storage follow at 0:37, then the plans at 0:45.",
+    "Setup starts at 0:06, a front-door clip is saved at 0:16, and from 0:22 a clip passes through without being stored. In the Events log a failed save retries at 0:29 and is saved at 0:32, and a failed clip is replayed at 0:35. Devices and Storage follow at 0:37, then the plans at 0:45.",
   label:
     "Recording of VideoArchiver with made-up cameras and clips: events landing, the three setup steps, one clip saved to Google Drive, the clip passing through without being stored, the Events log with a retry and a replay, the Devices and Storage pages, and the Free and Pro plans",
 };
@@ -634,7 +638,9 @@ export const AGENT_PLATFORM_RECORDING: ScreenRecording = {
   width: 1100,
   height: 792,
   caption:
-    "The financial advisors version: its landing page, then the agent working through a research task, sped up 2 to 4 times while it works. It plans its tasks at 0:20, researches the web from 0:24, and has written its report by 0:44.",
+    "The financial advisors version, sped up 2 to 4 times while the agent works.",
+  description:
+    "Its landing page first, then the agent working through a research task. It plans its tasks at 0:20, researches the web from 0:24, and has written its report by 0:44.",
   label:
     "Recording of the financial advisors version of the agent platform: its landing page, then the agent researching a topic and writing a report",
 };

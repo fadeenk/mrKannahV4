@@ -11,6 +11,7 @@ import CaseStudyLayout, {
 import FactValue from "@site/src/components/FactValue";
 import { ArrowRight } from "@site/src/components/Icons";
 import LiteYouTube from "@site/src/components/LiteYouTube";
+import ShowcaseRecording from "@site/src/components/ShowcaseRecording";
 import {
   AGENT_PLATFORM_RECORDING,
   AI_ASSISTANT_RECORDING,
@@ -31,8 +32,8 @@ import styles from "./showcase.module.css";
  * the page with a node per project, each with its recording (iFolio's runs on
  * a made-up portfolio, since the real account data can't be shown, and
  * VideoArchiver's on its dashboard's demo mode, with made-up cameras and
- * clips; its notes are read to assistive tech instead of shown as a caption)
- * and a link to its write-up. The smaller builds carry their own recordings
+ * clips) and a link to its write-up. Every recording is a ShowcaseRecording:
+ * one short caption, and its details read to assistive tech. The smaller builds carry their own recordings
  * and the recognition ledger its certificates and covers. Facts live in
  * src/data/showcase.ts, shared with the write-ups. Case Studies are their own
  * section of the site.
@@ -66,52 +67,19 @@ function Media({ project }: { project: ShowcaseProject }): JSX.Element | null {
   switch (project.slug) {
     case "ai-assistant":
       return (
-        <CaseFigure framed caption={AI_ASSISTANT_RECORDING.caption}>
-          <CaseVideo
-            src={AI_ASSISTANT_RECORDING.src}
-            poster={AI_ASSISTANT_RECORDING.poster}
-            width={AI_ASSISTANT_RECORDING.width}
-            height={AI_ASSISTANT_RECORDING.height}
-            label={AI_ASSISTANT_RECORDING.label}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={AI_ASSISTANT_RECORDING} />
       );
     case "videoarchiver":
       return (
-        <CaseFigure framed>
-          <CaseVideo
-            src={VIDEOARCHIVER_RECORDING.src}
-            poster={VIDEOARCHIVER_RECORDING.poster}
-            width={VIDEOARCHIVER_RECORDING.width}
-            height={VIDEOARCHIVER_RECORDING.height}
-            label={VIDEOARCHIVER_RECORDING.label}
-            description={VIDEOARCHIVER_RECORDING.description}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={VIDEOARCHIVER_RECORDING} />
       );
     case "agent-platform":
       return (
-        <CaseFigure framed caption={AGENT_PLATFORM_RECORDING.caption}>
-          <CaseVideo
-            src={AGENT_PLATFORM_RECORDING.src}
-            poster={AGENT_PLATFORM_RECORDING.poster}
-            width={AGENT_PLATFORM_RECORDING.width}
-            height={AGENT_PLATFORM_RECORDING.height}
-            label={AGENT_PLATFORM_RECORDING.label}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={AGENT_PLATFORM_RECORDING} />
       );
     case "ifolio":
       return (
-        <CaseFigure framed caption={IFOLIO_RECORDING.caption}>
-          <CaseVideo
-            src={IFOLIO_RECORDING.src}
-            poster={IFOLIO_RECORDING.poster}
-            width={IFOLIO_RECORDING.width}
-            height={IFOLIO_RECORDING.height}
-            label={IFOLIO_RECORDING.label}
-          />
-        </CaseFigure>
+        <ShowcaseRecording recording={IFOLIO_RECORDING} />
       );
     case "meetinghero":
       return (
