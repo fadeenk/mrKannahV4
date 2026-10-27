@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="AI writes the code. You still own the decisions. A 15-minute talk by Fadee Kannah, Vertical Software Summit 2026.">
+<title>AI writes the code. You still own the decisions. · Fadee Kannah</title>
+<script>
+  // Before first paint: mark JS on, and pick the theme. Light is the default;
+  // ?theme=dark|light overrides for one load, D saves a choice.
+  (function () {
+    var root = document.documentElement;
+    root.classList.add("js");
+    var asked = new URLSearchParams(location.search).get("theme");
+    var theme = asked === "dark" || asked === "light" ? asked : null;
+    if (!theme) {
+      try { theme = localStorage.getItem("vss26-deck-theme"); } catch (e) {}
+    }
+    root.dataset.theme = theme === "dark" ? "dark" : "light";
+  })();
+</script>
+<style>
+/*
+ * The talk deck for the Vertical Software Summit 2026, in mrkannah.com's design
+ * (DESIGN.md): white ground and near-black ink, Besley for headlines and
+ * numerals, the system sans for everything else, green for accents only, and
+ * the drenched green on the first and last slides. Built for a weak, washed-out
+ * projector: no thin strokes, no gradients or glass, no gray lighter than #555.
+ */
+@font-face {
+  font-family: "Besley Variable";
+  src: url(data:font/woff2;base64,{{BESLEY_WOFF2}}) format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Besley Fallback";
+  src: local("Georgia Bold"), local("Georgia-Bold"), local("Georgia");
+  size-adjust: 105.5%;
+}
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --ink: #161616;
+  --muted: #555555;
+  --rule: #555555;
+  --accent: #2e8555;
+  --accent-ink: #205d3b;
+  --drench: #277148;
+  --on-drench: #ffffff;
+  --serif: "Besley Variable", "Besley Fallback", Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  /* One hundredth of the largest 16:9 box that fits the window: body text is
+     3u, about 32px at 1080p. */
+  --u: min(1vh, 0.5625vw);
+  --fade: 280ms;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1b1b1d;
+  --ink: #f5f5f5;
+  --muted: #cfcfcf;
+  --rule: #a3a3a3;
+  --accent: #25c2a0;
+  --accent-ink: #4fddbf;
+  --drench: #136251;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --fade: 0ms; }
+}
+
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); }
+body {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: calc(3 * var(--u));
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.js body { overflow: hidden; }
+h1, h2, h3, p, ol, ul, dl, dd, figure, blockquote { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+
+/* Slides */
+.slide {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(4 * var(--u));
+  padding: calc(8 * var(--u)) calc(9 * var(--u)) calc(11 * var(--u));
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+.js .slide {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--fade) ease, visibility 0s linear var(--fade);
+}
+.js .slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+  transition: opacity var(--fade) ease, visibility 0s;
+}
+.slide--drench { background: var(--drench); color: var(--on-drench); }
+.notes { display: none; }
+
+h1, h2 {
+  font-family: var(--serif);
+  font-weight: 700;
+  text-wrap: balance;
+}
+h1 {
+  font-size: calc(8.6 * var(--u));
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+.slide--close h1 { font-size: calc(6.8 * var(--u)); }
+.cols.cols--close { grid-template-columns: 1fr auto; }
+h2 {
+  font-size: calc(6.2 * var(--u));
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+}
+.lead { font-size: calc(3.6 * var(--u)); font-weight: 600; line-height: 1.3; max-width: 34ch; }
+.label { font-size: calc(2.5 * var(--u)); font-weight: 700; color: var(--muted); letter-spacing: 0.01em; }
+.byline { font-size: calc(3.2 * var(--u)); font-weight: 700; }
+
+.cols { display: grid; grid-template-columns: 5fr 7fr; gap: calc(6 * var(--u)); align-items: center; }
+.stack { display: flex; flex-direction: column; gap: calc(3 * var(--u)); }
+
+/* The release line: the site's one motif, a stroke ending in a pilot dot. */
+.release {
+  position: relative;
+  height: calc(0.6 * var(--u));
+  width: calc(38% + 9 * var(--u));
+  margin-left: calc(-9 * var(--u));
+  background: currentColor;
+}
+.release::after {
+  content: "";
+  position: absolute;
+  right: calc(-1.4 * var(--u));
+  top: 50%;
+  width: calc(2.8 * var(--u));
+  height: calc(2.8 * var(--u));
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 calc(0.5 * var(--u)) var(--drench);
+  transform: translateY(-50%);
+}
+
+/* Numerals and ledgers */
+.num {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: calc(11 * var(--u));
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.num-label { font-size: calc(3 * var(--u)); font-weight: 600; }
+.ledger { display: grid; gap: calc(2.4 * var(--u)); }
+.ledger > div {
+  display: grid;
+  grid-template-columns: calc(15 * var(--u)) 1fr;
+  align-items: baseline;
+  gap: calc(2.4 * var(--u));
+  border-top: calc(0.4 * var(--u)) solid var(--accent);
+  padding-top: calc(1.6 * var(--u));
+}
+.ledger .num { font-size: calc(8.4 * var(--u)); }
+
+/* Screenshot frames: a ruled border, no resting shadow. */
+.frame {
+  border: calc(0.3 * var(--u)) solid var(--rule);
+  border-radius: calc(1.2 * var(--u));
+  overflow: hidden;
+  background: #ffffff;
+}
+.frame img { display: block; width: 100%; height: auto; }
+figure { display: flex; flex-direction: column; gap: calc(1.4 * var(--u)); }
+figcaption { font-size: calc(2.3 * var(--u)); font-weight: 600; color: var(--muted); }
+
+/* Chips: the site's pill tag, at projector weight. */
+.chips { display: flex; flex-wrap: wrap; gap: calc(1.4 * var(--u)); }
+.chips li {
+  border: calc(0.3 * var(--u)) solid var(--accent);
+  border-radius: 999px;
+  padding: calc(0.5 * var(--u)) calc(2 * var(--u));
+  font-size: calc(2.8 * var(--u));
+  font-weight: 700;
+}
+
+/* The six-step tracker at the foot of each step slide (built by the script),
+   and its large form on the map slide. */
+.track {
+  position: absolute;
+  left: calc(9 * var(--u));
+  right: calc(22 * var(--u));
+  bottom: calc(3.6 * var(--u));
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  font-size: calc(2.2 * var(--u));
+  font-weight: 600;
+  color: var(--muted);
+  --node: calc(2.4 * var(--u));
+  --line: calc(0.45 * var(--u));
+}
+.track li { position: relative; padding-top: calc(var(--node) + 1.1 * var(--u)); white-space: nowrap; }
+.track li::before {
+  content: "";
+  position: absolute;
+  top: calc((var(--node) - var(--line)) / 2);
+  left: 0;
+  right: 0;
+  height: var(--line);
+  background: var(--rule);
+}
+.track li:last-child::before { display: none; }
+.track li.is-done::before { background: var(--accent); }
+.track li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  background: var(--bg);
+  border: var(--line) solid var(--rule);
+}
+.track li.is-done::after,
+.track li.is-now::after { background: var(--accent); border-color: var(--accent); }
+.track li.is-now { color: var(--ink); font-weight: 800; }
+.track li.is-now::after {
+  box-shadow: 0 0 0 calc(0.5 * var(--u)) var(--bg), 0 0 0 calc(0.95 * var(--u)) var(--accent);
+}
+.track--big {
+  position: static;
+  font-size: calc(3.8 * var(--u));
+  font-weight: 700;
+  color: var(--ink);
+  --node: calc(4 * var(--u));
+  --line: calc(0.6 * var(--u));
+}
+.track--big li::before { background: var(--accent); }
+.track--big li::after { background: var(--accent); border-color: var(--accent); }
+.track--seven { grid-template-columns: repeat(7, 1fr); }
+
+/* Context: the two files, as ruled rows. */
+.files { display: grid; gap: calc(2.2 * var(--u)); }
+.files > div {
+  display: grid;
+  grid-template-columns: calc(32 * var(--u)) 1fr;
+  gap: calc(3 * var(--u));
+  align-items: center;
+  border-top: calc(0.4 * var(--u)) solid var(--accent);
+  padding-top: calc(1.8 * var(--u));
+}
+.files dt { font-family: var(--serif); font-weight: 700; font-size: calc(4 * var(--u)); }
+.files dd { display: flex; flex-direction: column; gap: calc(1.2 * var(--u)); font-size: calc(3.2 * var(--u)); font-weight: 600; }
+
+/* Replay: one decision at a time. */
+.replay-stage { display: grid; }
+.replay-stage > * {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--fade) ease, visibility 0s linear var(--fade);
+}
+.replay-stage > .is-shown {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--fade) ease, visibility 0s;
+}
+.turn {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2.6 * var(--u));
+  border-left: calc(0.7 * var(--u)) solid var(--accent);
+  padding-left: calc(3.4 * var(--u));
+}
+.turn-title { font-family: var(--serif); font-weight: 700; font-size: calc(5.6 * var(--u)); line-height: 1.1; }
+.turn-quote { font-size: calc(3.6 * var(--u)); font-weight: 600; line-height: 1.32; max-width: 44ch; text-indent: -0.42em; }
+.answers { display: flex; flex-wrap: wrap; gap: calc(3 * var(--u)) calc(9 * var(--u)); }
+.answers dd {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: calc(5.2 * var(--u));
+  line-height: 1.1;
+}
+.answers .mine dd { color: var(--accent-ink); }
+.tag {
+  display: inline-block;
+  margin-left: calc(1.8 * var(--u));
+  border: calc(0.3 * var(--u)) solid var(--accent);
+  border-radius: 999px;
+  padding: calc(0.5 * var(--u)) calc(1.8 * var(--u));
+  font-family: var(--sans);
+  font-size: calc(2.6 * var(--u));
+  font-weight: 700;
+  vertical-align: middle;
+  color: var(--accent-ink);
+}
+.tally { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(5 * var(--u)); align-self: center; }
+.tally > div { border-top: calc(0.4 * var(--u)) solid var(--accent); padding-top: calc(1.8 * var(--u)); }
+
+/* Build: the branch diagram. */
+.branch { width: 100%; height: auto; overflow: visible; }
+.branch .main { stroke: var(--ink); }
+.branch .track-line { stroke: var(--accent); }
+.branch .dot { fill: var(--accent); }
+.branch .merge { fill: var(--bg); stroke: var(--accent); }
+.branch text { fill: currentColor; font-family: var(--sans); font-weight: 700; font-size: 30px; }
+
+/* Test: the gate. */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(2 * var(--u));
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: calc(7.4 * var(--u));
+  line-height: 1;
+  color: var(--accent-ink);
+}
+.stamp svg { width: calc(8.4 * var(--u)); height: calc(8.4 * var(--u)); flex: none; }
+.stamp circle { fill: var(--accent); }
+.stamp path { stroke: var(--bg); }
+
+/* Review: a quote in the site's quote face, opening mark hung. */
+.quote p {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: calc(5.4 * var(--u));
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  max-width: 26ch;
+  text-indent: -0.45em;
+}
+.quote .mark { color: var(--accent); }
+.quote footer { margin-top: calc(1.8 * var(--u)); font-size: calc(2.6 * var(--u)); font-weight: 700; color: var(--muted); }
+
+/* Lists with green nodes. */
+.nodes { display: grid; gap: calc(2.6 * var(--u)) calc(6 * var(--u)); }
+.nodes--two { grid-template-columns: 1fr 1fr; }
+.nodes li {
+  position: relative;
+  padding-left: calc(5 * var(--u));
+  font-size: calc(4.6 * var(--u));
+  font-weight: 700;
+  line-height: 1.2;
+}
+.nodes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(0.6em - 1.2 * var(--u));
+  width: calc(2.4 * var(--u));
+  height: calc(2.4 * var(--u));
+  border-radius: 50%;
+  background: var(--accent);
+}
+.nodes--questions li { font-family: var(--serif); font-size: calc(6.2 * var(--u)); line-height: 1.12; }
+
+/* Close: the QR on a white plate, in both themes. */
+.qr { width: calc(44 * var(--u)); justify-self: end; }
+.qr-plate {
+  background: #ffffff;
+  border-radius: calc(1.6 * var(--u));
+  padding: calc(1.4 * var(--u));
+}
+.qr-plate svg { display: block; width: 100%; height: auto; }
+.qr-caption { margin-top: calc(1.6 * var(--u)); text-align: center; font-size: calc(3 * var(--u)); font-weight: 700; }
+
+/* Chrome: progress line, counter, timer. */
+.progress {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  height: calc(0.7 * var(--u));
+  width: calc(var(--p, 0) * 100%);
+  background: var(--accent);
+  transition: width var(--fade) ease;
+}
+.progress::after {
+  content: "";
+  position: absolute;
+  right: calc(-1.1 * var(--u));
+  top: 50%;
+  width: calc(2.2 * var(--u));
+  height: calc(2.2 * var(--u));
+  border-radius: 50%;
+  background: inherit;
+  box-shadow: 0 0 0 calc(0.4 * var(--u)) var(--ring, var(--bg));
+  transform: translateY(-50%);
+}
+.counter {
+  position: fixed;
+  z-index: 5;
+  right: calc(4 * var(--u));
+  bottom: calc(3.4 * var(--u));
+  font-size: calc(2.2 * var(--u));
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.timer {
+  position: fixed;
+  z-index: 5;
+  top: calc(2.4 * var(--u));
+  right: calc(4 * var(--u));
+  display: flex;
+  gap: calc(1 * var(--u));
+  align-items: baseline;
+  padding: calc(0.5 * var(--u)) calc(1.4 * var(--u));
+  border: calc(0.3 * var(--u)) solid currentColor;
+  border-radius: calc(0.8 * var(--u));
+  font-size: calc(2.4 * var(--u));
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--bg);
+}
+.timer-state { display: none; font-size: 0.8em; }
+.timer.is-paused .timer-state { display: inline; }
+.timer.is-late { color: var(--accent-ink); }
+.timer.is-over { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+body.on-drench .progress { background: var(--on-drench); --ring: var(--drench); }
+body.on-drench .counter { color: var(--on-drench); }
+body.on-drench .timer { color: var(--on-drench); background: var(--drench); }
+
+/* Speaker notes: off by default, so a mirrored projector never shows them. */
+.notes-panel {
+  position: fixed;
+  z-index: 8;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 44vh;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: calc(2 * var(--u)) calc(4 * var(--u)) calc(3 * var(--u));
+  background: var(--ink);
+  color: var(--bg);
+  font-size: max(16px, calc(2.4 * var(--u)));
+  line-height: 1.45;
+}
+.notes-head { font-weight: 800; margin-bottom: 0.6em; }
+.notes-body p { margin: 0 0 0.7em; max-width: 90ch; }
+.notes-body p.is-current { box-shadow: inset calc(0.6 * var(--u)) 0 0 var(--accent); padding-left: calc(1.6 * var(--u)); }
+
+/* Overlays: help, go to, and a black screen. */
+.overlay {
+  position: fixed;
+  z-index: 9;
+  inset: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(3 * var(--u));
+  padding: calc(6 * var(--u)) calc(9 * var(--u));
+  background: var(--bg);
+  color: var(--ink);
+  overflow: auto;
+}
+.overlay[hidden], .notes-panel[hidden], .timer[hidden], .blackout[hidden] { display: none; }
+.overlay h2 { font-size: calc(5 * var(--u)); }
+.keys { display: grid; grid-template-columns: max-content 1fr max-content 1fr; gap: calc(1.4 * var(--u)) calc(3 * var(--u)); font-size: calc(2.6 * var(--u)); }
+.keys dt { font-weight: 800; }
+.keys dd { font-weight: 500; }
+.goto-list { display: grid; grid-template-columns: 1fr 1fr; gap: calc(1 * var(--u)) calc(6 * var(--u)); }
+.goto-list button {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: calc(0.8 * var(--u)) calc(1.4 * var(--u));
+  border-radius: calc(0.8 * var(--u));
+  font-size: calc(3 * var(--u));
+  font-weight: 700;
+  cursor: pointer;
+}
+.goto-list button[aria-current="true"] { color: var(--accent-ink); }
+.goto-list button:focus-visible { outline: calc(0.4 * var(--u)) solid var(--accent); outline-offset: calc(0.3 * var(--u)); }
+.goto-typed { font-size: calc(2.6 * var(--u)); font-weight: 700; min-height: 1.4em; }
+.blackout { position: fixed; z-index: 10; inset: 0; background: #000; }
+.live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Narrow or portrait screens (a phone): text gets a floor, columns stack, and
+   a slide scrolls if it must. */
+@media screen and (max-aspect-ratio: 1/1) {
+  :root { --u: clamp(5px, 1.45vw, 8px); }
+  .js .slide { justify-content: flex-start; overflow-y: auto; padding: calc(9 * var(--u)) calc(5 * var(--u)) calc(14 * var(--u)); }
+  .cols, .cols.cols--close, .nodes--two, .tally, .keys, .goto-list { grid-template-columns: 1fr; }
+  .qr { justify-self: start; }
+  .track { left: calc(5 * var(--u)); right: calc(14 * var(--u)); }
+  .track:not(.track--big) li:not(.is-now) { color: transparent; }
+  .files > div { grid-template-columns: 1fr; }
+}
+
+/* Print: one slide per 16:9 page, every replay step shown at once, no chrome. */
+@page { size: 13.333in 7.5in; margin: 0; }
+@media print {
+  :root { --u: 0.075in; --fade: 0ms; }
+  html, body { height: auto; background: var(--bg); }
+  .js body { overflow: visible; }
+  .js .slide {
+    position: relative;
+    inset: auto;
+    width: 13.333in;
+    height: 7.5in;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    break-after: page;
+    page-break-after: always;
+  }
+  .js .slide:last-of-type { break-after: auto; page-break-after: auto; }
+  .slide, .frame, .qr-plate, .chips li { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .progress, .counter, .timer, .notes-panel, .overlay, .blackout, .live { display: none !important; }
+  .replay-stage { grid-template-columns: 1fr 1fr; gap: calc(2.4 * var(--u)) calc(4 * var(--u)); }
+  .replay-stage > * { grid-area: auto; opacity: 1; visibility: visible; }
+  .replay .turn { gap: calc(1.2 * var(--u)); }
+  .replay .turn-title { font-size: calc(3.4 * var(--u)); }
+  .replay .turn-quote { font-size: calc(2.3 * var(--u)); }
+  .replay .answers dd { font-size: calc(3.2 * var(--u)); }
+  .replay .tag { font-size: calc(1.9 * var(--u)); }
+  .replay .tally .num { font-size: calc(6 * var(--u)); }
+  .replay .tally .num-label { font-size: calc(2.2 * var(--u)); }
+  .replay h2 { font-size: calc(4.6 * var(--u)); }
+  .replay { gap: calc(2 * var(--u)); }
+}
+</style>
+</head>
+<body>
+<main class="deck" aria-roledescription="slide deck" aria-label="AI writes the code. You still own the decisions.">
+
+<section class="slide slide--drench" data-title="Opening" data-start="0:00">
+  <h1>AI writes the code.<br>You still own the decisions.</h1>
+  <div class="release" aria-hidden="true"></div>
+  <p class="byline">Fadee Kannah · mrkannah.com</p>
+  <aside class="notes"><p>AI writes the code. You still own the decisions.</p><p>That's the whole talk in one line. You'll hear a lot this week about what AI can do for your business. This session is about something narrower: how software actually gets built with AI agents, and how a small team stays in control while the agents write the code.</p><p>I'll show you the steps I follow, with real material from a product I run today. And at each step I'll tell you which part I never hand to an agent. No code on the slides, I promise. Whether you write code yourself, run a team that does, or invest in companies that do, these are the questions to ask.</p></aside>
+</section>
+
+<section class="slide" data-title="Who I am" data-start="0:54">
+  <div class="cols">
+    <div class="stack">
+      <h2>Technical co-founder, CourseKey.</h2>
+      <p class="lead">Now: VideoArchiver, my own product, built with AI agents.</p>
+      <div>
+        <p class="num">932</p>
+        <p class="num-label">commits since June 28</p>
+      </div>
+    </div>
+    <figure>
+      <div class="frame"><img src="{{IMG_HOME}}" width="1280" height="720" alt="VideoArchiver's home screen: every motion event and doorbell press, saved to your own cloud, with five saved clips listed."></div>
+      <figcaption>From VideoArchiver’s demo recording, with made-up clips</figcaption>
+    </figure>
+  </div>
+  <aside class="notes"><p>I'm Fadee Kannah. I've been building software for eighteen years. Luke Sophinos, who put this summit together, and I started CourseKey, software for career schools. I was the technical co-founder. I architected the platform and led the engineers who built and ran it, and by 2021 more than 200 career colleges were using it.</p><p>Today I join SaaS teams and build what they need next. I also run my own product, VideoArchiver. It saves your Ring camera clips to storage you already own, like Google Drive or Dropbox. I build it with AI coding agents. Since June 28 it has 932 commits, and 219 of them name a Claude model as co-author. The rest don't say, so I won't claim them.</p><p>Everything I show you today comes from that product, or from client work that's published on my site.</p></aside>
+</section>
+
+<section class="slide" data-title="Six steps" data-start="1:59">
+  <h2>The agent does the work. A person owns each step.</h2>
+  <ol class="track track--big" aria-label="The six steps">
+    <li>Context</li><li>Problem</li><li>Plan</li><li>Build</li><li>Test</li><li>Review</li>
+  </ol>
+  <aside class="notes"><p>Here's the process. Six steps: context, problem, plan, build, test, review.</p><p>None of these are new. Good teams did all six long before AI. What changed is who does the work inside each step. An agent can now research, ask the questions, draft the plan, write the code, and even review code. What it can't do is decide what matters to your customer, or answer for it when a deploy goes wrong.</p><p>So for each step I'll show you two things: what the agent did, and what stayed with me. And notice that three of the six happen before anyone writes code.</p></aside>
+</section>
+
+<section class="slide" data-title="Context" data-start="2:46" data-track="1">
+  <h2>Before it starts, the agent reads what you know.</h2>
+  <dl class="files">
+    <div>
+      <dt>CONTEXT.md</dt>
+      <dd>
+        <span>The glossary</span>
+        <ul class="chips"><li>Destination</li><li>Storage preset</li><li>Failed clip</li><li>Failure episode</li><li>Replay</li></ul>
+      </dd>
+    </div>
+    <div>
+      <dt>AGENTS.md</dt>
+      <dd>The rules for agents</dd>
+    </div>
+  </dl>
+  <figure style="max-width: 56%">
+    <div class="frame"><img src="{{IMG_NEEDS_ATTENTION}}" width="1120" height="275" alt="VideoArchiver's Needs attention list: a Backyard motion clip marked Google Drive, failed after retries, with a Replay button."></div>
+    <figcaption>The same words in the product: a failed clip, and its Replay button</figcaption>
+  </figure>
+  <aside class="notes"><p>Step one: context. Every session, an agent starts out knowing nothing about your business. When it doesn't know, it guesses, and its guesses sound just as confident as its facts.</p><p>So VideoArchiver has two plain text files that every agent reads before it does anything. The first, CONTEXT.md, is a glossary of my product's words: Destination, Storage preset, Failed clip, Failure episode, Replay. Each one is written down once, so "failed clip" means the same thing to me, to the agent, and in the code. The second, AGENTS.md, holds the rules for any agent working in the code.</p><p>In vertical software, those words are where your expertise lives. At Portico, the reports I build calculate missed time, makeup hours and expected hours for career schools. Anyone new to that code, person or agent, has to learn what those words mean to a school before their report can be right. So write the words down first. It's the cheapest step in this whole talk.</p></aside>
+</section>
+
+<section class="slide" data-title="Problem" data-start="4:01" data-track="2">
+  <h2>The agent interviews you until the problem is clear.</h2>
+  <div class="cols">
+    <div class="ledger">
+      <div><p class="num">35</p><p class="num-label">customer requests</p></div>
+      <div><p class="num">27</p><p class="num-label">decisions</p></div>
+      <div><p class="num">1</p><p class="num-label">session</p></div>
+    </div>
+    <figure>
+      <div class="frame"><img src="{{IMG_STORAGE}}" width="1120" height="550" alt="VideoArchiver's Storage page: where Ring clips are saved, with cards for Google Drive, Dropbox and S3-compatible storage."></div>
+      <figcaption>VideoArchiver’s Storage page, from the demo recording</figcaption>
+    </figure>
+  </div>
+  <aside class="notes"><p>Step two: the problem. The usual way is to write a spec and hand it over. I do it the other way around: the agent interviews me.</p><p>Here's a real one, from this October. I wanted VideoArchiver customers to send their clips to storage they own beyond Google Drive and Dropbox: Backblaze, Cloudflare, Synology, even a NAS, a storage box at home. And I wanted more than one storage destination per camera link.</p><p>Before any interview, an agent researched it. It came back with a report and a demand table: 35 confirmed requests on Ring's community forum, 11 of them for a NAS. So I knew customers wanted it before I spent a day building it.</p><p>Then an agent grilled me. It worked through the decisions the feature needed, and every question came with its own recommended answer. That matters. I wasn't writing a spec from a blank page. I was saying yes or no to a proposal, and changing it where I knew better. 27 decisions, all settled in one session. Here's what that looked like.</p></aside>
+</section>
+
+<section class="slide replay" data-title="Replay" data-start="5:23" data-track="2" data-steps="4">
+  <div>
+    <h2>Replay: the grilling, October 2026</h2>
+    <p class="lead">3 of 27 decisions</p>
+  </div>
+  <div class="replay-stage">
+    <article class="turn" data-step="1">
+      <p class="label">Decision</p>
+      <p class="turn-title">Several S3 Destinations per Ring Link</p>
+      <dl class="answers">
+        <div><dt class="label">Agent recommended</dt><dd>One</dd></div>
+        <div class="mine"><dt class="label">My answer</dt><dd>Several<span class="tag">The one override</span></dd></div>
+      </dl>
+    </article>
+    <article class="turn" data-step="2">
+      <p class="label">Agent’s recommendation</p>
+      <blockquote class="turn-quote">“Use Ring’s Content-Length when the file host sends it. Otherwise hold the clip in Worker memory under a cap, never on disk. Above the cap, send it chunked and fail with a clear message if refused.”</blockquote>
+      <dl class="answers"><div class="mine"><dt class="label">My answer</dt><dd>Yes</dd></div></dl>
+    </article>
+    <article class="turn" data-step="3">
+      <p class="label">Agent’s recommendation</p>
+      <blockquote class="turn-quote">“Connect uploads a tiny test object through the same streamed path a clip uses, then tries to delete it.”</blockquote>
+      <dl class="answers"><div class="mine"><dt class="label">My answer</dt><dd>Yes</dd></div></dl>
+    </article>
+    <div class="tally" data-step="4">
+      <div><p class="num">27</p><p class="num-label">decisions</p></div>
+      <div><p class="num">1</p><p class="num-label">session</p></div>
+      <div><p class="num">1</p><p class="num-label">override</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p data-note-step="0">This is a replay of that session. Three of the 27.</p><p data-note-step="1">[→] The first decision: can one camera link send clips to several S3 destinations, the Backblaze and Cloudflare kind? The agent recommended one. I said several. Out of 27, that was the only time I went against its recommendation. It was a product call, and product calls are mine.</p><p data-note-step="2">[→] The second one is technical, so here it is in plain words. If Ring's file server tells us how big the clip is, use that. If it doesn't, hold the clip in memory up to a limit, and never write it to disk. Above the limit, send it in pieces, and if the storage refuses, fail with a clear message. I said yes. Notice it kept a promise my product makes on its homepage: clips are streamed, never stored.</p><p data-note-step="3">[→] Third: when a customer connects their storage, how do we know it works? Upload a tiny test file through the same path a real clip takes, then try to delete it. Yes. The customer finds out about a problem on the setup screen, instead of weeks later when a clip is missing.</p><p data-note-step="4">[→] 27 decisions, one session, one override. The agent did the homework. I made the calls.</p></aside>
+</section>
+
+<section class="slide" data-title="Plan" data-start="6:57" data-track="3">
+  <h2>Tickets and decision records, before any code.</h2>
+  <div class="cols">
+    <div>
+      <p class="num">+30</p>
+      <p class="num-label">more decisions</p>
+    </div>
+    <div class="stack">
+      <p class="label">Seven dated tracks</p>
+      <ol class="track track--big track--seven" aria-label="Seven dated tracks, T0 to T6">
+        <li>T0</li><li>T1</li><li>T2</li><li>T3</li><li>T4</li><li>T5</li><li>T6</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes"><p>Step three: the plan. Still no code.</p><p>After the interview, I reviewed the architecture together with agents, and a second round of questions added 30 more decisions. Two of them show why this step matters. First, three parts of the code needed deeper work before anything new was built on top of them. Second, the database change ships in two steps, so no customer's save fails while the deploy is running. Neither of those is something I'd want to discover halfway through building. Both were caught on paper, when changing course costs nothing.</p><p>Then it became seven dated tracks, T0 through T6, each with its tickets, plus decision records: short notes that say what we chose and why. All of it drafted before any code was written.</p><p>VideoArchiver has 21 written decision records today. They're how the next agent, or the next engineer, finds out why things are the way they are, without asking me.</p></aside>
+</section>
+
+<section class="slide" data-title="Build" data-start="8:09" data-track="4">
+  <h2>Small steps. Test first. A branch of its own.</h2>
+  <svg class="branch" viewBox="0 0 1000 300" role="img" aria-label="A track leaves what customers use on a branch of its own, moves in five small steps, and comes back through review.">
+    <path class="main" d="M0 230 H1000" fill="none" stroke-width="8" stroke-linecap="round"/>
+    <path class="track-line" d="M110 230 C180 230 180 100 260 100 H740 C820 100 820 230 890 230" fill="none" stroke-width="8" stroke-linecap="round"/>
+    <circle class="dot" cx="330" cy="100" r="14"/>
+    <circle class="dot" cx="420" cy="100" r="14"/>
+    <circle class="dot" cx="510" cy="100" r="14"/>
+    <circle class="dot" cx="600" cy="100" r="14"/>
+    <circle class="dot" cx="690" cy="100" r="14"/>
+    <circle class="merge" cx="890" cy="230" r="20" stroke-width="8"/>
+    <text x="330" y="55">This track, in small steps</text>
+    <text x="0" y="290">What customers use</text>
+    <text x="890" y="290" text-anchor="middle">Review</text>
+  </svg>
+  <aside class="notes"><p>Step four: build. This is what everyone pictures when they hear "AI writes code," and by this point it's the least dramatic part.</p><p>Each track gets a branch of its own, away from what customers use. The agent works in small steps: it writes a test first, watches it fail, then writes the code that makes it pass. Small steps also mean every change is small enough for a person to read, and that matters in step six.</p><p>Nobody needs to be a hero here. The process is boring on purpose, and that's how VideoArchiver gets built.</p></aside>
+</section>
+
+<section class="slide" data-title="Test" data-start="8:54" data-track="5">
+  <h2>A gate that must pass before anything ships.</h2>
+  <div class="stack">
+    <p class="label">Real uploads</p>
+    <ul class="chips"><li>Backblaze</li><li>Cloudflare</li><li>Synology</li><li>2 self-hosted servers</li></ul>
+  </div>
+  <p class="stamp">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4 8.6 13.4 14.5 7" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Ran. Passed.
+  </p>
+  <aside class="notes"><p>Step five: test. I treat a test as a gate. If it fails, nothing ships.</p><p>VideoArchiver has 390 test files, and they run on every pull request and every push to the main branch. The dashboard even has a demo mode with made-up cameras and clips, and the build checks that every page has one.</p><p>But the tests that matter most touch the real world. In vertical software, the real world is your customers' systems: their storage, their files, their edge cases. Here's the gate for the storage work. Before any storage preset ships, a small throwaway program streams 30 and 90 megabyte files to real Backblaze, Cloudflare and Synology buckets, plus two servers that people run themselves.</p><p>When I started writing this talk, that test hadn't run yet, and until it passed, those presets weren't going anywhere. It has run now, and it passed. That's what a gate is for. An agent will tell you the code works. The gate is how you find out.</p></aside>
+</section>
+
+<section class="slide" data-title="Review" data-start="10:10" data-track="6">
+  <h2>A second agent reviews. A person reads every diff.</h2>
+  <blockquote class="quote">
+    <p><span class="mark">“</span>Your team reviews everything I write before it ships.<span class="mark">”</span></p>
+    <footer>mrkannah.com</footer>
+  </blockquote>
+  <aside class="notes"><p>Step six: review. Before each track merges, a second agent reviews the code. It didn't write it, so it reads it fresh. Then I read the diff, the exact lines that changed. Then I deploy it, and I apply the database changes myself. No agent does those last steps.</p><p>Each release also gets a written record: what was checked before the deploy, each step in order, and what was verified on the live product afterwards. Both October releases have one, and the second fixed 17 issues found in an audit.</p><p>The rule holds on client work too. For two years I've been the embedded engineer on Portico's Success team, and their engineers review and QA everything before it ships. On my site I put it in one line: your team reviews everything I write before it ships. However the code got written, that line doesn't change.</p></aside>
+</section>
+
+<section class="slide" data-title="What stays human" data-start="11:18">
+  <h2>What stays with a person</h2>
+  <ul class="nodes nodes--two">
+    <li>Choosing the problem</li>
+    <li>Picking the first failing test</li>
+    <li>Making the calls</li>
+    <li>Reading the diff</li>
+    <li>Reading the plan</li>
+    <li>Deploying</li>
+  </ul>
+  <aside class="notes"><p>So here's what stays human, from everything you've just seen.</p><p>Deciding which problem is worth solving. Making the calls, including overriding the agent when it's wrong for your customer. Reading the plan before any code exists. Picking which test has to fail first, because that's how you define done. Reading the diff. And deploying, and changing the database, because when that goes wrong a customer loses something, and the agent isn't the one who calls them.</p><p>Notice that none of these take long. Reading a plan takes minutes, and so does reading a small diff. Everything else I hand over gladly: the research, the questions, the drafts, the code, a first review. That's most of the hours.</p></aside>
+</section>
+
+<section class="slide" data-title="The Monday question" data-start="12:12">
+  <p class="lead">For your next AI-built feature:</p>
+  <ol class="nodes nodes--questions">
+    <li>Who wrote down the problem?</li>
+    <li>Who read the plan?</li>
+    <li>Which test fails first?</li>
+    <li>Who reviewed the diff?</li>
+  </ol>
+  <aside class="notes"><p>Which brings me to my question for Monday.</p><p>Pick your next feature that AI is helping build, and ask four things. Who wrote down the problem? Who read the plan? Which test fails first? And who reviewed the diff?</p><p>If you're a founder or an operator, ask your team. If you're an investor, ask the companies you back. If every answer comes back with a name, or a test, you're in control. If any answer is "the AI handled it," that's the step to fix first. You don't need new tools for that. You need a person next to each step. Take a photo of this slide, and ask on Monday.</p></aside>
+</section>
+
+<section class="slide slide--drench slide--close" data-title="Close" data-start="13:03">
+  <div class="cols cols--close">
+    <div class="stack">
+      <h1>AI writes the code.<br>You still own the decisions.</h1>
+      <div class="release" aria-hidden="true"></div>
+      <p class="byline">Fadee Kannah · mrkannah.com</p>
+    </div>
+    <div class="qr">
+      <div class="qr-plate">{{QR_SVG}}</div>
+      <p class="qr-caption">mrkannah.com/vsaas</p>
+    </div>
+  </div>
+  <aside class="notes"><p>AI writes the code. You still own the decisions.</p><p>If you want the case studies behind this talk, they're behind that QR code. And come find me afterwards if you want to compare notes on how your team does any of this. Thank you.</p></aside>
+</section>
+
+</main>
+
+<div class="progress" aria-hidden="true"></div>
+<p class="counter" aria-hidden="true"></p>
+<p class="timer" id="timer" hidden><span class="timer-state">Paused</span><span class="timer-time">0:00</span><span>/ 15:00</span></p>
+<p class="live" aria-live="polite"></p>
+
+<section class="notes-panel" id="notes" hidden aria-label="Speaker notes">
+  <p class="notes-head"></p>
+  <div class="notes-body"></div>
+</section>
+
+<section class="overlay" id="help" hidden role="dialog" aria-modal="true" aria-labelledby="help-title">
+  <h2 id="help-title">Keys</h2>
+  <dl class="keys">
+    <dt>→ ↓ Space PageDown</dt><dd>Next slide or step</dd>
+    <dt>← ↑ Shift+Space PageUp</dt><dd>Back</dd>
+    <dt>Home / End</dt><dd>First / last slide</dd>
+    <dt>G</dt><dd>Go to a section</dd>
+    <dt>F</dt><dd>Fullscreen</dd>
+    <dt>T</dt><dd>Timer: start, pause</dd>
+    <dt>Shift+T</dt><dd>Reset the timer</dd>
+    <dt>N</dt><dd>Speaker notes</dd>
+    <dt>D</dt><dd>Dark or light theme</dd>
+    <dt>B or .</dt><dd>Black screen</dd>
+    <dt>Swipe</dt><dd>Next or back on a phone</dd>
+    <dt>? / Esc</dt><dd>This help / close</dd>
+  </dl>
+</section>
+
+<section class="overlay" id="goto" hidden role="dialog" aria-modal="true" aria-labelledby="goto-title">
+  <h2 id="goto-title">Go to</h2>
+  <ol class="goto-list"></ol>
+  <p class="goto-typed" aria-live="polite"></p>
+</section>
+
+<div class="blackout" id="blackout" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var total = slides.length;
+  var STEPS = ["Context", "Problem", "Plan", "Build", "Test", "Review"];
+  var THEME_KEY = "vss26-deck-theme";
+  var progress = document.querySelector(".progress");
+  var counter = document.querySelector(".counter");
+  var live = document.querySelector(".live");
+  var notes = document.getElementById("notes");
+  var timer = document.getElementById("timer");
+  var help = document.getElementById("help");
+  var goto = document.getElementById("goto");
+  var blackout = document.getElementById("blackout");
+  var index = 0;
+  var step = 0;
+  var lastFocus = null;
+
+  function stepsOf(i) { return Number(slides[i].dataset.steps || 0); }
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+
+  // The six-step tracker at the foot of each step slide.
+  slides.forEach(function (slide) {
+    var at = Number(slide.dataset.track || 0);
+    if (!at) return;
+    var ol = document.createElement("ol");
+    ol.className = "track";
+    ol.setAttribute("aria-label", "Step " + at + " of 6: " + STEPS[at - 1]);
+    STEPS.forEach(function (name, i) {
+      var li = document.createElement("li");
+      li.textContent = name;
+      if (i + 1 < at) li.className = "is-done";
+      if (i + 1 === at) { li.className = "is-now"; li.setAttribute("aria-current", "step"); }
+      ol.appendChild(li);
+    });
+    slide.appendChild(ol);
+  });
+
+  slides.forEach(function (slide, i) {
+    slide.setAttribute("role", "group");
+    slide.setAttribute("aria-roledescription", "slide");
+    slide.setAttribute("aria-label", (i + 1) + " of " + total + ": " + slide.dataset.title);
+  });
+
+  // Go to: one button per slide.
+  var gotoList = goto.querySelector(".goto-list");
+  var gotoTyped = goto.querySelector(".goto-typed");
+  slides.forEach(function (slide, i) {
+    var li = document.createElement("li");
+    var b = document.createElement("button");
+    b.type = "button";
+    b.dataset.to = String(i);
+    b.textContent = (i + 1) + "  " + slide.dataset.title;
+    li.appendChild(b);
+    gotoList.appendChild(li);
+  });
+  var gotoButtons = Array.prototype.slice.call(gotoList.querySelectorAll("button"));
+
+  function render(announce) {
+    slides.forEach(function (slide, i) {
+      var on = i === index;
+      slide.classList.toggle("is-active", on);
+      slide.setAttribute("aria-hidden", on ? "false" : "true");
+      slide.inert = !on;
+    });
+    var slide = slides[index];
+    slide.querySelectorAll("[data-step]").forEach(function (el) {
+      el.classList.toggle("is-shown", Number(el.dataset.step) === step);
+    });
+    document.body.classList.toggle("on-drench", slide.classList.contains("slide--drench"));
+    progress.style.setProperty("--p", String((index + 1) / total));
+    counter.textContent = (index + 1) + " / " + total;
+    var hash = "#/" + (index + 1) + (step ? "." + step : "");
+    if (location.hash !== hash) {
+      try { history.replaceState(null, "", hash); } catch (e) {}
+    }
+    if (announce) live.textContent = "Slide " + (index + 1) + " of " + total + ": " + slide.dataset.title;
+    renderNotes();
+  }
+
+  function go(i, st) {
+    index = clamp(i, 0, total - 1);
+    step = clamp(st || 0, 0, stepsOf(index));
+    render(true);
+  }
+  function next() {
+    if (step < stepsOf(index)) { step += 1; render(false); }
+    else if (index < total - 1) go(index + 1, 0);
+  }
+  function prev() {
+    if (step > 0) { step -= 1; render(false); }
+    else if (index > 0) go(index - 1, stepsOf(index - 1));
+  }
+  function fromHash() {
+    var m = /^#\/?(\d+)(?:\.(\d+))?$/.exec(location.hash);
+    if (!m) return false;
+    index = clamp(Number(m[1]) - 1, 0, total - 1);
+    step = clamp(Number(m[2] || 0), 0, stepsOf(index));
+    return true;
+  }
+
+  // Speaker notes
+  function renderNotes() {
+    if (notes.hidden) return;
+    var slide = slides[index];
+    var head = (index + 1) + " / " + total + " · " + slide.dataset.title + " · planned start " + slide.dataset.start;
+    if (index < total - 1) head += " · next: " + slides[index + 1].dataset.title;
+    notes.querySelector(".notes-head").textContent = head;
+    var body = notes.querySelector(".notes-body");
+    body.innerHTML = slide.querySelector(".notes").innerHTML;
+    body.querySelectorAll("[data-note-step]").forEach(function (p) {
+      p.classList.toggle("is-current", Number(p.dataset.noteStep) === step);
+    });
+    var current = body.querySelector(".is-current");
+    if (current) current.scrollIntoView({ block: "nearest" });
+  }
+  function toggleNotes() { notes.hidden = !notes.hidden; renderNotes(); }
+
+  // Theme
+  function toggleTheme() {
+    var theme = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = theme;
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+  }
+
+  // Timer, counting up to 15:00.
+  var LIMIT = 15 * 60;
+  var startedAt = 0;
+  var banked = 0;
+  var running = false;
+  var tick = 0;
+  function elapsed() { return banked + (running ? (performance.now() - startedAt) / 1000 : 0); }
+  function fmt(s) {
+    s = Math.floor(s);
+    var sec = s % 60;
+    return Math.floor(s / 60) + ":" + (sec < 10 ? "0" : "") + sec;
+  }
+  function drawTimer() {
+    var s = elapsed();
+    timer.querySelector(".timer-time").textContent = fmt(s);
+    timer.classList.toggle("is-late", s >= LIMIT - 120 && s < LIMIT);
+    timer.classList.toggle("is-over", s >= LIMIT);
+    timer.classList.toggle("is-paused", !running);
+  }
+  function startTimer() { startedAt = performance.now(); running = true; clearInterval(tick); tick = setInterval(drawTimer, 250); }
+  function pauseTimer() { banked = elapsed(); running = false; clearInterval(tick); }
+  function toggleTimer() {
+    if (timer.hidden) { timer.hidden = false; startTimer(); }
+    else if (running) pauseTimer();
+    else startTimer();
+    drawTimer();
+  }
+  function resetTimer() { pauseTimer(); banked = 0; timer.hidden = false; drawTimer(); }
+
+  // Fullscreen
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (root.requestFullscreen) root.requestFullscreen().catch(function () {});
+  }
+
+  // Overlays
+  function open(overlay) {
+    lastFocus = document.activeElement;
+    overlay.hidden = false;
+  }
+  function close(overlay) {
+    overlay.hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  var typed = "";
+  function openGoto() {
+    open(goto);
+    typed = "";
+    gotoTyped.textContent = "";
+    gotoButtons.forEach(function (b, i) { b.setAttribute("aria-current", i === index ? "true" : "false"); });
+    gotoButtons[index].focus();
+  }
+  gotoList.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-to]");
+    if (!b) return;
+    close(goto);
+    go(Number(b.dataset.to), 0);
+  });
+  function gotoKey(e) {
+    var at = gotoButtons.indexOf(document.activeElement);
+    if (e.key === "Escape" || e.key === "g" || e.key === "G") { close(goto); }
+    else if (/^[0-9]$/.test(e.key)) { typed = (typed + e.key).slice(-2); gotoTyped.textContent = "Slide " + typed; }
+    else if (e.key === "Backspace") { typed = typed.slice(0, -1); gotoTyped.textContent = typed ? "Slide " + typed : ""; }
+    else if (e.key === "Enter") {
+      var to = typed ? Number(typed) - 1 : at;
+      close(goto);
+      if (to >= 0) go(to, 0);
+    }
+    else if (e.key === "ArrowDown" || e.key === "ArrowRight") { gotoButtons[clamp(at + 1, 0, total - 1)].focus(); }
+    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") { gotoButtons[clamp(at - 1, 0, total - 1)].focus(); }
+    else if (e.key === "Tab") { return; }
+    e.preventDefault();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (!blackout.hidden) { blackout.hidden = true; e.preventDefault(); return; }
+    if (!goto.hidden) { gotoKey(e); return; }
+    if (!help.hidden) {
+      if (e.key === "Escape" || e.key === "?") { close(help); e.preventDefault(); }
+      return;
+    }
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": case "PageDown": case "Enter": next(); break;
+      case " ": if (e.shiftKey) prev(); else next(); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": case "Backspace": prev(); break;
+      case "Home": go(0, 0); break;
+      case "End": go(total - 1, 0); break;
+      case "f": case "F": toggleFullscreen(); break;
+      case "g": case "G": openGoto(); break;
+      case "t": case "T": if (e.shiftKey) resetTimer(); else toggleTimer(); break;
+      case "n": case "N": toggleNotes(); break;
+      case "d": case "D": toggleTheme(); break;
+      case "?": open(help); break;
+      case "b": case "B": case ".": blackout.hidden = false; break;
+      case "F5": break; // some clickers send F5; don't reload mid-talk
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  // Swipe on a phone
+  var touchX = null;
+  var touchY = null;
+  window.addEventListener("touchstart", function (e) {
+    if (e.touches.length !== 1) { touchX = null; return; }
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    var dy = e.changedTouches[0].clientY - touchY;
+    touchX = null;
+    if (!goto.hidden || !help.hidden) return;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) next(); else prev();
+    }
+  }, { passive: true });
+
+  window.addEventListener("hashchange", function () { if (fromHash()) render(true); });
+
+  fromHash();
+  render(false);
+})();
+</script>
+</body>
+</html>

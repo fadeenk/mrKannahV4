@@ -394,6 +394,16 @@ Motion is chosen by `useMotionTier()`: `full` (fine pointer), `touch` (settle on
 
 On `/card` the root mirrors `--c-ease` and `--c-dur-fast`. In the full tier the badge leans up to 6px toward the pointer (a 2D translate), the sheen follows it, and the edge's bright end turns to face it, all easing back over 0.5s on `--c-ease` when the pointer leaves; the typed sheen and edge properties are what let them ease. In the touch tier there are no pointer effects but the turn still animates; in the reduced tier the faces swap instantly. Under `prefers-reduced-motion` every transition and transform on the card is off. Hover feedback on rows, tiles, and buttons is a fill, rule, and color change at `--c-dur-fast`; whatever moves, moves by transform.
 
+## Talk deck (outside the site)
+
+`talks/vss-2026/` holds a self-contained HTML deck for the Vertical Software Summit 2026 talk. Docusaurus does not build it; its README covers the controls and the build. It is the same world, set for a weak, washed-out projector:
+
+- Light theme by default (white ground, `#161616` ink), `D` for dark (the site's dark ground and Mint Signal). Type scales with the viewport from a 16:9 unit: body 3u (about 32px at 1080p) in the system sans at 500, headlines, numerals and quotes in Besley 700.
+- Nothing thin and nothing pale: in light, no gray lighter than `#555` for text, rules or borders, and every stroke at least 0.3u. No gradients, glass or resting shadows; screenshot frames are ruled instead of shadowed.
+- Green for accents only. The drenched green (Drench Forest, Drench Deep in dark) grounds the first and last slides and nothing else.
+- The release line recurs: under the opening and closing headlines, as the progress line with its pilot dot along the top edge, and as the six-step tracker at the foot of each step slide. The tracker replaces numbered labels, so no slide carries a kicker above its heading.
+- The QR sits on a white plate in both themes. Slides change with a fade only, and instantly under `prefers-reduced-motion`.
+
 ## Do's and Don'ts
 
 Concrete guardrails grounded in the shipped code.
