@@ -23,6 +23,8 @@ Personal portfolio and consulting acquisition site for Fadee Kannah (Mr. Kannah,
 
 What it does: explains services, engagement models, proof, and story, and routes to `https://cal.com/kannah/30min` for a free consultation and `/#engagements` for engagements.
 
+Booking links: every link to `https://cal.com/kannah/30min` is built by `calUrl` / `useCalUrl` (`src/components/BookCta/cal.ts`, `landing-campaign.ts`) and carries `variant=<placement>` plus UTM tags, because Cal.com saves only `utm_source`, `utm_medium`, `utm_campaign`, `utm_term` and `utm_content` on a booking. `utm_content` is the placement (the CTA variant). The trio defaults to `mrkannah.com` / `website` / `site` (`vsaas` on /vsaas); when the visitor landed with their own `utm_*` tags (QR, LinkedIn, the /card link), the first tagged landing in the browser session is forwarded instead, on every page. The server-rendered HTML always holds the default-tagged link. The vCard's link has fixed tags (`contact-card` / `vcf` / `site`, content `vcf`). `npm run check:build` fails on any untagged booking link.
+
 Success means: qualified consultation booked → consulting engagement started.
 
 ## Positioning
@@ -44,6 +46,7 @@ A generic agency sells capacity; this product sells founder-to-production accoun
 Confirmed functionality:
 
 - Home (`src/pages/index.tsx`): the consulting-led page: hero, stats band with selected-work logos, pain groups, proof showcase, engagement offers, testimonials, fit FAQ, closing CTA, contact.
+- `/vsaas` (`src/pages/vsaas.tsx`): the homepage retold for vertical SaaS founders, operators and investors, handed out at events (first: Vertical Software Summit, Miami, Nov 4–5, 2026) by QR, the `/card` link and shared links. No engagement offers; one action, the booking call (`variant=vsaas`). Noindex and out of the sitemap.
 - Showcase (`src/pages/showcase/`): the index plus five write-ups, led by the most recent (`videoarchiver`, `ai-assistant`, `ifolio`, `agent-platform`, `meetinghero`), with smaller builds and recognition on the index. Data in `src/data/showcase.ts`. Case Studies are their own top-level nav item.
 - Blog docs at `/blog` (`docs/`, `sidebars.ts`), About (`src/pages/about.tsx`), plus goals, podcasts, summit, years, card, 653-timberfalls-for-rent. `datingProfile` was intentionally removed (commit "Remove dating page"); its images now live under `docs/Yearly/2024/`.
 - Technical constraints: Docusaurus 3.10.2 + React 19 + TypeScript strict, static export to `build/`, `onBrokenLinks: throw`, English-only, gtag `G-QRPFQQWH20`.

@@ -8,7 +8,8 @@ TEL;TYPE=work,pref:(702) 337-3306
 EMAIL;TYPE=work:fadeekannah@gmail.com
 URL:https://mrkannah.com
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/fadeek/
-item1.URL:https://cal.com/kannah/30min
+item1.URL:https://cal.com/kannah/30min?variant=vcf&utm_source=contact-card&
+ utm_medium=vcf&utm_campaign=site&utm_content=vcf
 item1.X-ABLabel:Book a call
 X-SOCIALPROFILE;TYPE=github:https://github.com/fadeenk
 PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgHBgcJ

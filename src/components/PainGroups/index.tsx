@@ -5,7 +5,7 @@ import Reveal from "@site/src/components/Reveal";
 import SectionHeader from "@site/src/components/SectionHeader";
 import styles from "./styles.module.css";
 
-type Situation = {
+export type Situation = {
   /** What the visitor would say, in their words. */
   quote: string;
   body: string;
@@ -24,7 +24,7 @@ type Situation = {
  *   - AGI:     src/pages/case-studies/american-growth-insurance.tsx
  * Order follows the ProofShowcase rows the links jump to (AGI's two sit together).
  */
-const situations: readonly Situation[] = [
+const SITUATIONS: readonly Situation[] = [
   {
     quote: "Customers keep asking for things our engineers can’t get to.",
     body: "Custom reports, integrations, documentation. Your engineers belong on the roadmap, and your customers shouldn’t have to wait.",
@@ -46,12 +46,22 @@ const situations: readonly Situation[] = [
   },
 ];
 
+type PainGroupsProps = {
+  /**
+   * The rows, for a page written for one audience (/vsaas). Each must stay
+   * inside a published case study, as the rows above do.
+   */
+  situations?: readonly Situation[];
+};
+
 /**
  * The problem, in the visitor's words. Ruled rows (the FAQ's vocabulary at a
  * larger scale): the quote on the left, what it looks like day to day and a
  * jump to the client who was there on the right.
  */
-export default function PainGroups(): JSX.Element {
+export default function PainGroups({
+  situations = SITUATIONS,
+}: PainGroupsProps): JSX.Element {
   return (
     <section className={`section section--alt ${styles.wrap}`}>
       <div className="container">

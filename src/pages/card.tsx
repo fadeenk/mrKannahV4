@@ -15,12 +15,14 @@ import { PageMetadata, useColorMode } from "@docusaurus/theme-common";
 import Layout from "@theme/Layout";
 import {
   ArrowLeft,
+  ArrowRight,
   Calendar,
   Mail,
   Phone,
   QrCode,
   UserPlus,
 } from "@site/src/components/Icons";
+import { useCalUrl } from "@site/src/components/BookCta/landing-campaign";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import ShareButton from "@site/src/components/ShareButton";
 import SignalField from "@site/src/components/SignalField";
@@ -32,6 +34,7 @@ import {
   PERSONAL_PROFILES,
   PHONE,
   VCARD_HREF,
+  VSAAS_HREF,
   WEBSITE,
   WORK_PROFILES,
   type Profile,
@@ -54,6 +57,7 @@ import styles from "./card.module.css";
 
 const LINE = "I ship the work that keeps slipping.";
 const QR_CAPTION = "Scan to access contact info";
+const VSAAS_LINK = "Building vertical software? See how I help";
 
 /** The page ground per theme, for the phone's browser chrome (mirrors --card-ground). */
 const GROUND_HEX = { light: "#f5f6f7", dark: "#1b1b1d" } as const;
@@ -159,6 +163,8 @@ export default function Card(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const tier = useMotionTier();
   const [face, setFace] = useState<Face>("front");
+  /* BOOKING.href with the visitor's own landing tags, once mounted. */
+  const bookingHref = useCalUrl("card");
 
   const rootRef = useRef<HTMLElement>(null);
   const leanRef = useRef<HTMLDivElement>(null);
@@ -401,7 +407,7 @@ export default function Card(): JSX.Element {
                     <span>Save contact</span>
                   </a>
                   <a
-                    href={BOOKING.href}
+                    href={bookingHref}
                     className={`${styles.button} ${styles.outline}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -429,6 +435,19 @@ export default function Card(): JSX.Element {
                       <span>QR code</span>
                     </button>
                   </div>
+                  {/* Text, not a button: Save contact stays the one solid
+                      control. A plain link, not a router Link, so /vsaas
+                      loads in full and GA's first hit there carries the
+                      campaign. */}
+                  <a
+                    href={VSAAS_HREF}
+                    className={styles.more}
+                    data-field-quiet=""
+                  >
+                    {VSAAS_LINK}
+                    {"\u00a0"}
+                    <ArrowRight className={styles.moreIcon} />
+                  </a>
                 </div>
 
                 <nav className={styles.profiles} aria-label="Profiles">

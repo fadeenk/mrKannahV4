@@ -2,10 +2,11 @@ import React, { useEffect, useRef, type JSX } from "react";
 import { useMotionTier } from "@site/src/components/MotionTier";
 import { ArrowUpRight } from "@site/src/components/Icons";
 import { CAL_URL, calUrl, type CtaVariant } from "./cal";
+import { useCalUrl } from "./landing-campaign";
 import { CTA_MICROCOPY } from "./copy";
 import styles from "./styles.module.css";
 
-export { CAL_URL, CTA_MICROCOPY, calUrl, type CtaVariant };
+export { CAL_URL, CTA_MICROCOPY, calUrl, useCalUrl, type CtaVariant };
 
 type BookCtaProps = {
   variant?: CtaVariant;
@@ -62,6 +63,7 @@ export default function BookCta({
   emphasis = "outline",
 }: BookCtaProps): JSX.Element {
   const magnetRef = useRef<HTMLDivElement>(null);
+  const href = useCalUrl(variant);
   useMagnet(magnetRef);
   const alignStart = !center || block;
   const onGreen = tone === "onGreen";
@@ -73,10 +75,13 @@ export default function BookCta({
         className={`cta-container ${styles.magnetic} ${alignStart ? styles.alignStart : ""}`}
       >
         <a
-          href={calUrl(variant)}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Book a free 30-min call, opens in new tab"
+          /* GA event per click; the link opens a new tab, so this page stays
+             to send it. gtag is absent in dev and when blocked. */
+          onClick={() => window.gtag?.("event", "book_click", { variant })}
           className={`button button--primary ${block ? "button--block" : "button--lg"} ${onGreen ? styles.onGreen : ""} ${emphasis === "solid" ? styles.solid : ""}`}
         >
           Book a free 30-min call

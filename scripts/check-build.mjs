@@ -1,11 +1,12 @@
 // Checks for defects that typecheck and `docusaurus build` both miss.
-// Run after `npm run build`: `npm run check:build`.
+// Run after `npm run build`: `npm run check:build`. For a build written
+// elsewhere (`npm run build -- --out-dir <dir>`): `npm run check:build -- <dir>`.
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 
-const buildDir = "build";
+const buildDir = process.argv[2] ?? "build";
 if (!existsSync(buildDir)) {
-  console.error("check:build: no build/ directory. Run `npm run build` first.");
+  console.error(`check:build: no ${buildDir}/ directory. Run \`npm run build\` first.`);
   process.exit(1);
 }
 
@@ -51,6 +52,20 @@ if (existsSync(sitemap) && readFileSync(sitemap, "utf8").includes("/superpowers"
 }
 if (existsSync(join(buildDir, "blog", "superpowers"))) {
   problems.push(`${join(buildDir, "blog", "superpowers")}: planning docs were published`);
+}
+
+// Cal.com keeps only utm_* from a booking link, so an untagged link books
+// with no source. Every booking link in the pages and the vCard (folded
+// lines joined first) must carry utm_source.
+const bookingLink = /(?:https?:)?\/\/cal\.com\/kannah\/30min[^\s"'<>]*/g;
+const bookingFiles = [...walk(buildDir, /\.html$/), ...walk(buildDir, /\.vcf$/)];
+for (const file of bookingFiles) {
+  const text = readFileSync(file, "utf8").replace(/\r?\n[ \t]/g, "");
+  for (const link of new Set(text.match(bookingLink))) {
+    if (!/[?&](?:amp;)?utm_source=/.test(link)) {
+      problems.push(`${file}: booking link without utm_source: ${link}`);
+    }
+  }
 }
 
 if (problems.length > 0) {

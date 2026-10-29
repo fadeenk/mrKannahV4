@@ -171,12 +171,14 @@ The homepage (`src/pages/index.tsx`) is the one place the system speaks louder, 
 
 `/card` is the same world under one held object: a pane of glass held over the release line. The tick field runs behind a frosted badge, the line enters behind the round portrait and climbs past it, and the glass is what you hold up and hand over. The page is chromeless, Besley sets the name and nothing else, and there is no drenched band. The glass, its light-catching edge, its sheen, and its one resting shadow are user-pinned and belong to that badge alone.
 
+`/vsaas` (`src/pages/vsaas.tsx`) is the homepage retold for vertical software founders and operators, the page Fadee hands out at events by QR and link. It is the homepage shell with the homepage's tokens and components, so every rule here that names the homepage holds there too; its layout section lists what differs.
+
 **Key Characteristics:**
 - Single green voice, theme-flipped (forest in light, mint in dark)
 - Flat surfaces at rest, lift only on hover
 - Restrained and confident controls with 8–12px geometry
 - Playful proof accents (tilt, angled testimonials, logo marquee) on a calm base
-- The homepage, its case studies, `/about`, `/showcase`, and `/card` only: a serif display face and one recurring "release line" motif in ticks, strokes, and a pilot dot; drenched green bands on the homepage (three), each case study, `/about` and `/showcase` page (the closing one), none on `/card`
+- The homepage, `/vsaas`, the case studies, `/about`, `/showcase`, and `/card` only: a serif display face and one recurring "release line" motif in ticks, strokes, and a pilot dot; drenched green bands on the homepage and `/vsaas` (three each), each case study, `/about` and `/showcase` page (the closing one), none on `/card`
 - `/card` only: a frosted glass badge over the tick field, the one glass surface in the system
 
 ## Colors
@@ -203,7 +205,7 @@ Full ramps are normative in `src/css/custom.css`: light `#29784c, #277148, #205d
 Functional one-offs, not system accents: link blue (#1976d2, historic) and the iFolio AI badge gradient (#667eea → #764ba2, historic). Do not promote these to palette roles.
 
 - **Logo Plate** (#fcfbf7, 1px `rgba(28, 30, 33, 0.14)` border, 8px radius): the warm light chip behind client logos in both themes, because the logos are dark marks on transparent. It sits behind the logo only; text never sits on it, so copy keeps following the theme (ProofShowcase, the case studies, the stats-band marquee on hover).
-### Drenched Bands (the homepage only)
+### Drenched Bands (the homepage and `/vsaas`)
 - **Drench Forest** (#277148): Light-theme ground of a drenched band. This is the theme's `primary-darker` step (`--c-drench-bg` in `src/pages/index.module.css`). White text on it measures 5.9:1.
 - **Drench Deep** (#136251): Dark-theme ground, the deep ramp step (`primary-darkest` at 72% over black). White text measures 7.3:1. Mint Signal is not used as a ground because white on it is 2.3:1.
 
@@ -222,7 +224,7 @@ The badge's materials, declared on the `/card` root (`src/pages/card.module.css`
 
 ### Named Rules
 **The One Voice Rule.** Green is the only accent on any screen. Its rarity is the point — rarity preserves the booking CTA.
-**The Three Bands Rule.** On the homepage green may own the surface in exactly three regions: stats, testimonials, closing CTA. A case-study page, `/about` and each `/showcase` page get one: the closing CTA. `/card` gets none: field and glass only. Everywhere else green stays a stroke, a fill on one button, or a line.
+**The Three Bands Rule.** On the homepage and `/vsaas` green may own the surface in exactly three regions: stats, testimonials, closing CTA. A case-study page, `/about` and each `/showcase` page get one: the closing CTA. `/card` gets none: field and glass only. Everywhere else green stays a stroke, a fill on one button, or a line.
 
 ## Typography
 
@@ -252,8 +254,8 @@ The badge's materials, declared on the `/card` root (`src/pages/card.module.css`
 Body, labels, and microcopy stay in the system sans on these surfaces too. On `/card` the role (1rem, 600), the line under it (muted), the row labels (the Label role), the row values (1rem, 600, tabular numerals), and every button are system sans.
 
 ### Named Rules
-**The Display-Once Rule.** Anton italic with stroke appears in the site header and nowhere else. Section hierarchy stays in the system sans on every page except the homepage, its case studies, `/about`, `/showcase`, and `/card`.
-**The Serif-For-Claims Rule.** On the homepage, the case studies, `/about`, and `/showcase` Besley carries headings, titles, numerals, and quotes, the things a visitor skims; on `/card` it sets the name and nothing else. It never sets body copy, buttons, or microcopy, and it is never stroked, italicised, or rotated.
+**The Display-Once Rule.** Anton italic with stroke appears in the site header and nowhere else. Section hierarchy stays in the system sans on every page except the homepage, `/vsaas`, its case studies, `/about`, `/showcase`, and `/card`.
+**The Serif-For-Claims Rule.** On the homepage, `/vsaas`, the case studies, `/about`, and `/showcase` Besley carries headings, titles, numerals, and quotes, the things a visitor skims; on `/card` it sets the name and nothing else. It never sets body copy, buttons, or microcopy, and it is never stroked, italicised, or rotated.
 
 ## Layout
 
@@ -276,6 +278,13 @@ Hero → stats band (drenched) → problem rows → proof → engagements → te
 - Engagements: three columns sharing subgrid rows (the You get / You need / what-shapes-the-work / Case study rows align across cards, and the Case study row comes last so an offer without a published case study just ends a row early; every row is visible, nothing collapses; booking microcopy shows once in the hero and once in the closing CTA, not under every card), one column under 996px.
 - Proof: a continued line down the left with a node per client; the Portico screenshot strip is a tilted plane at 997px and wider, a scroll-snap row under it.
 
+### `/vsaas` layout
+The homepage order without the engagements: hero → stats band (drenched) → problem rows → proof → testimonials (drenched; Luke Sophinos and Anthony Bull) → FAQ → closing CTA (drenched) → contact form. Noindex and out of the sitemap; reached by QR, the `/card` link and shared links.
+
+- Hero: `ConsultingHero` with props. The H1 is longer, so `longTitle` sets it a size down (`clamp(2.25rem, 4.2vw, 4rem)`), each line still one row at 997px and wider, and the portrait sits 2rem lower so the release line runs under the copy, not through it. The quiet link beside the solid button is "Save my contact" (the vCard, no `download`, as on `/card`), and the small line under the microcopy is the event line (`SUMMIT_LINE`, removable) in place of the homepage's fit sentence.
+- Problem rows: three of its own (`PainGroups situations`), each still a published case study, jumping to the same proof rows.
+- Every booking button carries `variant=vsaas`; there are two, the hero's (solid) and the closing CTA's.
+
 ### `/about` layout
 The case-study shell with a full-bleed hero (`CaseStudyLayout variant="page"`): the hero, then one container (`CaseBody`) holding the numeral ledger, four chapters on the spine, the folded longer story, a quiet foot link, and the shared closing band. Order: hero (H1 on two lines across the row, lede and the solid booking button left, portrait tile right, the tick field behind it fading out at its lower edge) → numeral ledger (counting up once on first view, as the stats band does) with a sources footnote → four chapters on the spine (Where I started, CourseKey and the exit, MeetingHero and why I shut it down, Consulting today), each with a date line set under its heading → "The longer story" disclosure, in the body column → foot link → drenched FinalCta. Every dated fact carries its source in the copy or the footnote.
 
@@ -286,7 +295,7 @@ The case-study shell in two forms. The index uses `CaseStudyLayout variant="inde
 Chromeless: Layout runs with `noFooter` and the navbar is hidden only while the card root is on the page (`html:has(.root) .navbar`), so the badge is the page. The root is a full-viewport grid (`min-height: 100svh`) that centers the badge over the field, with a gutter of `clamp(0.75rem, 4vh, 3rem)` by `clamp(0.75rem, 4vw, 3rem)`; it is the field's positioned ancestor and isolates its stacking.
 
 - Badge: `min(100%, 26rem)` wide, a one-cell grid holding both faces, so it is as tall as the taller face and stays in flow at every size; the hidden face keeps its box but is `visibility: hidden` and `inert`.
-- Front face order: identity (portrait, name, role, line) → phone and email rows → actions (Save contact, Book a call, then Share and QR code as a two-column pair) → profiles (work tiles left, personal marks right, over a hairline). The identity sits 1.5rem above the rest, whose groups sit 1rem apart; rows and buttons within a group sit 0.5rem apart.
+- Front face order: identity (portrait, name, role, line) → phone and email rows → actions (Save contact, Book a call, then Share and QR code as a two-column pair, then a centered text link on to `/vsaas`, "Building vertical software? See how I help", in Forest Ink with a muted underline) → profiles (work tiles left, personal marks right, over a hairline). The identity sits 1.5rem above the rest, whose groups sit 1rem apart; rows and buttons within a group sit 0.5rem apart.
 - 360px and under: a 104px portrait and tighter face and button padding.
 - Short portrait screens (`orientation: portrait` and `max-height: 740px`, Safari with its bars, an iPhone SE): a 92px portrait, 1rem face padding and group gaps, 48px rows and 44px buttons, so QR code stays above the fold and from about 660px tall the whole front face fits.
 - Landscape phone (`orientation: landscape` and `max-height: 34rem`): the badge widens to 46rem and goes two-column, identity and profiles left, rows and actions right; the QR face sets the plate beside its caption.
@@ -395,10 +404,10 @@ Concrete guardrails grounded in the shipped code.
 - **Do** reserve Anton italic + stroke for the site header; set all section titles in the system sans.
 - **Do** preserve external CTA attributes (`target="_blank" rel="noopener noreferrer"`) on cal.com and outbound links.
 - **Do** collapse 3-col stats and 2-col secondary grids to 1 column under 768px, and the header split under 996px.
-- **Do** (on the homepage) make exactly one booking button per view the solid one, and keep the drenched bands to stats, testimonials, and the closing CTA.
+- **Do** (on the homepage and `/vsaas`) make exactly one booking button per view the solid one, and keep the drenched bands to stats, testimonials, and the closing CTA.
 - **Do** (on the homepage) check white text against the drench ground in both themes (5.9:1 light, 7.3:1 dark) before putting copy on a green band.
 - **Do** (on the homepage) ship every motion effect with a `reduced` tier that shows the finished state and an SSR render that matches it.
-- **Do** (on `/card`) keep Save contact the one solid control; Book a call stays outline, and Share and QR code stay quiet glass.
+- **Do** (on `/card`) keep Save contact the one solid control; Book a call stays outline, Share and QR code stay quiet glass, and the `/vsaas` link stays text.
 - **Do** (on `/card`) set green text and marks on the glass in Forest Ink (#29784c) in light and Mint Signal in dark, and give anything on the glass that carries text the denser Glass Fill.
 - **Do** (on `/card`) give the glass an opaque fallback: Glass Solid when `backdrop-filter` is unsupported and under `prefers-reduced-transparency`.
 - **Do** keep detail/showcase/about spines scroll-scrubbed via `scrub` (`SpineSection`/`CaseSection`: line draws by scroll at 62% viewport from 997px with motion allowed, Reveal fill as the fallback). Leave the `/case-studies` index ledger on Reveal fill — two short rows cannot show scrub.
@@ -410,5 +419,5 @@ Concrete guardrails grounded in the shipped code.
 - **Don't** reuse display rotation, text-stroke, or testimonial tilt outside their signature components.
 - **Don't** invent testimonials, client names, stats, or pricing beyond `Testimonials`, `LogosCarousel`, and `PRODUCT.md` evidence. Proof cards on the homepage come only from the published case studies; an unapproved client stays a claim-free placeholder.
 - **Don't** put section kickers, eyebrows, or numbered section labels above headings. The heading carries its own weight.
-- **Don't** set Besley on body copy, buttons, or microcopy, and don't use it outside the homepage, its case studies, `/about`, `/showcase`, and the name on `/card`.
+- **Don't** set Besley on body copy, buttons, or microcopy, and don't use it outside the homepage, `/vsaas`, its case studies, `/about`, `/showcase`, and the name on `/card`.
 - **Don't** use Mint Signal (#25c2a0) as a ground under white text; use the drench steps.

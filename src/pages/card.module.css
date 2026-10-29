@@ -488,6 +488,42 @@
   color: var(--card-accent-ink);
 }
 
+/* The way on to /vsaas: a text link under the buttons, a step quieter than
+   all of them. Green ink, as the glass's other green text. */
+.more,
+.more:visited {
+  justify-self: center;
+  /* Inline text, balanced, so on a phone it breaks after the question and
+     the arrow stays on the last word. */
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.625rem 0.5rem;
+  text-wrap: balance;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--card-accent-ink);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.more:hover {
+  color: var(--card-accent-ink);
+  text-decoration-color: currentColor;
+}
+
+.moreIcon {
+  vertical-align: -0.125em;
+  transition: transform var(--c-dur-fast) var(--c-ease);
+}
+
+.more:hover .moreIcon {
+  transform: translateX(2px);
+}
+
 /* Work profiles as tiles on the left; the personal pair smaller, grey and
    untiled on the right, so they sit a step back. */
 .profiles {
@@ -838,5 +874,11 @@
   .tip,
   .backButton {
     transition: none;
+  }
+
+  .moreIcon,
+  .more:hover .moreIcon {
+    transition: none;
+    transform: none;
   }
 }
