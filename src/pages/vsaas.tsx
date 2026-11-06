@@ -18,13 +18,6 @@ import "@fontsource-variable/besley/wght.css";
 import besleyLatin from "@fontsource-variable/besley/files/besley-latin-wght-normal.woff2";
 import styles from "./index.module.css";
 
-/**
- * Remove after the Vertical Software Summit (Miami, Nov 4–5, 2026): set to
- * null and the hero ends at the booking microcopy.
- */
-const SUMMIT_LINE: string | null =
-  "At the Vertical Software Summit in Miami, Nov 4–5? Find me there, or book a call for after.";
-
 /*
  * The homepage's problem rows, retold for vertical software. Same rule: each
  * is a published case study, and the facts come only from:
@@ -88,7 +81,7 @@ export default function Vsaas(): JSX.Element {
           sub="I'm Fadee Kannah, technical co-founder of CourseKey, where I built the platform from concept to scale for 200+ career colleges. I join SaaS teams and build what they need next, from customer requests to AI features. Your team reviews everything I write before it ships."
           variant="vsaas"
           secondary={{ label: "Save my contact", href: VCARD_HREF }}
-          fit={SUMMIT_LINE}
+          fit={null}
         />
         <StatsBand />
         <PainGroups situations={SITUATIONS} />

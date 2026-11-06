@@ -254,8 +254,8 @@
     margin-top: 3.5rem;
   }
 
-  /* /vsaas: its longer sub and Summit line run the copy a line deeper, so
-     the portrait, and the line with it, sits lower to match. */
+  /* /vsaas: its longer sub runs the copy a line deeper, so the portrait, and
+     the line with it, sits lower to match. */
   .titleLong ~ .portrait {
     margin-top: 5.5rem;
   }

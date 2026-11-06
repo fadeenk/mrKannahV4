@@ -279,9 +279,9 @@ Hero → stats band (drenched) → problem rows → proof → engagements → te
 - Proof: a continued line down the left with a node per client; the Portico screenshot strip is a tilted plane at 997px and wider, a scroll-snap row under it.
 
 ### `/vsaas` layout
-The homepage order without the engagements: hero → stats band (drenched) → problem rows → proof → testimonials (drenched; Luke Sophinos and Anthony Bull) → FAQ → closing CTA (drenched) → contact form. Noindex and out of the sitemap; reached by QR, the `/card` link and shared links.
+The homepage order without the engagements: hero → stats band (drenched) → problem rows → proof → testimonials (drenched; Luke Sophinos and Anthony Bull) → FAQ → closing CTA (drenched) → contact form. Noindex and out of the sitemap; reached by QR and shared links.
 
-- Hero: `ConsultingHero` with props. The H1 is longer, so `longTitle` sets it a size down (`clamp(2.25rem, 4.2vw, 4rem)`), each line still one row at 997px and wider, and the portrait sits 2rem lower so the release line runs under the copy, not through it. The quiet link beside the solid button is "Save my contact" (the vCard, no `download`, as on `/card`), and the small line under the microcopy is the event line (`SUMMIT_LINE`, removable) in place of the homepage's fit sentence.
+- Hero: `ConsultingHero` with props. The H1 is longer, so `longTitle` sets it a size down (`clamp(2.25rem, 4.2vw, 4rem)`), each line still one row at 997px and wider, and the portrait sits 2rem lower so the release line runs under the copy, not through it. The quiet link beside the solid button is "Save my contact" (the vCard, no `download`, as on `/card`), and the hero ends at the booking microcopy (`fit={null}` drops the homepage's fit sentence).
 - Problem rows: three of its own (`PainGroups situations`), each still a published case study, jumping to the same proof rows.
 - Every booking button carries `variant=vsaas`; there are two, the hero's (solid) and the closing CTA's.
 
@@ -295,7 +295,7 @@ The case-study shell in two forms. The index uses `CaseStudyLayout variant="inde
 Chromeless: Layout runs with `noFooter` and the navbar is hidden only while the card root is on the page (`html:has(.root) .navbar`), so the badge is the page. The root is a full-viewport grid (`min-height: 100svh`) that centers the badge over the field, with a gutter of `clamp(0.75rem, 4vh, 3rem)` by `clamp(0.75rem, 4vw, 3rem)`; it is the field's positioned ancestor and isolates its stacking.
 
 - Badge: `min(100%, 26rem)` wide, a one-cell grid holding both faces, so it is as tall as the taller face and stays in flow at every size; the hidden face keeps its box but is `visibility: hidden` and `inert`.
-- Front face order: identity (portrait, name, role, line) → phone and email rows → actions (Save contact, Book a call, then Share and QR code as a two-column pair, then a centered text link on to `/vsaas`, "Building vertical software? See how I help", in Forest Ink with a muted underline) → profiles (work tiles left, personal marks right, over a hairline). The identity sits 1.5rem above the rest, whose groups sit 1rem apart; rows and buttons within a group sit 0.5rem apart.
+- Front face order: identity (portrait, name, role, line) → phone and email rows → actions (Save contact, Book a call, then Share and QR code as a two-column pair,) → profiles (work tiles left, personal marks right, over a hairline). The identity sits 1.5rem above the rest, whose groups sit 1rem apart; rows and buttons within a group sit 0.5rem apart.
 - 360px and under: a 104px portrait and tighter face and button padding.
 - Short portrait screens (`orientation: portrait` and `max-height: 740px`, Safari with its bars, an iPhone SE): a 92px portrait, 1rem face padding and group gaps, 48px rows and 44px buttons, so QR code stays above the fold and from about 660px tall the whole front face fits.
 - Landscape phone (`orientation: landscape` and `max-height: 34rem`): the badge widens to 46rem and goes two-column, identity and profiles left, rows and actions right; the QR face sets the plate beside its caption.
@@ -407,7 +407,7 @@ Concrete guardrails grounded in the shipped code.
 - **Do** (on the homepage and `/vsaas`) make exactly one booking button per view the solid one, and keep the drenched bands to stats, testimonials, and the closing CTA.
 - **Do** (on the homepage) check white text against the drench ground in both themes (5.9:1 light, 7.3:1 dark) before putting copy on a green band.
 - **Do** (on the homepage) ship every motion effect with a `reduced` tier that shows the finished state and an SSR render that matches it.
-- **Do** (on `/card`) keep Save contact the one solid control; Book a call stays outline, Share and QR code stay quiet glass, and the `/vsaas` link stays text.
+- **Do** (on `/card`) keep Save contact the one solid control; Book a call stays outline, Share and QR code stay quiet glass, and `/card` carries no link on to `/vsaas`.
 - **Do** (on `/card`) set green text and marks on the glass in Forest Ink (#29784c) in light and Mint Signal in dark, and give anything on the glass that carries text the denser Glass Fill.
 - **Do** (on `/card`) give the glass an opaque fallback: Glass Solid when `backdrop-filter` is unsupported and under `prefers-reduced-transparency`.
 - **Do** keep detail/showcase/about spines scroll-scrubbed via `scrub` (`SpineSection`/`CaseSection`: line draws by scroll at 62% viewport from 997px with motion allowed, Reveal fill as the fallback). Leave the `/case-studies` index ledger on Reveal fill — two short rows cannot show scrub.
